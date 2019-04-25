@@ -1,0 +1,24 @@
+<div class="col-md-12">
+  <h2 class="text-center">Add User</h2>
+  <form>
+
+    <div class="form-group">
+      <label for="login">Email:</label>
+      <input type="login" [(ngModel)]="user.login" placeholder="Email" class="form-control" id="login" name="login">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" [(ngModel)]="user.password" placeholder="Password" class="form-control" id="password"
+        name="password">
+    </div>
+
+    <div class="form-group">
+      <label for="matchingPassword">Confirm Password:</label>
+      <input type="password" [(ngModel)]="user.matchingPassword" placeholder="Confirm Password" class="form-control"
+        id="matchingPassword" name="matchingPassword">
+    </div>
+
+    <button type="submit" class="btn btn-success" (click)="create()">Sing up</button>
+  </form>
+</div>
