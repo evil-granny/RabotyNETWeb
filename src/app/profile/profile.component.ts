@@ -4,6 +4,8 @@ import { DomSanitizer } from '@angular/platform-browser'
 
 import { Person } from '../models/person.model';
 import { PersonService } from '../services/person.service';
+import { Contacts } from '../models/contacts.model';
+import { Address } from '../models/address.model';
 
 @Component({
   selector: 'rabotyNet',
@@ -24,6 +26,10 @@ export class ProfileComponent implements OnInit {
     this.personService.findById()
       .subscribe(data => {
         this.person = data;
+        if (this.person.contacts == null && this.person.address == null) {
+          this.person.contacts = new Contacts();
+          this.person.address = new Address();
+        }
       });
   };
 
@@ -34,13 +40,11 @@ export class ProfileComponent implements OnInit {
   };
 
   handleFileInput(file: FileList) {
-    console.log("[handleFileInput]");
     this.fileToUpload = file.item(0);
 
     var reader = new FileReader();
     reader.onload = (event: any) => {
       this.person.photo = event.target.result;
-      console.log(this.person.photo);
     }
     reader.readAsDataURL(this.fileToUpload);
   }

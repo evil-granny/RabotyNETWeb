@@ -18,16 +18,16 @@ export class PersonService {
 
   constructor(private http: HttpClient) { }
 
-  private personUrl = "http://localhost:8080";
+  userId: any = 1;
+
+  private url = "http://localhost:8080";
 
   public findById(): Observable<any> {
-    console.log("[findById]");
-    return this.http.get<Person>(this.personUrl + "/person/1", httpOptions);
+    return this.http.get<Person>(this.url + "/person/" + this.userId, httpOptions);
   }
 
   public update(person: Person): Observable<any> {
-    console.log("[update]");
-    return this.http.put<Person>(this.personUrl + "/updatePerson", person, httpOptions);
+    return this.http.put<Person>(this.url + "/updatePerson", person, httpOptions);
   }
 
 }

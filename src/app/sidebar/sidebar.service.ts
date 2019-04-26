@@ -14,7 +14,7 @@ export class SidebarService {
     },
     {
       title: 'Vacancies',
-      icon: 'fa fa-tachometer-alt',
+      icon: 'fa fa-archive',
       active: false,
       url: 'vacancies'
     },

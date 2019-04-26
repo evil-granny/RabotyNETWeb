@@ -8,7 +8,7 @@ import { SidebarService } from './sidebar/sidebar.service';
 })
 export class AppComponent {
 
-  title = 'Angular Pro Sidebar';
+  title = 'RabotyNet';
 
   constructor(public sidebarservice: SidebarService) { }
 

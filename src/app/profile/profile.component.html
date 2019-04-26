@@ -4,18 +4,28 @@
       <section class="module">
         <div class="module-inner">
           <div class="side-bar">
-            <div class="user-info">
+            <!--<div class="user-info">
               <img *ngIf="person.photo" class="img-profile img-circle img-responsive center-block rounded-circle"
                 style="height: 150px; width: 150px" [src]="person.photo" alt="">
               <img *ngIf="!person.photo" class="img-profile img-circle img-responsive center-block rounded"
                 style="height: 150px; width: 150px" [src]="noImage" alt="">
-            </div>
+            </div> -->
           </div>
           <div class="content-panel">
             <h2 class="title">Profile</h2>
             <form class="form-horizontal" (ngSubmit)="update()" #personForm="ngForm">
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Personal Info</h3>
+                <div class="form-group">
+                  <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                      <img class="rounded img-responsive" style="width: 140px; height: 150px" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                  </figure>
+                  <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                    <input type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile"></label>
+                    <input class="btn btn-primary" type="submit" value="Update Photo" style="width: 140px; margin-top: 10px; ">
+                  </div>
+                </div>
                 <div class="form-group">
                   <label for="firstName" class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
