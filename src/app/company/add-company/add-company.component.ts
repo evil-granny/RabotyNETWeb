@@ -26,21 +26,17 @@ export class AddCompanyComponent implements OnInit {
   }
 
   update(): void {
-    if (CompanyService.validateCompany(this.company))
-      this.companyService.update(this.company)
-        .subscribe(data => {
-          alert("Company has been updated successfully.");
-        });
-    else alert("An validation error");
+    this.companyService.update(this.company)
+      .subscribe(data => {
+        alert("Company has been updated successfully.");
+      });
   };
 
   create(): void {
-    if (CompanyService.validateCompany(this.company))
-      this.companyService.create(this.company)
-        .subscribe(data => {
-          alert("Company has been created successfully.");
-        });
-    else alert("An validation error");
+    this.companyService.create(this.company)
+      .subscribe(data => {
+        alert("Company has been created successfully.");
+      });
   };
 
 }

@@ -43,28 +43,4 @@ export class CompanyService {
     console.log("[find by id]");
     return this.http.get<Company>(this.companyURL + "/company/" + companyId, httpOptions);
   }
-
-  public static validateCompany(company) {
-    return company.name.length > 0 && company.name.length <= 30 &&
-      company.edrpou.length > 0 && company.edrpou.length <= 30 &&
-      company.description.length < 30 &&
-      company.website.length > 0 && company.website.length <= 30 &&
-      this.validateAddress(company.address) &&
-      this.validateContacts(company.contacts);
-  }
-
-  private static validateAddress(address) {
-    return address.country.length > 0 && address.country.length <= 20 &&
-      address.city.length > 0 && address.city.length <= 15 &&
-      address.street.length <= 30 &&
-      address.building.length <= 5 &&
-      address.apartment.length <= 5 &&
-      address.zipCode > 0;
-  }
-
-  private static validateContacts(contacts) {
-    return contacts.email.length <= 50 &&
-      contacts.phoneNumber.length <= 15;
-  }
-
 }
