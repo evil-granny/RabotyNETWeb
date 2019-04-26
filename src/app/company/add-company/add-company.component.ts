@@ -5,7 +5,9 @@ import { Company } from '../../models/company.model';
 import { CompanyService } from '../../services/company.service'
 
 @Component({
-  templateUrl: './add-company.component.html'
+  selector: 'rabotyNet',
+  templateUrl: './add-company.component.html',
+  styleUrls: ['./add-company.component.css']
 })
 export class AddCompanyComponent implements OnInit {
 
