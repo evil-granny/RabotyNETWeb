@@ -39,6 +39,11 @@ export class CompanyService {
     return this.http.put<Company>(this.companyURL + "/updateCompany", company, httpOptions);
   }
 
+  public approve(company) {
+    console.log("[approve company]");
+    return this.http.put<Company>(this.companyURL + "/approveCompany", company, httpOptions);
+  }
+
   public findById(companyId) {
     console.log("[find by id]");
     return this.http.get<Company>(this.companyURL + "/company/" + companyId, httpOptions);

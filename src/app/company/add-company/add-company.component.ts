@@ -35,8 +35,8 @@ export class AddCompanyComponent implements OnInit {
   create(): void {
     this.companyService.create(this.company)
       .subscribe(data => {
-        alert("Company has been created successfully.");
-      });
+        this.router.navigate(['/companies']);
+      });  
   };
 
 }

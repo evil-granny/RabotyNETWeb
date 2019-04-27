@@ -30,11 +30,10 @@ export class CompanyComponent implements OnInit {
   };
 
   approve(company: Company) : void {
-    company.approved = true;
-    this.companyService.update(company)
+    this.companyService.approve(company)
       .subscribe( data => {
-        this.companies.find((c) => c.companyId === company.companyId).approved = true;
-      })
+        this.companies.find((c) => c.companyId === company.companyId).emailSent = true;
+      });
   }
 
 }

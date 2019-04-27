@@ -17,6 +17,8 @@ export class Company {
 
     approved: boolean = false;
 
+    emailSent: boolean = false;
+
     contacts: Contacts = new Contacts();
 
     address: Address = new Address();

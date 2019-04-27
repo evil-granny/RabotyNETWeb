@@ -16,6 +16,7 @@ import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
 import { SearchCVComponent } from './search-cv/search-cv.component'
+import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'companies', component: CompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyId', component: AddCompanyComponent },
+  { path: 'approveCompany/:companyId', component: ApproveCompanyComponent },
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
