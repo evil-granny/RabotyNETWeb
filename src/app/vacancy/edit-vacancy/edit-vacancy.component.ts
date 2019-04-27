@@ -10,7 +10,9 @@ import { Requirement } from 'src/app/models/requirement.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  templateUrl: './edit-vacancy.component.html'
+  selector: 'rabotyNet',
+  templateUrl: './edit-vacancy.component.html',
+  styleUrls: ['./edit-vacancy.component.css']
 })
 export class EditVacancyComponent implements OnInit {
 
@@ -21,9 +23,9 @@ export class EditVacancyComponent implements OnInit {
   }
 
   create(): void {
-    console.log("fff");
     console.log(this.vacancy);
-    this.vacancy.company = this.companyService.findById(1)[0];
+    //this.vacancy.company = this.companyService.findById(1)[0];
+    //let companyId = this.companyService.findById(1);
     this.vacancyService.create(this.vacancy)
       .subscribe(data => {
         this.gotoList();
@@ -40,8 +42,8 @@ export class EditVacancyComponent implements OnInit {
     }
   }
 
-  update(vacancy: Vacancy): void {
-    this.vacancyService.save(this.vacancy)
+  update(): void {
+    this.vacancyService.update(this.vacancy)
       .subscribe(data => {
         this.gotoList();
       }, error => console.error(error));
@@ -53,11 +55,11 @@ export class EditVacancyComponent implements OnInit {
 
   Requirement: Array<any>;
 
-  save(form: NgForm): void {
-    this.vacancyService.create(form).subscribe(result => {
-      this.gotoList();
-    }, error => console.error(error));
-  }
+  // save(form: NgForm): void {
+  //   this.vacancyService.create(form).subscribe(result => {
+  //     this.gotoList();
+  //   }, error => console.error(error));
+  // }
 
   private fieldArray: Array<any> = [];
   private newAttribute: any = {};

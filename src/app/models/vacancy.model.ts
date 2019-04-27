@@ -13,6 +13,6 @@ export class Vacancy {
 
     company: Company = new Company();
 
-    requirements: Requirement[] = [];
+    requirements: Requirement[] = Array<Requirement>();
 
 }

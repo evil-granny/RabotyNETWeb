@@ -33,22 +33,22 @@ export class VacancyService {
     return this.http.delete(this.vacancyUrl + "/deleteVacancy/" + id, httpOptions);
   }
 
-  public save(vacancy: any): Observable<any> {
-    let result: Observable<Object>;
-    if (vacancy['id']) {
-      result = this.http.put<Vacancy>(this.vacancyAPI,vacancy.id, vacancy);
-    } else {
-      result = this.http.post<Vacancy>(this.vacancyUrl+ '/createVacancy'+1, vacancy);
-    }
-    return result;
-  }
+  // public save(vacancy: any): Observable<any> {
+  //   let result: Observable<Object>;
+  //   if (vacancy['id']) {
+  //     result = this.http.put<Vacancy>(this.vacancyAPI,vacancy.id, vacancy);
+  //   } else {
+  //     result = this.http.post<Vacancy>(this.vacancyUrl+ '/createVacancy'+1, vacancy);
+  //   }
+  //   return result;
+  // }
   public update(vacancy : Vacancy) {
-    return this.http.put<Vacancy>(this.vacancyAPI + vacancy.vacancyId, vacancy);
+    return this.http.put<Vacancy>(this.vacancyUrl + "/updateVacancy", vacancy, httpOptions);
   }
 
   
-   public create(vacancy : any) : Observable<Object>{
-     return this.http.post<Vacancy>(this.vacancyUrl + "/createVacancy/"+1, vacancy);
+   public create(vacancy : Vacancy) : Observable<Object>{
+     return this.http.post<Vacancy>(this.vacancyUrl + "/createVacancy/"+1, vacancy, httpOptions);
    }
 
 }

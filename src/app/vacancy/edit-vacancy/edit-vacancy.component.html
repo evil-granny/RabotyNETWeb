@@ -1,37 +1,102 @@
-<div class="col-md-12">
-  <h2 class="text-center">{{vacancy.vacancyId ? 'Edit' : 'Add'}} Vacancy</h2>
-  <div class="myForm">
-    <form #vacancyForm="ngForm" (ngSubmit)="create()">
-      <div class="form-group col-md-5">
-        <input type="hidden" name="id" [(ngModel)]="vacancy.vacancyId">
-        <label for="position">Position:</label>
-        <input type="text" [(ngModel)]="vacancy.position" placeholder="Input position" minlength="5" maxlength="40"
-          class="form-control" id="position" required name="position" #position>
-      </div>
-      <div class="form-group col-md-5">
-        <label for="salary">Salary:</label>
-        <input type="number" [(ngModel)]="vacancy.salary" placeholder="Input salary" maxlength="10" class="form-control"
-          id="salary" required name="salary" #salary>
-      </div>
-      <div class="form-group col-md-5">
-        <label for="employment">Employment:</label>
-        <input type="text" [(ngModel)]="vacancy.employment" placeholder="Input type of employment" minlength="4"
-          class="form-control" id="employment" required name="employment" #employment>
-      </div>
-      <div class="form-group col-md-5" *ngFor="let item of vacancy.requirements">
-        <label for="description">Requirement:</label>
-        <input type="text" [(ngModel)]="item.description" placeholder="Input requirement" maxlength="100"
-          class="form-control" id="description" required name="description" #requirement>
-      </div>
-      <td>
-        <button class="btn btn-success" type="button" (click)="addFieldValue()">Add new requirement</button>
-      </td>
+<body>
+  <div class="container">
+    <div class="view-account">
+      <section class="module">
+        <div class="module-inner">
+          <div class="content-panel">
+            <h2 class="title">Create Vacancy</h2>
+            <!-- (ngSubmit)="update()" -->
+            <form class="form-horizontal" #personForm="ngForm">
+              <fieldset class="fieldset">
+                <h3 class="fieldset-title">Main Info</h3>
+                <div class="form-group">
+                  <label for="position" class="col-md-2 col-sm-3 col-xs-12 control-label">Posistion</label>
+                  <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" pattern="^[A-Za-z0-9]{3,40}$" [(ngModel)]="vacancy.position"
+                      placeholder="Input position" id="position" name="position" #position="ngModel" required
+                      autocomplete="off">
+                    <div *ngIf="position.errors && (position.dirty || position.touched)" class="alert alert-danger">
+                      <div [hidden]="!position.errors.required">Position is required!</div>
+                      <div [hidden]="!position.errors.pattern">
+                        Position can only contain letters and numbers (3-40 characters)!
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-      <div class="buttons">
-        <button class="btn btn-primary" style="margin-top: 20px" type="submit" [disabled]="!vacancyForm.form.valid">
-          Save</button>
-        <a class="cancel" routerLink="/vacancies" style="font-size: 17px;margin-left: 20px;margin-top:30px">Cancel</a>
-      </div>
-    </form>
+                <div class="form-group">
+                  <label for="employment" class="col-md-2 col-sm-3 col-xs-12 control-label">Employment</label>
+                  <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" pattern="^[A-Za-z0-9]{3,40}$" [(ngModel)]="vacancy.employment"
+                      placeholder="employment" id="employment" name="employment" #employment="ngModel" required
+                      autocomplete="off" style="resize: none" rows="5"> 
+                    <div *ngIf="employment.errors && (employment.dirty || employment.touched)" class="alert alert-danger">
+                      <div [hidden]="!employment.errors.required">Employment is required!</div>
+                      <div [hidden]="!employment.errors.pattern">
+                       Employment can only contain letters and numbers!
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="salary" class="col-md-2 col-sm-3 col-xs-12 control-label">Salary</label>
+                  <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" pattern="^[0-9]{3,11}$" [(ngModel)]="vacancy.salary"
+                      placeholder="Input salary" id="salary" name="salary" #salary="ngModel" 
+                      autocomplete="off">
+                    <div *ngIf="salary.errors && (salary.dirty || salary.touched)" class="alert alert-danger">
+                      <div [hidden]="!salary.errors.required">Salary is required!</div>
+                      <div [hidden]="!salary.errors.pattern">
+                       Salary can only contain numbers (3-11 digits)!
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>  <br>
+                
+              <fieldset class="fieldset">
+                <h3 class="fieldset-title">Requirements Info</h3>
+
+                <div class="form-group">
+                   <div class="col-md-10 col-sm-9 col-xs-12" *ngFor="let item of vacancy.requirements">
+                     <label for="requirement" class="col-md-2 col-sm-3 col-xs-12 control-label">Requirement:</label>
+                     <input type="text" class="form-control" name="something" [(ngModel)]="item.description" pattern="^[A-Za-z0-9]{3,100}$" 
+                        placeholder="Input requirement" maxlength="100" id="requirement" #requirement="ngModel"
+                         required autocomplete="off">
+                        <div *ngIf="requirement.errors && (requirement.dirty || requirement.touched)" class="alert alert-danger">
+                          <div [hidden]="!requirement.errors.required">Requirement is required!</div>
+                          <div [hidden]="!requirement.errors.pattern">
+                            Requirement can contain letters and numbers(from 3 to 100 characters)!
+                          </div>
+                        </div>
+                  </div>
+                  <td>
+                    <button class="btn btn-success" type="button" (click)="addFieldValue()">Add new requirement</button>
+                  </td>
+                </div>
+              
+              </fieldset> <br>
+
+              <fieldset class="fieldset">
+                <h3 class="fieldset-title">Action</h3>
+
+                <div class="form-group">
+                  <div *ngIf="vacancy.vacancyId == null">
+                    <button class="btn btn-primary" style="margin-top: 20px" type="submit" [disabled]="!personForm.form.valid"
+                        (click)="create()">Create</button>
+                  </div>
+                   <div *ngIf="vacancy.vacancyId != null">
+                    <button class="btn btn-success" (click)="update()">Update</button>
+                  </div>
+                  <a class="cancel" routerLink="/vacancies" style="font-size: 17px;margin-left: 20px;margin-top:30px">Cancel</a>
+                </div>
+              </fieldset>
+                
+            </form>
+          </div>
+        </div>  
+      </section>
+    </div>
   </div>
-</div>
+</body>
