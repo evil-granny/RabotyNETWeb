@@ -51,13 +51,13 @@
               </fieldset>  <br>
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Requirements Info</h3>
-
                 <div class="form-group">
-                    <div class="col-md-10 col-sm-9 col-xs-12" *ngFor="let item of vacancy.requirements;let index = index ">
-                     <label for="requirement" class="col-md-2 col-sm-3 col-xs-12 control-label">Requirement:{{index+1}}</label>
-                     <input type="text" class="form-control" name="something" [(ngModel)]="item.description"  
-                        placeholder="Input requirement" maxlength="100" id="requirement" #requirement="ngModel"
+                    <div class="col-md-10 col-sm-9 col-xs-12" *ngFor="let item of vacancy.requirements;let index = index;">
+                     <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Requirement:{{index+1}}</label>
+                     <input type="text" class="form-control" name="description" [(ngModel)]="item.description"  
+                        placeholder="Input requirement" maxlength="100" id="description" #description="ngModel"
                           autocomplete="off">
+                    
                   </div>
                   <td>
                     <div class="addRequirement">
