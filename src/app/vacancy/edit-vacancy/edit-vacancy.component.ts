@@ -1,15 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { Vacancy } from '../../models/vacancy.model';
-import { VacancyService } from '../../services/vacancy.service';
-import { CompanyService } from '../../services/company.service';
-import { NgForm, FormControl } from '@angular/forms';
-import { Requirement } from 'src/app/models/requirement.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {Vacancy} from '../../models/vacancy.model';
+import {VacancyService} from '../../services/vacancy.service';
+import {Requirement} from 'src/app/models/requirement.model';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'rabotyNet',
   templateUrl: './edit-vacancy.component.html',
   styleUrls: ['./edit-vacancy.component.css']
@@ -18,22 +15,11 @@ export class EditVacancyComponent implements OnInit {
 
   vacancy: Vacancy = new Vacancy();
 
-  constructor(private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService,
-    private companyService: CompanyService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
   }
 
-  create(): void {
-    console.log(this.vacancy);
-    //this.vacancy.company = this.companyService.findById(1)[0];
-    //let companyId = this.companyService.findById(1);
-    this.vacancyService.create(this.vacancy)
-      .subscribe(data => {
-        this.gotoList();
-      }, error => console.error(error));
-  };
-
   ngOnInit(): void {
-    let vacancyId = this.route.snapshot.paramMap.get("vacancyId");
+    let vacancyId = this.route.snapshot.paramMap.get('vacancyId');
     if (vacancyId !== null) {
       this.vacancyService.get(vacancyId)
         .subscribe(data => {
@@ -42,27 +28,38 @@ export class EditVacancyComponent implements OnInit {
     }
   }
 
+  create(): void {
+    console.log(this.vacancy);
+    this.vacancyService.create(this.vacancy)
+      .subscribe(data => {
+        this.gotoList();
+      }, error => console.error(error));
+  };
+
   update(): void {
+    console.log(this.vacancy.requirements);
+    console.log(this.vacancy.vacancyId);
     this.vacancyService.update(this.vacancy)
       .subscribe(data => {
         this.gotoList();
       }, error => console.error(error));
   };
 
+
   gotoList() {
     this.router.navigate(['/vacancies']);
   }
 
-  Requirement: Array<any>;
+  employment = 'FULL PART_TIME HOURLY TRAINEE'.split(' ');
+  selectedEmployment = 'FULL';
 
-  // save(form: NgForm): void {
-  //   this.vacancyService.create(form).subscribe(result => {
-  //     this.gotoList();
-  //   }, error => console.error(error));
-  // }
+  changingValue(newValue) {
+    this.selectedEmployment = newValue;
+  }
 
   private fieldArray: Array<any> = [];
   private newAttribute: any = {};
+  Requirement: Array<any>;
 
   addFieldValue() {
     console.log(this.vacancy);

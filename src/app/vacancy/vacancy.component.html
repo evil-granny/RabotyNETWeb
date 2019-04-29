@@ -25,12 +25,14 @@
             <li *ngFor="let requirement of vacancy.requirements">{{requirement.description}}</li>
           </td>
           <td>
+            <a routerLink="/updateVacancy/{{vacancy.vacancyId}}" class="btn btn-success">Update</a>
             <button class="btn btn-danger" (click)="deleteById(vacancy.vacancyId)">Delete Vacancy</button>
           </td>
         </tr>
       </tbody>
     </table>
     <button class="btn btn-primary" [routerLink]="['/createVacancy']">Add</button>
+    
   </div>
 </div>
 </body> 

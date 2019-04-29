@@ -1,42 +1,60 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { Vacancy } from '../models/vacancy.model';
-import { VacancyService } from '../services/vacancy.service';
-import { Observable } from 'rxjs';
-import { Requirement } from '../models/requirement.model';
+import {Vacancy} from '../models/vacancy.model';
+import {VacancyService} from '../services/vacancy.service';
+import {Observable} from 'rxjs';
+import {Requirement} from '../models/requirement.model';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'rabotyNet',
   templateUrl: './vacancy.component.html',
-  styleUrls: [ './vacancy.component.css' ]
+  styleUrls: ['./vacancy.component.css']
 })
 export class VacancyComponent implements OnInit {
-  vacancies : Observable<Vacancy[]>;
-  requirements : Observable<Requirement[]>;
+  vacancies: Observable<Vacancy[]>;
+  requirements: Observable<Requirement[]>;
 
-  constructor(private router: Router, private vacancyService: VacancyService) {}
+  vacancy: Vacancy = new Vacancy();
+
+  constructor(private router: Router, private vacancyService: VacancyService) {
+  }
 
   ngOnInit() {
     this.reloadData();
   };
+
   reloadData() {
     this.vacancyService.findAll().subscribe(
-      data=>{
+      data => {
         this.vacancies = data;
         console.log(this.vacancies);
       }
-    )
+    );
   }
+
+  gotoList() {
+    this.router.navigate(['/vacancies']);
+  }
+
+  update(vacancyId): void {
+    console.log(vacancyId);
+    console.log(this.vacancyService.get(vacancyId));
+    this.vacancyService.update(this.vacancyService.get(vacancyId))
+      .subscribe(data => {
+        this.gotoList();
+      }, error => console.error(error));
+  };
 
   deleteById(id: number): void {
     this.vacancyService.deleteById(id)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.reloadData();
-      },
-      error => console.log(error));
+      .subscribe(
+        data => {
+          console.log(data);
+          this.reloadData();
+        },
+        error => console.log(error));
   };
 
 }

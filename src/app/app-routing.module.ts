@@ -22,6 +22,7 @@ const routes: Routes = [
 
   { path: 'vacancies', component: VacancyComponent },
   { path: 'createVacancy', component: EditVacancyComponent },
+  {path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
 
   { path: 'companies', component: CompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },

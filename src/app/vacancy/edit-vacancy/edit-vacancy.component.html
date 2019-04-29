@@ -27,15 +27,10 @@
                 <div class="form-group">
                   <label for="employment" class="col-md-2 col-sm-3 col-xs-12 control-label">Employment</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z0-9]{3,40}$" [(ngModel)]="vacancy.employment"
-                      placeholder="employment" id="employment" name="employment" #employment="ngModel" required
-                      autocomplete="off" style="resize: none" rows="5"> 
-                    <div *ngIf="employment.errors && (employment.dirty || employment.touched)" class="alert alert-danger">
-                      <div [hidden]="!employment.errors.required">Employment is required!</div>
-                      <div [hidden]="!employment.errors.pattern">
-                       Employment can only contain letters and numbers!
-                      </div>
-                    </div>
+                           <select class='form-control' [(ngModel)]="vacancy.employment" (change)="changingValue($event)" name="sel3"  id="employment" name="employment" required
+                           autocomplete="off" > 
+                            <option [ngValue]="i" *ngFor="let i of employment" >{{i}}</option>
+                        </select> 
                   </div>
                 </div>
 
@@ -54,26 +49,27 @@
                   </div>
                 </div>
               </fieldset>  <br>
-                
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Requirements Info</h3>
 
                 <div class="form-group">
-                   <div class="col-md-10 col-sm-9 col-xs-12" *ngFor="let item of vacancy.requirements">
-                     <label for="requirement" class="col-md-2 col-sm-3 col-xs-12 control-label">Requirement:</label>
-                     <input type="text" class="form-control" name="something" [(ngModel)]="item.description" pattern="^[A-Za-z0-9]{3,100}$" 
+                    <div class="col-md-10 col-sm-9 col-xs-12" *ngFor="let item of vacancy.requirements;let index = index ">
+                     <label for="requirement" class="col-md-2 col-sm-3 col-xs-12 control-label">Requirement:{{index+1}}</label>
+                     <input type="text" class="form-control" name="something" [(ngModel)]="item.description"  
                         placeholder="Input requirement" maxlength="100" id="requirement" #requirement="ngModel"
-                         required autocomplete="off">
-                        <div *ngIf="requirement.errors && (requirement.dirty || requirement.touched)" class="alert alert-danger">
-                          <div [hidden]="!requirement.errors.required">Requirement is required!</div>
-                          <div [hidden]="!requirement.errors.pattern">
-                            Requirement can contain letters and numbers(from 3 to 100 characters)!
-                          </div>
-                        </div>
+                          autocomplete="off">
                   </div>
                   <td>
-                    <button class="btn btn-success" type="button" (click)="addFieldValue()">Add new requirement</button>
+                    <div class="addRequirement">
+                        <div *ngIf ="vacancy.vacancyId != null">
+                          <button class="btn btn-success" type="button" hidden (click)="addFieldValue()">Add new requirement</button>
+                        </div>
+                        <div *ngIf ="vacancy.vacancyId == null">
+                         <button class="btn btn-success" type="button" (click)="addFieldValue()">Add new requirement</button>
+                       </div>
+                    </div>
                   </td>
+
                 </div>
               
               </fieldset> <br>
@@ -87,7 +83,7 @@
                         (click)="create()">Create</button>
                   </div>
                    <div *ngIf="vacancy.vacancyId != null">
-                    <button class="btn btn-success" (click)="update()">Update</button>
+                    <button class="btn btn-success" (click)="update()" [disabled]="!personForm.form.valid">Update</button>
                   </div>
                   <a class="cancel" routerLink="/vacancies" style="font-size: 17px;margin-left: 20px;margin-top:30px">Cancel</a>
                 </div>
