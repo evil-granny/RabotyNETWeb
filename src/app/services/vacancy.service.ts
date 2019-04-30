@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Vacancy} from '../models/vacancy.model';
 import {Observable} from 'rxjs';
+import { Requirement } from '../models/requirement.model';
 
 const httpOptions = {
   headers: new HttpHeaders({

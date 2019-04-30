@@ -14,6 +14,7 @@ import {Requirement} from 'src/app/models/requirement.model';
 export class EditVacancyComponent implements OnInit {
 
   vacancy: Vacancy = new Vacancy();
+  requirements:  Requirement[] = Array<Requirement>();
 
   constructor(private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
   }
@@ -29,7 +30,6 @@ export class EditVacancyComponent implements OnInit {
   }
 
   create(): void {
-    console.log(this.vacancy);
     this.vacancyService.create(this.vacancy)
       .subscribe(data => {
         this.gotoList();
@@ -37,12 +37,10 @@ export class EditVacancyComponent implements OnInit {
   };
 
   update(): void {
-    console.log(this.vacancy.requirements);
-    console.log(this.vacancy.vacancyId);
-    this.vacancyService.update(this.vacancy)
-      .subscribe(data => {
-        this.gotoList();
-      }, error => console.error(error));
+   this.vacancyService.update(this.vacancy)
+       .subscribe(data => {
+         this.gotoList();
+       }, error => console.error(error));
   };
 
 

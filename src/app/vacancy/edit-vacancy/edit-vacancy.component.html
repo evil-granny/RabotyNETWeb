@@ -52,13 +52,17 @@
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Requirements Info</h3>
                 <div class="form-group">
-                    <div class="col-md-10 col-sm-9 col-xs-12" *ngFor="let item of vacancy.requirements;let index = index;">
+                     <div class="col-md-10 col-sm-9 col-xs-12" *ngFor="let item of vacancy.requirements;let index = index;"> 
                      <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Requirement:{{index+1}}</label>
-                     <input type="text" class="form-control" name="description" [(ngModel)]="item.description"  
-                        placeholder="Input requirement" maxlength="100" id="description" #description="ngModel"
-                          autocomplete="off">
-                    
-                  </div>
+                       <div *ngIf = "vacancy.vacancyId == null; else updateBlock"> 
+                          <input type = "text" class="form-control" name="description"   
+                            placeholder="Input requirement" maxlength="100" id="description" [(ngModel)]="item.description" #description="ngModel"
+                            autocomplete="off" >
+                        </div>
+                        <ng-template #updateBlock>
+                            <p> <textarea rows="3" cols="45" name="description" [value]="item.description" >{{ item.description }}</textarea></p>
+                        </ng-template>     
+                   </div> 
                   <td>
                     <div class="addRequirement">
                         <div *ngIf ="vacancy.vacancyId != null">
