@@ -60,8 +60,10 @@
                             autocomplete="off" >
                         </div>
                         <ng-template #updateBlock>
-                            <p> <textarea rows="3" cols="45" name="description" [value]="item.description" >{{ item.description }}</textarea></p>
-                        </ng-template>     
+                            <input type = "text" class="form-control" [ngModelOptions]="{standalone: true}"   
+                            placeholder="Input requirement" maxlength="100" id="description" [(ngModel)]="item.description" 
+                            autocomplete="off" >
+                          </ng-template>     
                    </div> 
                   <td>
                     <div class="addRequirement">

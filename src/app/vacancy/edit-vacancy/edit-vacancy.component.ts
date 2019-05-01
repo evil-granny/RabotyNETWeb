@@ -37,10 +37,12 @@ export class EditVacancyComponent implements OnInit {
   };
 
   update(): void {
-   this.vacancyService.update(this.vacancy)
+    console.log(this.vacancy);
+      this.vacancyService.update(this.vacancy)
        .subscribe(data => {
          this.gotoList();
        }, error => console.error(error));
+
   };
 
 

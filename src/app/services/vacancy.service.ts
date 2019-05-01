@@ -42,5 +42,8 @@ export class VacancyService {
   public create(vacancy: Vacancy): Observable<Object> {
     return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + 1, vacancy, httpOptions);
   }
+  public updateRequirement(requirement: any): Observable<Requirement> {
+    return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
+  }
 
 }
