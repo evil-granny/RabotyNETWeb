@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Person } from "../models/person.model";
+import { Person } from '../models/person.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
+    'Authorization': 'Basic dXNlcjp1c2Vy'
   })
 };
 
@@ -19,7 +20,7 @@ export class SearchCVService {
   private searchCVUrl = 'http://localhost:8080';
 
   public getResult(searchCV) {
-    console.log("[Start Searching]");
-    return this.http.post<Person[]>(this.searchCVUrl + "/searchCV", searchCV, httpOptions);
+    console.log('[Start Searching]');
+    return this.http.post<Person[]>(this.searchCVUrl + '/searchCV', searchCV, httpOptions);
   }
 }

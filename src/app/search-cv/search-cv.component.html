@@ -1,43 +1,61 @@
-<a routerLink="/searchCV">Search</a>
-
-<form>
-  <label>
-    <input type="text" [(ngModel)]="searchCv.searchText" placeholder="Search.." name="searchText" class="form-control">
-  </label>
-
-
-  <label>
-    <select [(ngModel)]="searchCv.searchParameter" name="searchParameter" class="form-control">
-      <option value="name">by name</option>
-      <option value="phoneNumber">by phone</option>
-      <option value="city">by city</option>
-    </select>
-  </label>
-
-  <br>
-  <button class="btn btn-success" (click)="startSearch()">Start CV search</button>
-</form>
+<div class="search-result">
+  <form>
+    <label>
+      <input type="text" [(ngModel)]="searchCv.searchText" placeholder="Search.." name="searchText"
+             class="form-control">
+    </label>
 
 
-<div class="col-md-12">
-  <h2>Search result</h2>
+    <label>
+      <select [(ngModel)]="searchCv.searchParameter" name="searchParameter" class="form-control">
+        <option value="name">by name</option>
+        <option value="phoneNumber">by phone</option>
+        <option value="city">by city</option>
+      </select>
+    </label>
 
-  <table class="table table-striped">
-    <thead>
+    <br>
+    <button class="btn btn-success" (click)="startSearch()">Start CV search</button>
+  </form><br><br>
+
+
+  <div class="col-md-12">
+    <h2>Search result</h2>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="d-none">Id</th>
+        <th>Json list</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let person of people">
+        <td class="d-none">{{person.userId}}</td>
+        <td>{{person|json}}</td>
+
+      </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-striped">
+      <thead>
       <tr>
         <th class="d-none">Id</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Birthday</th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       <tr *ngFor="let person of people">
         <td class="d-none">{{person.userId}}</td>
         <td>{{person.firstName}}</td>
         <td>{{person.lastName}}</td>
         <td>{{person.birthday}}</td>
       </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>
