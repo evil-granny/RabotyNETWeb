@@ -15,7 +15,9 @@ import { AddCvComponent } from './cv/add-cv/add-cv.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
-import { SearchCVComponent } from './search-cv/search-cv.component'
+import { SearchCVComponent } from './search-cv/search-cv.component';
+
+// import { LoginComponent} from './login/login.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -33,7 +35,9 @@ const routes: Routes = [
   { path: 'registration', component: AddUserComponent },
   { path: 'users', component: UserComponent },
 
-  { path: 'searchCV', component: SearchCVComponent }
+  { path: 'searchCV', component: SearchCVComponent },
+
+  // { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
