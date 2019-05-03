@@ -20,27 +20,26 @@ export class VacancyService {
   constructor(private http: HttpClient) {
   }
 
-  private vacancyUrl = 'http://localhost:8080';
-  private vacancyAPI = this.vacancyUrl + '/vacancy';
+  private vacancyUrl = 'http://localhost:8080/vacancies';
 
   public findAll(): Observable<any> {
-    return this.http.get(this.vacancyUrl + '/vacancies', httpOptions);
+    return this.http.get(this.vacancyUrl , httpOptions);
   }
 
   get(vacancyId: string) {
-    return this.http.get<Vacancy>(this.vacancyAPI + '/' + vacancyId, httpOptions);
+    return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
   }
 
   public deleteById(id: number): Observable<Object> {
-    return this.http.delete(this.vacancyUrl + '/deleteVacancy/' + id, httpOptions);
+    return this.http.delete(this.vacancyUrl + '/' + id, httpOptions);
   }
 
   public update(vacancy: any): Observable<Vacancy> {
-    return this.http.put<Vacancy>(this.vacancyUrl + '/updateVacancy', vacancy, httpOptions);
+    return this.http.put<Vacancy>(this.vacancyUrl , vacancy, httpOptions);
   }
 
   public create(vacancy: Vacancy): Observable<Object> {
-    return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + 1, vacancy, httpOptions);
+    return this.http.post<Vacancy>(this.vacancyUrl + '/' + 1, vacancy, httpOptions);
   }
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
