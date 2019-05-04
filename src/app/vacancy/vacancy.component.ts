@@ -6,6 +6,7 @@ import {VacancyService} from '../services/vacancy.service';
 import {Observable} from 'rxjs';
 import {Requirement} from '../models/requirement.model';
 
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'rabotyNet',
@@ -15,6 +16,8 @@ import {Requirement} from '../models/requirement.model';
 export class VacancyComponent implements OnInit {
   vacancies: Observable<Vacancy[]>;
   requirements: Observable<Requirement[]>;
+
+  p: number = 1;
 
   vacancy: Vacancy = new Vacancy();
 

@@ -26,15 +26,10 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>
         </ul>
@@ -49,7 +44,7 @@
               <h3 class="text-muted">Vacancies</h3>
               </div>
                 <div class="row" >
-                    <div class="col-lg-4" *ngFor="let vacancy of vacancies">
+                    <div class="col-lg-4" *ngFor="let vacancy of vacancies | paginate: { itemsPerPage: 3, currentPage: p }">
                       <h2>{{vacancy.position}}</h2>
                       <p>{{vacancy.employment}}</p>
                       <td>
@@ -59,47 +54,11 @@
                     </div>
                </div>
                <button class="btn btn-success" [routerLink]="['/createVacancy']">Add new vacancy</button>
+               <div class="pagin">
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+              </div>
             </div>
     <hr>
     </body>
     </html>
-  
-  <!-- <body style="margin-left: 280px; ">
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h1>Vacancies</h1>
-  </div>
-  <div class="panel-body">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th class="d-none">Id</th>
-          <th>Position</th>
-          <th>Employment</th>
-          <th>Salary</th>
-          <th>Requirements</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let vacancy of vacancies">
-          <td class="d-none">{{vacancy.vacancyId}}</td>
-          <td>{{vacancy.position}}</td>
-          <td>{{vacancy.employment}}</td>
-          <td>{{vacancy.salary}}</td>
-          <td>
-            <li *ngFor="let requirement of vacancy.requirements">{{requirement.description}}</li>
-          </td>
-          <td>
-            <a routerLink="/updateVacancy/{{vacancy.vacancyId}}" class="btn btn-success">Update</a>
-            <button class="btn btn-danger" (click)="deleteById(vacancy.vacancyId)">Delete Vacancy</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <button class="btn btn-primary" [routerLink]="['/createVacancy']">Add</button>
-    
-  </div>
-</div>
-</body> 
-  -->
+
