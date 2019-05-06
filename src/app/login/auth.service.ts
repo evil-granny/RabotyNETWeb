@@ -6,14 +6,17 @@ export class AuthService {
 
   authenticated = false;
 
+  private userUrl = 'http://localhost:8080/loggedUser';
+  private pmUrl = 'http://localhost:8080/api/test/pm';
+  private adminUrl = 'http://localhost:8080/api/test/admin';
+
   constructor(private http: HttpClient) {
   }
 
   public authenticate(credentials) {
 
     const authHeader = credentials ? {
-      // 'Authorization' : 'Basic ' + btoa(credentials.username + ':' + credentials.password),
-      'Authorization' : 'Basic YWRtaW46YWRtaW4=',
+      'Authorization' : 'Basic ' + btoa(credentials.username + ':' + credentials.password),
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
     } : {};
@@ -25,7 +28,7 @@ export class AuthService {
       headers: new HttpHeaders(authHeader)
     };
 
-    return this.http.post('http://localhost:8080/logedUser', credentials, httpOptions);
+    return this.http.post(this.userUrl, credentials, httpOptions);
   }
 
 }

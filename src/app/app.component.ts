@@ -14,11 +14,9 @@ export class AppComponent {
 
   title = 'Angular Pro Sidebar';
 
-  greeting = {};
-
   constructor(public sidebarservice: SidebarService, private app: AuthService, private http: HttpClient, private router: Router) {
 
-    // this.app.authenticate(undefined, undefined);
+    this.app.authenticate(undefined);
   }
 
   toggleSidebar() {

@@ -21,10 +21,6 @@ export class LoginComponent {
       this.router.navigateByUrl('/searchCV');
 
     });
-    const result = this.searchCVService.getResult('aszfd').subscribe(data => {
-      console.log('CV');
-      console.log(data);
-    });
 
   }
 

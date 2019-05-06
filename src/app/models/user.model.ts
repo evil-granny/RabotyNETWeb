@@ -6,6 +6,6 @@ export class User {
 
     password: string;
 
-    matchingPassword: string;
+    matchingPassword: string
 
 }
