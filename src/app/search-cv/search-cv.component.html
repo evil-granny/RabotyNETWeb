@@ -1,3 +1,11 @@
+<label class="resultOnPage">
+  <select [(ngModel)]="searchCv.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
+    <option [defaultSelected]="searchCv.resultsOnPage" value=10>Results on page: 10</option>
+    <option value=20>Results on page: 20</option>
+    <option value=50>Results on page: 50</option>
+  </select>
+</label>
+
 <div class="search-result">
   <form>
     <label>
@@ -5,10 +13,9 @@
              class="form-control">
     </label>
 
-
     <label>
       <select [(ngModel)]="searchCv.searchParameter" name="searchParameter" class="form-control">
-        <option value="name">by name</option>
+        <option [defaultSelected]="searchCv.searchParameter" value="name">by name</option>
         <option value="phoneNumber">by phone</option>
         <option value="city">by city</option>
       </select>
@@ -16,13 +23,15 @@
 
     <br>
     <button class="btn btn-success" (click)="startSearch()">Start CV search</button>
-  </form><br><br>
-
+  </form>
+  <br><br>
 
   <div class="col-md-12">
     <h2>Search result</h2>
 
-    <table class="table table-striped">
+    <h3>{{people.length}} Cvs founded</h3>
+
+    <table class="table table-striped" hidden="hidden">
       <thead>
       <tr>
         <th class="d-none">Id</th>
@@ -58,4 +67,7 @@
       </tbody>
     </table>
   </div>
+</div>
+<div class="nextPage">
+  <button class="btn btn-success" (click)="nextPage()">Next page</button>
 </div>

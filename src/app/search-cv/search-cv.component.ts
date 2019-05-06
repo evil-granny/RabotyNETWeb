@@ -20,6 +20,15 @@ export class SearchCVComponent {
   constructor(private router: Router, private searchCVService: SearchCVService) { }
 
   startSearch() {
+    this.searchCv.firstResultNumber = 0;
+    this.searchCVService.getResult(this.searchCv)
+      .subscribe(data => {
+        this.people = data;
+      });
+  }
+
+  nextPage() {
+    this.searchCv.firstResultNumber = this.searchCv.firstResultNumber + this.searchCv.resultsOnPage;
     this.searchCVService.getResult(this.searchCv)
       .subscribe(data => {
         this.people = data;

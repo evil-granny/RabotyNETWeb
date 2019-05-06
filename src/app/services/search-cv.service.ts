@@ -22,4 +22,9 @@ export class SearchCVService {
     console.log('[Start Searching]');
     return this.http.post<Person[]>(this.searchCVUrl + '/searchCV', searchCV, httpOptions);
   }
+
+  public nextPage(searchCV) {
+    console.log('[Next page]');
+    return this.http.post<Person[]>(this.searchCVUrl + '/searchCV', searchCV, httpOptions);
+  }
 }
