@@ -17,8 +17,6 @@ import { UserComponent } from './user/user.component';
 
 import { SearchCVComponent } from './search-cv/search-cv.component';
 
-// import { LoginComponent} from './login/login.component';
-
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
@@ -36,8 +34,6 @@ const routes: Routes = [
   { path: 'users', component: UserComponent },
 
   { path: 'searchCV', component: SearchCVComponent },
-
-  // { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

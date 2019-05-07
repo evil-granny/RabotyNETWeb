@@ -6,6 +6,10 @@ export class User {
 
     password: string;
 
-    matchingPassword: string
+    matchingPassword: string;
+
+    role: string[];
+
+    token: string;
 
 }

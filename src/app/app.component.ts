@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { SidebarService } from './sidebar/sidebar.service';
 import {HttpClient} from '@angular/common/http';
-import { AuthService } from './login/auth.service';
+import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
-// import 'rxjs/add/operator/finally';
+import { User } from './models/user.model';
+import { Role } from './models/roles.model';
+import {UserPrincipal} from './models/userPrincipal.model';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +14,26 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
+  currentUser: UserPrincipal;
+
   title = 'Angular Pro Sidebar';
 
-  constructor(public sidebarservice: SidebarService, private app: AuthService, private http: HttpClient, private router: Router) {
+  constructor(public sidebarservice: SidebarService, private app: AuthenticationService, private http: HttpClient, private router: Router) {
 
-    this.app.authenticate(undefined);
+    this.app.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
+  }
+
+  get isUser() {
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
+  }
+
+  logout() {
+    this.app.logout();
+    this.router.navigate(['/login']);
   }
 
   toggleSidebar() {
@@ -34,13 +51,4 @@ export class AppComponent {
   hideSidebar() {
     this.sidebarservice.setSidebarState(true);
   }
-
-  logout() {
-    // @ts-ignore
-    this.http.post('logout', {}).finally(() => {
-      this.app.authenticated = false;
-      this.router.navigateByUrl('/login');
-    }).subscribe();
-  }
-
 }
