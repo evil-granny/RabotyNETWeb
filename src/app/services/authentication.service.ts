@@ -16,7 +16,8 @@ export class AuthenticationService {
 
   authenticated = false;
 
-  private userUrl = 'http://localhost:8080/loginUser';
+  private userLoginUrl = 'http://localhost:8080/loginUser';
+  private userLogoutUrl = 'http://localhost:8080/logoutUser';
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<UserPrincipal>(JSON.parse(localStorage.getItem('currentUser')));
@@ -42,7 +43,7 @@ export class AuthenticationService {
       headers: new HttpHeaders(authHeader)
     };
 
-    return this.http.post<any>(this.userUrl, credentials, httpOptions)
+    return this.http.post<any>(this.userLoginUrl, credentials, httpOptions)
       .pipe(map(currentUser => {
         let userPrincipal: UserPrincipal;
         if (currentUser) {
@@ -67,9 +68,25 @@ export class AuthenticationService {
       }));
   }
 
-  logout() {
+  logout(credentials) {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    const authHeader = credentials ? {
+      'Authorization' : 'Basic ' + btoa(credentials.username + ':' + credentials.password),
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json'
+    } : {};
+    console.log('AUTH_HEADER');
+    console.log(authHeader);
+    const headers = new HttpHeaders(authHeader);
+
+    const httpOptions = {
+      headers: new HttpHeaders(authHeader)
+    };
+    return this.http.post<any>(this.userLogoutUrl, credentials, httpOptions)
+      .pipe(map(currentUser => {
+        return null;
+      }));
   }
 }
