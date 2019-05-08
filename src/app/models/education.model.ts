@@ -6,7 +6,7 @@ export class Education {
 
     school: string;
 
-    speciality: string;
+    specialty: string;
 
     graduation: number;
 

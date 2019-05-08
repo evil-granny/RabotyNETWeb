@@ -36,7 +36,7 @@ export class CVService {
 
   public update(cv) {
     console.log("[update cv]");
-    return this.http.put<CV>(this.cvUrl + "/updateCV/" + cv.cvId, cv, httpOptions);
+    return this.http.put<CV>(this.cvUrl + "/updateCV", cv, httpOptions);
   }
 
 }
