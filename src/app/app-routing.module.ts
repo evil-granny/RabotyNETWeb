@@ -15,6 +15,9 @@ import { AddCvComponent } from './cv/add-cv/add-cv.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
+import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
+
 import { SearchCVComponent } from './search-cv/search-cv.component';
 
 const routes: Routes = [
@@ -32,6 +35,9 @@ const routes: Routes = [
 
   { path: 'registration', component: AddUserComponent },
   { path: 'users', component: UserComponent },
+
+  { path: 'admin', component: AdminComponent },
+  { path: 'home', component: HomeComponent },
 
   { path: 'searchCV', component: SearchCVComponent },
 ];
