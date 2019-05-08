@@ -15,8 +15,8 @@ import {SearchCVResponse} from '../models/SearcModel/SearchCVResponse.model';
 export class SearchCVComponent {
 
   searchCv: SearchCV = new SearchCV();
-  searchCVResults: SearchCVResult[];
-  searchCVResponse: SearchCVResponse;
+  searchCVResponse: SearchCVResponse = new SearchCVResponse();
+  searchCVResult: SearchCVResult = new SearchCVResult();
 
   constructor(private router: Router, private searchCVService: SearchCVService) { }
 

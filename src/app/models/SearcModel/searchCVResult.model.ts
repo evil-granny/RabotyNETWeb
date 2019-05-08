@@ -14,6 +14,6 @@ export class SearchCVResult {
 
   phoneNumber: string;
 
-  eMail: string;
+  email: string;
 
 }

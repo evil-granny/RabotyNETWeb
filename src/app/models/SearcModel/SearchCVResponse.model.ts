@@ -4,6 +4,6 @@ export class SearchCVResponse {
 
   count: BigInteger;
 
-  searchCVResults: SearchCVResult[];
+  searchCVDTOs: SearchCVResult[];
 
 }

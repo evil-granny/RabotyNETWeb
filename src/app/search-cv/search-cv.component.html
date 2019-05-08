@@ -30,51 +30,34 @@
   <div class="col-md-12">
     <h2>Search result</h2>
 
-<!--    <h3>{{searchCVResponse.count}} Cvs founded</h3>-->
+    <h3>{{searchCVResponse.count}} Cvs founded</h3>
 
-<!--    <table class="table table-striped" hidden="hidden">-->
-<!--      <thead>-->
-<!--      <tr>-->
-<!--        <th class="d-none">Id</th>-->
-<!--        <th>Json list</th>-->
-
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      <tbody>-->
-<!--      <tr *ngFor="let searchCVResult of searchCVResponse.searchCVResults">-->
-<!--        <td class="d-none">{{searchCVResult.id}}</td>-->
-<!--        <td>{{searchCVResult|json}}</td>-->
-
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
-
-<!--    <table class="table table-striped">-->
-<!--      <thead>-->
-<!--      <tr>-->
-<!--        <th class="d-none">Id</th>-->
-<!--        <th>First Name</th>-->
-<!--        <th>Last Name</th>-->
-<!--        <th>Age</th>-->
-<!--        <th>Position</th>-->
-<!--        <th>City</th>-->
-<!--        <th>Phone</th>-->
-<!--        <th>E-mail</th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      <tbody>-->
-<!--      <tr *ngFor="let searchCVResult of searchCVResponse.searchCVResults">-->
-<!--        <td class="d-none">{{searchCVResult.id}}</td>-->
-<!--        <td>{{searchCVResult.firstName}}</td>-->
-<!--        <td>{{searchCVResult.lastName}}</td>-->
-<!--        <td>{{searchCVResult.age}}</td>-->
-<!--        <td>{{searchCVResult.position}}</td>-->
-<!--        <td>{{searchCVResult.city}}</td>-->
-<!--        <td>{{searchCVResult.phoneNumber}}</td>-->
-<!--        <td>{{searchCVResult.eMail}}</td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="d-none">Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Position</th>
+        <th>City</th>
+        <th>Phone</th>
+        <th>E-mail</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let searchCVResult of searchCVResponse.searchCVDTOs">
+        <td class="d-none">{{searchCVResult.id}}</td>
+        <td>{{searchCVResult.firstName}}</td>
+        <td>{{searchCVResult.lastName}}</td>
+        <td>{{searchCVResult.age}} years old</td>
+        <td>{{searchCVResult.position}}</td>
+        <td>{{searchCVResult.city}}</td>
+        <td>{{searchCVResult.phoneNumber}}</td>
+        <td>{{searchCVResult.email}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 <div class="nextPage">
