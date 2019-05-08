@@ -21,7 +21,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
   { path: 'vacancies', component: VacancyComponent },
-  { path: 'createVacancy', component: EditVacancyComponent },
+  { path: 'vacanciesByCompany', component: VacancyComponent },
+   { path: 'createVacancy', component: EditVacancyComponent },
+  // { path: 'createVacancy/:companyId', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
 
   { path: 'companies', component: CompanyComponent },

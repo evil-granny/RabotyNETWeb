@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 
 import {Vacancy} from '../models/vacancy.model';
 import {VacancyService} from '../services/vacancy.service';
+import {CompanyService} from '../services/company.service';
 import {Observable} from 'rxjs';
 import {Requirement} from '../models/requirement.model';
 
@@ -19,22 +20,24 @@ export class VacancyComponent implements OnInit {
 
   p: number = 1;
 
+
   vacancy: Vacancy = new Vacancy();
 
-  constructor(private router: Router, private vacancyService: VacancyService) {
+  constructor(private router: Router, private vacancyService: VacancyService, private companyService: CompanyService) {
   }
 
   ngOnInit() {
     this.reloadData();
   };
+  id: number = 1;
 
   reloadData() {
-    this.vacancyService.findAll().subscribe(
-      data => {
-        this.vacancies = data;
-        console.log(this.vacancies);
-      }
-    );
+     this.vacancyService.findAll().subscribe(
+       data => {
+         this.vacancies = data;
+         console.log(this.vacancies);
+       }
+     );
   }
 
   gotoList() {

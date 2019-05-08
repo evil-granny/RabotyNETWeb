@@ -26,6 +26,10 @@ export class VacancyService {
     return this.http.get(this.vacancyUrl , httpOptions);
   }
 
+  public findVacanciesByCompanyId(companyId : number): Observable<any> {
+    return this.http.get(this.vacancyUrl + '/byCompanyId/' + companyId, httpOptions);
+  }
+
   get(vacancyId: string) {
     return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
   }
@@ -44,5 +48,6 @@ export class VacancyService {
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
   }
+
 
 }
