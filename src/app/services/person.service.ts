@@ -22,7 +22,7 @@ export class PersonService {
 
   public findById(): Observable<any> {
     console.log("[findById]");
-    return this.http.get<Person>(this.personUrl + "/person/1", httpOptions);
+    return this.http.get<Person>(this.personUrl + "/1", httpOptions);
   }
 
   public update(person: Person): Observable<any> {

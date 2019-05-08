@@ -11,11 +11,13 @@ import { AddCompanyComponent } from './company/add-company/add-company.component
 
 import { CvComponent } from './cv/cv.component';
 import { AddCvComponent } from './cv/add-cv/add-cv.component';
+import {PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
+
 
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
-import { SearchCVComponent } from './search-cv/search-cv.component'
+import { SearchCVComponent } from './search-cv/search-cv.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -29,6 +31,7 @@ const routes: Routes = [
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
+  { path: 'designerPDFcv', component: PdfDesignerComponent },
 
   { path: 'registration', component: AddUserComponent },
   { path: 'users', component: UserComponent },
