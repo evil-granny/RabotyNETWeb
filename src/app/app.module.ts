@@ -36,6 +36,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 
 // import { PaginationModule } from 'ngx-pagination'
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -57,7 +58,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddCvComponent,
     UserComponent,
     AddUserComponent,
-    SearchCVComponent
+    SearchCVComponent,
+    ApproveCompanyComponent
   ],
   imports: [
     BrowserModule,

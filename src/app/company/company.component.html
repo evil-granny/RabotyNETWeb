@@ -37,7 +37,7 @@
         <td>
           <a routerLink="/updateCompany/{{company.companyId}}" class="btn btn-success">Update</a>
           <button class="btn btn-danger" (click)="deleteById(company)">Delete</button>
-          <div *ngIf="company.approved === false">
+          <div *ngIf="company.emailSent === false">
             <button class="btn btn-primary" (click)="approve(company)">Approve</button>
           </div>
         </td>

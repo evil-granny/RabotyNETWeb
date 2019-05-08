@@ -5,7 +5,9 @@ import { Company } from '../../models/company.model';
 import { CompanyService } from '../../services/company.service'
 
 @Component({
-  templateUrl: './add-company.component.html'
+  selector: 'rabotyNet',
+  templateUrl: './add-company.component.html',
+  styleUrls: ['./add-company.component.css']
 })
 export class AddCompanyComponent implements OnInit {
 
@@ -24,21 +26,17 @@ export class AddCompanyComponent implements OnInit {
   }
 
   update(): void {
-    if (CompanyService.validateCompany(this.company))
-      this.companyService.update(this.company)
-        .subscribe(data => {
-          alert("Company has been updated successfully.");
-        });
-    else alert("An validation error");
+    this.companyService.update(this.company)
+      .subscribe(data => {
+        alert("Company has been updated successfully.");
+      });
   };
 
   create(): void {
-    if (CompanyService.validateCompany(this.company))
-      this.companyService.create(this.company)
-        .subscribe(data => {
-          alert("Company has been created successfully.");
-        });
-    else alert("An validation error");
+    this.companyService.create(this.company)
+      .subscribe(data => {
+        this.router.navigate(['/companies']);
+      });  
   };
 
 }
