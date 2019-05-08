@@ -5,7 +5,9 @@ import {AuthenticationService} from '../services/authentication.service';
 import {SearchCVService} from '../services/search-cv.service';
 
 @Component({
-  templateUrl: './login.component.html'
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: [ './login.component.scss' ]
 })
 export class LoginComponent {
 

@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'vacancies', component: VacancyComponent },
   { path: 'createVacancy', component: EditVacancyComponent },
 
-  { path: 'companies', component: CompanyComponent },
+  // { path: 'companies', component: CompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyId', component: AddCompanyComponent },
 
@@ -34,12 +34,12 @@ const routes: Routes = [
   { path: 'createCV', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
-  { path: 'users', component: UserComponent },
-
-  { path: 'admin', component: AdminComponent },
+  // { path: 'users', component: UserComponent },
+  //
+  // { path: 'admin', component: AdminComponent },
   { path: 'home', component: HomeComponent },
 
-  { path: 'searchCV', component: SearchCVComponent },
+  // { path: 'searchCV', component: SearchCVComponent },
 ];
 
 @NgModule({

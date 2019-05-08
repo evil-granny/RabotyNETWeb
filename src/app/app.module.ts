@@ -1,49 +1,40 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
-import { ProfileComponent } from './profile/profile.component';
-import { PersonService } from './services/person.service';
+import {ProfileComponent} from './profile/profile.component';
 
-import { VacancyComponent } from './vacancy/vacancy.component';
-import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';
+import {VacancyComponent} from './vacancy/vacancy.component';
+import {EditVacancyComponent} from './vacancy/edit-vacancy/edit-vacancy.component';
 
-import { CompanyComponent } from './company/company.component';
-import { AddCompanyComponent } from './company/add-company/add-company.component';
+import {CompanyComponent} from './company/company.component';
+import {AddCompanyComponent} from './company/add-company/add-company.component';
 
-import { CvComponent } from './cv/cv.component';
-import { AddCvComponent } from './cv/add-cv/add-cv.component';
+import {CvComponent} from './cv/cv.component';
+import {AddCvComponent} from './cv/add-cv/add-cv.component';
 
-import { UserComponent } from './user/user.component';
-import { AddUserComponent } from './user/add-user/add-user.component';
+import {UserComponent} from './user/user.component';
+import {AddUserComponent} from './user/add-user/add-user.component';
 
-import { SearchCVComponent } from './search-cv/search-cv.component';
+import {SearchCVComponent} from './search-cv/search-cv.component';
 
-import { CompanyService } from './services/company.service';
-import { CVService } from './services/cv.service';
-import { UserService } from './services/user.service';
-import { SearchCVService } from './services/search-cv.service';
+import {AppRoutingModule} from './app-routing.module';
+import {BsDropdownModule} from 'ngx-bootstrap';
 
-import { AppRoutingModule } from './app-routing.module';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import {AppComponent} from './app.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
 
-import { AppComponent } from './app.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthenticationService} from './services/authentication.service';
+import {HomeComponent} from './home/home.component';
+import {LoginComponent} from './login/login.component';
+import {AdminComponent} from './admin/admin.component';
 
-import { RouterModule, Routes } from '@angular/router';
-import { AuthenticationService } from './services/authentication.service';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
-
-import { AuthInterceptor, ErrorInterceptor } from './_helpers';
+import {AuthInterceptor, ErrorInterceptor} from './_helpers';
 import {Role} from './models/roles.model';
 import {AuthGuard} from './_guards/auth.guard';
 
@@ -62,6 +53,18 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_ADMIN] }
+  },
+  {
+    path: 'companies',
+    component: CompanyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
+  },
+  {
+    path: 'searchCV',
+    component: SearchCVComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
   {
     path: 'users',
