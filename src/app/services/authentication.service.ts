@@ -68,25 +68,25 @@ export class AuthenticationService {
       }));
   }
 
-  logout(credentials) {
+  logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    const authHeader = credentials ? {
-      'Authorization' : 'Basic ' + btoa(credentials.username + ':' + credentials.password),
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-    } : {};
-    console.log('AUTH_HEADER');
-    console.log(authHeader);
-    const headers = new HttpHeaders(authHeader);
-
-    const httpOptions = {
-      headers: new HttpHeaders(authHeader)
-    };
-    return this.http.post<any>(this.userLogoutUrl, credentials, httpOptions)
-      .pipe(map(currentUser => {
-        return null;
-      }));
+    // const authHeader = credentials ? {
+    //   'Authorization' : 'Basic ' + btoa(credentials.username + ':' + credentials.password),
+    //   'Access-Control-Allow-Origin': '*',
+    //   'Content-Type': 'application/json'
+    // } : {};
+    // console.log('AUTH_HEADER');
+    // console.log(authHeader);
+    // const headers = new HttpHeaders(authHeader);
+    //
+    // const httpOptions = {
+    //   headers: new HttpHeaders(authHeader)
+    // };
+    // return this.http.post<any>(this.userLogoutUrl, credentials, httpOptions)
+    //   .pipe(map(currentUser => {
+    //     return null;
+    //   }));
   }
 }
