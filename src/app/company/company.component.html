@@ -1,0 +1,77 @@
+<body>
+  <div class="container">
+    <div class="view-account">
+      <section class="module">
+        <div class="module-inner">
+          <div class="content-panel">
+            <h2>List of Companies</h2>
+            <label for="filter">Filter by approved</label>
+            <select id="filter" [(ngModel)]="filter" class="form-control col-md-2">
+              <option value="all" selected>All</option>
+              <option value="approved">Approved</option>
+              <option value="unapproved">Unapproved</option>
+            </select>
+            <br>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="d-none">Id</th>
+                  <th>Name</th>
+                  <th>EDRPOU</th>
+                  <th>Website</th>
+                  <th>Claims</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let company of companies">
+                  <td class="d-none" *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.companyId}}</td>
+                  <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.name}}</td>
+                  <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.edrpou}}</td>
+                  <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.website}}</td>
+                  <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
+                    <div *ngIf="company.companyId == currentClaim">
+                      <table class="table table-stripped">
+                        <thead>
+                          <tr>
+                            <th class="d-none">Id</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let claim of company.claims">
+                            <td class="d-none">{{claim.claimId}}</td>
+                            <td>{{claim.title}}</td>
+                            <td>{{claim.description}}</td>
+                            <td>
+                              <button class="btn" (click)="rejectClaim(claim)"><i class="fa fa-thumbs-down"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <a class="btn" (click)="currentClaim=null;"><i class="fa fa-sort-up"></i></a>
+                    </div>
+                    <a *ngIf="company.companyId != currentClaim" class="btn"
+                      (click)="currentClaim=company.companyId"><i class="fa fa-sort-down"></i></a>
+                  </td>
+                  <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
+                    <a routerLink="/viewCompany/{{company.companyId}}" class="btn"><i class="fa fa-eye"></i></a>
+                    <a routerLink="/updateCompany/{{company.companyId}}" class="btn"><i class="fa fa-edit"></i></a>
+                    <a class="btn" (click)="deleteById(company)"><i class="fa fa-trash"></i></a>
+                    <a *ngIf="!isMailSent(company)" class="btn" (click)="approve(company)"><i class="fa fa-thumbs-up"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button *ngIf="canPrev()" class="btn btn-info" (click)="prev(); log();">&laquo; Previous</button>
+            <button *ngIf="!canPrev()" disabled class="btn btn-info" (click)="prev(); log();">&laquo; Previous</button>
+            <button *ngIf="canNext()" class="btn btn-info" (click)="next();">Next &raquo;</button>
+            <button *ngIf="!canNext()" disabled class="btn btn-info" (click)="next();">Next &raquo;</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>

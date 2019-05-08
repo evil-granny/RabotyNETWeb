@@ -39,4 +39,8 @@ export class UserService {
     return this.http.post<User>(this.userUrl + "/registration", user, httpOptions);
   }
 
+  public findById(userId){
+      return this.http.get<User>(this.userUrl +"/user/"+userId,httpOptions);
+  }
+
 }

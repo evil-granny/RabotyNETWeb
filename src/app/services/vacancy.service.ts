@@ -26,12 +26,16 @@ export class VacancyService {
     return this.http.get(this.vacancyUrl , httpOptions);
   }
 
-  public findVacanciesByCompanyId(companyId : number): Observable<any> {
-    return this.http.get(this.vacancyUrl + '/byCompanyId/' + companyId, httpOptions);
+  public findVacanciesByCompanyId(companyId : any, first : number, count : number): Observable<any> {
+    return this.http.get(this.vacancyUrl + '/byCompanyId/' + companyId + "/" + first + "/" + count, httpOptions);
   }
 
   get(vacancyId: string) {
     return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
+  }
+
+  getCountOfVacancies(companyId: any) {
+    return this.http.get<number>(this.vacancyUrl + '/count/' + companyId, httpOptions);
   }
 
   public deleteById(id: number): Observable<Object> {
@@ -42,8 +46,8 @@ export class VacancyService {
     return this.http.put<Vacancy>(this.vacancyUrl , vacancy, httpOptions);
   }
 
-  public create(vacancy: Vacancy): Observable<Object> {
-    return this.http.post<Vacancy>(this.vacancyUrl + '/' + 1, vacancy, httpOptions);
+  public createVacancy(vacancy: Vacancy, companyId : string): Observable<Object> {
+    return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + companyId, vacancy, httpOptions);
   }
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);

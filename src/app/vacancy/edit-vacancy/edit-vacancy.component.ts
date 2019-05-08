@@ -30,9 +30,9 @@ export class EditVacancyComponent implements OnInit {
   }
 
   create(): void {
-    this.vacancyService.create(this.vacancy)
+    this.vacancyService.createVacancy(this.vacancy,this.route.snapshot.paramMap.get('companyId'))
       .subscribe(data => {
-        this.gotoList();
+        this.router.navigate(['/viewCompany/'+ this.route.snapshot.paramMap.get('companyId')]);
       }, error => console.error(error));
   };
 
