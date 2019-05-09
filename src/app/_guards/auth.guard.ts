@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
         console.log('route.data.roles ' + route.data.roles);
         console.log('currentUser.roles ' + currentUser.roles);
         console.log(route.data.roles.indexOf(currentUser.roles));
-        this.router.navigate(['/profile']).then(
+        this.router.navigate(['/accessDenied']).then(
 err => {
             throw err;
             console.log('********ERROR 1********');
