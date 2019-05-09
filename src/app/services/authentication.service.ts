@@ -52,16 +52,16 @@ export class AuthenticationService {
           userRoles.forEach(function (key) {
             roles.push(key.authority);
           });
-          console.log("ROLES")
-          console.log(roles)
+          // console.log("ROLES")
+          // console.log(roles)
           const token = 'Basic ' + btoa(credentials.username + ':' + credentials.password);
           userPrincipal = new UserPrincipal(name, roles, token);
-          console.log("UserPrincipal")
-          console.log(userPrincipal)
+          // console.log("UserPrincipal")
+          // console.log(userPrincipal)
           localStorage.setItem('currentUser', JSON.stringify(userPrincipal));
           this.currentUserSubject.next(userPrincipal);
-          console.log("UserPrincipal fro ls")
-          console.log(this.currentUserValue)
+          // console.log("UserPrincipal fro ls")
+          // console.log(this.currentUserValue);
         }
         return userPrincipal;
       }));
@@ -71,13 +71,13 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    const authHeader = {};
-    const httpOptions = {
-      headers: new HttpHeaders(authHeader)
-    };
-    return this.http.post<any>(this.userLogoutUrl, httpOptions)
-      .pipe(map(currentUser => {
-        return null;
-      }));
+    // const authHeader = {};
+    // const httpOptions = {
+    //   headers: new HttpHeaders(authHeader)
+    // };
+    // return this.http.post<any>(this.userLogoutUrl, httpOptions)
+    //   .pipe(map(currentUser => {
+    //     return null;
+    //   }));
   }
 }

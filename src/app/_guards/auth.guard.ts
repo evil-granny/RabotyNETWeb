@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import {Role} from '../models/roles.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -14,7 +13,13 @@ export class AuthGuard implements CanActivate {
     //   // logged in so return true
     //   return true;
     // }
-    const currentUser = this.authenticationService.currentUserValue;
+    let currentUser;
+
+    try {
+      currentUser = this.authenticationService.currentUserValue;
+    } catch { return false; }
+
+    console.log('AuthGuard.ts:  ' + currentUser);
 
     if (currentUser) {
       // check if route is restricted by role
@@ -23,11 +28,21 @@ export class AuthGuard implements CanActivate {
         // role not authorised so redirect to home page
      // if (route.data.roles) {
        // console.log("!!"+route.data.roles.indexOf(currentUser.roles.toString()));
-        console.log("-----------AuthGuard-----------")
-        console.log("route.data.roles " + route.data.roles);
-        console.log("currentUser.roles "+ currentUser.roles);
+        console.log('-----------AuthGuard-----------')
+        console.log('route.data.roles ' + route.data.roles);
+        console.log('currentUser.roles ' + currentUser.roles);
         console.log(route.data.roles.indexOf(currentUser.roles));
-        this.router.navigate(['/']);
+        this.router.navigate(['/profile']).then(
+err => {
+            throw err;
+            console.log('********ERROR 1********');
+            console.log(err);
+          },
+err => {
+          throw err;
+          console.log('********ERROR 2********');
+          console.log(err);
+        });
 
         return false;
       }
@@ -38,6 +53,8 @@ export class AuthGuard implements CanActivate {
       // // not logged in so redirect to login page
       // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
       // return false;
-    }
+    } else {
+      this.router.navigate(['/login']);
+      return false; }
   }
 }
