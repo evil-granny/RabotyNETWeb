@@ -27,6 +27,8 @@ import { CompanyService } from './services/company.service';
 import { CVService } from './services/cv.service';
 import { UserService } from './services/user.service';
 import { SearchCVService } from './services/search-cv.service';
+import { PdfService } from './services/pdf.service';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap';

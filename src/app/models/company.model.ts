@@ -1,4 +1,4 @@
-import { Contacts } from './contacts.model';
+import { Contact } from './contact.model';
 import { Address } from './address.model';
 
 export class Company {
@@ -17,7 +17,7 @@ export class Company {
 
     approved: boolean = false;
 
-    contacts: Contacts = new Contacts();
+    contact: Contact = new Contact();
 
     address: Address = new Address();
 

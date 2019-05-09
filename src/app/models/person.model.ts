@@ -1,20 +1,20 @@
 import { Address } from './address.model';
-import { Contacts } from './contacts.model';
+import { Contact } from './contact.model';
 
 export class Person {
 
     userId: BigInteger;
 
-    firstName: string;
+    firstName: string = "";
 
-    lastName: string;
+    lastName: string= "";
 
-    birthday: Date;
+    birthday: Date= null;
 
-    photo: BinaryType;
+    photo: BinaryType= null;
 
     address: Address = new Address();
 
-    contacts: Contacts = new Contacts();
+    contact: Contact = new Contact();
 
 }

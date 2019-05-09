@@ -1,6 +1,7 @@
 import { Skill } from './skill.model';
 import { Education } from './education.model';
 import { Job } from './job.model';
+import { Person } from './person.model';
 
 export class CV {
 
@@ -15,5 +16,7 @@ export class CV {
     education: Education = new Education();
 
     jobs: Job[] = [];
+
+    person: Person = new Person();
 
 }

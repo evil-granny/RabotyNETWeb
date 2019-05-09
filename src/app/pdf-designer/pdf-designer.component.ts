@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CV } from '../models/cv.model';
+import { Person} from '../models/person.model';
+import { PdfService } from '../services/pdf.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Contact } from '../models/contact.model';
 
 @Component({
   selector: 'app-pdf-designer',
@@ -7,9 +12,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PdfDesignerComponent implements OnInit {
 
-  constructor() { }
+  cv: CV = new CV();
+  person: Person = new Person();
+  contact: Contact= new Contact();
 
-  ngOnInit() {
+  constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService) {}   
+
+  ngOnInit(): void {
+    var cvId = this.route.snapshot.paramMap.get("cvId");
+    if (cvId !== null) {
+      this.pdfService.findById(cvId)
+        .subscribe(data => {
+          this.cv = data;
+        });
+    }
   }
+
+  update(): void {
+    this.pdfService.update(this.cv)
+      .subscribe(data => {
+        if(data != null)
+          alert("Company has been updated successfully.");
+        else
+          alert("Validation problem has been occured"); 
+      });
+  };
+
 
 }
