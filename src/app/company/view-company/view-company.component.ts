@@ -22,7 +22,7 @@ export class ViewCompanyComponent implements OnInit {
   claiming: boolean = false;
 
   page: number = 0;
-  count: number = 1;
+  count: number = 2;
   size: number = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService,

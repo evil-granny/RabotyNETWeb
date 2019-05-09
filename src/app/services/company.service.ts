@@ -31,6 +31,10 @@ export class CompanyService {
     return this.http.get<Company[]>(this.companyURL + "/companies/"+first+"/"+count);
   }
 
+  public getCompaniesCount() {
+    return this.http.get<number>(this.companyURL + "/companies/count");
+  }
+
   public deleteById(company) {
     console.log("[delete company]");
     return this.http.delete(this.companyURL + "/deleteCompany/" + company.companyId, httpOptions);

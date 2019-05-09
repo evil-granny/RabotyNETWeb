@@ -24,15 +24,15 @@ export class CompanyComponent implements OnInit {
   constructor(private router: Router, private companyService: CompanyService) {}
 
   ngOnInit() {
+    this.companyService.getCompaniesCount()
+      .subscribe( data => {
+        this.size = data;
+      });
+
     this.findAll();
   };
 
   findAll() {
-    this.companyService.findAll()
-      .subscribe( data => {
-        this.size = data.length;
-      });
-
     this.companyService.findAllWothPagination(this.page * this.count, this.count)
       .subscribe( data => {
         this.companies = data;
