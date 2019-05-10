@@ -90,25 +90,25 @@
               <h4 class="fieldset-title"></h4>
               <h4>Vacancies</h4>
               <div class="container">
-                    <div class="row" >
-                         <div class="col-lg-6" *ngFor="let vacancy of vacancies">
-                          <div class="card">
-                          <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
-                          <p style="margin-left: 10px;">{{vacancy.employment}}</p>
-                          <td>
-                            <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">{{requirement.description}}</li>
-                          </td>
-                            <div class="row align-items-end" style="height: 100%;margin: 0px;">
-                              <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom" role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
-                            </div>
-                        </div> 
+                <div class="row" >
+                  <div class="col-lg-6" *ngFor="let vacancy of vacancies">
+                    <div class="card">
+                      <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
+                      <p style="margin-left: 10px;">{{vacancy.employment}}</p>
+                      <td>
+                        <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">{{requirement.description}}</li>
+                      </td>
+                      <div class="row align-items-end" style="height: 100%;margin: 0px;">
+                        <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom" role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
                       </div>
-                   </div>
-                   <button *ngIf="canPrev()" class="btn btn-info" (click)="prev();">&laquo; Previous</button>
-            <button *ngIf="!canPrev()" disabled class="btn btn-info" (click)="prev();">&laquo; Previous</button>
-            <button *ngIf="canNext()" class="btn btn-info" (click)="next();">Next &raquo;</button>
-            <button *ngIf="!canNext()" disabled class="btn btn-info" (click)="next();">Next &raquo;</button>
-        
+                      </div> 
+                  </div>
+                </div>
+                <button *ngIf="canPrev()" class="btn btn-info" (click)="prev();">&laquo; Previous</button>
+                <button *ngIf="!canPrev()" disabled class="btn btn-info" (click)="prev();">&laquo; Previous</button>
+                <button *ngIf="canNext()" class="btn btn-info" (click)="next();">Next &raquo;</button>
+                <button *ngIf="!canNext()" disabled class="btn btn-info" (click)="next();">Next &raquo;</button>
+    
               
                     <!-- <div class="pagin">
                       <pagination-controls directionLinks="true"

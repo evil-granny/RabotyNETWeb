@@ -40,7 +40,7 @@ export class CVService {
   }
 
   public findById(cvId) {
-    console.log("[find cv by id]");
-    return this.http.get<CV>(this.cvUrl + "/cv/" + cvId, httpOptions);
+    console.log("[find company by id]");
+    return this.http.get<Company>(this.companyURL + "/company/" + companyId, httpOptions);
   }
 }

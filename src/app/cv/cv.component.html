@@ -36,7 +36,7 @@
         </td>
         <td>{{cv.education.degree}}</td>
         <td>{{cv.education.school}}</td>
-        <td>{{cv.education.speciality}}</td>
+        <td>{{cv.education.specialty}}</td>
         <td>{{cv.education.graduation}}</td>
         <td>
           <li *ngFor="let job of cv.jobs">{{job.begin}}</li>
@@ -54,7 +54,9 @@
           <li *ngFor="let job of cv.jobs">{{job.end}}</li>
         </td>
         <td>
-          <button class="btn btn-danger" (click)="deleteById(cv)">Delete CV</button>
+          <a routerLink="/updateCV/{{cv.cvId}}" class="btn btn-success">Update</a>
+        <td>
+          <button class="btn btn-danger" (click)="deleteById(cv)">Delete</button>
         </td>
       </tr>
     </tbody>
