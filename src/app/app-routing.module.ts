@@ -11,23 +11,29 @@ import { AddCompanyComponent } from './company/add-company/add-company.component
 
 import { CvComponent } from './cv/cv.component';
 import { AddCvComponent } from './cv/add-cv/add-cv.component';
-import {PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
+import { PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
 
 
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
+
+import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 import { SearchCVComponent } from './search-cv/search-cv.component';
+import { ViewCompanyComponent } from './company/view-company/view-company.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
   { path: 'vacancies', component: VacancyComponent },
-  { path: 'createVacancy', component: EditVacancyComponent },
+  { path: 'createVacancy/:companyId', component: EditVacancyComponent },
+  { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
 
   { path: 'companies', component: CompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyId', component: AddCompanyComponent },
+  { path: 'approveCompany/:companyId', component: ApproveCompanyComponent },
+  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },

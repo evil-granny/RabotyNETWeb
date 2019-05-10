@@ -39,6 +39,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
+
+// import { PaginationModule } from 'ngx-pagination'
+import {NgxPaginationModule} from 'ngx-pagination';
+import {ViewCompanyComponent} from './company/view-company/view-company.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -59,7 +64,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UserComponent,
     AddUserComponent,
     SearchCVComponent,
+<<<<<<< HEAD
     PdfDesignerComponent
+=======
+    ApproveCompanyComponent,
+    ViewCompanyComponent
+>>>>>>> dev
   ],
   imports: [
     BrowserModule,
@@ -69,7 +79,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     AppRoutingModule,
     PerfectScrollbarModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    NgxPaginationModule,
+    // PaginationModule
   ],
   providers: [{
     provide: PERFECT_SCROLLBAR_CONFIG,

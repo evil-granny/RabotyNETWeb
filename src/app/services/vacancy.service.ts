@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { Vacancy } from "../models/vacancy.model";
-import { Observable } from 'rxjs';
+import {Vacancy} from '../models/vacancy.model';
+import {Observable} from 'rxjs';
+import { Requirement } from '../models/requirement.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*' 
+    'Access-Control-Allow-Origin': '*'
   })
 };
 
@@ -16,39 +17,41 @@ const httpOptions = {
 })
 export class VacancyService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  private vacancyUrl = 'http://localhost:8080';
-  private vacancyAPI = this.vacancyUrl+'/vacancy';
+  private vacancyUrl = 'http://localhost:8080/vacancies';
 
   public findAll(): Observable<any> {
-    return this.http.get(this.vacancyUrl + "/vacancies", httpOptions);
-  }
-  
-  get(vacancyId : string)   {
-    return this.http.get<Vacancy>(this.vacancyAPI + '/' + vacancyId, httpOptions);
+    return this.http.get(this.vacancyUrl , httpOptions);
   }
 
-  public deleteById(id:number): Observable<Object> {
-    return this.http.delete(this.vacancyUrl + "/deleteVacancy/" + id, httpOptions);
+  public findVacanciesByCompanyId(companyId : any, first : number, count : number): Observable<any> {
+    return this.http.get(this.vacancyUrl + '/byCompanyId/' + companyId + "/" + first + "/" + count, httpOptions);
   }
 
-  public save(vacancy: any): Observable<any> {
-    let result: Observable<Object>;
-    if (vacancy['id']) {
-      result = this.http.put<Vacancy>(this.vacancyAPI,vacancy.id, vacancy);
-    } else {
-      result = this.http.post<Vacancy>(this.vacancyUrl+ '/createVacancy'+1, vacancy);
-    }
-    return result;
-  }
-  public update(vacancy : Vacancy) {
-    return this.http.put<Vacancy>(this.vacancyAPI + vacancy.vacancyId, vacancy);
+  get(vacancyId: string) {
+    return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
   }
 
-  
-   public create(vacancy : any) : Observable<Object>{
-     return this.http.post<Vacancy>(this.vacancyUrl + "/createVacancy/"+1, vacancy);
-   }
+  getCountOfVacancies(companyId: any) {
+    return this.http.get<number>(this.vacancyUrl + '/count/' + companyId, httpOptions);
+  }
+
+  public deleteById(id: number): Observable<Object> {
+    return this.http.delete(this.vacancyUrl + '/' + id, httpOptions);
+  }
+
+  public update(vacancy: any): Observable<Vacancy> {
+    return this.http.put<Vacancy>(this.vacancyUrl , vacancy, httpOptions);
+  }
+
+  public createVacancy(vacancy: Vacancy, companyId : string): Observable<Object> {
+    return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + companyId, vacancy, httpOptions);
+  }
+  public updateRequirement(requirement: any): Observable<Requirement> {
+    return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
+  }
+
 
 }

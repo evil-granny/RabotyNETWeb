@@ -3,15 +3,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Company } from '../../models/company.model';
 import { CompanyService } from '../../services/company.service'
+import { UserService } from 'src/app/services/user.service';
+import { Status } from 'src/app/models/status.model';
 
 @Component({
-  templateUrl: './add-company.component.html'
+  selector: 'rabotyNet',
+  templateUrl: './add-company.component.html',
+  styleUrls: ['./add-company.component.css']
 })
 export class AddCompanyComponent implements OnInit {
 
   company: Company = new Company();
 
-  constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
     var companyId = this.route.snapshot.paramMap.get("companyId");
@@ -24,21 +29,35 @@ export class AddCompanyComponent implements OnInit {
   }
 
   update(): void {
-    if (CompanyService.validateCompany(this.company))
-      this.companyService.update(this.company)
-        .subscribe(data => {
+    this.companyService.update(this.company)
+      .subscribe(data => {
+        if(data != null)
           alert("Company has been updated successfully.");
-        });
-    else alert("An validation error");
+        else
+          alert("Validation problem has been occured"); 
+      });
   };
 
   create(): void {
-    if (CompanyService.validateCompany(this.company))
-      this.companyService.create(this.company)
-        .subscribe(data => {
-          alert("Company has been created successfully.");
-        });
-    else alert("An validation error");
+    this.userService.findById(1)
+      .subscribe(data => {
+        console.log(data);
+        this.company.user = data;
+
+        this.company.status = new Status();
+        this.company.status.approved = false;
+        this.company.status.mailSent = false;
+        this.company.status.reliable = false;
+
+        this.companyService.create(this.company)
+          .subscribe(data => {
+            if(data != null) {
+              this.router.navigate(['/companies']);
+            }
+            else
+              alert("Validation problem has been occured");  
+        }); 
+      }); 
   };
 
 }

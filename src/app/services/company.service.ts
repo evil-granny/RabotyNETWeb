@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Company } from "../models/company.model";
+import { Claim } from '../models/claim.model';
+import { Status } from '../models/status.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,6 +26,15 @@ export class CompanyService {
     return this.http.get<Company[]>(this.companyURL + "/companies");
   }
 
+  public findAllWothPagination(first: number, count: number) {
+    console.log("[find all companies by pagination]");
+    return this.http.get<Company[]>(this.companyURL + "/companies/"+first+"/"+count);
+  }
+
+  public getCompaniesCount() {
+    return this.http.get<number>(this.companyURL + "/companies/count");
+  }
+
   public deleteById(company) {
     console.log("[delete company]");
     return this.http.delete(this.companyURL + "/deleteCompany/" + company.companyId, httpOptions);
@@ -39,32 +50,26 @@ export class CompanyService {
     return this.http.put<Company>(this.companyURL + "/updateCompany", company, httpOptions);
   }
 
+  public approve(company) {
+    console.log("[approve company]");
+    return this.http.put<Company>(this.companyURL + "/approveCompany", company, httpOptions);
+  }
+
   public findById(companyId) {
-    console.log("[find by id]");
+    console.log("[find company by id]");
     return this.http.get<Company>(this.companyURL + "/company/" + companyId, httpOptions);
   }
 
-  public static validateCompany(company) {
-    return company.name.length > 0 && company.name.length <= 30 &&
-      company.edrpou.length > 0 && company.edrpou.length <= 30 &&
-      company.description.length < 30 &&
-      company.website.length > 0 && company.website.length <= 30 &&
-      this.validateAddress(company.address) &&
-      this.validateContacts(company.contacts);
+  public createClaim(claim) {
+    console.log("[claim company]");
+    return this.http.post<Company>(this.companyURL + "/createClaim", claim, httpOptions);
   }
 
-  private static validateAddress(address) {
-    return address.country.length > 0 && address.country.length <= 20 &&
-      address.city.length > 0 && address.city.length <= 15 &&
-      address.street.length <= 30 &&
-      address.building.length <= 5 &&
-      address.apartment.length <= 5 &&
-      address.zipCode > 0;
+  public findClaims(company) {
+    return this.http.get<Claim[]>(this.companyURL + "/findClaims/" + company.companyId, httpOptions);
   }
 
-  private static validateContacts(contacts) {
-    return contacts.email.length <= 50 &&
-      contacts.phoneNumber.length <= 15;
+  public deleteClaimById(claim) {
+    return this.http.delete(this.companyURL + "/deleteClaim/" + claim.claimId, httpOptions);
   }
-
 }
