@@ -30,12 +30,20 @@ export class VacancyService {
     return this.http.get(this.vacancyUrl + '/byCompanyId/' + companyId + "/" + first + "/" + count, httpOptions);
   }
 
+  public findAllWothPagination(first: number, count: number) : Observable<any> {
+    return this.http.get(this.vacancyUrl +"/all/"+first+"/"+count);
+  }
+
   get(vacancyId: string) {
     return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
   }
 
   getCountOfVacancies(companyId: any) {
     return this.http.get<number>(this.vacancyUrl + '/count/' + companyId, httpOptions);
+  }
+
+  getCountOfAllVacancies() {
+    return this.http.get<number>(this.vacancyUrl + '/countAll/', httpOptions);
   }
 
   public deleteById(id: number): Observable<Object> {

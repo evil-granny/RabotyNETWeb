@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 import {Vacancy} from '../models/vacancy.model';
 import {VacancyService} from '../services/vacancy.service';
@@ -22,23 +22,30 @@ export class VacancyComponent implements OnInit {
   requirements: Observable<Requirement[]>;
 
   currentUser: UserPrincipal;
+  // companies: Company[];
 
   p: number = 1;
 
   vacancy: Vacancy = new Vacancy();
 
-  constructor(private app: AuthenticationService, private router: Router, private vacancyService: VacancyService, private companyService: CompanyService) {
+  page: number = 0;
+  count: number = 6;
+  size: number = 0;
+
+  constructor(private app: AuthenticationService, private router: Router,private route: ActivatedRoute ,private vacancyService: VacancyService, private companyService: CompanyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {
-    this.reloadData();
-    // this.currentUser = this.app.currentUserValue;
+    this.vacancyService.getCountOfAllVacancies().subscribe(data=>{
+      this.size = data;
+    });
+    this.findAll();
   };
   
 
-  reloadData() {
-     this.vacancyService.findAll().subscribe(
+  findAll() {
+     this.vacancyService.findAllWothPagination(this.page * this.count, this.count).subscribe(
        data => {
          this.vacancies = data;
          console.log(this.vacancies);
@@ -61,14 +68,12 @@ export class VacancyComponent implements OnInit {
     this.vacancyService.deleteById(id)
       .subscribe(
         data => {
-          this.reloadData();
+          this.findAll();
         },
         error => console.log(error));
   };
 
   get isAdmin() {
-    // console.log('ADMIN')
-    // console.log(this.currentUser)
     return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
   }
 
@@ -83,6 +88,28 @@ export class VacancyComponent implements OnInit {
   logout() {
     const user = this.app.logout();
       this.router.navigateByUrl('/vacancies');
+  }
+
+  canPrev() : boolean {
+    return this.page > 0;
+  }
+
+  prev() {
+    if(this.canPrev()) {
+      this.page = this.page - 1;
+      this.findAll();
+    }
+  }
+
+  canNext() : boolean {
+    return (this.page + 1) * this.count < this.size;
+  }
+
+  next() {
+    if(this.canNext()) {
+      this.page = this.page + 1;
+      this.findAll();
+    }
   }
 
 }
