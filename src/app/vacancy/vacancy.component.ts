@@ -6,6 +6,9 @@ import {VacancyService} from '../services/vacancy.service';
 import {CompanyService} from '../services/company.service';
 import {Observable} from 'rxjs';
 import {Requirement} from '../models/requirement.model';
+import {AuthenticationService} from '../services/authentication.service';
+import {Role} from '../models/roles.model';
+import {UserPrincipal} from '../models/userPrincipal.model';
 
 
 @Component({
@@ -18,15 +21,19 @@ export class VacancyComponent implements OnInit {
   vacancies: Observable<Vacancy[]>;
   requirements: Observable<Requirement[]>;
 
+  currentUser: UserPrincipal;
+
   p: number = 1;
 
   vacancy: Vacancy = new Vacancy();
 
-  constructor(private router: Router, private vacancyService: VacancyService, private companyService: CompanyService) {
+  constructor(private app: AuthenticationService, private router: Router, private vacancyService: VacancyService, private companyService: CompanyService) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {
     this.reloadData();
+    // this.currentUser = this.app.currentUserValue;
   };
   
 
@@ -58,5 +65,24 @@ export class VacancyComponent implements OnInit {
         },
         error => console.log(error));
   };
+
+  get isAdmin() {
+    // console.log('ADMIN')
+    // console.log(this.currentUser)
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
+  }
+
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
+
+  get isUser() {
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
+  }
+
+  logout() {
+    const user = this.app.logout();
+      this.router.navigateByUrl('/vacancies');
+  }
 
 }

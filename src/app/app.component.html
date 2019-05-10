@@ -13,17 +13,17 @@
     <div class="overlay" (click)="toggleSidebar()" [ngClass]="{'show' : !getSideBarState()}"></div>
   </main>
 
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/">Home</a>
-      <a class="nav-item nav-link" routerLink="/login">Login</a>
-      <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>
-      <a class="nav-item nav-link" routerLink="/users" *ngIf="isUser">Users</a>
-      <a class="nav-item nav-link" routerLink="/companies" *ngIf="isCowner || isAdmin">Companies</a>
-      <a class="nav-item nav-link" routerLink="/searchCV" *ngIf="isCowner || isUser">SearchCV</a>
-      <a class="nav-item nav-link" (click)="logout()" *ngIf="isAdmin || isCowner || isUser">Logout</a>
-    </div>
-  </nav>
+  <!--<nav class="navbar navbar-expand navbar-dark bg-dark">-->
+    <!--<div class="navbar-nav">-->
+      <!--<a class="nav-item nav-link" routerLink="/">Home</a>-->
+      <!--<a class="nav-item nav-link" routerLink="/login">Login</a>-->
+      <!--<a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>-->
+      <!--<a class="nav-item nav-link" routerLink="/users" *ngIf="isUser">Users</a>-->
+      <!--<a class="nav-item nav-link" routerLink="/companies" *ngIf="isCowner || isAdmin">Companies</a>-->
+      <!--<a class="nav-item nav-link" routerLink="/searchCV" *ngIf="isCowner || isUser">SearchCV</a>-->
+      <!--<a class="nav-item nav-link" (click)="logout()" *ngIf="isAdmin || isCowner || isUser">Logout</a>-->
+    <!--</div>-->
+  <!--</nav>-->
 
   <div style="text-align:center"class="container">
     <div class="container">

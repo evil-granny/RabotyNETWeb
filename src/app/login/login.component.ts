@@ -20,7 +20,7 @@ export class LoginComponent {
     const user = this.app.authenticate(this.credentials).subscribe(data => {
       console.log('user');
       console.log(data);
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/vacancies');
     });
   }
 

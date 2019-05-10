@@ -43,7 +43,6 @@ import {ViewCompanyComponent} from './company/view-company/view-company.componen
 
 import {RouterModule, Routes} from '@angular/router';
 import {AuthenticationService} from './services/authentication.service';
-import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {AdminComponent} from './admin/admin.component';
 
@@ -59,8 +58,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
+    path: 'vacancies',
+    component: VacancyComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -92,7 +91,7 @@ const routes: Routes = [
     component: LoginComponent
   },
 
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'vacancies' }
 ];
 
 @NgModule({
@@ -111,7 +110,6 @@ const routes: Routes = [
     SearchCVComponent,
     ApproveCompanyComponent,
     ViewCompanyComponent,
-    HomeComponent,
     LoginComponent,
     AdminComponent,
     AccessDeniedPageComponent

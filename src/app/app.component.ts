@@ -22,22 +22,22 @@ export class AppComponent {
     this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
-  get isAdmin() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
-  }
+  // get isAdmin() {
+  //   return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
+  // }
+  //
+  // get isCowner() {
+  //   return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  // }
+  //
+  // get isUser() {
+  //   return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
+  // }
 
-  get isCowner() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
-  }
-
-  get isUser() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
-  }
-
-  logout() {
-    this.app.logout();
-    this.router.navigate(['/login']);
-  }
+  // logout() {
+  //   this.app.logout();
+  //   this.router.navigate(['/login']);
+  // }
 
   toggleSidebar() {
     this.sidebarservice.setSidebarState(!this.sidebarservice.getSidebarState());

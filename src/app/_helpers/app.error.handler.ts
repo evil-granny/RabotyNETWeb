@@ -9,10 +9,10 @@ export class AppErrorHandler implements ErrorHandler {
 
   handleError(error) {
 
-    const router = this.injector.get(Router);
-    console.log('URL: ' + router.url);
-    console.error('An error occurred:', error.message);
-
-    alert(error);
+    // const router = this.injector.get(Router);
+    // console.log('URL: ' + router.url);
+    // console.error('An error occurred:', error.message);
+    //
+    // alert(error);
   }
 }
