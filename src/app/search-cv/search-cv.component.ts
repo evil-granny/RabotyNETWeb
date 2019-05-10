@@ -25,6 +25,7 @@ export class SearchCVComponent {
   constructor(private router: Router, private searchCVService: SearchCVService) { }
 
   startSearch() {
+    this.searchCv.resultsOnPage = 10;
     this.searchCv.firstResultNumber = 0;
     this.resultText = false;
     this.searchCVService.getResult(this.searchCv)
