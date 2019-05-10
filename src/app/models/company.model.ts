@@ -18,13 +18,7 @@ export class Company {
 
     logo: string;
 
-<<<<<<< HEAD
-    approved: boolean = false;
-
     contact: Contact = new Contact();
-=======
-    contact: Contacts = new Contacts();
->>>>>>> dev
 
     address: Address = new Address();
 

@@ -13,9 +13,8 @@ import { Contact } from '../models/contact.model';
 export class PdfDesignerComponent implements OnInit {
 
   cv: CV = new CV();
-  person: Person = new Person();
-  contact: Contact= new Contact();
-
+ 
+  
   constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService) {}   
 
   ngOnInit(): void {
@@ -29,6 +28,7 @@ export class PdfDesignerComponent implements OnInit {
   }
 
   update(): void {
+    console.log(this.cv);
     this.pdfService.update(this.cv)
       .subscribe(data => {
         if(data != null)

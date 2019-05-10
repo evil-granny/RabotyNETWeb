@@ -24,22 +24,15 @@ export class PdfService {
   private cvURL = 'http://localhost:8080';
 
   public findById(cvId) {
-    console.log("[find company by id]");
-    return this.http.get<CV>(this.cvURL + "/cv/" + cvId, httpOptions);
+    console.log("[find cv by id]");
+    return this.http.get<CV>(this.cvURL + "/pdf/" + cvId, httpOptions);
   }
 
   public update(cv) {
-    console.log("[update company]");
-    return this.http.put<CV>(this.cvURL + "/updateCV", cv, httpOptions);
+    console.log("[update cv]");
+    return this.http.put<CV>(this.cvURL + "/updatePDF", cv, httpOptions);
   }
   
-
-
-
-
-
-
-
 }
 
 

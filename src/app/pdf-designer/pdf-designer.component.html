@@ -3,104 +3,62 @@
       <div class="view-account">
         <section class="module">
           <div class="module-inner">
-            <div class="side-bar">
-              <!--<div class="user-info">
-                <img *ngIf="person.photo" class="img-profile img-circle img-responsive center-block rounded-circle"
-                  style="height: 150px; width: 150px" [src]="person.photo" alt="">
-                <img *ngIf="!person.photo" class="img-profile img-circle img-responsive center-block rounded"
-                  style="height: 150px; width: 150px" [src]="noImage" alt="">
-              </div> -->
-            </div>
             <div class="content-panel">
-              <h2 class="title">Profile</h2>
-              <form class="form-horizontal" (ngSubmit)="update()" #personForm="ngForm">
+              <h2 class="title">CV</h2>
+              <form class="form-horizontal" #cvForm="ngForm">
                 <fieldset class="fieldset">
-                  <h3 class="fieldset-title">Personal Info</h3>
-                  <div class="form-group">
-                    <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                        <img class="rounded img-responsive" style="width: 140px; height: 150px" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                    </figure>
-                    <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile"></label>
-                      <input class="btn btn-primary" type="submit" value="Update Photo" style="width: 140px; margin-top: 10px; ">
-                    </div>
-                  </div>
-                  <!----
-                  <div class="form-group">
-                    <label for="firstName" class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[A-Za-z]{3,20}$" [(ngModel)]="cv.person.firstName"
-                        placeholder="First Name" id="firstName" name="firstName" #firstName="ngModel" required
-                        autocomplete="off">
-                      <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="alert alert-danger">
-                        <div [hidden]="!firstName.errors.required">First Name is required!</div>
-                        <div [hidden]="!firstName.errors.pattern">First Name can only contain letters of the alphabet
-                          (from 3 to 20 characters).</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="lastName" class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[A-Za-z]{3,20}$" [(ngModel)]="cv.person.lastName"
-                        placeholder="Last Name" id="lastName" name="lastName" #lastName="ngModel" required
-                        autocomplete="off">
-                      <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="alert alert-danger">
-                        <div [hidden]="!lastName.errors.required">Last Name is required!</div>
-                        <div [hidden]="!lastName.errors.pattern">Last Name can only contain letters of the alphabet (from
-                          3 to 20 characters).</div>
-                      </div>
-                    </div>
-                  </div>
-                -->
-                <div class="form-group">
-                  <label for="position" class="col-md-2 col-sm-3 col-xs-12 control-label">Position</label>
-                  <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z]{3,20}$" [(ngModel)]="cv.position"
-                      placeholder="Last Name" id="position" name="position" #position="ngModel" required
-                      autocomplete="off">
-                    <div *ngIf="position.errors && (position.dirty || position.touched)" class="alert alert-danger">
-                      <div [hidden]="!position.errors.required">Last Name is required!</div>
-                      <div [hidden]="!position.errors.pattern">Last Name can only contain letters of the alphabet (from
-                        3 to 20 characters).</div>
-                    </div>
-                  </div>
-                </div>
-                
-                
-                <!----
-                <div class="form-group">
-                    <label for="birthday" class="col-md-2 col-sm-3 col-xs-12 control-label">Birthday</label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="date" class="form-control" [(ngModel)]="cv.person.birthday" placeholder="Birthday"
-                        id="birthday" name="birthday" #birthday="ngModel" required autocomplete="off">
-                      <div *ngIf="birthday.errors && (birthday.dirty || birthday.touched)" class="alert alert-danger">
-                        <div [hidden]="!birthday.errors.required">Birthday is required!</div>
-                      </div>
-                    </div>
-                  </div>
-                -->
-                
-                
-                
-                </fieldset>
-                <fieldset class="fieldset">
-                  <h3 class="fieldset-title">Contact Info</h3>
+                  <h3 class="fieldset-title">Main Info</h3>
                   
+                  <div class="form-group">
+                    <label for="lastname" class="col-md-2 col-sm-3 col-xs-12 control-label">CV</label>
+                    <div class="col-md-10 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" pattern="^[A-Za-z]{3,30}$" [(ngModel)]="cv.position"
+                        placeholder="Company Name" id="lastname" name="lastname" #lastname="ngModel" required
+                        autocomplete="off">
+                      <div *ngIf="lastname.errors && (lastname.dirty || lastname.touched)" class="alert alert-danger">
+                        <div [hidden]="!lastname.errors.required">Company Name is required!</div>
+                        <div [hidden]="!lastname.errors.pattern">
+                          Compnany Name can only contain letters and numbers (3-30 characters)!
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name" class="col-md-2 col-sm-3 col-xs-12 control-label">CV</label>
+                    <div class="col-md-10 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" pattern="^[0-9]$" [(ngModel)]="cv.cvId"
+                        placeholder="Company Name" id="name" name="name" #name="ngModel" required
+                        autocomplete="off">
+                      <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
+                        <div [hidden]="!name.errors.required">Company Name is required!</div>
+                        <div [hidden]="!name.errors.pattern">
+                          Compnany Name can only contain letters and numbers (3-30 characters)!
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                </fieldset>  <br>
                   
                
-                </fieldset>
-                <hr>
-                <div class="form-group">
-                  <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-                    <input class="btn btn-primary" type="submit" [disabled]="!personForm.form.valid"
-                      value="Update Profile">
+  
+              
+  
+                <fieldset class="fieldset">
+                  <h3 class="fieldset-title">Action</h3>
+  
+                  <div class="form-group">
+                    
+                    <div *ngIf="cv.cvId != null">
+                      <button [disabled]="!cvForm.form.valid" class="btn btn-success" (click)="update()">Update</button>
+                    </div>
                   </div>
-                </div>
+                </fieldset>
+                  
               </form>
             </div>
-          </div>
+          </div>  
         </section>
       </div>
     </div>

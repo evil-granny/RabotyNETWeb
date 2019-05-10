@@ -64,12 +64,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UserComponent,
     AddUserComponent,
     SearchCVComponent,
-<<<<<<< HEAD
-    PdfDesignerComponent
-=======
+    PdfDesignerComponent,
     ApproveCompanyComponent,
     ViewCompanyComponent
->>>>>>> dev
   ],
   imports: [
     BrowserModule,
