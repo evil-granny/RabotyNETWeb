@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-import { User } from '../models/user.model';
 import {UserPrincipal} from '../models/userPrincipal.model';
-import {Role} from '../models/roles.model';
+import { map } from 'rxjs/operators';
 
 
 @Injectable( { providedIn: 'root' } )
@@ -14,10 +11,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<UserPrincipal>;
   public currentUser: Observable<UserPrincipal>;
 
-  authenticated = false;
-
   private userLoginUrl = 'http://localhost:8080/loginUser';
-  private userLogoutUrl = 'http://localhost:8080/logoutUser';
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<UserPrincipal>(JSON.parse(localStorage.getItem('currentUser')));
@@ -52,16 +46,10 @@ export class AuthenticationService {
           userRoles.forEach(function (key) {
             roles.push(key.authority);
           });
-          // console.log("ROLES")
-          // console.log(roles)
           const token = 'Basic ' + btoa(credentials.username + ':' + credentials.password);
           userPrincipal = new UserPrincipal(name, roles, token);
-          // console.log("UserPrincipal")
-          // console.log(userPrincipal)
           localStorage.setItem('currentUser', JSON.stringify(userPrincipal));
           this.currentUserSubject.next(userPrincipal);
-          // console.log("UserPrincipal fro ls")
-          // console.log(this.currentUserValue);
         }
         return userPrincipal;
       }));
@@ -71,13 +59,5 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    // const authHeader = {};
-    // const httpOptions = {
-    //   headers: new HttpHeaders(authHeader)
-    // };
-    // return this.http.post<any>(this.userLogoutUrl, httpOptions)
-    //   .pipe(map(currentUser => {
-    //     return null;
-    //   }));
   }
 }

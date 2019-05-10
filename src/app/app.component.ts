@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { SidebarService } from './sidebar/sidebar.service';
+import {Component} from '@angular/core';
+import {SidebarService} from './sidebar/sidebar.service';
 import {HttpClient} from '@angular/common/http';
-import { AuthenticationService } from './services/authentication.service';
-import { Router } from '@angular/router';
-import { User } from './models/user.model';
-import { Role } from './models/roles.model';
+import {AuthenticationService} from './services/authentication.service';
+import {Router} from '@angular/router';
+import {Role} from './models/roles.model';
 import {UserPrincipal} from './models/userPrincipal.model';
 
 @Component({

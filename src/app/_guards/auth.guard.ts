@@ -18,12 +18,9 @@ export class AuthGuard implements CanActivate {
     console.log('AuthGuard.ts:  ' + currentUser);
 
     if (currentUser) {
-
       let roleHolder;
-
       currentUser.roles.forEach(  key => {
         if (route.data.roles && route.data.roles.indexOf(key.toString()) === -1) {
-          // role not authorised so redirect to access denied page
           console.log('-----------AuthGuard-----------')
           console.log('route.data.roles ' + route.data.roles);
           console.log('currentUser.roles ' + currentUser.roles);
@@ -33,31 +30,12 @@ export class AuthGuard implements CanActivate {
           roleHolder = currentUser.roles;
         }
       });
-
       if (!roleHolder) {
         this.router.navigate(['/accessDenied']);
         return false;
       }
-
-
-
-      // // check if route is restricted by role
-      // if (route.data.roles && route.data.roles.indexOf(currentUser.roles.toString()) === -1) {
-      //   // role not authorised so redirect to access denied page
-      //   console.log('-----------AuthGuard-----------')
-      //   console.log('route.data.roles ' + route.data.roles);
-      //   console.log('currentUser.roles ' + currentUser.roles);
-      //   console.log(route.data.roles.indexOf(currentUser.roles));
-      //   this.router.navigate(['/accessDenied']);
-      //
-      //   return false;
-      // }
-
-      // authorised so return true
       return true;
-
     } else {
-      // not logged in so redirect to login page
       this.router.navigate(['/login']);
       return false; }
   }
