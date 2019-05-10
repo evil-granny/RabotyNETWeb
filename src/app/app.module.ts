@@ -40,6 +40,7 @@ import { ApproveCompanyComponent } from './company/approve-company/approve-compa
 
 // import { PaginationModule } from 'ngx-pagination'
 import {NgxPaginationModule} from 'ngx-pagination';
+import {ViewCompanyComponent} from './company/view-company/view-company.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -59,7 +60,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UserComponent,
     AddUserComponent,
     SearchCVComponent,
-    ApproveCompanyComponent
+    ApproveCompanyComponent,
+    ViewCompanyComponent
   ],
   imports: [
     BrowserModule,

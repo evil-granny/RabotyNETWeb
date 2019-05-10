@@ -20,7 +20,6 @@ export class VacancyComponent implements OnInit {
 
   p: number = 1;
 
-
   vacancy: Vacancy = new Vacancy();
 
   constructor(private router: Router, private vacancyService: VacancyService, private companyService: CompanyService) {
@@ -29,7 +28,7 @@ export class VacancyComponent implements OnInit {
   ngOnInit() {
     this.reloadData();
   };
-  id: number = 1;
+  
 
   reloadData() {
      this.vacancyService.findAll().subscribe(
@@ -45,8 +44,6 @@ export class VacancyComponent implements OnInit {
   }
 
   update(vacancyId): void {
-    console.log(vacancyId);
-    console.log(this.vacancyService.get(vacancyId));
     this.vacancyService.update(this.vacancyService.get(vacancyId))
       .subscribe(data => {
         this.gotoList();
@@ -57,7 +54,6 @@ export class VacancyComponent implements OnInit {
     this.vacancyService.deleteById(id)
       .subscribe(
         data => {
-          console.log(data);
           this.reloadData();
         },
         error => console.log(error));
