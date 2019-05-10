@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { CV } from '../../models/cv.model';
 import { CVService } from '../../services/cv.service';
@@ -14,23 +14,23 @@ export class AddCvComponent {
 
   cv: CV = new CV();
 
-  constructor(private router: Router, private route: ActivatedRoute, private cvService: CVService) { }
+  constructor(private router: Router, private cvService: CVService) { }
 
   ngOnInit(): void {
     var cvId = this.route.snapshot.paramMap.get("cvId");
-    if (cvId !== null) {
-      this.cvService.findById(cvId)
+    if (companyId !== null) {
+      this.companyService.findById(companyId)
         .subscribe(data => {
-          this.cv = data;
+          this.company = data;
         });
     }
   }
 
   update(): void {
-    this.cvService.update(this.cv)
+    this.companyService.update(this.company)
       .subscribe(data => {
         if(data != null)
-          alert("CV has been updated successfully.");
+          alert("Company has been updated successfully.");
         else
           alert("Validation problem has been occured"); 
       });

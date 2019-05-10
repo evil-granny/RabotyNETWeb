@@ -41,6 +41,6 @@ export class CVService {
 
   public findById(cvId) {
     console.log("[find cv by id]");
-    return this.http.get<CV>(this.cvUrl + "/cv/" + cvId, httpOptions);
+    return this.http.get<CV>(this.companyURL + "/company/" + companyId, httpOptions);
   }
 }

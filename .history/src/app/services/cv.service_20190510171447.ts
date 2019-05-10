@@ -39,8 +39,8 @@ export class CVService {
     return this.http.put<CV>(this.cvUrl + "/updateCV", cv, httpOptions);
   }
 
-  public findById(cvId) {
-    console.log("[find cv by id]");
-    return this.http.get<CV>(this.cvUrl + "/cv/" + cvId, httpOptions);
+  public findById(companyId) {
+    console.log("[find company by id]");
+    return this.http.get<Company>(this.companyURL + "/company/" + companyId, httpOptions);
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { CV } from '../../models/cv.model';
 import { CVService } from '../../services/cv.service';

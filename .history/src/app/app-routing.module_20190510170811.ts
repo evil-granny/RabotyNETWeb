@@ -35,7 +35,7 @@ const routes: Routes = [
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
-  { path: 'updateCV/:cvId', component: AddCvComponent },
+  { path: ''}
 
   { path: 'registration', component: AddUserComponent },
   { path: 'users', component: UserComponent },
