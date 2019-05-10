@@ -15,17 +15,23 @@ import { AddCvComponent } from './cv/add-cv/add-cv.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
-import { SearchCVComponent } from './search-cv/search-cv.component'
+
+import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
+import { SearchCVComponent } from './search-cv/search-cv.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
   { path: 'vacancies', component: VacancyComponent },
-  { path: 'createVacancy', component: EditVacancyComponent },
+  { path: 'vacanciesByCompany', component: VacancyComponent },
+   { path: 'createVacancy', component: EditVacancyComponent },
+  // { path: 'createVacancy/:companyId', component: EditVacancyComponent },
+  { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
 
   { path: 'companies', component: CompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyId', component: AddCompanyComponent },
+  { path: 'approveCompany/:companyId', component: ApproveCompanyComponent },
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
