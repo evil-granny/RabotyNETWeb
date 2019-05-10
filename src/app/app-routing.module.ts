@@ -15,6 +15,9 @@ import { AddCvComponent } from './cv/add-cv/add-cv.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
+import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
+import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 import { SearchCVComponent } from './search-cv/search-cv.component';
@@ -27,7 +30,7 @@ const routes: Routes = [
   { path: 'createVacancy/:companyId', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
 
-  { path: 'companies', component: CompanyComponent },
+  // { path: 'companies', component: CompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyId', component: AddCompanyComponent },
   { path: 'approveCompany/:companyId', component: ApproveCompanyComponent },
@@ -37,9 +40,13 @@ const routes: Routes = [
   { path: 'createCV', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
-  { path: 'users', component: UserComponent },
+  // { path: 'users', component: UserComponent },
+  //
+  // { path: 'admin', component: AdminComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'accessDenied', component: AccessDeniedPageComponent }
 
-  { path: 'searchCV', component: SearchCVComponent }
+  // { path: 'searchCV', component: SearchCVComponent },
 ];
 
 @NgModule({

@@ -1,9 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ErrorHandler, NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { ProfileComponent } from './profile/profile.component';
 import { PersonService } from './services/person.service';
@@ -42,9 +41,59 @@ import { ApproveCompanyComponent } from './company/approve-company/approve-compa
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ViewCompanyComponent} from './company/view-company/view-company.component';
 
+import {RouterModule, Routes} from '@angular/router';
+import {AuthenticationService} from './services/authentication.service';
+import {HomeComponent} from './home/home.component';
+import {LoginComponent} from './login/login.component';
+import {AdminComponent} from './admin/admin.component';
+
+import {AuthInterceptor, ErrorInterceptor} from './_helpers';
+import {Role} from './models/roles.model';
+import {AuthGuard} from './_guards/auth.guard';
+import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
+import {AppErrorHandler} from './_helpers/app.error.handler';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
+
+const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_ADMIN] }
+  },
+  {
+    path: 'companies',
+    component: CompanyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
+  },
+  {
+    path: 'searchCV',
+    component: SearchCVComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
+  },
+  {
+    path: 'users',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_USER] }
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+
+  { path: '**', redirectTo: '' }
+];
 
 @NgModule({
   declarations: [
@@ -61,9 +110,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddUserComponent,
     SearchCVComponent,
     ApproveCompanyComponent,
-    ViewCompanyComponent
+    ViewCompanyComponent,
+    HomeComponent,
+    LoginComponent,
+    AdminComponent,
+    AccessDeniedPageComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -75,10 +129,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxPaginationModule,
     // PaginationModule
   ],
-  providers: [{
-    provide: PERFECT_SCROLLBAR_CONFIG,
-    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-  }],
+  providers: [AuthenticationService,
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: ErrorHandler, useClass: AppErrorHandler }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
