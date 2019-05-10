@@ -4,7 +4,7 @@
   padding-right: 300px;
 }
 
-.nextPage{
+.page{
   float: right;
   padding-top: 20px;
   padding-right: 300px;
@@ -15,5 +15,9 @@
   padding-top: 50px;
   padding-right: 300px;
   padding-left: 300px;
+}
+
+.page .btn {
+  margin: 10px;
 }
 

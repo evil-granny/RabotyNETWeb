@@ -1,10 +1,10 @@
-<label class="resultOnPage">
+<div class="resultOnPage" [hidden]="resultText">
   <select [(ngModel)]="searchCv.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
     <option [defaultSelected]="searchCv.resultsOnPage" value=10>Results on page: 10</option>
     <option value=20>Results on page: 20</option>
     <option value=50>Results on page: 50</option>
   </select>
-</label>
+</div>
 
 <div class="search-result">
   <form>
@@ -19,6 +19,7 @@
         <option value="skill">by skill</option>
         <option value="phoneNumber">by phone</option>
         <option value="city">by city</option>
+        <option value="position">by position</option>
       </select>
     </label>
 
@@ -27,12 +28,24 @@
   </form>
   <br><br>
 
-  <div class="col-md-12">
-    <h2>Search result</h2>
 
-    <h3>{{searchCVResponse.count}} Cvs founded</h3>
+  <div class="search-result-text">
 
-    <table class="table table-striped">
+    <div [hidden]="resultText">
+      <h2>Search result</h2>
+      <h5>{{searchCVResponse.count}} Cvs founded</h5>
+      <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
+    </div>
+  </div>
+</div>
+
+<div class="page" [hidden]="resultText">
+  <button class="btn" [disabled]="previousButton" (click)="previousPage()">Previous page</button>
+  <button class="btn" [disabled]="nextButton" (click)="nextPage()">Next page</button>
+</div><br><br>
+
+<div class="search-result">
+    <table class="table table-striped" [hidden]="resultText">
       <thead>
       <tr>
         <th class="d-none">Id</th>
@@ -58,8 +71,9 @@
       </tr>
       </tbody>
     </table>
-  </div>
+
 </div>
-<div class="nextPage">
-  <button class="btn btn-success" (click)="nextPage()">Next page</button>
-</div>
+<div class="page" [hidden]="resultText">
+  <button class="btn" [disabled]="previousButton" (click)="previousPage()">Previous page</button>
+  <button class="btn" [disabled]="nextButton" (click)="nextPage()">Next page</button>
+</div><br><br>
