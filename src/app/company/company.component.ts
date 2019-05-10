@@ -110,4 +110,8 @@ export class CompanyComponent implements OnInit {
       return company.status == null || company.status.reliable;
   }
 
+  hasClaims(company: Company) : boolean {
+      return company.claims.length > 0;
+  }
+
 }
