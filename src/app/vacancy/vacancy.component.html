@@ -20,7 +20,7 @@
       <a class="navbar-brand" routerLink="/admin" *ngIf="isAdmin">Admin</a>
       <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin || isCowner">Company owner</a>
       <a class="navbar-brand" routerLink="/users" *ngIf="isUser">User</a>
-      <a class="navbar-brand" routerLink="/searchCV" *ngIf="isCowner || isUser">SearchCV</a>
+      <a class="navbar-brand" routerLink="/searchCV" *ngIf="isCowner">SearchCV</a>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
@@ -50,11 +50,11 @@
                         <div class="row align-items-end" style="height: 100%;margin: 0px;">
                           <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom" role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
                         </div>
-                    </div> 
+                    </div>
                   </div>
                </div>
-    
-          
+
+
                <div class="pagin">
                   <pagination-controls directionLinks="true"
                   autoHide="true" (pageChange)="p = $event"></pagination-controls>

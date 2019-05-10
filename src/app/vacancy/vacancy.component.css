@@ -1,7 +1,6 @@
-
 html,
 body {
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 body {
   padding-top: 70px;
@@ -12,17 +11,19 @@ footer {
 .pagin{
   text-align: center;
 }
-.card {
+.row .card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   width: 360px;
   height: 190px;
-    position: relative !important;
+  position: relative !important;
+
+
   /* margin-right: 10px; */
-   margin-bottom: 20px; 
+  margin-bottom: 20px;
   /* text-align: center; */
-  margin-left:  10px;
+  /*margin-left:  10px;*/
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -31,9 +32,9 @@ footer {
 }
 
 /* Add some padding inside the card container */
- .container {
+.container {
   padding: 2px 16px;
-} 
+}
 
 
 
@@ -41,8 +42,8 @@ footer {
   .row-offcanvas {
     position: relative;
     -webkit-transition: all .25s ease-out;
-         -o-transition: all .25s ease-out;
-            transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
   }
 
   .row-offcanvas-right {
@@ -55,22 +56,22 @@ footer {
 
   .row-offcanvas-right,
   .sidebar-offcanvas {
-    right: -100%; 
+    right: -100%;
   }
 
   .row-offcanvas-right.active,
   .sidebar-offcanvas {
-    right: -50%; 
+    right: -50%;
   }
 
   .row-offcanvas-left,
   .sidebar-offcanvas {
-    left: -100%; 
+    left: -100%;
   }
 
   .row-offcanvas-left.active,
   .sidebar-offcanvas {
-    left: -50%; 
+    left: -50%;
   }
 
   .row-offcanvas-right.active {
@@ -78,13 +79,13 @@ footer {
   }
 
   .row-offcanvas-left.active {
-    left: 50%; 
+    left: 50%;
   }
 
   .sidebar-offcanvas {
     position: absolute;
     top: 0;
-    width: 50%; 
+    width: 50%;
   }
 }
 

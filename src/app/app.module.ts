@@ -78,7 +78,7 @@ const routes: Routes = [
     path: 'searchCV',
     component: SearchCVComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
+    data: { roles: [Role.ROLE_COWNER] }
   },
   {
     path: 'users',

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SearchCVService } from '../services/search-cv.service';
@@ -13,7 +13,6 @@ import {SearchCVResponse} from '../models/SearcModel/SearchCVResponse.model';
 })
 
 export class SearchCVComponent {
-
   searchCv: SearchCV = new SearchCV();
   searchCVResponse: SearchCVResponse = new SearchCVResponse();
   searchCVResult: SearchCVResult = new SearchCVResult();
@@ -31,8 +30,8 @@ export class SearchCVComponent {
     this.searchCVService.getResult(this.searchCv)
       .subscribe(data => {
         this.searchCVResponse = data;
-        this.pagesCount = Math.ceil(this.searchCVResponse.count / this.searchCv.resultsOnPage);
-        if (this.searchCVResponse.count > this.searchCv.resultsOnPage) {
+        this.pagesCount = Math.ceil(this.searchCVResponse.count / parseInt(this.searchCv.resultsOnPage, 10));
+        if (this.searchCVResponse.count > parseInt(this.searchCv.resultsOnPage, 10)) {
           this.nextButton = false;
           this.previousButton = true;
           this.pageNumber = 1;
@@ -45,7 +44,7 @@ export class SearchCVComponent {
   }
 
   nextPage() {
-    this.searchCv.firstResultNumber = this.searchCv.firstResultNumber + this.searchCv.resultsOnPage;
+    this.searchCv.firstResultNumber = this.searchCv.firstResultNumber + parseInt(this.searchCv.resultsOnPage, 10);
     this.searchCVService.getResult(this.searchCv)
       .subscribe(data => {
         this.searchCVResponse = data;
@@ -60,7 +59,7 @@ export class SearchCVComponent {
   }
 
   previousPage() {
-    this.searchCv.firstResultNumber = this.searchCv.firstResultNumber - this.searchCv.resultsOnPage;
+    this.searchCv.firstResultNumber = this.searchCv.firstResultNumber - parseInt(this.searchCv.resultsOnPage, 10);
     this.searchCVService.getResult(this.searchCv)
       .subscribe(data => {
         this.searchCVResponse = data;

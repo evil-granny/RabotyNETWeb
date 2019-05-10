@@ -2,10 +2,16 @@ export class SearchCV {
 
   searchText: string;
 
-  searchParameter = 'name';
+  searchParameter: string;
 
-  resultsOnPage = 10;
+  resultsOnPage: string;
 
-  firstResultNumber = 0;
+  firstResultNumber: number;
+
+  constructor() {
+    this.resultsOnPage = '10';
+    this.searchParameter = 'position';
+  }
 
 }
+

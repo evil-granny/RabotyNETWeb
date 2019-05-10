@@ -1,8 +1,8 @@
 <div class="resultOnPage" [hidden]="resultText">
   <select [(ngModel)]="searchCv.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
-    <option [defaultSelected]="searchCv.resultsOnPage" value=10>Results on page: 10</option>
-    <option value=20>Results on page: 20</option>
-    <option value=50>Results on page: 50</option>
+    <option [defaultSelected]="searchCv.resultsOnPage" value="10">Results on page: 10</option>
+    <option value="20">Results on page: 20</option>
+    <option value="50">Results on page: 50</option>
   </select>
 </div>
 
@@ -45,32 +45,32 @@
 </div><br><br>
 
 <div class="search-result">
-    <table class="table table-striped" [hidden]="resultText">
-      <thead>
-      <tr>
-        <th class="d-none">Id</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Age</th>
-        <th>Position</th>
-        <th>City</th>
-        <th>Phone</th>
-        <th>E-mail</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let searchCVResult of searchCVResponse.searchCVDTOs">
-        <td class="d-none">{{searchCVResult.id}}</td>
-        <td>{{searchCVResult.firstName}}</td>
-        <td>{{searchCVResult.lastName}}</td>
-        <td>{{searchCVResult.age}} years old</td>
-        <td>{{searchCVResult.position}}</td>
-        <td>{{searchCVResult.city}}</td>
-        <td>{{searchCVResult.phoneNumber}}</td>
-        <td>{{searchCVResult.email}}</td>
-      </tr>
-      </tbody>
-    </table>
+  <table class="table table-striped" [hidden]="resultText">
+    <thead>
+    <tr>
+      <th class="d-none">Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Age</th>
+      <th>Position</th>
+      <th>City</th>
+      <th>Phone</th>
+      <th>E-mail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let searchCVResult of searchCVResponse.searchCVDTOs">
+      <td class="d-none">{{searchCVResult.id}}</td>
+      <td>{{searchCVResult.firstName}}</td>
+      <td>{{searchCVResult.lastName}}</td>
+      <td>{{searchCVResult.age}} years old</td>
+      <td>{{searchCVResult.position}}</td>
+      <td>{{searchCVResult.city}}</td>
+      <td>{{searchCVResult.phoneNumber}}</td>
+      <td>{{searchCVResult.email}}</td>
+    </tr>
+    </tbody>
+  </table>
 
 </div>
 <div class="page" [hidden]="resultText">
