@@ -7,7 +7,8 @@ import { Skill } from '../../models/skill.model';
 import { Job } from '../../models/job.model';
 
 @Component({
-  templateUrl: './add-cv.component.html'
+  templateUrl: './add-cv.component.html',
+  styleUrls: ['./add-cv.component.css']
 })
 export class AddCvComponent {
 
@@ -16,15 +17,13 @@ export class AddCvComponent {
   constructor(private router: Router, private cvService: CVService) { }
 
   insert(): void {
-    console.log(this.cv);
-    this.cvService.insert(this.cv)
+    this.cvService.update(this.cv)
       .subscribe(data => {
         alert("CV has been created successfully.");
       });
   };
 
   newSkill() {
-    console.log(this.cv.skills);
     this.cv.skills.push(new Skill());
   }
 
