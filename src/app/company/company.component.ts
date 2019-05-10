@@ -111,7 +111,7 @@ export class CompanyComponent implements OnInit {
   }
 
   hasClaims(company: Company) : boolean {
-      return company.claims.length > 0;
+      return company.claims==null || company.claims.length > 0;
   }
 
 }
