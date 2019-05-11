@@ -100,7 +100,7 @@ export class CompanyComponent implements OnInit {
 
   isApproved(company: Company) : boolean {
     return company.status == null || company.status.approved;
-}
+  }
 
   isMailSent(company: Company) : boolean {
       return company.status == null || company.status.mailSent;
@@ -111,7 +111,7 @@ export class CompanyComponent implements OnInit {
   }
 
   hasClaims(company: Company) : boolean {
-      return company.claims==null || company.claims.length > 0;
+      return company.claims != null && company.claims.length > 0;
   }
 
 }

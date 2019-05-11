@@ -36,8 +36,16 @@ export class ViewCompanyComponent implements OnInit {
     if(companyId != null) {
       this.companyService.findById(companyId)
         .subscribe(data => {
-          this.company = data;
-          console.log(this.company);
+
+          this.companyService.findClaims(data)
+            .subscribe( data1 => {
+              data.claims = [];
+              data1.forEach(function(claim) {
+                data.claims.push(claim);
+              });
+
+              this.company = data;
+            });   
         })
     }
     this.findVacancies();
@@ -91,6 +99,22 @@ export class ViewCompanyComponent implements OnInit {
       this.page = this.page + 1;
       this.findVacancies();
     }
+  }
+
+  isApproved() : boolean {
+    return this.company.status == null || this.company.status.approved;
+  }
+
+  isMailSent() : boolean {
+      return this.company.status == null || this.company.status.mailSent;
+  }
+
+  isReliable() : boolean {
+      return this.company.status == null || this.company.status.reliable;
+  }
+
+  hasClaims() : boolean {
+      return this.company.claims != null && this.company.claims.length > 0;
   }
 
 }
