@@ -40,7 +40,7 @@
               <h3 class="text-muted">Vacancies</h3>
               </div>
                 <div class="row" >
-                     <div class="col-lg-4" directionLinks="false" autoHide="false" *ngFor="let vacancy of vacancies ">
+                     <div class="col-lg-4" *ngFor="let vacancy of vacancies ">
                       <div class="card">
                       <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
                       <p style="margin-left: 10px;">{{vacancy.employment}}</p>
@@ -53,11 +53,12 @@
                     </div>
                   </div>
                </div>
-               <button *ngIf="canPrev()" class="btn btn-info" (click)="prev();">&laquo; Previous</button>
-               <button *ngIf="!canPrev()" disabled class="btn btn-info" (click)="prev();">&laquo; Previous</button>
-               <button *ngIf="canNext()" class="btn btn-info" (click)="next();">Next &raquo;</button>
-               <button *ngIf="!canNext()" disabled class="btn btn-info" (click)="next();">Next &raquo;</button>
-
+               <div class="paginations">
+               <button *ngIf="canPreviousPage()" class="btn btn-info"  (click)="previousPage();">&laquo; Previous</button>
+               <button *ngIf="!canPreviousPage()" disabled class="btn btn-info"  (click)="previousPage();">&laquo; Previous</button>
+               <button *ngIf="canNextPage()" class="btn btn-info" style="margin-right:40px" (click)="nextPage();">Next &raquo;</button>
+               <button *ngIf="!canNextPage()" disabled class="btn btn-info" style="margin-left:40px" (click)="nextPage();">Next &raquo;</button>
+              </div>
             </div>
     <hr>
     </body>
