@@ -19,57 +19,58 @@ export class CompanyService {
 
   constructor(private http: HttpClient) { }
 
-  private companyURL = 'http://localhost:8080';
+  private companyURL = 'http://localhost:8080/companies';
+  private claimURL = 'http://localhost:8080/claims';
 
   public findAll() {
     console.log("[find all companies]");
-    return this.http.get<Company[]>(this.companyURL + "/companies");
+    return this.http.get<Company[]>(this.companyURL);
   }
 
   public findAllWothPagination(first: number, count: number) {
     console.log("[find all companies by pagination]");
-    return this.http.get<Company[]>(this.companyURL + "/companies/"+first+"/"+count);
+    return this.http.get<Company[]>(this.companyURL + "/" + first + "/" + count);
   }
 
   public getCompaniesCount() {
-    return this.http.get<number>(this.companyURL + "/companies/count");
+    return this.http.get<number>(this.companyURL + "/count");
   }
 
   public deleteById(company) {
     console.log("[delete company]");
-    return this.http.delete(this.companyURL + "/deleteCompany/" + company.companyId, httpOptions);
+    return this.http.delete(this.companyURL + "/" + company.companyId, httpOptions);
   }
 
   public create(company) {
     console.log("[create company]");
-    return this.http.post<Company>(this.companyURL + "/createCompany", company, httpOptions);
+    return this.http.post<Company>(this.companyURL + "/", company, httpOptions);
   }
 
   public update(company) {
     console.log("[update company]");
-    return this.http.put<Company>(this.companyURL + "/updateCompany", company, httpOptions);
+    return this.http.put<Company>(this.companyURL + "/", company, httpOptions);
   }
 
   public approve(company) {
     console.log("[approve company]");
-    return this.http.put<Company>(this.companyURL + "/approveCompany", company, httpOptions);
+    return this.http.put<Company>(this.companyURL + "/approve", company, httpOptions);
   }
 
   public findById(companyId) {
     console.log("[find company by id]");
-    return this.http.get<Company>(this.companyURL + "/company/" + companyId, httpOptions);
+    return this.http.get<Company>(this.companyURL + "/" + companyId, httpOptions);
   }
 
   public createClaim(claim) {
     console.log("[claim company]");
-    return this.http.post<Company>(this.companyURL + "/createClaim", claim, httpOptions);
+    return this.http.post<Company>(this.claimURL + "/", claim, httpOptions);
   }
 
   public findClaims(company) {
-    return this.http.get<Claim[]>(this.companyURL + "/findClaims/" + company.companyId, httpOptions);
+    return this.http.get<Claim[]>(this.claimURL + "/" + company.companyId, httpOptions);
   }
 
   public deleteClaimById(claim) {
-    return this.http.delete(this.companyURL + "/deleteClaim/" + claim.claimId, httpOptions);
+    return this.http.delete(this.claimURL + "/" + claim.claimId, httpOptions);
   }
 }
