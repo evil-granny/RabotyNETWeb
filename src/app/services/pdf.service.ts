@@ -32,6 +32,16 @@ export class PdfService {
     console.log("[update cv]");
     return this.http.put<CV>(this.cvURL + "/updatePDF", cv, httpOptions);
   }
+
+  public show() {
+    console.log("[update cv]");
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');    
+    return this.http.get(this.cvURL + "/createPdf",{ headers: headers, responseType: 'arraybuffer'});
+  }
+
+  
+
   
 }
 

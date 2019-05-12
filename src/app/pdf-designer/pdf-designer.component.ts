@@ -12,8 +12,15 @@ import { Contact } from '../models/contact.model';
 })
 export class PdfDesignerComponent implements OnInit {
 
-  cv: CV = new CV();
  
+
+  
+  contact: Contact = new Contact();
+  people: Person = new Person();
+  cv: CV = new CV();
+  urlPdf: string ="false";
+  
+   
   
   constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService) {}   
 
@@ -37,6 +44,25 @@ export class PdfDesignerComponent implements OnInit {
           alert("Validation problem has been occured"); 
       });
   };
+
+  showPdf(): void {   
+  this.pdfService.show()
+      .subscribe(data =>   {
+        var file = new Blob([data], { type: 'application/pdf' });
+        console.log(file);
+        var fileURL = URL.createObjectURL(file);   
+        console.log(fileURL);
+        this.urlPdf= fileURL;
+        window.open(fileURL);  
+        window.focus();
+       });   
+  };
+
+  
+    
+  
+  
+  
 
 
 }
