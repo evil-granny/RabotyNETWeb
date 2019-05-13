@@ -45,7 +45,7 @@ const routes: Routes = [
   // { path: 'admin', component: AdminComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent }
 
-  // { path: 'searchCV', component: SearchCVComponent },
+  // { path: 'searchCV', component: SearchCVComponent }
 ];
 
 @NgModule({
