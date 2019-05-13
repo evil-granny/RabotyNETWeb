@@ -22,8 +22,7 @@ export class VacancyComponent implements OnInit {
   requirements: Observable<Requirement[]>;
 
   currentUser: UserPrincipal;
-  // companies: Company[];
-
+  
   p: number = 1;
 
   vacancy: Vacancy = new Vacancy();
@@ -45,7 +44,7 @@ export class VacancyComponent implements OnInit {
   
 
   findAll() {
-     this.vacancyService.findAllWothPagination(this.page * this.count, this.count).subscribe(
+     this.vacancyService.findAllWithPagination(this.page * this.count, this.count).subscribe(
        data => {
          this.vacancies = data;
          console.log(this.vacancies);
@@ -90,23 +89,23 @@ export class VacancyComponent implements OnInit {
       this.router.navigateByUrl('/vacancies');
   }
 
-  canPrev() : boolean {
+  canPreviousPage() : boolean {
     return this.page > 0;
   }
 
-  prev() {
-    if(this.canPrev()) {
+  previousPage () {
+    if(this.canPreviousPage()) {
       this.page = this.page - 1;
       this.findAll();
     }
   }
 
-  canNext() : boolean {
+  canNextPage() : boolean {
     return (this.page + 1) * this.count < this.size;
   }
 
-  next() {
-    if(this.canNext()) {
+  nextPage() {
+    if(this.canNextPage()) {
       this.page = this.page + 1;
       this.findAll();
     }

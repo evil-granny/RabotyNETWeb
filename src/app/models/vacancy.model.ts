@@ -11,6 +11,8 @@ export class Vacancy {
 
     salary: Int8Array;
 
+    hotVacancy: boolean;
+
     company: Company = new Company();
 
     requirements: Requirement[] = Array<Requirement>();

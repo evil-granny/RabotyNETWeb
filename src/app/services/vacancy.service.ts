@@ -27,11 +27,11 @@ export class VacancyService {
   }
 
   public findVacanciesByCompanyName(companyName : any, first : number, count : number): Observable<any> {
-    return this.http.get(this.vacancyUrl + '/byCompanyName/' + companyName + "/" + first + "/" + count, httpOptions);
+    return this.http.get(this.vacancyUrl + '/' + companyName + "/" + first + "/" + count, httpOptions);
   }
 
-  public findAllWothPagination(first: number, count: number) : Observable<any> {
-    return this.http.get(this.vacancyUrl +"/all/"+first+"/"+count);
+  public findAllWithPagination(first: number, count: number) : Observable<any> {
+    return this.http.get(this.vacancyUrl + "/" + first+ "/" + count);
   }
 
   get(vacancyId: string) {
@@ -39,11 +39,11 @@ export class VacancyService {
   }
 
   getCountOfVacancies(companyName: any) {
-    return this.http.get<number>(this.vacancyUrl + '/count/' + companyName, httpOptions);
+    return this.http.get<number>(this.vacancyUrl + '/getCount/' + companyName, httpOptions);
   }
 
   getCountOfAllVacancies() {
-    return this.http.get<number>(this.vacancyUrl + '/countAll/', httpOptions);
+    return this.http.get<number>(this.vacancyUrl + '/getCountAll/', httpOptions);
   }
 
   public deleteById(id: number): Observable<Object> {

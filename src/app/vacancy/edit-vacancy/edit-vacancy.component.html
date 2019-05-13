@@ -48,6 +48,18 @@
                     </div>
                   </div>
                 </div>
+
+                 <div class="form-group">
+                  <label for="hotVacancy" class="col-md-2 col-sm-3 col-xs-12 control-label">Hot vacancy</label>
+                  <div class= "checkboxC">
+                  <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input type="checkbox" style="width: 40px;height: 40px" [(ngModel)]="vacancy.hotVacancy"
+                      placeholder="Check if vacancy is hot" id="hotVacancy" name="hotVacancy" #hotVacancy="ngModel" checked
+                      autocomplete="off">
+                  </div>
+                </div>
+                </div> 
+
               </fieldset>  <br>
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Requirements Info</h3>
@@ -100,7 +112,7 @@
                     <button class="btn btn-primary" style="margin-top: 20px" type="submit" [disabled]="!personForm.form.valid"
                         (click)="create()">Create</button>
                   </div>
-                   <div *ngIf="vacancy.vacancyId != null">
+                   <div *ngIf="vacancy.vacancyId != null && (isCowner==true)">
                     <button class="btn btn-success" (click)="update()" [disabled]="!personForm.form.valid">Update</button>
                   </div>
                   <a class="cancel" routerLink="/vacancies" style="font-size: 17px;margin-left: 20px;margin-top:30px">Cancel</a>

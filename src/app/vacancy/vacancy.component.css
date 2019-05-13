@@ -25,12 +25,27 @@ footer {
   /*margin-left:  10px;*/
 }
 
+/* .card2 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background: rgb(247, 248, 196);
+  transition: 0.3s;
+  width: 340px;
+  height: 190px;
+  position: relative !important;
+  margin-bottom: 10px;
+ 
+} */
 
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-
+/* .card2:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+} */
+.paginations{
+  text-align: center;
+}
 
 .container {
   padding: 2px 16px;
