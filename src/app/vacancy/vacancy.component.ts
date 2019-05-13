@@ -22,8 +22,7 @@ export class VacancyComponent implements OnInit {
   requirements: Observable<Requirement[]>;
 
   currentUser: UserPrincipal;
-  // companies: Company[];
-
+  
   p: number = 1;
 
   vacancy: Vacancy = new Vacancy();
