@@ -112,7 +112,7 @@
                     <button class="btn btn-primary" style="margin-top: 20px" type="submit" [disabled]="!personForm.form.valid"
                         (click)="create()">Create</button>
                   </div>
-                   <div *ngIf="vacancy.vacancyId != null && (isCowner==true||isAdmin==true)">
+                   <div *ngIf="vacancy.vacancyId != null && (isCowner==true)">
                     <button class="btn btn-success" (click)="update()" [disabled]="!personForm.form.valid">Update</button>
                   </div>
                   <a class="cancel" routerLink="/vacancies" style="font-size: 17px;margin-left: 20px;margin-top:30px">Cancel</a>
