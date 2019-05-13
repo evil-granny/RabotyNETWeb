@@ -19,9 +19,9 @@ export class AddCompanyComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit(): void {
-    var companyId = this.route.snapshot.paramMap.get("companyId");
-    if (companyId !== null) {
-      this.companyService.findById(companyId)
+    var companyName = this.route.snapshot.paramMap.get("companyName");
+    if (companyName !== null) {
+      this.companyService.findByName(companyName)
         .subscribe(data => {
           this.company = data;
         });
@@ -52,7 +52,7 @@ export class AddCompanyComponent implements OnInit {
         this.companyService.create(this.company)
           .subscribe(data => {
             if(data != null) {
-              this.router.navigate(['/companies']);
+              this.router.navigate(['/updateCompany/' + this.company.name]);
             }
             else
               alert("Validation problem has been occured");  

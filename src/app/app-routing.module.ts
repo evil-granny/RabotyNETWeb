@@ -26,14 +26,14 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
   { path: 'vacancies', component: VacancyComponent },
-  { path: 'createVacancy/:companyId', component: EditVacancyComponent },
+  { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
 
   // { path: 'companies', component: CompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
-  { path: 'updateCompany/:companyId', component: AddCompanyComponent },
-  { path: 'approveCompany/:companyId', component: ApproveCompanyComponent },
-  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
+  { path: 'updateCompany/:companyName', component: AddCompanyComponent },
+  { path: 'approveCompany/:companyName', component: ApproveCompanyComponent },
+  { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },

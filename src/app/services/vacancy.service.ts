@@ -26,8 +26,8 @@ export class VacancyService {
     return this.http.get(this.vacancyUrl , httpOptions);
   }
 
-  public findVacanciesByCompanyId(companyId : any, first : number, count : number): Observable<any> {
-    return this.http.get(this.vacancyUrl + '/byCompanyId/' + companyId + "/" + first + "/" + count, httpOptions);
+  public findVacanciesByCompanyName(companyName : any, first : number, count : number): Observable<any> {
+    return this.http.get(this.vacancyUrl + '/byCompanyName/' + companyName + "/" + first + "/" + count, httpOptions);
   }
 
   public findAllWothPagination(first: number, count: number) : Observable<any> {
@@ -38,8 +38,8 @@ export class VacancyService {
     return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
   }
 
-  getCountOfVacancies(companyId: any) {
-    return this.http.get<number>(this.vacancyUrl + '/count/' + companyId, httpOptions);
+  getCountOfVacancies(companyName: any) {
+    return this.http.get<number>(this.vacancyUrl + '/count/' + companyName, httpOptions);
   }
 
   getCountOfAllVacancies() {
@@ -54,8 +54,8 @@ export class VacancyService {
     return this.http.put<Vacancy>(this.vacancyUrl , vacancy, httpOptions);
   }
 
-  public createVacancy(vacancy: Vacancy, companyId : string): Observable<Object> {
-    return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + companyId, vacancy, httpOptions);
+  public createVacancy(vacancy: Vacancy, companyName : string): Observable<Object> {
+    return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + companyName, vacancy, httpOptions);
   }
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);

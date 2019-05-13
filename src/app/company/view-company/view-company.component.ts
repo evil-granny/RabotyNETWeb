@@ -29,12 +29,12 @@ export class ViewCompanyComponent implements OnInit {
     private userService: UserService, private vacancyService: VacancyService) { }
 
   ngOnInit() {
-    this.vacancyService.getCountOfVacancies(this.route.snapshot.paramMap.get("companyId")).subscribe(data=>{
+    this.vacancyService.getCountOfVacancies(this.route.snapshot.paramMap.get("companyName")).subscribe(data=>{
       this.size = data;
     });
-    var companyId = this.route.snapshot.paramMap.get("companyId");
-    if(companyId != null) {
-      this.companyService.findById(companyId)
+    var companyName = this.route.snapshot.paramMap.get("companyName");
+    if(companyName != null) {
+      this.companyService.findByName(companyName)
         .subscribe(data => {
 
           this.companyService.findClaims(data)
@@ -53,7 +53,7 @@ export class ViewCompanyComponent implements OnInit {
 
   findVacancies() {
   
-    this.vacancyService.findVacanciesByCompanyId(this.route.snapshot.paramMap.get("companyId"), this.page * this.count, this.count).subscribe(
+    this.vacancyService.findVacanciesByCompanyName(this.route.snapshot.paramMap.get("companyName"), this.page * this.count, this.count).subscribe(
       data => {
              this.vacancies = data;
              console.log(this.vacancies);

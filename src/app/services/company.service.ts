@@ -56,9 +56,14 @@ export class CompanyService {
     return this.http.put<Company>(this.companyURL + "/approve", company, httpOptions);
   }
 
-  public findById(companyId) {
-    console.log("[find company by id]");
-    return this.http.get<Company>(this.companyURL + "/" + companyId, httpOptions);
+  // public findById(companyId) {
+  //   console.log("[find company by id]");
+  //   return this.http.get<Company>(this.companyURL + "/" + companyId, httpOptions);
+  // }
+
+  public findByName(companyName) {
+    console.log("[find company by name]");
+    return this.http.get<Company>(this.companyURL + "/" + companyName, httpOptions);
   }
 
   public createClaim(claim) {
