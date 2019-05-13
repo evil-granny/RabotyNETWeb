@@ -41,7 +41,7 @@
               </div>
                 <div class="row" >
                      <div class="col-lg-4" *ngFor="let vacancy of vacancies ">
-                       <div class="hopVacancies" *ngIf="vacancy.hot==true" >
+                       <div class="hopVacancies" *ngIf="vacancy.hotVacancy==true" >
                       <div style="background: rgb(247, 248, 196)" class="card">
                       <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
                       <p style="margin-left: 10px;">{{vacancy.employment}}</p>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="simpleVacancy" *ngIf="vacancy.hot!=true" >
+                  <div class="simpleVacancy" *ngIf="vacancy.hotVacancy!=true" >
                       <div class="card">
                       <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
                       <p style="margin-left: 10px;">{{vacancy.employment}}</p>

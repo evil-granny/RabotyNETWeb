@@ -11,7 +11,7 @@ export class Vacancy {
 
     salary: Int8Array;
 
-    hot: boolean;
+    hotVacancy: boolean;
 
     company: Company = new Company();
 
