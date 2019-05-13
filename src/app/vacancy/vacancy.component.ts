@@ -9,6 +9,7 @@ import {Requirement} from '../models/requirement.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {Role} from '../models/roles.model';
 import {UserPrincipal} from '../models/userPrincipal.model';
+import {Search} from '../models/SearchModel/search.model';
 
 
 @Component({
@@ -32,25 +33,27 @@ export class VacancyComponent implements OnInit {
   count: number = 6;
   size: number = 0;
 
-  constructor(private app: AuthenticationService, private router: Router,private route: ActivatedRoute ,private vacancyService: VacancyService, private companyService: CompanyService) {
+  search: Search = new Search();
+
+  constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, private companyService: CompanyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {
-    this.vacancyService.getCountOfAllVacancies().subscribe(data=>{
+    this.search.searchDocument = 'vacancies';
+    this.vacancyService.getCountOfAllVacancies().subscribe(data => {
       this.size = data;
     });
     this.findAll();
   };
-  
 
   findAll() {
-     this.vacancyService.findAllWothPagination(this.page * this.count, this.count).subscribe(
-       data => {
-         this.vacancies = data;
-         console.log(this.vacancies);
-       }
-     );
+    this.vacancyService.findAllWothPagination(this.page * this.count, this.count).subscribe(
+      data => {
+        this.vacancies = data;
+        console.log(this.vacancies);
+      }
+    );
   }
 
   gotoList() {
@@ -74,42 +77,50 @@ export class VacancyComponent implements OnInit {
   };
 
   get isAdmin() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
   }
 
   get isCowner() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
   }
 
   get isUser() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
   }
 
   logout() {
     const user = this.app.logout();
-      this.router.navigateByUrl('/vacancies');
+    this.router.navigateByUrl('/vacancies');
   }
 
-  canPrev() : boolean {
+  canPrev(): boolean {
     return this.page > 0;
   }
 
   prev() {
-    if(this.canPrev()) {
+    if (this.canPrev()) {
       this.page = this.page - 1;
       this.findAll();
     }
   }
 
-  canNext() : boolean {
+  canNext(): boolean {
     return (this.page + 1) * this.count < this.size;
   }
 
   next() {
-    if(this.canNext()) {
+    if (this.canNext()) {
       this.page = this.page + 1;
       this.findAll();
     }
   }
 
+  searchPage() {
+    this.router.navigateByUrl('/searchCV');
+    this.search.searchDocument = 'cvs';
+  }
+
+  startSearch() {
+
+  }
 }

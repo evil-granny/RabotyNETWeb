@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Vacancy} from '../models/vacancy.model';
 import {Observable} from 'rxjs';
 import { Requirement } from '../models/requirement.model';
+import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -61,5 +62,9 @@ export class VacancyService {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
   }
 
+  public getResult(searchCV) {
+    console.log('[Start Searching]');
+    return this.http.post<SearchCVResponse>(this.vacancyUrl + '/vacancySearch', searchCV, httpOptions);
+  }
 
 }

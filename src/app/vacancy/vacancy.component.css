@@ -36,8 +36,6 @@ footer {
   padding: 2px 16px;
 }
 
-
-
 @media screen and (max-width: 767px) {
   .row-offcanvas {
     position: relative;

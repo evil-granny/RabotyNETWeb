@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {SearchCVResult} from '../models/SearcModel/searchCVResult.model';
-import {SearchCVResponse} from '../models/SearcModel/SearchCVResponse.model';
+import {SearchCVResult} from '../models/SearchModel/searchCVResult.model';
+import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
