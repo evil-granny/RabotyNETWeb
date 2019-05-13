@@ -39,14 +39,15 @@ export class PdfDesignerComponent implements OnInit {
     this.pdfService.update(this.cv)
       .subscribe(data => {
         if(data != null)
-          alert("Company has been updated successfully.");
+          alert("CV has been updated successfully.");
         else
           alert("Validation problem has been occured"); 
       });
   };
 
-  showPdf(): void {   
-  this.pdfService.show()
+  showPdf(): void { 
+  
+   this.pdfService.show(this.cv.cvId)
       .subscribe(data =>   {
         var file = new Blob([data], { type: 'application/pdf' });
         console.log(file);

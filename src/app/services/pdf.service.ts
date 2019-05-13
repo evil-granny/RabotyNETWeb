@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { CV } from '../models/cv.model';
+import { CVService } from './cv.service';
 
 
 
@@ -33,11 +34,11 @@ export class PdfService {
     return this.http.put<CV>(this.cvURL + "/updatePDF", cv, httpOptions);
   }
 
-  public show() {
+  public show(cvId) {
     console.log("[update cv]");
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');    
-    return this.http.get(this.cvURL + "/createPdf",{ headers: headers, responseType: 'arraybuffer'});
+    return this.http.get(this.cvURL + "/createPdf/" + cvId,{ headers: headers, responseType: 'arraybuffer'});
   }
 
   

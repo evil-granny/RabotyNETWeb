@@ -37,7 +37,6 @@ const routes: Routes = [
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
-  { path: 'designerPDFcv', component: PdfDesignerComponent },
   { path: 'createPdf', component: PdfDesignerComponent },
   { path: 'updateCvForPDF/:cvId', component: PdfDesignerComponent },
 
