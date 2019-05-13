@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SidebarService } from './sidebar/sidebar.service';
+import { ModalService } from './modal/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { SidebarService } from './sidebar/sidebar.service';
 })
 export class AppComponent {
 
-  title = 'Angular Pro Sidebar';
+  title = 'RabotyNET';
 
   constructor(public sidebarservice: SidebarService) { }
 
@@ -28,4 +29,5 @@ export class AppComponent {
     this.sidebarservice.setSidebarState(true);
   }
 
+  
 }

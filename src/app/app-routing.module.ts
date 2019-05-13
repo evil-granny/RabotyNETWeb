@@ -34,6 +34,7 @@ const routes: Routes = [
   { path: 'users', component: UserComponent },
 
   { path: 'searchCV', component: SearchCVComponent }
+  
 ];
 
 @NgModule({

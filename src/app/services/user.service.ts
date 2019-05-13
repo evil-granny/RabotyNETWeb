@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { User } from "../models/user.model";
 import { Observable } from "rxjs";
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,9 +24,15 @@ export class UserService {
 
   private userUrl = 'http://localhost:8080';
 
+
   public findAll(): Observable<any> {
     console.log("[findAll]");
     return this.http.get<User[]>(this.userUrl + "/users", httpOptions);
+  }
+
+  public findByEmail(user): Observable<any> {
+    console.log("[findByEmail]");
+     return this.http.get<User[]>(this.userUrl + "/users/"+ user.login+"/", httpOptions);
   }
 
   public deleteById(user) {
@@ -33,10 +40,9 @@ export class UserService {
     return this.http.delete(this.userUrl + "/deleteUser/" + user.userId, httpOptions);
   }
 
-  public insert(user) {
+  public insert(user:any, users:any) {        
     console.log("[insert]");
     console.log(user);
     return this.http.post<User>(this.userUrl + "/registration", user, httpOptions);
   }
-
 }

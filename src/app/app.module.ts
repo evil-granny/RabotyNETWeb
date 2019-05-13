@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalModule } from './modal/modal.module';
 
 import { ProfileComponent } from './profile/profile.component';
 import { PersonService } from './services/person.service';
@@ -57,6 +58,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SearchCVComponent
   ],
   imports: [
+    ModalModule,
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
