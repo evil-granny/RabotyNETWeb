@@ -21,6 +21,8 @@ import { AccessDeniedPageComponent } from './access-denied-page/access-denied-pa
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 import { SearchCVComponent } from './search-cv/search-cv.component';
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
+import {PasswordForgotComponent} from './password-forgot/password-forgot.component';
+import {PasswordRestoreComponent} from './password-restore/password-restore.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -40,6 +42,8 @@ const routes: Routes = [
   { path: 'updateCV/:cvId', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
+  { path: 'forgotPassword', component: PasswordForgotComponent },
+  { path: 'confirmPassword', component: PasswordRestoreComponent },
   // { path: 'users', component: UserComponent },
   //
   // { path: 'admin', component: AdminComponent },

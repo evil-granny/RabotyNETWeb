@@ -51,6 +51,8 @@ import {Role} from './models/roles.model';
 import {AuthGuard} from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 import {AppErrorHandler} from './_helpers/app.error.handler';
+import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
+import { PasswordRestoreComponent } from './password-restore/password-restore.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -112,7 +114,9 @@ const routes: Routes = [
     ViewCompanyComponent,
     LoginComponent,
     AdminComponent,
-    AccessDeniedPageComponent
+    AccessDeniedPageComponent,
+    PasswordForgotComponent,
+    PasswordRestoreComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
