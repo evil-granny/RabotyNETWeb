@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from 'src/app/services/company.service';
-import { Company } from 'src/app/models/company.model';
+import { Company } from 'src/app/models/CompanyModel/company.model';
 import { Status } from 'src/app/models/status.model';
 
 @Component({
