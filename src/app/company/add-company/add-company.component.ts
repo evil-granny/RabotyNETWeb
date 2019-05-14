@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Company } from '../../models/company.model';
+import { Company } from '../../models/CompanyModel/company.model';
 import { CompanyService } from '../../services/company.service'
 import { UserService } from 'src/app/services/user.service';
 import { Status } from 'src/app/models/status.model';

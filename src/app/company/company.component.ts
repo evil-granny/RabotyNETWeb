@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Company } from '../models/company.model';
+import { Company } from '../models/CompanyModel/company.model';
 import { CompanyService } from '../services/company.service';
 import { Claim } from '../models/claim.model';
 
@@ -24,18 +24,14 @@ export class CompanyComponent implements OnInit {
   constructor(private router: Router, private companyService: CompanyService) {}
 
   ngOnInit() {
-    this.companyService.getCompaniesCount()
-      .subscribe( data => {
-        this.size = data;
-      });
-
     this.findAll();
   };
 
   findAll() {
     this.companyService.findAllWothPagination(this.page * this.count, this.count)
       .subscribe( data => {
-        this.companies = data;
+        this.companies = data.companies;
+        this.size = data.count;
 
         this.companies.forEach(company => {
           this.companyService.findClaims(company)
