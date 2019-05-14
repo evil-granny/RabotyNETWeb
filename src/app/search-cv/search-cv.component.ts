@@ -28,7 +28,9 @@ export class SearchCVComponent implements OnInit {
   pagesCount: number;
   pageNumber: number;
 
-  constructor(private app: AuthenticationService, private router: Router, private searchCVService: SearchCVService) { }
+  constructor(private app: AuthenticationService, private router: Router, private searchCVService: SearchCVService) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
+  }
 
   get isAdmin() {
     return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;

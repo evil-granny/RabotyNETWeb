@@ -28,12 +28,11 @@
     <form class="form-inline my-2 my-lg-0">
       <label class="navbar-brand">Search in:
         <select [(ngModel)]="search.searchDocument" (change)="vacancyPage()" name="searchDocument" class="form-control">
-          <option [defaultSelected]="search.searchDocument" value="cvs">cvs</option>
+          <option [defaultSelected]="search.searchDocument" value="cvs">summaries</option>
           <option value="vacancies">vacancies</option>
         </select>
       </label>
-      <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control mr-sm-2">
-      <label class="navbar-brand">Search by:
+      <label class="navbar-brand">Search summaries by:
         <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
           <option [defaultSelected]="search.searchParameter" value="name">name</option>
           <option value="skill">skill</option>
@@ -42,9 +41,10 @@
           <option value="position">position</option>
         </select>
       </label>
+      <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control mr-sm-2">
       <button class="btn btn-outline-success my-2 my-sm-0" (click)="startSearch()">Search</button>
-      <button class="fa fa-sign-in" style="margin-left: 20px;font-size:36px;color: blue" routerLink="/login" *ngIf="!currentUser"></button>
-      <button class="fas fa-user-plus" style="margin-left: 20px;font-size:36px;color: blue" routerLink="/registration" *ngIf="!currentUser"></button>
+<!--      <button class="fa fa-sign-in" style="margin-left: 20px;font-size:36px;color: blue" routerLink="/login" *ngIf="!currentUser"></button>-->
+<!--      <button class="fas fa-user-plus" style="margin-left: 20px;font-size:36px;color: blue" routerLink="/registration" *ngIf="!currentUser"></button>-->
       <button class="fa fa-sign-out" style="margin-left: 20px;font-size:36px;color: blue" (click)="logout()" *ngIf="currentUser"></button>
     </form>
   </div>
@@ -64,7 +64,7 @@
 
   <div>
     <h2>Search result</h2>
-    <h5>{{searchCVResponse.count}} Cvs founded</h5>
+    <h5>{{searchCVResponse.count}}Cvs founded</h5>
     <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
   </div>
 
