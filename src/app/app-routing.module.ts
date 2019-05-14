@@ -16,6 +16,7 @@ import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
 import { SearchCVComponent } from './search-cv/search-cv.component'
+import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'createCV', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
+  { path: 'registrationConfirm', component: RegistrationconfirmComponent },
   { path: 'users', component: UserComponent },
 
   { path: 'searchCV', component: SearchCVComponent }

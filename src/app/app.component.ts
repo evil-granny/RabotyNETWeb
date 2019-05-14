@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { SidebarService } from './sidebar/sidebar.service';
-import { ModalService } from './modal/modal.service';
 
 @Component({
   selector: 'app-root',

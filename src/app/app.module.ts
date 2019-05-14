@@ -37,6 +37,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ComfirmComponent } from './confirm/comfirm.component';
+import { MatDialogModule } from '@angular/material';
+import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -55,7 +58,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddCvComponent,
     UserComponent,
     AddUserComponent,
-    SearchCVComponent
+    SearchCVComponent,
+    ComfirmComponent,
+    RegistrationconfirmComponent
   ],
   imports: [
     ModalModule,
@@ -66,12 +71,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     AppRoutingModule,
     PerfectScrollbarModule,
+    MatDialogModule,
     BsDropdownModule.forRoot()
   ],
   providers: [{
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ComfirmComponent]
 })
 export class AppModule { }

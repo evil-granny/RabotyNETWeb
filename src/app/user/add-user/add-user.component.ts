@@ -1,23 +1,23 @@
-import { Component,OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
-import { ModalContext } from '../../modal/modal-context';
-import { ModalContainerComponent } from '../../modal/modal-container/modal-container.component';
+import { ComfirmComponent } from '../../confirm/comfirm.component';
+import { MatDialog } from '@angular/material';
 @Component({
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css']
 })
-export class AddUserComponent  implements OnInit {
+export class AddUserComponent implements OnInit {
 
- 
-  users: User[];  
+
+  users: User[];
   foundUser: User[];
   user: User = new User();
+  error: any;
 
-
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.userService.findAll()
@@ -26,23 +26,24 @@ export class AddUserComponent  implements OnInit {
       });
   };
 
-  findByEmail(){
-    this.userService.findByEmail(this.user)
+  findByEmail(user: User) {
+    this.userService.findByEmail(user)
       .subscribe(data => {
         this.foundUser = data;
       });
   }
+
   create(): void {
-    this.findByEmail();
-    if(this.foundUser != null){
-      window.alert("There is an account with that email! Try with another or login, please!")
-      console.log(this.foundUser)
-    }else{ 
     this.userService.insert(this.user, this.users)
       .subscribe(data => {
-        alert("User has been created successfully.");
-      });}
+        console.log(data);
+        this.openModal("User has been created successfully. Confirm your email and login into site!");
+      });
   };
+
+  public openModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } })
+  }
 
 
 }
