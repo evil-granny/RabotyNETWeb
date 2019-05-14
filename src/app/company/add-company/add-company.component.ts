@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from '../../models/CompanyModel/company.model';
 import { CompanyService } from '../../services/company.service'
 import { UserService } from 'src/app/services/user.service';
-import { Status } from 'src/app/models/status.model';
 
 @Component({
   selector: 'rabotyNet',
@@ -44,10 +43,7 @@ export class AddCompanyComponent implements OnInit {
         console.log(data);
         this.company.user = data;
 
-        this.company.status = new Status();
-        this.company.status.approved = false;
-        this.company.status.mailSent = false;
-        this.company.status.reliable = false;
+        this.company.status = 'CREATED';
 
         this.companyService.create(this.company)
           .subscribe(data => {

@@ -102,19 +102,19 @@ export class ViewCompanyComponent implements OnInit {
   }
 
   isApproved() : boolean {
-    return this.company.status == null || this.company.status.approved;
+    return this.company.status == 'APPROVED';
   }
 
   isMailSent() : boolean {
-      return this.company.status == null || this.company.status.mailSent;
+    return this.company.status == 'MAIL_SENT';
   }
 
-  isReliable() : boolean {
-      return this.company.status == null || this.company.status.reliable;
+  isBlocked() : boolean {
+    return this.company.status == 'BLOCKED';
   }
 
   hasClaims() : boolean {
-      return this.company.claims != null && this.company.claims.length > 0;
+    return this.company.claims != null && this.company.claims.length > 0;
   }
 
 }

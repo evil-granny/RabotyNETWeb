@@ -6,10 +6,10 @@
         <div class="module-inner">
           <div class="content-panel">
             <h2> 
-                <i *ngIf="isApproved() && isReliable() && !hasClaims()" class="fa fa-thumbs-up" style="color: green;"></i>
+                <i *ngIf="isApproved() && !isBlocked() && !hasClaims()" class="fa fa-thumbs-up" style="color: green;"></i>
                 <i *ngIf="isApproved() && hasClaims()" class="fa fa-warning" style="color: orange;"></i>
                 <i *ngIf="!isApproved()" class="fa fa-times" style="color: red;"></i>
-                <i *ngIf="isApproved() && !isReliable()" class="fa fa-thumbs-down" style="color: red"></i>
+                <i *ngIf="isApproved() && isBlocked()" class="fa fa-thumbs-down" style="color: red"></i>
               {{company.name}}</h2>
               <img src="assets/img/company.png" alt="Company logo" height="150" style="float: left">
               

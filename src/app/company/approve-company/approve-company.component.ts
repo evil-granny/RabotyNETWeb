@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from 'src/app/models/CompanyModel/company.model';
-import { Status } from 'src/app/models/status.model';
 
 @Component({
   selector: 'rabotyNet',
@@ -22,10 +21,7 @@ export class ApproveCompanyComponent implements OnInit {
         .subscribe(data => {
           this.company = data;
           
-          if(this.company.status != null) {
-            this.company.status.approved = true;
-            this.company.status.reliable = true;
-          }
+          this.company.status = 'APPROVED';
 
           this.companyService.update(this.company)
             .subscribe(data => {

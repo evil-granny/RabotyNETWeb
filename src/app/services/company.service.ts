@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Company } from "../models/CompanyModel/company.model";
 import { Claim } from '../models/claim.model';
-import { Status } from '../models/status.model';
 import { CompanyPaginationDTO } from '../models/CompanyModel/companyPaginationDTO.model';
 
 const httpOptions = {

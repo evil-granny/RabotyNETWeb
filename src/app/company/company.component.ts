@@ -78,7 +78,7 @@ export class CompanyComponent implements OnInit {
   approve(company: Company) : void {
     this.companyService.approve(company)
       .subscribe( data => {
-        this.companies.find((c) => c.companyId === company.companyId).status.mailSent = true;
+        this.companies.find((c) => c.companyId === company.companyId).status = 'MAIL_SENT';
       });
   }
 
@@ -95,19 +95,30 @@ export class CompanyComponent implements OnInit {
   }
 
   isApproved(company: Company) : boolean {
-    return company.status == null || company.status.approved;
+    return company.status == 'APPROVED';
   }
 
   isMailSent(company: Company) : boolean {
-      return company.status == null || company.status.mailSent;
+    return company.status == 'MAIL_SENT';
   }
 
-  isReliable(company: Company) : boolean {
-      return company.status == null || company.status.reliable;
+  isBlocked(company: Company) : boolean {
+    return company.status == 'BLOCKED';
   }
 
   hasClaims(company: Company) : boolean {
-      return company.claims != null && company.claims.length > 0;
+    return company.claims != null && company.claims.length > 0;
+  }
+
+  block(company: Company) {
+    if(company.status == 'BLOCKED')
+      company.status = 'APPROVED';
+    else
+      company.status = 'BLOCKED';  
+    this.companyService.update(company)
+      .subscribe(data => {
+        this.companies.find((c) => c.companyId === company.companyId).status = data.status;
+      });
   }
 
 }
