@@ -10,7 +10,6 @@ import {AuthenticationService} from '../services/authentication.service';
 import {Role} from '../models/roles.model';
 import {UserPrincipal} from '../models/userPrincipal.model';
 import {Search} from '../models/SearchModel/search.model';
-import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
 
 
 @Component({
@@ -117,5 +116,9 @@ export class VacancyComponent implements OnInit {
 
   searchCVPage() {
     this.router.navigateByUrl('/searchCV');
+  }
+
+  startSearch() {
+    this.router.navigate(['/vacancies/search', {doc: this.search.searchDocument, text: this.search.searchText, sParam: this.search.searchParameter}]);
   }
 }
