@@ -1,4 +1,4 @@
-import { Contacts } from '../contacts.model';
+import { Contact } from '../contact.model';
 import { Address } from '../address.model';
 import { User } from '../user.model';
 import { Claim } from '../claim.model';
@@ -17,7 +17,7 @@ export class Company {
 
     logo: string;
 
-    contact: Contacts = new Contacts();
+    contact: Contact = new Contact();
 
     address: Address = new Address();
 

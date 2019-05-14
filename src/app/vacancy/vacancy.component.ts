@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {Vacancy} from '../models/vacancy.model';
+import {Vacancy} from '../models/vacancy/vacancy.model';
 import {VacancyService} from '../services/vacancy.service';
 import {CompanyService} from '../services/company.service';
 import {Observable} from 'rxjs';
@@ -36,9 +36,6 @@ export class VacancyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vacancyService.getCountOfAllVacancies().subscribe(data=>{
-      this.size = data;
-    });
     this.findAll();
   };
   
@@ -47,6 +44,8 @@ export class VacancyComponent implements OnInit {
      this.vacancyService.findAllWithPagination(this.page * this.count, this.count).subscribe(
        data => {
          this.vacancies = data;
+         this.vacancies = data.vacancies;
+         this.size = data.count;
        }
      );
   }
