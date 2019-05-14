@@ -1,8 +1,7 @@
-import { Contacts } from './contacts.model';
-import { Address } from './address.model';
-import { User } from './user.model';
-import { Claim } from './claim.model';
-import { Status } from './status.model';
+import { Contact } from '../contact.model';
+import { Address } from '../address.model';
+import { User } from '../user.model';
+import { Claim } from '../claim.model';
 
 export class Company {
 
@@ -18,7 +17,7 @@ export class Company {
 
     logo: string;
 
-    contact: Contacts = new Contacts();
+    contact: Contact = new Contact();
 
     address: Address = new Address();
 
@@ -26,5 +25,5 @@ export class Company {
 
     claims: Claim[] = new Array();
 
-    status: Status;
+    status: string;
 }

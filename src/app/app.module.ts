@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { ProfileComponent } from './profile/profile.component';
-import { PersonService } from './services/person.service';
+import { PersonService } from './services/profile/person.service';
 
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';

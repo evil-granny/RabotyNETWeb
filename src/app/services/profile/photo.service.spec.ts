@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SidebarService } from './sidebar.service';
+import { PhotoService } from './photo.service';
 
-describe('SidebarService', () => {
+describe('PhotoService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SidebarService = TestBed.get(SidebarService);
+    const service: PhotoService = TestBed.get(PhotoService);
     expect(service).toBeTruthy();
   });
 });

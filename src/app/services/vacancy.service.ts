@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import {Vacancy} from '../models/vacancy.model';
+import {Vacancy} from '../models/vacancy/vacancy.model';
 import {Observable} from 'rxjs';
 import { Requirement } from '../models/requirement.model';
 import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
 import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
+import { VacancyDTO } from '../models/vacancy/vacancyDTO.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -29,11 +30,11 @@ export class VacancyService {
   }
 
   public findVacanciesByCompanyName(companyName : any, first : number, count : number): Observable<any> {
-    return this.http.get(this.vacancyUrl + '/byCompanyName/' + companyName + "/" + first + "/" + count, httpOptions);
+    return this.http.get<VacancyDTO>(this.vacancyUrl + '/' + companyName + "/" + first + "/" + count, httpOptions);
   }
 
-  public findAllWothPagination(first: number, count: number) : Observable<any> {
-    return this.http.get(this.vacancyUrl +"/all/"+first+"/"+count);
+  public findAllWithPagination(first: number, count: number) : Observable<any> {
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/" + first+ "/" + count, httpOptions);
   }
 
   get(vacancyId: string) {
@@ -41,12 +42,12 @@ export class VacancyService {
   }
 
   getCountOfVacancies(companyName: any) {
-    return this.http.get<number>(this.vacancyUrl + '/count/' + companyName, httpOptions);
+    return this.http.get<number>(this.vacancyUrl + '/getCount/' + companyName, httpOptions);
   }
 
-  getCountOfAllVacancies() {
-    return this.http.get<number>(this.vacancyUrl + '/countAll/', httpOptions);
-  }
+  // getCountOfAllVacancies() {
+  //   return this.http.get<number>(this.vacancyUrl + '/getCountAll/', httpOptions);
+  // }
 
   public deleteById(id: number): Observable<Object> {
     return this.http.delete(this.vacancyUrl + '/' + id, httpOptions);

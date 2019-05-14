@@ -28,10 +28,10 @@
               <tbody *ngFor="let company of companies">
                 <tr>
                   <td>
-                    <i *ngIf="isApproved(company) && isReliable(company) && !hasClaims(company)" class="fa fa-thumbs-up" style="color: green; font-size: 150%;"></i>
+                    <i *ngIf="isApproved(company) && !isBlocked(company) && !hasClaims(company)" class="fa fa-thumbs-up" style="color: green; font-size: 150%;"></i>
                     <i *ngIf="isApproved(company) && hasClaims(company)" class="fa fa-warning" style="color: orange; font-size: 150%;"></i>
                     <i *ngIf="!isApproved(company)" class="fa fa-times" style="color: red; font-size: 150%;"></i>
-                    <i *ngIf="isApproved(company) && !isReliable(company)" class="fa fa-thumbs-down" style="color: red; font-size: 150%;"></i>
+                    <i *ngIf="isApproved(company) && isBlocked(company)" class="fa fa-thumbs-down" style="color: red; font-size: 150%;"></i>
                   </td>
                   <td class="d-none" *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.companyId}}</td>
                   <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.name}}</td>
@@ -45,7 +45,9 @@
                     <a routerLink="/viewCompany/{{company.name}}" class="btn" rel="tooltip" title="View details"><i class="fa fa-eye"></i></a>
                     <a routerLink="/updateCompany/{{company.name}}" class="btn"><i class="fa fa-edit" rel="tooltip" title="Update"></i></a>
                     <a class="btn" (click)="deleteById(company)"><i class="fa fa-trash" rel="tooltip" title="Delete"></i></a>
-                    <a *ngIf="!isMailSent(company)" class="btn" (click)="approve(company)" rel="tooltip" title="Approve"><i class="fa fa-thumbs-up"></i></a>
+                    <a *ngIf="company.status == 'CREATED'" class="btn" (click)="approve(company)" rel="tooltip" title="Approve"><i class="fa fa-thumbs-up"></i></a>
+                    <a *ngIf="company.status == 'APPROVED'" class="btn" (click)="block(company)" rel="tooltip" title="Block"><i class="fa fa-lock"></i></a>
+                    <a *ngIf="company.status == 'BLOCKED'" class="btn" (click)="block(company)" rel="tooltip" title="Unblock"><i class="fa fa-unlock"></i></a>
                   </td>
                 </tr>
 

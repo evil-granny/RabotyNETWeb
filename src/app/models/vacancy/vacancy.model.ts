@@ -1,5 +1,5 @@
-import { Requirement } from './requirement.model';
-import { Company } from './company.model';
+import { Requirement } from '../requirement.model';
+import { Company } from '../CompanyModel/company.model';
 
 export class Vacancy {
 
@@ -10,6 +10,8 @@ export class Vacancy {
     employment: string;
 
     salary: Int8Array;
+
+    hotVacancy: boolean;
 
     company: Company = new Company();
 

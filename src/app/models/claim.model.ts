@@ -1,5 +1,5 @@
 import { User } from './user.model';
-import { Company } from './company.model';
+import { Company } from './CompanyModel/company.model';
 
 export class Claim {
     

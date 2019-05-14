@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Company } from "../models/company.model";
+import { Company } from "../models/CompanyModel/company.model";
 import { Claim } from '../models/claim.model';
-import { Status } from '../models/status.model';
+import { CompanyPaginationDTO } from '../models/CompanyModel/companyPaginationDTO.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -29,11 +29,7 @@ export class CompanyService {
 
   public findAllWothPagination(first: number, count: number) {
     console.log("[find all companies by pagination]");
-    return this.http.get<Company[]>(this.companyURL + "/" + first + "/" + count);
-  }
-
-  public getCompaniesCount() {
-    return this.http.get<number>(this.companyURL + "/count");
+    return this.http.get<CompanyPaginationDTO>(this.companyURL + "/" + first + "/" + count);
   }
 
   public deleteById(company) {
@@ -55,11 +51,6 @@ export class CompanyService {
     console.log("[approve company]");
     return this.http.put<Company>(this.companyURL + "/approve", company, httpOptions);
   }
-
-  // public findById(companyId) {
-  //   console.log("[find company by id]");
-  //   return this.http.get<Company>(this.companyURL + "/" + companyId, httpOptions);
-  // }
 
   public findByName(companyName) {
     console.log("[find company by name]");
