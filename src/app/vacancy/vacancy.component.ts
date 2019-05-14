@@ -26,13 +26,13 @@ export class VacancyComponent implements OnInit {
   currentUser: UserPrincipal;
   // companies: Company[];
 
-  p: number = 1;
+  p = 1;
 
   vacancy: Vacancy = new Vacancy();
 
-  page: number = 0;
-  count: number = 6;
-  size: number = 0;
+  page = 0;
+  count = 6;
+  size = 0;
 
   constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, private companyService: CompanyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
@@ -44,7 +44,7 @@ export class VacancyComponent implements OnInit {
       this.size = data;
     });
     this.findAll();
-  };
+  }
 
   findAll() {
     this.vacancyService.findAllWothPagination(this.page * this.count, this.count).subscribe(
@@ -64,7 +64,7 @@ export class VacancyComponent implements OnInit {
       .subscribe(data => {
         this.gotoList();
       }, error => console.error(error));
-  };
+  }
 
   deleteById(id: number): void {
     this.vacancyService.deleteById(id)
@@ -73,7 +73,7 @@ export class VacancyComponent implements OnInit {
           this.findAll();
         },
         error => console.log(error));
-  };
+  }
 
   get isAdmin() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
