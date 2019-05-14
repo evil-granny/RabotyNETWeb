@@ -22,6 +22,8 @@ import { ApproveCompanyComponent } from './company/approve-company/approve-compa
 import { SearchCVComponent } from './search-cv/search-cv.component';
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
 import {SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
+import { SearchCVComponent } from './search-cv/search-cv.component'
+import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -41,10 +43,10 @@ const routes: Routes = [
   { path: 'updateCV/:cvId', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
-  // { path: 'users', component: UserComponent },
-  //
-  // { path: 'admin', component: AdminComponent },
-  { path: 'accessDenied', component: AccessDeniedPageComponent },
+  { path: 'registrationConfirm', component: RegistrationconfirmComponent },
+  { path: 'users', component: UserComponent },
+
+  { path: 'searchCV', component: SearchCVComponent }
 
    { path: 'vacancies/search', component: SearchVacancyComponent }
 ];

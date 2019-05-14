@@ -3,6 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { ModalModule } from './modal/modal.module';
 
 import { ProfileComponent } from './profile/profile.component';
 import { PersonService } from './services/profile/person.service';
@@ -35,6 +36,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ComfirmComponent } from './confirm/comfirm.component';
+import { MatDialogModule } from '@angular/material';
+import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 
 // import { PaginationModule } from 'ngx-pagination'
@@ -109,6 +113,8 @@ const routes: Routes = [
     UserComponent,
     AddUserComponent,
     SearchCVComponent,
+    ComfirmComponent,
+    RegistrationconfirmComponent,
     ApproveCompanyComponent,
     ViewCompanyComponent,
     LoginComponent,
@@ -117,6 +123,7 @@ const routes: Routes = [
     SearchVacancyComponent
   ],
   imports: [
+    ModalModule,
     RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
@@ -128,7 +135,15 @@ const routes: Routes = [
     BsDropdownModule.forRoot(),
     NgxPaginationModule,
     // PaginationModule
+    MatDialogModule,
+    BsDropdownModule.forRoot()
   ],
+  providers: [{
+    provide: PERFECT_SCROLLBAR_CONFIG,
+    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+  }],
+  bootstrap: [AppComponent],
+  entryComponents: [ComfirmComponent]
   providers: [AuthenticationService,
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
