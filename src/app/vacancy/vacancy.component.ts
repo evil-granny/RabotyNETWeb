@@ -10,6 +10,7 @@ import {AuthenticationService} from '../services/authentication.service';
 import {Role} from '../models/roles.model';
 import {UserPrincipal} from '../models/userPrincipal.model';
 import {Search} from '../models/SearchModel/search.model';
+import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
 
 
 @Component({
@@ -20,6 +21,7 @@ import {Search} from '../models/SearchModel/search.model';
 })
 export class VacancyComponent implements OnInit {
   vacancies: Observable<Vacancy[]>;
+  search: Search = new Search();
   requirements: Observable<Requirement[]>;
 
   currentUser: UserPrincipal;
@@ -32,8 +34,6 @@ export class VacancyComponent implements OnInit {
   page: number = 0;
   count: number = 6;
   size: number = 0;
-
-  search: Search = new Search();
 
   constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, private companyService: CompanyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
@@ -115,12 +115,7 @@ export class VacancyComponent implements OnInit {
     }
   }
 
-  searchPage() {
+  searchCVPage() {
     this.router.navigateByUrl('/searchCV');
-    this.search.searchDocument = 'cvs';
-  }
-
-  startSearch() {
-
   }
 }

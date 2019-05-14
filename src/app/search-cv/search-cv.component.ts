@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SearchCVService } from '../services/search-cv.service';
+import { SearchService } from '../services/search.service';
 import { Search } from '../models/SearchModel/search.model';
-import {SearchCVResult} from '../models/SearchModel/searchCVResult.model';
 import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
 import {Role} from '../models/roles.model';
 import {UserPrincipal} from '../models/userPrincipal.model';
@@ -21,14 +20,13 @@ export class SearchCVComponent implements OnInit {
 
   search: Search = new Search();
   searchCVResponse: SearchCVResponse = new SearchCVResponse();
-  searchCVResult: SearchCVResult = new SearchCVResult();
   resultText = true;
   nextButton = true;
   previousButton = true;
   pagesCount: number;
   pageNumber: number;
 
-  constructor(private app: AuthenticationService, private router: Router, private searchCVService: SearchCVService) {
+  constructor(private app: AuthenticationService, private router: Router, private searchCVService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
@@ -52,7 +50,7 @@ export class SearchCVComponent implements OnInit {
   startSearch() {
     this.search.firstResultNumber = 0;
     this.resultText = false;
-    this.searchCVService.getResult(this.search)
+    this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
         this.pagesCount = Math.ceil(this.searchCVResponse.count / parseInt(this.search.resultsOnPage, 10));
@@ -70,7 +68,7 @@ export class SearchCVComponent implements OnInit {
 
   nextPage() {
     this.search.firstResultNumber = this.search.firstResultNumber + parseInt(this.search.resultsOnPage, 10);
-    this.searchCVService.getResult(this.search)
+    this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
         this.pageNumber++;
@@ -85,7 +83,7 @@ export class SearchCVComponent implements OnInit {
 
   previousPage() {
     this.search.firstResultNumber = this.search.firstResultNumber - parseInt(this.search.resultsOnPage, 10);
-    this.searchCVService.getResult(this.search)
+    this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
         this.pageNumber--;
@@ -102,9 +100,9 @@ export class SearchCVComponent implements OnInit {
       });
   }
 
-  vacancyPage() {
+  searchVacancyPage() {
     this.search.searchDocument = 'vacancies';
-    this.router.navigateByUrl('/vacancies');
+    this.router.navigateByUrl('/vacancies/search');
   }
 
   ngOnInit(): void {

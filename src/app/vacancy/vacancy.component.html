@@ -27,7 +27,7 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <label class="navbar-brand" *ngIf="isCowner">Search in:
-            <select [(ngModel)]="search.searchDocument" (change)="searchPage()" name="searchDocument" class="form-control">
+            <select [(ngModel)]="search.searchDocument" (change)="searchCVPage()" name="searchDocument" class="form-control">
               <option [defaultSelected]="search.searchDocument" value="cvs">summaries</option>
               <option value="vacancies">vacancies</option>
             </select>
@@ -40,7 +40,7 @@
             </select>
           </label>
           <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control mr-sm-2">
-          <button class="btn btn-outline-success my-2 my-sm-0" (click)="startSearch()">Search</button>
+          <a class="btn btn-outline-success my-2 my-sm-0" role="button" routerLink="/vacancies/search{{search}}}">Search</a>
           <button class="fa fa-sign-in" style="margin-left: 20px;font-size:36px;color: blue" routerLink="/login" *ngIf="!currentUser"></button>
           <button class="fas fa-user-plus" style="margin-left: 20px;font-size:36px;color: blue" routerLink="/registration" *ngIf="!currentUser"></button>
           <button class="fa fa-sign-out" style="margin-left: 20px;font-size:36px;color: blue" (click)="logout()" *ngIf="currentUser"></button>

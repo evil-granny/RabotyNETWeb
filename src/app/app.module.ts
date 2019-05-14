@@ -24,7 +24,7 @@ import { SearchCVComponent } from './search-cv/search-cv.component';
 import { CompanyService } from './services/company.service';
 import { CVService } from './services/cv.service';
 import { UserService } from './services/user.service';
-import { SearchCVService } from './services/search-cv.service';
+import { SearchService } from './services/search.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap';
@@ -51,6 +51,7 @@ import {Role} from './models/roles.model';
 import {AuthGuard} from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 import {AppErrorHandler} from './_helpers/app.error.handler';
+import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -112,7 +113,8 @@ const routes: Routes = [
     ViewCompanyComponent,
     LoginComponent,
     AdminComponent,
-    AccessDeniedPageComponent
+    AccessDeniedPageComponent,
+    SearchVacancyComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

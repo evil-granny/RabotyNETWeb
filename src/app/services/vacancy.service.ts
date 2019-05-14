@@ -5,6 +5,7 @@ import {Vacancy} from '../models/vacancy.model';
 import {Observable} from 'rxjs';
 import { Requirement } from '../models/requirement.model';
 import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
+import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -60,11 +61,6 @@ export class VacancyService {
   }
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
-  }
-
-  public getResult(searchCV) {
-    console.log('[Start Searching]');
-    return this.http.post<SearchCVResponse>(this.vacancyUrl + '/vacancySearch', searchCV, httpOptions);
   }
 
 }
