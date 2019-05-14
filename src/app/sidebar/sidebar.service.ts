@@ -1,10 +1,23 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Photo } from '../models/photo.model';
+import { Observable } from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Origin': '*'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
+
   toggled = false;
+
+  private url = "http://localhost:8080";
 
   _hasBackgroundImage = true;
   menus = [
@@ -29,10 +42,11 @@ export class SidebarService {
       type: 'simple'
     },
   ];
-  constructor() { }
+
+  constructor(private http: HttpClient) { }
 
   toggle() {
-    this.toggled = ! this.toggled;
+    this.toggled = !this.toggled;
   }
 
   getSidebarState() {
@@ -54,4 +68,5 @@ export class SidebarService {
   set hasBackgroundImage(hasBackgroundImage) {
     this._hasBackgroundImage = hasBackgroundImage;
   }
+
 }

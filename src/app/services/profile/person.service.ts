@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Person } from '../models/person.model';
+import { Person } from './../../models/person.model';
 import { Observable } from 'rxjs';
 
 const httpOptions = {
@@ -20,14 +20,14 @@ export class PersonService {
 
   userId: any = 1;
 
-  private url = "http://localhost:8080";
+  private url = "http://localhost:8080/people/";
 
-  public findById(): Observable<any> {
-    return this.http.get<Person>(this.url + "/person/" + this.userId, httpOptions);
+  public findById(): Observable<Person> {
+    return this.http.get<Person>(this.url + this.userId, httpOptions);
   }
 
-  public update(person: Person): Observable<any> {
-    return this.http.put<Person>(this.url + "/updatePerson", person, httpOptions);
+  public update(person: Person): Observable<Person> {
+    return this.http.put<Person>(this.url, person, httpOptions);
   }
 
 }

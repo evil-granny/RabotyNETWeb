@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SidebarService } from './sidebar.service';
-// import { MenusService } from './menus.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,7 +17,7 @@ import { SidebarService } from './sidebar.service';
 })
 export class SidebarComponent implements OnInit {
   menus = [];
-  constructor(public sidebarservice: SidebarService) {
+  constructor(public sidebarservice: SidebarService, private sanitizer: DomSanitizer) {
     this.menus = sidebarservice.getMenuList();
    }
 
