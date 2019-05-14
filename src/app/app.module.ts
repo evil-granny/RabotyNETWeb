@@ -1,8 +1,8 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ErrorHandler, NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { ProfileComponent } from './profile/profile.component';
 import { PersonService } from './services/profile/person.service';
@@ -38,19 +38,19 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 
 // import { PaginationModule } from 'ngx-pagination'
-import {NgxPaginationModule} from 'ngx-pagination';
-import {ViewCompanyComponent} from './company/view-company/view-company.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ViewCompanyComponent } from './company/view-company/view-company.component';
 
-import {RouterModule, Routes} from '@angular/router';
-import {AuthenticationService} from './services/authentication.service';
-import {LoginComponent} from './login/login.component';
-import {AdminComponent} from './admin/admin.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
+import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
 
-import {AuthInterceptor, ErrorInterceptor} from './_helpers';
-import {Role} from './models/roles.model';
-import {AuthGuard} from './_guards/auth.guard';
+import { AuthInterceptor, ErrorInterceptor } from './_helpers';
+import { Role } from './models/roles.model';
+import { AuthGuard } from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
-import {AppErrorHandler} from './_helpers/app.error.handler';
+import { AppErrorHandler } from './_helpers/app.error.handler';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true

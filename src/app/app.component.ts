@@ -16,8 +16,6 @@ export class AppComponent {
   title = 'RabotyNet';
   currentUser: UserPrincipal;
 
-  title = 'Angular Pro Sidebar';
-
   constructor(public sidebarservice: SidebarService) { }
 
   toggleSidebar() {
