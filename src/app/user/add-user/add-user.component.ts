@@ -26,11 +26,17 @@ export class AddUserComponent implements OnInit {
       });
   };
 
-  findByEmail(user: User) {
-    this.userService.findByEmail(user)
+  findByEmail() {
+    this.userService.findByEmail(this.user)
       .subscribe(data => {
         this.foundUser = data;
-      });
+        console.log(this.foundUser);
+        if (this.foundUser.length > 0) {
+          this.openModal("There is an account with that email! Try with another one or login, please!")
+        } else {
+          this.create();
+        }
+      });      
   }
 
   create(): void {

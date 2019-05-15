@@ -21,8 +21,7 @@ import { AccessDeniedPageComponent } from './access-denied-page/access-denied-pa
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 import { SearchCVComponent } from './search-cv/search-cv.component';
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
-import {SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
-import { SearchCVComponent } from './search-cv/search-cv.component'
+import { SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
 import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
 
 const routes: Routes = [
@@ -46,9 +45,9 @@ const routes: Routes = [
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
   { path: 'users', component: UserComponent },
 
-  { path: 'searchCV', component: SearchCVComponent }
+  { path: 'searchCV', component: SearchCVComponent },
 
-   { path: 'vacancies/search', component: SearchVacancyComponent }
+  { path: 'vacancies/search', component: SearchVacancyComponent }
 ];
 
 @NgModule({

@@ -6,7 +6,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ModalModule } from './modal/modal.module';
 
 import { ProfileComponent } from './profile/profile.component';
-import { PersonService } from './services/profile/person.service';
 
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';
@@ -88,8 +87,12 @@ const routes: Routes = [
   {
     path: 'users',
     component: UserComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_USER] }
+   // canActivate: [AuthGuard],
+   // data: { roles: [Role.ROLE_USER] }
+  },
+  {
+    path: 'registrationConfirm',
+    component: RegistrationconfirmComponent,
   },
   {
     path: 'login',
@@ -138,17 +141,12 @@ const routes: Routes = [
     MatDialogModule,
     BsDropdownModule.forRoot()
   ],
-  providers: [{
-    provide: PERFECT_SCROLLBAR_CONFIG,
-    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-  }],
   bootstrap: [AppComponent],
-  entryComponents: [ComfirmComponent]
+  entryComponents: [ComfirmComponent],
   providers: [AuthenticationService,
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: AppErrorHandler }],
-  bootstrap: [AppComponent]
+    { provide: ErrorHandler, useClass: AppErrorHandler }]
 })
 export class AppModule { }

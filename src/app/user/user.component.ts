@@ -31,8 +31,4 @@ export class UserComponent implements OnInit {
       })
   };
 
-  public openModal(){
-    this.dialog.open(ComfirmComponent, {data: {name: 'Thank you for registration! Confirm your email and login into site!'}})
-  }
-
 }

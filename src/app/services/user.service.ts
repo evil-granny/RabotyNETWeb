@@ -35,9 +35,14 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl + "/users", httpOptions);
   }
 
-  public findByEmail(user): Observable<any> {
+  public findByEmail(user: User): Observable<any> {
     console.log("[findByEmail]");
     return this.http.get<User[]>(this.userUrl + "/users/" + user.login + "/", httpOptions);
+  }
+
+  public findById(userId:number): Observable<any> {
+    console.log("[findById]");
+    return this.http.get<User>(this.userUrl + "/user/" + userId, httpOptions);
   }
 
   public deleteById(user) {
@@ -49,24 +54,10 @@ export class UserService {
     this.dialog.open(ComfirmComponent, { data: { name } })
   }
 
-  findEmail(user: User) {
-    this.findByEmail(user)
-      .subscribe(data => {
-        this.foundUser = data;
-      });
-  }
-
   public insert(user: any, users: any) {
-    this.findEmail(user);
-    console.log(this.foundUser)
-    if (this.foundUser != null) {
-      this.openModal("There is an account with that email! Try with another or login, please!")
-    } else {
       console.log("[insert]");
       console.log(user);
-      error => { this.error = error.message; console.log(error); }
       this.openModal("User has been created successfully. Confirm your email and login into site!");
       return this.http.post<User>(this.userUrl + "/registration", user, httpOptions);
-    }
   }
 }
