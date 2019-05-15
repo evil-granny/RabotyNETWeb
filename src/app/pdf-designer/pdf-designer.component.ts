@@ -46,6 +46,8 @@ export class PdfDesignerComponent implements OnInit {
   };
 
   showPdf(): void { 
+
+    
   
    this.pdfService.show(this.cv.cvId)
       .subscribe(data =>   {
