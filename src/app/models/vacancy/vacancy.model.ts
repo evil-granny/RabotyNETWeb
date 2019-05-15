@@ -5,6 +5,8 @@ export class Vacancy {
 
     vacancyId: BigInteger;
 
+    description: string;
+
     position: string;
 
     employment: string;

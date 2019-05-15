@@ -30,7 +30,7 @@ export class VacancyComponent implements OnInit {
   vacancy: Vacancy = new Vacancy();
 
   page: number = 0;
-  count: number = 6;
+  count: number = 9;
   size: number = 0;
 
   constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, private companyService: CompanyService) {
