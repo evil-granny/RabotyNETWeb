@@ -31,6 +31,7 @@
   </div>
 </nav>
 <div class="container login_top">
+  <div style="margin-bottom: 15px">Please sign in below or <a routerLink="/registration">create an account.</a></div>
 <form role="form" (submit)="login()">
   <div class="form-group w-25">
     <label for="username">Email:</label> <input type="text"
@@ -40,7 +41,7 @@
     <label for="password">Password:</label> <input type="password"
                                                    class="form-control" placeholder="Password" id="password" name="password" [(ngModel)]="credentials.password"/>
   </div>
-  <button type="submit" class="btn btn-primary">Login</button>
+  <button type="submit" class="btn btn-primary w-25">Sign in</button>
   <div class="forgot"><a routerLink="/forgotPassword">Forgot password?</a></div>
 </form>
 </div>
