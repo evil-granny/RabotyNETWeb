@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
+import {SearchService} from '../services/search.service';
 
 @Component({
   selector: 'app-login',

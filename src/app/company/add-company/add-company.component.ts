@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Company } from '../../models/company.model';
+import { Company } from '../../models/CompanyModel/company.model';
 import { CompanyService } from '../../services/company.service'
 import { UserService } from 'src/app/services/user.service';
-import { Status } from 'src/app/models/status.model';
 
 @Component({
   selector: 'rabotyNet',
@@ -19,9 +18,9 @@ export class AddCompanyComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit(): void {
-    var companyId = this.route.snapshot.paramMap.get("companyId");
-    if (companyId !== null) {
-      this.companyService.findById(companyId)
+    var companyName = this.route.snapshot.paramMap.get("companyName");
+    if (companyName !== null) {
+      this.companyService.findByName(companyName)
         .subscribe(data => {
           this.company = data;
         });
@@ -44,15 +43,12 @@ export class AddCompanyComponent implements OnInit {
         console.log(data);
         this.company.user = data;
 
-        this.company.status = new Status();
-        this.company.status.approved = false;
-        this.company.status.mailSent = false;
-        this.company.status.reliable = false;
+        this.company.status = 'CREATED';
 
         this.companyService.create(this.company)
           .subscribe(data => {
             if(data != null) {
-              this.router.navigate(['/companies']);
+              this.router.navigate(['/updateCompany/' + this.company.name]);
             }
             else
               alert("Validation problem has been occured");  

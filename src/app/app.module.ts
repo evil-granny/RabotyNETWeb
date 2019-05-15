@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { ProfileComponent } from './profile/profile.component';
-import { PersonService } from './services/person.service';
+import { PersonService } from './services/profile/person.service';
 
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';
@@ -24,7 +24,7 @@ import { SearchCVComponent } from './search-cv/search-cv.component';
 import { CompanyService } from './services/company.service';
 import { CVService } from './services/cv.service';
 import { UserService } from './services/user.service';
-import { SearchCVService } from './services/search-cv.service';
+import { SearchService } from './services/search.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap';
@@ -51,6 +51,7 @@ import {Role} from './models/roles.model';
 import {AuthGuard} from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 import {AppErrorHandler} from './_helpers/app.error.handler';
+import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
 import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
 import { PasswordRestoreComponent } from './password-restore/password-restore.component';
 
@@ -76,12 +77,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
   },
-  {
-    path: 'searchCV',
-    component: SearchCVComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
-  },
+  // {
+  //   path: 'searchCV',
+  //   component: SearchCVComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: [Role.ROLE_COWNER] }
+  // },
   {
     path: 'users',
     component: UserComponent,
@@ -116,7 +117,8 @@ const routes: Routes = [
     AdminComponent,
     AccessDeniedPageComponent,
     PasswordForgotComponent,
-    PasswordRestoreComponent
+    PasswordRestoreComponent,
+    SearchVacancyComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

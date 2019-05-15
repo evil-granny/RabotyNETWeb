@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SearchCvService } from './search-cv.service';
+import { SearchCvService } from './search.service';
 
 describe('SearchCvService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

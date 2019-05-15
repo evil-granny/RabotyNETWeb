@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Summaries</title>
+  <title>Vacancies</title>
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,16 +27,14 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <label class="navbar-brand">Search in:
-        <select [(ngModel)]="search.searchDocument" (change)="searchVacancyPage()" name="searchDocument" class="form-control">
+        <select [(ngModel)]="search.searchDocument" (change)="searchCVPage()" name="searchDocument" class="form-control">
           <option [defaultSelected]="search.searchDocument" value="cvs">summaries</option>
           <option value="vacancies">vacancies</option>
         </select>
       </label>
-      <label class="navbar-brand">Search summaries by:
+      <label class="navbar-brand">Search vacancies by:
         <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
-          <option [defaultSelected]="search.searchParameter" value="name">name</option>
-          <option value="skill">skill</option>
-          <option value="phoneNumber">phone</option>
+          <option [defaultSelected]="search.searchParameter" value="company">company</option>
           <option value="city">city</option>
           <option value="position">position</option>
         </select>
@@ -62,7 +60,7 @@
 
   <div>
     <h2>Search result</h2>
-    <h5>{{searchCVResponse.count}}Cvs founded</h5>
+    <h5>{{searchVacancyResponse.count}} Vacancies founded</h5>
     <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
   </div>
 
@@ -75,23 +73,21 @@
     <thead>
     <tr>
       <th class="d-none">Id</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Age</th>
       <th>Position</th>
+      <th>Company</th>
       <th>City</th>
-      <th>Phone</th>
+      <th>Employment</th>
+      <th>Salary</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let searchCVResult of searchCVResponse.searchCVDTOs">
-      <td class="d-none">{{searchCVResult.id}}</td>
-      <td>{{searchCVResult.firstName}}</td>
-      <td>{{searchCVResult.lastName}}</td>
-      <td>{{searchCVResult.age}} years old</td>
-      <td>{{searchCVResult.position}}</td>
-      <td>{{searchCVResult.city}}</td>
-      <td>{{searchCVResult.phoneNumber}}</td>
+    <tr *ngFor="let searchVacancyResult of searchVacancyResponse.searchVacancyDTOS">
+      <td class="d-none">{{searchVacancyResult.vacancyId}}</td>
+      <td>{{searchVacancyResult.position}}</td>
+      <td>{{searchVacancyResult.companyName}}</td>
+      <td>{{searchVacancyResult.city}}</td>
+      <td>{{searchVacancyResult.employment}}</td>
+      <td>{{searchVacancyResult.salary}} usd</td>
     </tr>
     </tbody>
   </table>
@@ -104,4 +100,5 @@
 
 </body>
 </html>
+
 

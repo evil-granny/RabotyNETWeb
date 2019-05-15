@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SearchCVService } from '../services/search-cv.service';
-import { SearchCV } from '../models/SearcModel/searchCV.model';
-import {SearchCVResult} from '../models/SearcModel/searchCVResult.model';
-import {SearchCVResponse} from '../models/SearcModel/SearchCVResponse.model';
+import { SearchService } from '../services/search.service';
+import { Search } from '../models/SearchModel/search.model';
+import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
+import {Role} from '../models/roles.model';
+import {UserPrincipal} from '../models/userPrincipal.model';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
   selector: 'app-search-cv',
@@ -12,27 +14,47 @@ import {SearchCVResponse} from '../models/SearcModel/SearchCVResponse.model';
   styleUrls: ['./search-cv.component.scss']
 })
 
-export class SearchCVComponent {
+export class SearchCVComponent implements OnInit {
 
-  searchCv: SearchCV = new SearchCV();
+  currentUser: UserPrincipal;
+
+  search: Search = new Search();
   searchCVResponse: SearchCVResponse = new SearchCVResponse();
-  searchCVResult: SearchCVResult = new SearchCVResult();
   resultText = true;
   nextButton = true;
   previousButton = true;
   pagesCount: number;
   pageNumber: number;
 
-  constructor(private router: Router, private searchCVService: SearchCVService) { }
+  constructor(private app: AuthenticationService, private router: Router, private searchCVService: SearchService) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
+  }
+
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
+
+  get isUser() {
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
+  }
+
+  logout() {
+    const user = this.app.logout();
+    this.router.navigateByUrl('/vacancies');
+  }
 
   startSearch() {
-    this.searchCv.firstResultNumber = 0;
+    this.search.firstResultNumber = 0;
     this.resultText = false;
-    this.searchCVService.getResult(this.searchCv)
+    this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
-        this.pagesCount = Math.ceil(this.searchCVResponse.count / this.searchCv.resultsOnPage);
-        if (this.searchCVResponse.count > this.searchCv.resultsOnPage) {
+        this.pagesCount = Math.ceil(this.searchCVResponse.count / parseInt(this.search.resultsOnPage, 10));
+        if (this.searchCVResponse.count > parseInt(this.search.resultsOnPage, 10)) {
           this.nextButton = false;
           this.previousButton = true;
           this.pageNumber = 1;
@@ -45,8 +67,8 @@ export class SearchCVComponent {
   }
 
   nextPage() {
-    this.searchCv.firstResultNumber = this.searchCv.firstResultNumber + this.searchCv.resultsOnPage;
-    this.searchCVService.getResult(this.searchCv)
+    this.search.firstResultNumber = this.search.firstResultNumber + parseInt(this.search.resultsOnPage, 10);
+    this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
         this.pageNumber++;
@@ -60,8 +82,8 @@ export class SearchCVComponent {
   }
 
   previousPage() {
-    this.searchCv.firstResultNumber = this.searchCv.firstResultNumber - this.searchCv.resultsOnPage;
-    this.searchCVService.getResult(this.searchCv)
+    this.search.firstResultNumber = this.search.firstResultNumber - parseInt(this.search.resultsOnPage, 10);
+    this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
         this.pageNumber--;
@@ -76,5 +98,14 @@ export class SearchCVComponent {
           this.previousButton = true;
         }
       });
+  }
+
+  searchVacancyPage() {
+    this.search.searchDocument = 'vacancies';
+    this.router.navigateByUrl('/vacancies/search');
+  }
+
+  ngOnInit(): void {
+    this.search.searchDocument = 'cvs';
   }
 }

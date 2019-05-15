@@ -110,24 +110,16 @@
 
       .user-info {
         float: left;
+        font-size: 15px;
+        margin-top: 10px;
+        margin-left: 60px;
 
         >span {
           display: block;
         }
 
         .user-role {
-          font-size: 12px;
-        }
-
-        .user-status {
-          font-size: 11px;
-          margin-top: 4px;
-
-          i {
-            font-size: 8px;
-            margin-right: 4px;
-            color: #5cb85c;
-          }
+          font-size: 15px;
         }
       }
 

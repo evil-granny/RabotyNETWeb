@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
-import {Vacancy} from '../models/vacancy.model';
+import {Vacancy} from '../models/vacancy/vacancy.model';
 import {VacancyService} from '../services/vacancy.service';
 import {CompanyService} from '../services/company.service';
 import {Observable} from 'rxjs';
@@ -9,6 +9,7 @@ import {Requirement} from '../models/requirement.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {Role} from '../models/roles.model';
 import {UserPrincipal} from '../models/userPrincipal.model';
+import {Search} from '../models/SearchModel/search.model';
 
 
 @Component({
@@ -19,6 +20,7 @@ import {UserPrincipal} from '../models/userPrincipal.model';
 })
 export class VacancyComponent implements OnInit {
   vacancies: Observable<Vacancy[]>;
+  search: Search = new Search();
   requirements: Observable<Requirement[]>;
 
   currentUser: UserPrincipal;
@@ -27,27 +29,32 @@ export class VacancyComponent implements OnInit {
 
   vacancy: Vacancy = new Vacancy();
 
-  constructor(private app: AuthenticationService, private router: Router, private vacancyService: VacancyService, private companyService: CompanyService) {
+  page: number = 0;
+  count: number = 6;
+  size: number = 0;
+
+  constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, private companyService: CompanyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
-  }
+  };
 
   ngOnInit() {
-    this.reloadData();
-    // this.currentUser = this.app.currentUserValue;
+    this.search.searchDocument = 'vacancies';
+    this.findAll();
   };
-  
 
-  reloadData() {
-     this.vacancyService.findAll().subscribe(
+  findAll() {
+     this.vacancyService.findAllWithPagination(this.page * this.count, this.count).subscribe(
        data => {
          this.vacancies = data;
+         this.vacancies = data.vacancies;
+         this.size = data.count;
        }
      );
   }
 
   gotoList() {
     this.router.navigate(['/vacancies']);
-  }
+  };
 
   update(vacancyId): void {
     this.vacancyService.update(this.vacancyService.get(vacancyId))
@@ -60,14 +67,12 @@ export class VacancyComponent implements OnInit {
     this.vacancyService.deleteById(id)
       .subscribe(
         data => {
-          this.reloadData();
+          this.findAll();
         },
         error => console.log(error));
   };
 
   get isAdmin() {
-    // console.log('ADMIN')
-    // console.log(this.currentUser)
     return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
   }
 
@@ -84,4 +89,33 @@ export class VacancyComponent implements OnInit {
       this.router.navigateByUrl('/vacancies');
   }
 
+  canPreviousPage() : boolean {
+    return this.page > 0;
+  }
+
+  previousPage () {
+    if(this.canPreviousPage()) {
+      this.page = this.page - 1;
+      this.findAll();
+    }
+  }
+
+  canNextPage() : boolean {
+    return (this.page + 1) * this.count < this.size;
+  }
+
+  nextPage() {
+    if(this.canNextPage()) {
+      this.page = this.page + 1;
+      this.findAll();
+    }
+  }
+
+  searchCVPage() {
+    this.router.navigateByUrl('/searchCV');
+  }
+
+  startSearch() {
+    this.router.navigate(['/vacancies/search', {doc: this.search.searchDocument, text: this.search.searchText, sParam: this.search.searchParameter}]);
+  }
 }
