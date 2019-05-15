@@ -12,7 +12,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<UserPrincipal>;
   public currentUser: Observable<UserPrincipal>;
 
-  private userLoginUrl = 'http://localhost:8080/loginUser';
+  private userLoginUrl = 'http://localhost:8080/login';
   private userLogoutUrl = 'http://localhost:8080/logout';
 
   constructor(private http: HttpClient) {
