@@ -32,7 +32,6 @@ const routes: Routes = [
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
 
-  // { path: 'companies', component: CompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName', component: ApproveCompanyComponent },
@@ -45,9 +44,6 @@ const routes: Routes = [
   { path: 'registration', component: AddUserComponent },
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
-  // { path: 'users', component: UserComponent },
-  //
-  // { path: 'admin', component: AdminComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
 
    { path: 'vacancies/search', component: SearchVacancyComponent }
