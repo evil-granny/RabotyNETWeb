@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import { SidebarService } from './sidebar/sidebar.service';
+import {Component} from '@angular/core';
+import {SidebarService} from './sidebar/sidebar.service';
+import {HttpClient} from '@angular/common/http';
+import {AuthenticationService} from './services/authentication.service';
+import {Router} from '@angular/router';
+import {Role} from './models/roles.model';
+import {UserPrincipal} from './models/userPrincipal.model';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +13,10 @@ import { SidebarService } from './sidebar/sidebar.service';
 })
 export class AppComponent {
 
-  title = 'RabotyNET';
+  title = 'RabotyNet';
+  currentUser: UserPrincipal;
+
+
 
   constructor(public sidebarservice: SidebarService) { }
 

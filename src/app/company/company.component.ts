@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Company } from '../models/company.model';
+import { Company } from '../models/CompanyModel/company.model';
 import { CompanyService } from '../services/company.service';
 import { Claim } from '../models/claim.model';
 
@@ -24,18 +24,14 @@ export class CompanyComponent implements OnInit {
   constructor(private router: Router, private companyService: CompanyService) {}
 
   ngOnInit() {
-    this.companyService.getCompaniesCount()
-      .subscribe( data => {
-        this.size = data;
-      });
-
     this.findAll();
   };
 
   findAll() {
     this.companyService.findAllWothPagination(this.page * this.count, this.count)
       .subscribe( data => {
-        this.companies = data;
+        this.companies = data.companies;
+        this.size = data.count;
 
         this.companies.forEach(company => {
           this.companyService.findClaims(company)
@@ -82,7 +78,7 @@ export class CompanyComponent implements OnInit {
   approve(company: Company) : void {
     this.companyService.approve(company)
       .subscribe( data => {
-        this.companies.find((c) => c.companyId === company.companyId).status.mailSent = true;
+        this.companies.find((c) => c.companyId === company.companyId).status = 'MAIL_SENT';
       });
   }
 
@@ -99,15 +95,30 @@ export class CompanyComponent implements OnInit {
   }
 
   isApproved(company: Company) : boolean {
-    return company.status == null || company.status.approved;
-}
-
-  isMailSent(company: Company) : boolean {
-      return company.status == null || company.status.mailSent;
+    return company.status == 'APPROVED';
   }
 
-  isReliable(company: Company) : boolean {
-      return company.status == null || company.status.reliable;
+  isMailSent(company: Company) : boolean {
+    return company.status == 'MAIL_SENT';
+  }
+
+  isBlocked(company: Company) : boolean {
+    return company.status == 'BLOCKED';
+  }
+
+  hasClaims(company: Company) : boolean {
+    return company.claims != null && company.claims.length > 0;
+  }
+
+  block(company: Company) {
+    if(company.status == 'BLOCKED')
+      company.status = 'APPROVED';
+    else
+      company.status = 'BLOCKED';  
+    this.companyService.update(company)
+      .subscribe(data => {
+        this.companies.find((c) => c.companyId === company.companyId).status = data.status;
+      });
   }
 
 }

@@ -17,34 +17,41 @@ import { PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
+import { AdminComponent } from './admin/admin.component';
+import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 import { SearchCVComponent } from './search-cv/search-cv.component';
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
+import {SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
   { path: 'vacancies', component: VacancyComponent },
-  { path: 'createVacancy/:companyId', component: EditVacancyComponent },
+  { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
 
-  { path: 'companies', component: CompanyComponent },
+  // { path: 'companies', component: CompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
-  { path: 'updateCompany/:companyId', component: AddCompanyComponent },
-  { path: 'approveCompany/:companyId', component: ApproveCompanyComponent },
-  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
+  { path: 'updateCompany/:companyName', component: AddCompanyComponent },
+  { path: 'approveCompany/:companyName', component: ApproveCompanyComponent },
+  { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
   { path: 'createPdf', component: PdfDesignerComponent },
   { path: 'updateCvForPDF/:cvId', component: PdfDesignerComponent },
 
+  { path: 'updateCV/:cvId', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
-  { path: 'users', component: UserComponent },
+  // { path: 'users', component: UserComponent },
+  //
+  // { path: 'admin', component: AdminComponent },
+  { path: 'accessDenied', component: AccessDeniedPageComponent },
 
-  { path: 'searchCV', component: SearchCVComponent }
+   { path: 'vacancies/search', component: SearchVacancyComponent }
 ];
 
 @NgModule({

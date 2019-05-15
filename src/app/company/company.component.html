@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
   <div class="container">
     <div class="view-account">
@@ -15,6 +16,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
+                  <th>*</th>
                   <th class="d-none">Id</th>
                   <th>Name</th>
                   <th>EDRPOU</th>
@@ -23,14 +25,35 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr *ngFor="let company of companies">
+              <tbody *ngFor="let company of companies">
+                <tr>
+                  <td>
+                    <i *ngIf="isApproved(company) && !isBlocked(company) && !hasClaims(company)" class="fa fa-thumbs-up" style="color: green; font-size: 150%;"></i>
+                    <i *ngIf="isApproved(company) && hasClaims(company)" class="fa fa-warning" style="color: orange; font-size: 150%;"></i>
+                    <i *ngIf="!isApproved(company)" class="fa fa-times" style="color: red; font-size: 150%;"></i>
+                    <i *ngIf="isApproved(company) && isBlocked(company)" class="fa fa-thumbs-down" style="color: red; font-size: 150%;"></i>
+                  </td>
                   <td class="d-none" *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.companyId}}</td>
                   <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.name}}</td>
                   <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.edrpou}}</td>
                   <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">{{company.website}}</td>
                   <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
-                    <div *ngIf="company.companyId == currentClaim">
+                    <a *ngIf="company.companyId != currentClaim && hasClaims(company)" class="btn" rel="tooltip" title="Show"
+                      (click)="currentClaim=company.companyId"><i class="fa fa-sort-down"></i></a>
+                  </td>
+                  <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
+                    <a routerLink="/viewCompany/{{company.name}}" class="btn" rel="tooltip" title="View details"><i class="fa fa-eye"></i></a>
+                    <a routerLink="/updateCompany/{{company.name}}" class="btn"><i class="fa fa-edit" rel="tooltip" title="Update"></i></a>
+                    <a class="btn" (click)="deleteById(company)"><i class="fa fa-trash" rel="tooltip" title="Delete"></i></a>
+                    <a *ngIf="company.status == 'CREATED'" class="btn" (click)="approve(company)" rel="tooltip" title="Approve"><i class="fa fa-thumbs-up"></i></a>
+                    <a *ngIf="company.status == 'APPROVED'" class="btn" (click)="block(company)" rel="tooltip" title="Block"><i class="fa fa-lock"></i></a>
+                    <a *ngIf="company.status == 'BLOCKED'" class="btn" (click)="block(company)" rel="tooltip" title="Unblock"><i class="fa fa-unlock"></i></a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan="6">
+                    <div *ngIf="company.companyId == currentClaim" width="100%">
                       <table class="table table-stripped">
                         <thead>
                           <tr>
@@ -46,21 +69,13 @@
                             <td>{{claim.title}}</td>
                             <td>{{claim.description}}</td>
                             <td>
-                              <button class="btn" (click)="rejectClaim(claim)"><i class="fa fa-thumbs-down"></i></button>
+                              <button class="btn" (click)="rejectClaim(claim)" rel="tooltip" title="Reject claim"><i class="fa fa-thumbs-down"></i></button>
                             </td>
                           </tr>
                         </tbody>
                       </table>
-                      <a class="btn" (click)="currentClaim=null;"><i class="fa fa-sort-up"></i></a>
+                      <a class="btn" (click)="currentClaim=null;" rel="tooltip" title="Hide"><i class="fa fa-sort-up"></i></a>
                     </div>
-                    <a *ngIf="company.companyId != currentClaim" class="btn"
-                      (click)="currentClaim=company.companyId"><i class="fa fa-sort-down"></i></a>
-                  </td>
-                  <td *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
-                    <a routerLink="/viewCompany/{{company.companyId}}" class="btn"><i class="fa fa-eye"></i></a>
-                    <a routerLink="/updateCompany/{{company.companyId}}" class="btn"><i class="fa fa-edit"></i></a>
-                    <a class="btn" (click)="deleteById(company)"><i class="fa fa-trash"></i></a>
-                    <a *ngIf="!isMailSent(company)" class="btn" (click)="approve(company)"><i class="fa fa-thumbs-up"></i></a>
                   </td>
                 </tr>
               </tbody>

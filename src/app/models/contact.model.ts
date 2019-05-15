@@ -1,9 +1,9 @@
 export class Contact {
 
-    contactId: BigInteger;
+  contactsId: BigInteger;
 
-    email: string = "";
+  email: string;
 
-    phoneNumber: string = "";
+  phoneNumber: string;
 
 }

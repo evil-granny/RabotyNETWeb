@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchCvComponent } from './search-cv.component';
+import {SearchCVComponent} from './search-cv.component';
 
-describe('SearchCvComponent', () => {
-  let component: SearchCvComponent;
-  let fixture: ComponentFixture<SearchCvComponent>;
+describe('SearchCVComponent', () => {
+  let component: SearchCVComponent;
+  let fixture: ComponentFixture<SearchCVComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchCvComponent ]
+      declarations: [ SearchCVComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchCvComponent);
+    fixture = TestBed.createComponent(SearchCVComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

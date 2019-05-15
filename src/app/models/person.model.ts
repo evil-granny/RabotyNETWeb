@@ -1,5 +1,6 @@
 import { Address } from './address.model';
 import { Contact } from './contact.model';
+import { Photo } from './photo.model';
 
 export class Person {
 
@@ -11,7 +12,7 @@ export class Person {
 
     birthday: Date= null;
 
-    photo: BinaryType= null;
+    photo: Photo = new Photo();
 
     address: Address = new Address();
 

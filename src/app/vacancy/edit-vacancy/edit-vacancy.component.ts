@@ -1,9 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {Vacancy} from '../../models/vacancy.model';
+import {Vacancy} from '../../models/vacancy/vacancy.model';
 import {VacancyService} from '../../services/vacancy.service';
 import {Requirement} from 'src/app/models/requirement.model';
+import { UserPrincipal } from 'src/app/models/userPrincipal.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Role } from 'src/app/models/roles.model';
+
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -15,8 +19,10 @@ export class EditVacancyComponent implements OnInit {
 
   vacancy: Vacancy = new Vacancy();
   requirements:  Requirement[] = Array<Requirement>();
+  currentUser: UserPrincipal;
 
-  constructor(private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
+  constructor(private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit(): void {
@@ -30,9 +36,9 @@ export class EditVacancyComponent implements OnInit {
   }
 
   create(): void {
-    this.vacancyService.createVacancy(this.vacancy,this.route.snapshot.paramMap.get('companyId'))
+    this.vacancyService.createVacancy(this.vacancy,this.route.snapshot.paramMap.get('companyName'))
       .subscribe(data => {
-        this.router.navigate(['/viewCompany/'+ this.route.snapshot.paramMap.get('companyId')]);
+        this.router.navigate(['/viewCompany/'+ this.route.snapshot.paramMap.get('companyName')]);
       }, error => console.error(error));
   };
 
@@ -68,6 +74,14 @@ export class EditVacancyComponent implements OnInit {
 
   deleteFieldValue(index) {
     this.fieldArray.splice(index, 1);
+  }
+
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
   }
 
 }
