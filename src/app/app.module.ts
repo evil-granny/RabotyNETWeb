@@ -25,7 +25,7 @@ import { SearchCVComponent } from './search-cv/search-cv.component';
 import { CompanyService } from './services/company.service';
 import { CVService } from './services/cv.service';
 import { UserService } from './services/user.service';
-import { SearchCVService } from './services/search-cv.service';
+
 import { PdfService } from './services/pdf.service';
 
 import { SearchService } from './services/search.service';
