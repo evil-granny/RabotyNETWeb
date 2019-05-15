@@ -17,8 +17,6 @@ export class LoginComponent {
 
   login() {
     const user = this.app.authenticate(this.credentials).subscribe(data => {
-      console.log('user');
-      console.log(data);
       this.router.navigateByUrl('/vacancies');
     });
   }

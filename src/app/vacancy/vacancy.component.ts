@@ -41,7 +41,6 @@ export class VacancyComponent implements OnInit {
      this.vacancyService.findAll().subscribe(
        data => {
          this.vacancies = data;
-         console.log(this.vacancies);
        }
      );
   }

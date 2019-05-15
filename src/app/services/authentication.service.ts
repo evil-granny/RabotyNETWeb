@@ -31,9 +31,6 @@ export class AuthenticationService {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
     } : {};
-    console.log('AUTH_HEADER');
-    console.log(authHeader);
-
     const httpOptions = {
       headers: new HttpHeaders(authHeader)
     };
@@ -41,8 +38,6 @@ export class AuthenticationService {
     return this.http.post<any>(this.userLoginUrl, credentials, httpOptions)
       .pipe(map(currentUser => {
         let userPrincipal: UserPrincipal;
-        console.log('------------Current User------------')
-        console.log(currentUser)
         if (currentUser) {
           const name = currentUser.username;
           const userRoles = currentUser.authorities;
@@ -53,7 +48,6 @@ export class AuthenticationService {
           const userId = currentUser.userID;
           const token = 'Basic ' + btoa(credentials.username + ':' + credentials.password);
           userPrincipal = new UserPrincipal(name, roles, token, userId);
-          console.log(userId)
           localStorage.setItem('currentUser', JSON.stringify(userPrincipal));
           this.currentUserSubject.next(userPrincipal);
         }
@@ -65,16 +59,6 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    const authHeader = {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-    };
-    console.log('AUTH_HEADER');
-    console.log(authHeader);
-
-    const httpOptions = {
-      headers: new HttpHeaders(authHeader)
-    };
-    this.http.post<any>(this.userLogoutUrl, httpOptions);
+    this.http.get<any>(this.userLogoutUrl);
   }
 }
