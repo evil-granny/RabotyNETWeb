@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { MatDatepickerModule, MatInputModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
+
 import { ProfileComponent } from './profile/profile.component';
-import { PersonService } from './services/profile/person.service';
 
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';
@@ -31,20 +31,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent,
     ProfileComponent,
     VacancyComponent,
     EditVacancyComponent,
@@ -60,16 +51,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatDatepickerModule, MatInputModule, MatNativeDateModule,
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    PerfectScrollbarModule,
     BsDropdownModule.forRoot()
   ],
-  providers: [{
-    provide: PERFECT_SCROLLBAR_CONFIG,
-    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-  }],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'uk-UK' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
