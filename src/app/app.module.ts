@@ -3,24 +3,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { ModalModule } from './modal/modal.module';
 
 import { ProfileComponent } from './profile/profile.component';
 
-
-
-
-
-
-
 import { PersonService } from './services/profile/person.service';
-
-
-
-
-
-
-
 
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';
@@ -147,7 +133,6 @@ const routes: Routes = [
     SearchVacancyComponent
   ],
   imports: [
-    ModalModule,
     RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
