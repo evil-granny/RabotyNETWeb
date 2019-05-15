@@ -41,14 +41,6 @@ export class VacancyService {
     return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
   }
 
-  getCountOfVacancies(companyName: any) {
-    return this.http.get<number>(this.vacancyUrl + '/getCount/' + companyName, httpOptions);
-  }
-
-  // getCountOfAllVacancies() {
-  //   return this.http.get<number>(this.vacancyUrl + '/getCountAll/', httpOptions);
-  // }
-
   public deleteById(id: number): Observable<Object> {
     return this.http.delete(this.vacancyUrl + '/' + id, httpOptions);
   }

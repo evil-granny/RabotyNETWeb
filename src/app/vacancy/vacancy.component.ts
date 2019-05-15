@@ -35,12 +35,12 @@ export class VacancyComponent implements OnInit {
 
   constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, private companyService: CompanyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
-  }
+  };
 
   ngOnInit() {
     this.search.searchDocument = 'vacancies';
     this.findAll();
-  }
+  };
 
   findAll() {
      this.vacancyService.findAllWithPagination(this.page * this.count, this.count).subscribe(
@@ -54,7 +54,7 @@ export class VacancyComponent implements OnInit {
 
   gotoList() {
     this.router.navigate(['/vacancies']);
-  }
+  };
 
   update(vacancyId): void {
     this.vacancyService.update(this.vacancyService.get(vacancyId))
