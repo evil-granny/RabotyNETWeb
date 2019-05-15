@@ -1,99 +1,98 @@
- <!DOCTYPE html>
- <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vacancy</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
 
- <head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <meta name="description" content="">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>Vacancy</title>
-   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- </head>
+<nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">RabotyNet</a>
+  <a class="navbar-brand" routerLink="/admin" *ngIf="isAdmin">Admin</a>
+  <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin || isCowner">Company owner</a>
+  <a class="navbar-brand" routerLink="/users" *ngIf="isUser">User</a>
 
- <body>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
 
-   <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
-     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-       data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-       aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-     </button>
-     <a class="navbar-brand" href="#">RabotyNet</a>
-     <a class="navbar-brand" routerLink="/admin" *ngIf="isAdmin">Admin</a>
-     <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin || isCowner">Company owner</a>
-     <a class="navbar-brand" routerLink="/users" *ngIf="isUser">User</a>
-     <a class="navbar-brand" routerLink="/searchCV" *ngIf="isCowner">SearchCV</a>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <label class="navbar-brand" *ngIf="isCowner">Search in:
+        <select [(ngModel)]="search.searchDocument" (change)="searchCVPage()" name="searchDocument" class="form-control">
+          <option [defaultSelected]="search.searchDocument" value="cvs">summaries</option>
+          <option value="vacancies">vacancies</option>
+        </select>
+      </label>
+      <label class="navbar-brand">Search vacancies by:
+        <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
+          <option [defaultSelected]="search.searchParameter" value="company">company</option>
+          <option value="city">city</option>
+          <option value="position">position</option>
+        </select>
+      </label>
+      <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control mr-sm-2">
+      <button class="btn btn-outline-success my-2 my-sm-0" (click)="startSearch()">Search</button>
+      <button class="fa fa-sign-in" style="margin-left: 20px;font-size:36px;color: blue" routerLink="/login" *ngIf="!currentUser"></button>
+      <button class="fas fa-user-plus" style="margin-left: 20px;font-size:36px;color: blue" routerLink="/registration" *ngIf="!currentUser"></button>
+      <button class="fa fa-sign-out" style="margin-left: 20px;font-size:36px;color: blue" (click)="logout()" *ngIf="currentUser"></button>
+    </form>
+  </div>
+</nav>
 
-     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-       <ul class="navbar-nav mr-auto">
+<div class="container">
+  <div style ="margin-top:40px" class="masthead ">
+    <h3 class="text-muted">Vacancies</h3>
+  </div>
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let vacancy of vacancies ">
+      <div class="hotVacancies" *ngIf="vacancy.hotVacancy==true">
+        <div style="background: rgb(247, 248, 196)" class="card">
+          <span class=" ribbon" ><span class="badge badge-danger">HOT</span></span>
+          <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
+          <p style="margin-left: 10px;">{{vacancy.employment}}</p>
+          <td>
+            <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
+              {{requirement.description}}</li>
+          </td>
+          <div class="row align-items-end" style="height: 100%;margin: 0px;">
+            <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
+                                           role="button" routerLink="/viewVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="simpleVacancy" *ngIf="vacancy.hotVacancy!=true">
+        <div class="card">
+          <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
+          <p style="margin-left: 10px;">{{vacancy.employment}}</p>
+          <td>
+            <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
+              {{requirement.description}}</li>
+          </td>
+          <div class="row align-items-end" style="height: 100%;margin: 0px;">
+            <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
+                                           role="button" routerLink="/viewVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>
 
-       </ul>
-       <form class="form-inline my-2 my-lg-0">
-         <input class="form-control mr-sm-2" type="text" placeholder="Search">
-         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-         <button class="fa fa-sign-in" style="margin-left: 20px;font-size:36px;color: blue" routerLink="/login"
-           *ngIf="!currentUser"></button>
-         <button class="fas fa-user-plus" style="margin-left: 20px;font-size:36px;color: blue"
-           routerLink="/registration" *ngIf="!currentUser"></button>
-         <button class="fa fa-sign-out" style="margin-left: 20px;font-size:36px;color: blue" (click)="logout()"
-           *ngIf="currentUser"></button>
-       </form>
-     </div>
-   </nav>
-   <div class="container">
-     <div class="masthead">
-       <h3 class="text-muted">Vacancies</h3>
-     </div>
-     <div class="row">
-       <div class="col-lg-4" *ngFor="let vacancy of vacancies ">
-         <div class="hotVacancies" *ngIf="vacancy.hotVacancy==true">
-           
-           <div style="background: rgb(247, 248, 196)" class="card">
-              <span class="badge badge-pill badge-danger" style="width: 20%;margin-left: 82%;margin-top:5%;transform: rotate(45deg);">Hot</span>
-             <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
-             <p style="margin-left: 10px;">{{vacancy.employment}}</p>
-             <td>
-               <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
-                 {{requirement.description}}</li>
-             </td>
-             <div class="row align-items-end" style="height: 100%;margin: 0px;">
-               <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
-                   role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
-             </div>
-           </div>
-         </div>
-         <div class="simpleVacancy" *ngIf="vacancy.hotVacancy!=true">
-           <div class="card">
-             <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
-             <p style="margin-left: 10px;">{{vacancy.employment}}</p>
-             <td>
-               <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
-                 {{requirement.description}}</li>
-             </td>
-             <div class="row align-items-end" style="height: 100%;margin: 0px;">
-               <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
-                   role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
-             </div>
-           </div>
-
-         </div>
-
-       </div>
-     </div>
-     <div class="paginations">
-       <button *ngIf="canPreviousPage()" class="btn btn-info" (click)="previousPage();">&laquo; Previous</button>
-       <button *ngIf="!canPreviousPage()" disabled class="btn btn-info" style="margin-right:20px" (click)="previousPage();">&laquo;
-         Previous</button>
-       <button *ngIf="canNextPage()" class="btn btn-info" style="margin-right:40px" (click)="nextPage();">Next
-         &raquo;</button>
-       <button *ngIf="!canNextPage()" disabled class="btn btn-info" style="margin-left:40px" (click)="nextPage();">Next
-         &raquo;</button>
-     </div>
-   </div>
-   <hr>
- </body>
-
- </html>
+<footer>
+    <div class="paginations">
+        <button *ngIf="canPreviousPage()" class="btn btn-info"  style="margin-right:40px" (click)="previousPage();">&laquo; Previous</button>
+        <button *ngIf="canNextPage()" class="btn btn-info" style="margin-right:40px" (click)="nextPage();">Next &raquo;</button>
+      </div>
+</footer>
+</body>
+</html>

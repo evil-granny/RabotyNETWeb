@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {Vacancy} from '../models/vacancy.model';
+import {Vacancy} from '../models/vacancy/vacancy.model';
 import {VacancyService} from '../services/vacancy.service';
 import {CompanyService} from '../services/company.service';
 import {Observable} from 'rxjs';
@@ -9,6 +9,7 @@ import {Requirement} from '../models/requirement.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {Role} from '../models/roles.model';
 import {UserPrincipal} from '../models/userPrincipal.model';
+import {Search} from '../models/SearchModel/search.model';
 
 
 @Component({
@@ -19,41 +20,41 @@ import {UserPrincipal} from '../models/userPrincipal.model';
 })
 export class VacancyComponent implements OnInit {
   vacancies: Observable<Vacancy[]>;
+  search: Search = new Search();
   requirements: Observable<Requirement[]>;
 
   currentUser: UserPrincipal;
-  
+
   p: number = 1;
 
   vacancy: Vacancy = new Vacancy();
 
   page: number = 0;
-  count: number = 6;
+  count: number = 9;
   size: number = 0;
 
-  constructor(private app: AuthenticationService, private router: Router,private route: ActivatedRoute ,private vacancyService: VacancyService, private companyService: CompanyService) {
+  constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, private companyService: CompanyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
-  }
+  };
 
   ngOnInit() {
-    this.vacancyService.getCountOfAllVacancies().subscribe(data=>{
-      this.size = data;
-    });
+    this.search.searchDocument = 'vacancies';
     this.findAll();
   };
-  
 
   findAll() {
      this.vacancyService.findAllWithPagination(this.page * this.count, this.count).subscribe(
        data => {
          this.vacancies = data;
+         this.vacancies = data.vacancies;
+         this.size = data.count;
        }
      );
   }
 
   gotoList() {
     this.router.navigate(['/vacancies']);
-  }
+  };
 
   update(vacancyId): void {
     this.vacancyService.update(this.vacancyService.get(vacancyId))
@@ -110,4 +111,11 @@ export class VacancyComponent implements OnInit {
     }
   }
 
+  searchCVPage() {
+    this.router.navigateByUrl('/searchCV');
+  }
+
+  startSearch() {
+    this.router.navigate(['/vacancies/search', {doc: this.search.searchDocument, text: this.search.searchText, sParam: this.search.searchParameter}]);
+  }
 }

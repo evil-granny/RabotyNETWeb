@@ -1,51 +1,77 @@
-<div class="resultOnPage" [hidden]="resultText">
-  <select [(ngModel)]="searchCv.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
-    <option [defaultSelected]="searchCv.resultsOnPage" value="10">Results on page: 10</option>
-    <option value="20">Results on page: 20</option>
-    <option value="50">Results on page: 50</option>
-  </select>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Summaries</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
 
-<div class="search-result">
-  <form>
-    <label>
-      <input type="text" [(ngModel)]="searchCv.searchText" placeholder="Search.." name="searchText"
-             class="form-control">
-    </label>
+<nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">RabotyNet</a>
+  <a class="navbar-brand" routerLink="/admin" *ngIf="isAdmin">Admin</a>
+  <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin || isCowner">Company owner</a>
+  <a class="navbar-brand" routerLink="/users" *ngIf="isUser">User</a>
 
-    <label>
-      <select [(ngModel)]="searchCv.searchParameter" name="searchParameter" class="form-control">
-        <option [defaultSelected]="searchCv.searchParameter" value="name">by name</option>
-        <option value="skill">by skill</option>
-        <option value="phoneNumber">by phone</option>
-        <option value="city">by city</option>
-        <option value="position">by position</option>
-      </select>
-    </label>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
 
-    <br>
-    <button class="btn btn-success" (click)="startSearch()">Start CV search</button>
-  </form>
-  <br><br>
-
-
-  <div class="search-result-text">
-
-    <div [hidden]="resultText">
-      <h2>Search result</h2>
-      <h5>{{searchCVResponse.count}} Cvs founded</h5>
-      <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
-    </div>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <label class="navbar-brand">Search in:
+        <select [(ngModel)]="search.searchDocument" (change)="searchVacancyPage()" name="searchDocument" class="form-control">
+          <option [defaultSelected]="search.searchDocument" value="cvs">summaries</option>
+          <option value="vacancies">vacancies</option>
+        </select>
+      </label>
+      <label class="navbar-brand">Search summaries by:
+        <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
+          <option [defaultSelected]="search.searchParameter" value="name">name</option>
+          <option value="skill">skill</option>
+          <option value="phoneNumber">phone</option>
+          <option value="city">city</option>
+          <option value="position">position</option>
+        </select>
+      </label>
+      <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control mr-sm-2">
+      <button class="btn btn-outline-success my-2 my-sm-0" (click)="startSearch()">Search</button>
+      <button class="fa fa-sign-out" style="margin-left: 20px;font-size:36px;color: blue" (click)="logout()" *ngIf="currentUser"></button>
+    </form>
   </div>
-</div>
+</nav>
 
-<div class="page" [hidden]="resultText">
-  <button class="btn" [disabled]="previousButton" (click)="previousPage()">Previous page</button>
-  <button class="btn" [disabled]="nextButton" (click)="nextPage()">Next page</button>
-</div><br><br>
+<div class="searchContainer" [hidden]="resultText">
 
-<div class="search-result">
-  <table class="table table-striped" [hidden]="resultText">
+  <div class="resultOnPage">
+    <label>Results on page:
+      <select [(ngModel)]="search.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
+        <option [defaultSelected]="search.resultsOnPage" value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+      </select>
+    </label><br>
+  </div>
+
+  <div>
+    <h2>Search result</h2>
+    <h5>{{searchCVResponse.count}}Cvs founded</h5>
+    <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
+  </div>
+
+  <div class="page" [hidden]="resultText">
+    <button class="btn btn-info" [disabled]="previousButton" (click)="previousPage()">&laquo; Previous</button>
+    <button class="btn btn-info" [disabled]="nextButton" (click)="nextPage()">Next &raquo;</button>
+  </div>
+
+  <table class="table table-striped">
     <thead>
     <tr>
       <th class="d-none">Id</th>
@@ -55,7 +81,6 @@
       <th>Position</th>
       <th>City</th>
       <th>Phone</th>
-      <th>E-mail</th>
     </tr>
     </thead>
     <tbody>
@@ -67,13 +92,16 @@
       <td>{{searchCVResult.position}}</td>
       <td>{{searchCVResult.city}}</td>
       <td>{{searchCVResult.phoneNumber}}</td>
-      <td>{{searchCVResult.email}}</td>
     </tr>
     </tbody>
   </table>
-
+  <div class="page" [hidden]="resultText">
+    <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
+    <button class="btn btn-info" [disabled]="previousButton" (click)="previousPage()">&laquo; Previous</button>
+    <button class="btn btn-info" [disabled]="nextButton" (click)="nextPage()">Next &raquo;</button>
+  </div>
 </div>
-<div class="page" [hidden]="resultText">
-  <button class="btn" [disabled]="previousButton" (click)="previousPage()">Previous page</button>
-  <button class="btn" [disabled]="nextButton" (click)="nextPage()">Next page</button>
-</div><br><br>
+
+</body>
+</html>
+

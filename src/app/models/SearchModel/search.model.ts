@@ -1,8 +1,10 @@
-export class SearchCV {
+export class Search {
 
   searchText: string;
 
   searchParameter: string;
+
+  searchDocument: string;
 
   resultsOnPage: string;
 
@@ -10,6 +12,7 @@ export class SearchCV {
 
   constructor() {
     this.resultsOnPage = '10';
+    this.firstResultNumber = 0;
     this.searchParameter = 'position';
   }
 

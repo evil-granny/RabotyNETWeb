@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {Vacancy} from '../../models/vacancy.model';
+import {Vacancy} from '../../models/vacancy/vacancy.model';
 import {VacancyService} from '../../services/vacancy.service';
 import {Requirement} from 'src/app/models/requirement.model';
 import { UserPrincipal } from 'src/app/models/userPrincipal.model';

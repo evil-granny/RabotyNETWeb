@@ -1,9 +1,11 @@
-import { Requirement } from './requirement.model';
-import { Company } from './CompanyModel/company.model';
+import { Requirement } from '../requirement.model';
+import { Company } from '../CompanyModel/company.model';
 
 export class Vacancy {
 
     vacancyId: BigInteger;
+
+    description: string;
 
     position: string;
 

@@ -6,4 +6,6 @@ export class Skill {
 
     description: string;
 
+    printPdf: Boolean;
+
 }

@@ -4,7 +4,7 @@ import { CompanyService } from 'src/app/services/company.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Claim } from 'src/app/models/claim.model';
 import { UserService } from 'src/app/services/user.service';
-import { Vacancy } from 'src/app/models/vacancy.model';
+import { Vacancy } from 'src/app/models/vacancy/vacancy.model';
 import { VacancyService } from 'src/app/services/vacancy.service';
 import { Observable } from 'rxjs';
 
@@ -29,14 +29,10 @@ export class ViewCompanyComponent implements OnInit {
     private userService: UserService, private vacancyService: VacancyService) { }
 
   ngOnInit() {
-    this.vacancyService.getCountOfVacancies(this.route.snapshot.paramMap.get("companyName")).subscribe(data=>{
-      this.size = data;
-    });
     var companyName = this.route.snapshot.paramMap.get("companyName");
     if(companyName != null) {
       this.companyService.findByName(companyName)
         .subscribe(data => {
-
           this.companyService.findClaims(data)
             .subscribe( data1 => {
               data.claims = [];
@@ -52,11 +48,11 @@ export class ViewCompanyComponent implements OnInit {
   }
 
   findVacancies() {
-  
     this.vacancyService.findVacanciesByCompanyName(this.route.snapshot.paramMap.get("companyName"), this.page * this.count, this.count).subscribe(
       data => {
              this.vacancies = data;
-             console.log(this.vacancies);
+             this.vacancies = data.vacancies;
+             this.size = data.count; 
         }
     )
   }

@@ -1,24 +1,62 @@
-<div class="col-md-12">
-  <h2 class="text-center">Add User</h2>
-  <form>
-
-    <div class="form-group">
-      <label for="login">Email:</label>
-      <input type="login" [(ngModel)]="user.login" placeholder="Email" class="form-control" id="login" name="login">
-    </div>
-
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" [(ngModel)]="user.password" placeholder="Password" class="form-control" id="password"
-        name="password">
-    </div>
-
-    <div class="form-group">
-      <label for="matchingPassword">Confirm Password:</label>
-      <input type="password" [(ngModel)]="user.matchingPassword" placeholder="Confirm Password" class="form-control"
-        id="matchingPassword" name="matchingPassword">
-    </div>
-
-    <button type="submit" class="btn btn-success" (click)="create()">Sing up</button>
-  </form>
+<div class="container">
+  <div class="view-account">
+    <section class="module">
+      <div class="module-inner">
+        <div class="content-panel">
+  <h2 class="title">Sign up</h2>
+    <form class="form-horizontal" (ngSubmit)="findByEmail()" #userForm="ngForm">
+      <fieldset class="fieldset">
+        <div class="form-group">
+          <label for="login" class="col-md-2 col-sm-3 col-xs-12 control-label" minlength="3" >Email</label>
+          <div class="col-md-10 col-sm-9 col-xs-12">
+            <input type="email" class="form-control" [(ngModel)]="user.login"
+              placeholder="Email" id="login" name="login" #login="ngModel" required
+              autocomplete="off">
+            <div *ngIf="login.errors && (login.dirty || login.touched)" class="alert alert-danger">
+              <div [hidden]="!login.errors.required">Email is required!</div>
+              <div [hidden]="!login.errors.incorrect">Login is incorrect!</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-md-2 col-sm-3 col-xs-12 control-label">Password</label>
+          <div class="col-md-10 col-sm-9 col-xs-12">
+            <input type="password" class="form-control" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"  [(ngModel)]="user.password"
+              placeholder="Password" id="password" name="password" #password="ngModel" required
+              autocomplete="off">
+            <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+              <div [hidden]="!password.errors.required">Password is required!</div>
+              <div [hidden]="!password.errors.pattern">Password must contain upper, lower, number!</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="matchingPassword" class="col-md-2 col-sm-3 col-xs-12 control-label">Confirm Password</label>
+          <div class="col-md-10 col-sm-9 col-xs-12">
+            <input type="password" class="form-control"  [(ngModel)]="user.matchingPassword"
+              placeholder="Confirm Password" id="matchingPassword" name="matchingPassword" #matchingPassword="ngModel" required
+              autocomplete="off">
+            <div *ngIf="matchingPassword.errors && (matchingPassword.dirty || matchingPassword.touched)" class="alert alert-danger">
+              <div [hidden]="!matchingPassword.errors.required">Confirm password!</div>
+            </div>
+            <div *ngIf="user.matchingPassword != user.password" class="alert alert-danger">Passwords don`t match!
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <hr>
+      <fieldset class="fieldset">
+      <div class="form-group">
+        <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
+          <input class="btn btn-primary" type="submit" [disabled]="!userForm.form.valid"
+            value="Sign up">
+            <div>{{error}}</div>
+        </div>
+      </div>
+    </fieldset>
+    </form>
+  </div>
+</div>  
+</section>
+</div>
 </div>

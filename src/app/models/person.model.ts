@@ -6,11 +6,11 @@ export class Person {
 
     userId: BigInteger;
 
-    firstName: string;
+    firstName: string = "";
 
-    lastName: string;
+    lastName: string= "";
 
-    birthday: Date;
+    birthday: Date= null;
 
     photo: Photo = new Photo();
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
-import {SearchCVService} from '../services/search-cv.service';
+import {SearchService} from '../services/search.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent {
 
   credentials = {username: '', password: ''};
 
-  constructor(private app: AuthenticationService, private searchCVService: SearchCVService, private router: Router) {
+  constructor(private app: AuthenticationService, private searchCVService: SearchService, private router: Router) {
   }
 
   login() {
