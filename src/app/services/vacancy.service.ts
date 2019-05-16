@@ -37,6 +37,10 @@ export class VacancyService {
     return this.http.get<VacancyDTO>(this.vacancyUrl + "/" + first+ "/" + count, httpOptions);
   }
 
+  public findAllHotVacanciesWithPagination(first: number, count: number) : Observable<any> {
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/hotVacancies/" + first+ "/" + count, httpOptions);
+  }
+
   get(vacancyId: string) {
     return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
   }

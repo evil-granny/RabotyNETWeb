@@ -125,7 +125,7 @@
                    <div *ngIf="vacancy.vacancyId != null && (isCowner==true)">
                     <button class="btn btn-success" (click)="update()" [disabled]="!personForm.form.valid">Update</button>
                   </div>
-                  <a class="cancel" routerLink="/vacancies" style="font-size: 17px;margin-left: 20px;margin-top:30px">Cancel</a>
+                  <a class="cancel" (click)="goBack()" style="font-size: 17px;margin-left: 20px;margin-top:30px">Cancel</a>
                 </div>
               </fieldset>
                 
