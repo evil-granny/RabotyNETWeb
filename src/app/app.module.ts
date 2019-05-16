@@ -87,8 +87,8 @@ const routes: Routes = [
   {
     path: 'users',
     component: UserComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_USER] }
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.ROLE_USER] }
   },
   {
     path: 'registrationConfirm',
