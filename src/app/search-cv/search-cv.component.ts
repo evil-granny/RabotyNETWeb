@@ -7,11 +7,12 @@ import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
 import {Role} from '../models/roles.model';
 import {UserPrincipal} from '../models/userPrincipal.model';
 import {AuthenticationService} from '../services/authentication.service';
+import {PdfService} from '../services/pdf.service';
 
 @Component({
   selector: 'app-search-cv',
   templateUrl: './search-cv.component.html',
-  styleUrls: ['./search-cv.component.scss']
+  styleUrls: ['./search-cv.component.scss'],
 })
 
 export class SearchCVComponent implements OnInit {
@@ -25,26 +26,19 @@ export class SearchCVComponent implements OnInit {
   previousButton = true;
   pagesCount: number;
   pageNumber: number;
+  topButtons = true;
+  bottomButtons = true;
+  urlPdf = 'false';
 
-  constructor(private app: AuthenticationService, private router: Router, private searchCVService: SearchService) {
+  constructor(private app: AuthenticationService,
+              private router: Router,
+              private pdfService: PdfService,
+              private searchCVService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
-  }
-
-  get isAdmin() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
   }
 
   get isCowner() {
     return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
-  }
-
-  get isUser() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
-  }
-
-  logout() {
-    const user = this.app.logout();
-    this.router.navigateByUrl('/vacancies');
   }
 
   startSearch() {
@@ -53,17 +47,27 @@ export class SearchCVComponent implements OnInit {
     this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
-        this.pagesCount = Math.ceil(this.searchCVResponse.count / parseInt(this.search.resultsOnPage, 10));
-        if (this.searchCVResponse.count > parseInt(this.search.resultsOnPage, 10)) {
-          this.nextButton = false;
-          this.previousButton = true;
-          this.pageNumber = 1;
-        } else {
-          this.nextButton = true;
-          this.previousButton = true;
-          this.pageNumber = 1;
-        }
+        this.buttonsEnabled();
       });
+  }
+
+  buttonsEnabled() {
+    this.pagesCount = Math.ceil(this.searchCVResponse.count / parseInt(this.search.resultsOnPage, 10));
+    if (this.searchCVResponse.count > parseInt(this.search.resultsOnPage, 10)) {
+      this.topButtons = false;
+      this.nextButton = false;
+      this.previousButton = true;
+      this.pageNumber = 1;
+      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchCVResponse.searchCVDTOs.length > 15) {
+        this.bottomButtons = false;
+      }
+    } else {
+      this.topButtons = true;
+      this.nextButton = true;
+      this.previousButton = true;
+      this.pageNumber = 1;
+      this.bottomButtons = true;
+    }
   }
 
   nextPage() {
@@ -101,11 +105,23 @@ export class SearchCVComponent implements OnInit {
   }
 
   searchVacancyPage() {
-    this.search.searchDocument = 'vacancies';
     this.router.navigateByUrl('/vacancies/search');
   }
 
   ngOnInit(): void {
-    this.search.searchDocument = 'cvs';
+    this.search.searchDocument = 'resume';
+  }
+
+  viewCv(id: Uint8Array) {
+    this.pdfService.show(id)
+      .subscribe(data =>   {
+        var file = new Blob([data], { type: 'application/pdf' });
+        console.log(file);
+        var fileURL = URL.createObjectURL(file);
+        console.log(fileURL);
+        this.urlPdf= fileURL;
+        window.open(fileURL);
+        window.focus();
+      });
   }
 }
