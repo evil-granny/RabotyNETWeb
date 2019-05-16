@@ -8,6 +8,8 @@ import { Contact } from '../models/contact.model';
 import { Address } from '../models/address.model';
 import { PhotoService } from '../services/profile/photo.service';
 import { Photo } from '../models/photo.model';
+import { UserPrincipal } from '../models/userPrincipal.model';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'rabotyNet',
@@ -16,16 +18,20 @@ import { Photo } from '../models/photo.model';
 })
 export class ProfileComponent implements OnInit {
 
+  currentUser: UserPrincipal;
+
   person: Person = new Person();
   photo: Photo = new Photo();
 
   avatar: any;
   fileToUpload: File;
 
-  constructor(private router: Router, private personService: PersonService, private photoService: PhotoService, private sanitizer: DomSanitizer) { }
+  constructor(private app: AuthenticationService, private router: Router, private personService: PersonService, private photoService: PhotoService, private sanitizer: DomSanitizer) {
+    this.app.currentUser.subscribe(data => this.currentUser = data);
+  }
 
   ngOnInit() {
-    this.personService.findById()
+    this.personService.findById(this.currentUser.userId)
       .subscribe(data => {
         this.person = data;
 

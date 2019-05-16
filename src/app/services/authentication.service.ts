@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {UserPrincipal} from '../models/userPrincipal.model';
+import { UserPrincipal } from '../models/userPrincipal.model';
 import { map } from 'rxjs/operators';
+import { logger } from 'codelyzer/util/logger';
 
 
-@Injectable( { providedIn: 'root' } )
+@Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<UserPrincipal>;
   public currentUser: Observable<UserPrincipal>;
 
   private userLoginUrl = 'http://localhost:8080/login';
+  private userLogoutUrl = 'http://localhost:8080/logout';
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<UserPrincipal>(JSON.parse(localStorage.getItem('currentUser')));
@@ -25,13 +27,10 @@ export class AuthenticationService {
   public authenticate(credentials) {
 
     const authHeader = credentials ? {
-      'Authorization' : 'Basic ' + btoa(credentials.username + ':' + credentials.password),
+      'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password),
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
     } : {};
-    console.log('AUTH_HEADER');
-    console.log(authHeader);
-
     const httpOptions = {
       headers: new HttpHeaders(authHeader)
     };
@@ -46,8 +45,9 @@ export class AuthenticationService {
           userRoles.forEach(function (key) {
             roles.push(key.authority);
           });
+          const userId = currentUser.userID;
           const token = 'Basic ' + btoa(credentials.username + ':' + credentials.password);
-          userPrincipal = new UserPrincipal(name, roles, token);
+          userPrincipal = new UserPrincipal(name, roles, token, userId);
           localStorage.setItem('currentUser', JSON.stringify(userPrincipal));
           this.currentUserSubject.next(userPrincipal);
         }
@@ -59,5 +59,6 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.http.get<any>(this.userLogoutUrl);
   }
 }

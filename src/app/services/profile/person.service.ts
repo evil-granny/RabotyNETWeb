@@ -18,12 +18,10 @@ export class PersonService {
 
   constructor(private http: HttpClient) { }
 
-  userId: any = 1;
-
   private url = "http://localhost:8080/people/";
 
-  public findById(): Observable<Person> {
-    return this.http.get<Person>(this.url + this.userId, httpOptions);
+  public findById(userId: BigInteger): Observable<Person> {
+    return this.http.get<Person>(this.url + userId, httpOptions);
   }
 
   public update(person: Person): Observable<Person> {
