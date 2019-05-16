@@ -28,6 +28,7 @@ import { RegistrationconfirmComponent } from './confirm/registrationconfirm/regi
 import {ViewVacancyComponent} from './vacancy/view-vacancy/view-vacancy.component';
 import {PasswordForgotComponent} from './password-forgot/password-forgot.component';
 import {PasswordRestoreComponent} from './password-restore/password-restore.component';
+import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
+  { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
   // { path: 'users', component: UserComponent },
 

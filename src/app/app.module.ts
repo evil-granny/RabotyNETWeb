@@ -60,6 +60,7 @@ import { SearchVacancyComponent } from './search-vacancy/search-vacancy.componen
 import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
 import { PasswordRestoreComponent } from './password-restore/password-restore.component';
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
+import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -126,7 +127,8 @@ const routes: Routes = [
     PasswordRestoreComponent,
     SearchVacancyComponent,
     SearchVacancyComponent,
-    ViewVacancyComponent
+    ViewVacancyComponent,
+    AccessNonauthorizedPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

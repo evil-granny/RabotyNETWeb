@@ -20,9 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (err.status === 401) {
         console.log('========== ERRORS ==========')
         console.log(err.status);
-        // auto logout if 401 response returned from api
-        // this.authenticationService.logout();
-        // location.reload(true);
+        // this.router.navigate(['/nonauthorized']);
       }
       if (err.status === 403) {
         console.log('========== ERRORS ==========')
