@@ -13,13 +13,11 @@ export class LoginComponent {
 
   credentials = {username: '', password: ''};
 
-  constructor(private app: AuthenticationService, private searchCVService: SearchService, private router: Router) {
+  constructor(private app: AuthenticationService, private router: Router) {
   }
 
   login() {
     const user = this.app.authenticate(this.credentials).subscribe(data => {
-      console.log('user');
-      console.log(data);
       this.router.navigateByUrl('/vacancies');
     });
   }

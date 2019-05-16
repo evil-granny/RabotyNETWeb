@@ -1,6 +1,6 @@
 export class UserPrincipal {
 
-  constructor(username: string, roles: string[], token: string) {
+  constructor(username: string, roles: string[], token: string, userId: number) {
     this.username = username;
     this.roles = roles;
     this.token = token;
@@ -12,4 +12,5 @@ export class UserPrincipal {
 
   token: string;
 
+  userId: number;
 }

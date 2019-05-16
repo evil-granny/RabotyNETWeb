@@ -15,18 +15,11 @@ export class AuthGuard implements CanActivate {
       currentUser = this.authenticationService.currentUserValue;
     } catch { return false; }
 
-    console.log('AuthGuard.ts:  ' + currentUser);
-
     if (currentUser) {
       let roleHolder;
       currentUser.roles.forEach(  key => {
         if (route.data.roles && route.data.roles.indexOf(key.toString()) === -1) {
-          console.log('-----------AuthGuard-----------')
-          console.log('route.data.roles ' + route.data.roles);
-          console.log('currentUser.roles ' + currentUser.roles);
-          console.log(route.data.roles.indexOf(currentUser.roles));
         } else {
-          console.log('Role after checking ' + key.toString());
           roleHolder = currentUser.roles;
         }
       });

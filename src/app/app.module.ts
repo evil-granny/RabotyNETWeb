@@ -1,12 +1,12 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ErrorHandler, NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import { MatDatepickerModule, MatInputModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
 
 import { ProfileComponent } from './profile/profile.component';
-
-import { PersonService } from './services/profile/person.service';
 
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';
@@ -35,7 +35,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -45,22 +44,23 @@ import { MatDialogModule } from '@angular/material';
 import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 
-// import { PaginationModule } from 'ngx-pagination'
-import {NgxPaginationModule} from 'ngx-pagination';
-import {ViewCompanyComponent} from './company/view-company/view-company.component';
+import { ViewCompanyComponent } from './company/view-company/view-company.component';
 
+import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
+import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
 
-import {RouterModule, Routes} from '@angular/router';
-import {AuthenticationService} from './services/authentication.service';
-import {LoginComponent} from './login/login.component';
-import {AdminComponent} from './admin/admin.component';
-
-import {AuthInterceptor, ErrorInterceptor} from './_helpers';
-import {Role} from './models/roles.model';
-import {AuthGuard} from './_guards/auth.guard';
+import { AuthInterceptor, ErrorInterceptor } from './_helpers';
+import { Role } from './models/roles.model';
+import { AuthGuard } from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
-import {AppErrorHandler} from './_helpers/app.error.handler';
+import { AppErrorHandler } from './_helpers/app.error.handler';
 import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
+import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
+import { PasswordRestoreComponent } from './password-restore/password-restore.component';
+import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
+import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -82,19 +82,13 @@ const routes: Routes = [
     path: 'companies',
     component: CompanyComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
+    data: { roles: [Role.ROLE_COWNER] }
   },
-  // {
-  //   path: 'searchCV',
-  //   component: SearchCVComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: [Role.ROLE_COWNER] }
-  // },
   {
     path: 'users',
     component: UserComponent,
-   // canActivate: [AuthGuard],
-   // data: { roles: [Role.ROLE_USER] }
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.ROLE_USER] }
   },
   {
     path: 'registrationConfirm',
@@ -111,7 +105,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent,
     ProfileComponent,
     VacancyComponent,
     EditVacancyComponent,
@@ -130,26 +123,31 @@ const routes: Routes = [
     LoginComponent,
     AdminComponent,
     AccessDeniedPageComponent,
-    SearchVacancyComponent
+    PasswordForgotComponent,
+    PasswordRestoreComponent,
+    SearchVacancyComponent,
+    SearchVacancyComponent,
+    ViewVacancyComponent,
+    AccessNonauthorizedPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatDatepickerModule, MatInputModule, MatNativeDateModule,
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
     PerfectScrollbarModule,
-    BsDropdownModule.forRoot(),
-    NgxPaginationModule,
-    // PaginationModule
+
     MatDialogModule,
     BsDropdownModule.forRoot()
   ],
   bootstrap: [AppComponent],
   entryComponents: [ComfirmComponent],
   providers: [AuthenticationService,
+    { provide: MAT_DATE_LOCALE, useValue: 'uk-UK' },
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
