@@ -1,0 +1,29 @@
+<body>
+  <div class="container">
+    <div class="view-account">
+      <section class="module">
+        <div class="module-inner">
+          <div class="content-panel">
+            <h2>{{vacancy.description}}</h2>
+            <form class="form-horizontal" #personForm="ngForm">
+              <fieldset class="fieldset">
+                <h3 class="fieldset-title">Main Info</h3>
+                <div class="simpleVacancy" >
+                    <p><span class="mySpan" >Position: </span>{{vacancy.position}}</p>
+                    <p><span class="mySpan">Employment: </span>{{vacancy.employment}}</p>
+                    <p class="mySpan">Requirement:</p>
+                    <td>
+                      <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements ">
+                        {{requirement.description}}</li>
+                    </td>
+                </div>
+                </fieldset>
+             <hr>
+             <a class="btn btn-primary" routerLink="/vacancies" style="font-size: 17px;margin-left: 10px;margin-top:20px">Show all vacancies</a>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>

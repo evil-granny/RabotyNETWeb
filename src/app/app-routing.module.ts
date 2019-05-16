@@ -11,6 +11,8 @@ import { AddCompanyComponent } from './company/add-company/add-company.component
 
 import { CvComponent } from './cv/cv.component';
 import { AddCvComponent } from './cv/add-cv/add-cv.component';
+import { PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
+
 
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
@@ -21,7 +23,9 @@ import { AccessDeniedPageComponent } from './access-denied-page/access-denied-pa
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 import { SearchCVComponent } from './search-cv/search-cv.component';
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
-import {SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
+import { SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
+import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
+import {ViewVacancyComponent} from './vacancy/view-vacancy/view-vacancy.component';
 import {PasswordForgotComponent} from './password-forgot/password-forgot.component';
 import {PasswordRestoreComponent} from './password-restore/password-restore.component';
 
@@ -31,6 +35,7 @@ const routes: Routes = [
   { path: 'vacancies', component: VacancyComponent },
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
+  { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
 
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
@@ -39,14 +44,21 @@ const routes: Routes = [
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
+  { path: 'createPdf', component: PdfDesignerComponent },
+  { path: 'updateCvForPDF/:cvId', component: PdfDesignerComponent },
+
   { path: 'updateCV/:cvId', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
+  { path: 'registrationConfirm', component: RegistrationconfirmComponent },
+  // { path: 'users', component: UserComponent },
 
-   { path: 'vacancies/search', component: SearchVacancyComponent }
+  { path: 'searchCV', component: SearchCVComponent },
+
+  { path: 'vacancies/search', component: SearchVacancyComponent }
 ];
 
 @NgModule({
