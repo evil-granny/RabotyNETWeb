@@ -57,7 +57,10 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 import { AppErrorHandler } from './_helpers/app.error.handler';
 import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
+import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
+import { PasswordRestoreComponent } from './password-restore/password-restore.component';
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
+import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -79,14 +82,8 @@ const routes: Routes = [
     path: 'companies',
     component: CompanyComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
+    data: { roles: [Role.ROLE_COWNER] }
   },
-  // {
-  //   path: 'searchCV',
-  //   component: SearchCVComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: [Role.ROLE_COWNER] }
-  // },
   {
     path: 'users',
     component: UserComponent,
@@ -126,8 +123,12 @@ const routes: Routes = [
     LoginComponent,
     AdminComponent,
     AccessDeniedPageComponent,
+    PasswordForgotComponent,
+    PasswordRestoreComponent,
     SearchVacancyComponent,
-    ViewVacancyComponent
+    SearchVacancyComponent,
+    ViewVacancyComponent,
+    AccessNonauthorizedPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

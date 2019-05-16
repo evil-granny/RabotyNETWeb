@@ -5,7 +5,6 @@ import { UserPrincipal } from '../models/userPrincipal.model';
 import { map } from 'rxjs/operators';
 import { logger } from 'codelyzer/util/logger';
 
-
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 

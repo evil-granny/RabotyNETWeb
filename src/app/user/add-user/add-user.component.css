@@ -1,3 +1,7 @@
+.signin_top {
+  margin-top: 50px;
+}
+
 .ng-valid[required], .ng-valid.required {
     border-left: 5px solid #42A948;
 }

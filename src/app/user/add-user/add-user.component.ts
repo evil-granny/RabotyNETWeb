@@ -20,11 +20,7 @@ export class AddUserComponent implements OnInit {
   constructor(private router: Router, private userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.userService.findAll()
-      .subscribe(data => {
-        this.users = data;
-      });
-  };
+  }
 
   findByEmail() {
     this.userService.findByEmail(this.user)
