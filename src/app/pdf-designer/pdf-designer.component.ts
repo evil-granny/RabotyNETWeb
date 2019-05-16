@@ -35,6 +35,7 @@ export class PdfDesignerComponent implements OnInit {
   }
 
   update(): void {
+
     console.log(this.cv);
     this.pdfService.update(this.cv)
       .subscribe(data => {
@@ -47,9 +48,15 @@ export class PdfDesignerComponent implements OnInit {
 
   showPdf(): void { 
 
-    
-  
-   this.pdfService.show(this.cv.cvId)
+    this.pdfService.update(this.cv)
+      .subscribe(data => {
+        if(data != null)
+          alert("CV has been updated successfully.");
+        else
+          alert("Validation problem has been occured"); 
+      });    
+        
+      this.pdfService.show(this.cv.cvId)
       .subscribe(data =>   {
         var file = new Blob([data], { type: 'application/pdf' });
         console.log(file);
