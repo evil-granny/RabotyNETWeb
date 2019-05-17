@@ -60,4 +60,9 @@ export class UserService {
       this.openModal("User has been created successfully. Confirm your email and login into site!");
       return this.http.post<User>(this.userUrl + "/registration", user, httpOptions);
   }
+
+  public validToken(token: String): Observable<any>{
+    console.log("[validToken]");
+    return this.http.get<String>(this.userUrl + "/registrationConfirm?token=" + token, httpOptions);
+  }
 }
