@@ -22,6 +22,7 @@ import { ApproveCompanyComponent } from './company/approve-company/approve-compa
 import { SearchCVComponent } from './search-cv/search-cv.component';
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
 import {SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
+import { MyCompanyComponent } from './company/my-company/my-company.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
 
-  // { path: 'companies', component: CompanyComponent },
+  { path: 'companies', component: CompanyComponent },
+  { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName', component: ApproveCompanyComponent },

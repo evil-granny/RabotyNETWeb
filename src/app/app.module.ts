@@ -52,6 +52,7 @@ import {AuthGuard} from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 import {AppErrorHandler} from './_helpers/app.error.handler';
 import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
+import { MyCompanyComponent } from './company/my-company/my-company.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -114,7 +115,8 @@ const routes: Routes = [
     LoginComponent,
     AdminComponent,
     AccessDeniedPageComponent,
-    SearchVacancyComponent
+    SearchVacancyComponent,
+    MyCompanyComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

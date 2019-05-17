@@ -11,7 +11,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<UserPrincipal>;
   public currentUser: Observable<UserPrincipal>;
 
-  private userLoginUrl = 'http://localhost:8080/loginUser';
+  private userLoginUrl = 'http://localhost:8080/login';
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<UserPrincipal>(JSON.parse(localStorage.getItem('currentUser')));
