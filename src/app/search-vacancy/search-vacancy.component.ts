@@ -2,13 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {UserPrincipal} from '../models/userPrincipal.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {Router} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
 import {Role} from '../models/roles.model';
 import {Search} from '../models/SearchModel/search.model';
 import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
 import {SearchService} from '../services/search.service';
-
-;
 
 @Component({
   selector: 'app-search-vacancy',
@@ -27,11 +24,9 @@ export class SearchVacancyComponent implements OnInit {
   nextButton: boolean;
   bottomButtons = true;
 
-
   constructor(private app: AuthenticationService,
               private router: Router,
-              private searchService: SearchService,
-              private route: ActivatedRoute) {
+              private searchService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
@@ -40,6 +35,7 @@ export class SearchVacancyComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('OnInit Search Vacancy');
     this.search.searchDocument = 'vacancies';
   }
 
@@ -50,7 +46,8 @@ export class SearchVacancyComponent implements OnInit {
     this.searchService.getVacancyResult(this.search)
       .subscribe(data => {
         this.searchVacancyResponse = data;
-       this.buttonsEnabled();
+        console.log('Response = ' + JSON.stringify(this.searchVacancyResponse));
+        this.buttonsEnabled();
       });
   }
 
@@ -110,4 +107,10 @@ export class SearchVacancyComponent implements OnInit {
   searchCVPage() {
     this.router.navigateByUrl('/searchCV');
   }
+
+  sendToSearch(search: Search) {
+    this.search = search;
+    this.startSearch();
+  }
+
 }

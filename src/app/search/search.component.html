@@ -1,0 +1,20 @@
+<div class="show_button" [hidden]="button">
+  <button class="btn btn-info" (click)="show()">Search</button>
+</div>
+<form class="search-form" [hidden]="form">
+  <label class="select-control">Search</label>
+  <select [(ngModel)]="search.searchDocument"  name="searchDocument"
+          class="form-control">
+    <option [defaultSelected]="search.searchDocument" value="vacancies">vacancies</option>
+    <option value="resume">resume</option>
+  </select>
+  <label class="select-control">Search vacancies by:</label>
+  <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
+    <option [defaultSelected]="search.searchParameter" value="position">position</option>
+    <option value="city">city</option>
+    <option value="company">company</option>
+  </select>
+  <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control">
+  <button class="btn btn-info" (click)="start()">Start search</button><br><br><br>
+  <button class="btn btn-info" (click)="hide()">Hide</button>
+</form>

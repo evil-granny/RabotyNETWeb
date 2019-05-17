@@ -4,7 +4,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { MatDatepickerModule, MatInputModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
+import {MatDatepickerModule, MatInputModule, MatNativeDateModule, MAT_DATE_LOCALE, MatSidenavModule} from '@angular/material';
 
 import { ProfileComponent } from './profile/profile.component';
 
@@ -61,6 +61,8 @@ import { PasswordForgotComponent } from './password-forgot/password-forgot.compo
 import { PasswordRestoreComponent } from './password-restore/password-restore.component';
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
+import { SearchComponent } from './search/search.component';
+import {SidebarModule} from 'ng-sidebar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -128,7 +130,8 @@ const routes: Routes = [
     SearchVacancyComponent,
     SearchVacancyComponent,
     ViewVacancyComponent,
-    AccessNonauthorizedPageComponent
+    AccessNonauthorizedPageComponent,
+    SearchComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -142,7 +145,7 @@ const routes: Routes = [
     PerfectScrollbarModule,
 
     MatDialogModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(), MatSidenavModule, SidebarModule
   ],
   bootstrap: [AppComponent],
   entryComponents: [ComfirmComponent],
