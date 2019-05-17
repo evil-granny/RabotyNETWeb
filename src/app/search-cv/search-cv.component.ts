@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {SearchService} from '../services/search.service';
 import {Search} from '../models/SearchModel/search.model';
@@ -27,10 +27,25 @@ export class SearchCVComponent implements OnInit {
 
   constructor(private router: Router,
               private pdfService: PdfService,
+              private route: ActivatedRoute,
               private searchCVService: SearchService) {
   }
 
+  ngOnInit(): void {
+    console.log('OnInit SearchResume');
+    this.route.params
+      .subscribe(params => {
+        this.search.searchDocument = params['searchDoc'];
+        this.search.searchText = params['searchText'];
+        this.search.searchParameter = params['searchParameter'];
+      });
+    if (this.search.searchText !== undefined) {
+      this.startSearch();
+    }
+  }
+
   startSearch() {
+    console.log('Search parameters resume = ' + JSON.stringify(this.search));
     this.search.firstResultNumber = 0;
     this.resultText = false;
     this.searchCVService.getCVResult(this.search)
@@ -92,10 +107,6 @@ export class SearchCVComponent implements OnInit {
           this.previousButton = true;
         }
       });
-  }
-
-  ngOnInit(): void {
-    this.search.searchDocument = 'resume';
   }
 
   viewCv(id: Uint8Array) {

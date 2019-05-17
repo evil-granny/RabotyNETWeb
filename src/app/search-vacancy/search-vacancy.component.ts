@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Search} from '../models/SearchModel/search.model';
 import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
 import {SearchService} from '../services/search.service';
@@ -21,15 +21,25 @@ export class SearchVacancyComponent implements OnInit {
   bottomButtons = true;
 
   constructor(private router: Router,
-              private searchService: SearchService) {}
+              private route: ActivatedRoute,
+              private searchService: SearchService) {
+  }
 
   ngOnInit() {
-    console.log('OnInit Search Vacancy');
-    this.search.searchDocument = 'vacancies';
+    console.log('OnInit SearchVacancy');
+    this.route.params
+      .subscribe(params => {
+        this.search.searchDocument = params['searchDoc'];
+        this.search.searchText = params['searchText'];
+        this.search.searchParameter = params['searchParameter'];
+      });
+    if (this.search.searchText !== undefined) {
+      this.startSearch();
+    }
   }
 
   startSearch() {
-    console.log('Search parameters = ' + JSON.stringify(this.search));
+    console.log('Search parameters vacancy= ' + JSON.stringify(this.search));
     this.search.firstResultNumber = 0;
     this.resultText = false;
     this.searchService.getVacancyResult(this.search)

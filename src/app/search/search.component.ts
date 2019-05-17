@@ -32,10 +32,12 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     switch (this.search.searchDocument) {
       case 'resume':
+        console.log('Oninit search resume = ' + this.search.searchDocument);
         this.resumeSelect = false;
         this.vacancySelect = true;
         break;
       case 'vacancies':
+        console.log('Oninit search vacancies = ' + this.search.searchDocument);
         this.resumeSelect = true;
         this.vacancySelect = false;
         break;
@@ -55,11 +57,19 @@ export class SearchComponent implements OnInit {
   start() {
     switch (this.search.searchDocument) {
       case 'resume':
-        this.router.navigateByUrl('/searchCV');
+        this.router.navigate(['/searchCV', {
+          searchDoc: this.search.searchDocument,
+          searchText: this.search.searchText,
+          searchParameter: this.search.searchParameter
+        }]);
         this.findResume.emit(this.search);
         break;
       case 'vacancies':
-        this.router.navigateByUrl('/vacancies/search');
+        this.router.navigate(['/vacancies/search', {
+          searchDoc: this.search.searchDocument,
+          searchText: this.search.searchText,
+          searchParameter: this.search.searchParameter
+        }]);
         this.findVacancies.emit(this.search);
         break;
     }
