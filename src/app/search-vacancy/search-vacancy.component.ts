@@ -42,14 +42,13 @@ export class SearchVacancyComponent implements OnInit {
   }
 
   startSearch() {
-    this.searchComponent.form = false;
-    console.log('Search parameters vacancy= ' + JSON.stringify(this.search));
+    // console.log('Search parameters vacancy= ' + JSON.stringify(this.search));
     this.search.firstResultNumber = 0;
     this.resultText = false;
     this.searchService.getVacancyResult(this.search)
       .subscribe(data => {
         this.searchVacancyResponse = data;
-        console.log('Vacancy Response = ' + JSON.stringify(this.searchVacancyResponse));
+        // console.log('Vacancy Response = ' + JSON.stringify(this.searchVacancyResponse));
         this.buttonsEnabled();
       });
   }

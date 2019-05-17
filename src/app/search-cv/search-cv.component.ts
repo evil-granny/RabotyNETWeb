@@ -48,14 +48,13 @@ export class SearchCVComponent implements OnInit {
   }
 
   startSearch() {
-    this.searchComponent.form = false;
-    console.log('Search parameters resume = ' + JSON.stringify(this.search));
+    // console.log('Search parameters resume = ' + JSON.stringify(this.search));
     this.search.firstResultNumber = 0;
     this.resultText = false;
     this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
-        console.log('CV response = ' + JSON.stringify(this.searchCVResponse));
+        // console.log('CV response = ' + JSON.stringify(this.searchCVResponse));
         this.buttonsEnabled();
       });
   }
