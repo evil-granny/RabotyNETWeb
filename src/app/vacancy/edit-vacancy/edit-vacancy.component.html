@@ -14,7 +14,7 @@
                       <input type="text" class="form-control" pattern="^[A-Za-z0-9\s\S]{3,40}$" [(ngModel)]="vacancy.description"
                         placeholder="Input description" id="description" name="description" #description="ngModel" required
                         autocomplete="off">
-                      <div *ngIf="description.errors && (descriptionition.dirty || description.touched)" class="alert alert-danger">
+                      <div *ngIf="description.errors && (description.dirty || description.touched)" class="alert alert-danger">
                         <div [hidden]="!description.errors.required">Description is required!</div>
                         <div [hidden]="!description.errors.pattern">
                             Description can only contain letters and numbers (3-40 characters)!
@@ -40,9 +40,9 @@
                 <div class="form-group">
                   <label for="employment" class="col-md-2 col-sm-3 col-xs-12 control-label">Employment</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                           <select class='form-control' [(ngModel)]="vacancy.employment" (change)="changingValue($event)" name="sel3"  id="employment" name="employment" required
+                           <select class='form-control' [(ngModel)]="vacancy.employment" (change)="changingValue($event)" name="sel3"   id="employment" name="employment" required
                            autocomplete="off" > 
-                            <option [ngValue]="i" *ngFor="let i of employment" >{{i}}</option>
+                            <option [ngValue]="i" *ngFor="let i of employment">{{i}}</option>
                         </select> 
                   </div>
                 </div>

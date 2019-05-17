@@ -45,7 +45,7 @@ export class VacancyService {
     return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
   }
 
-  public deleteById(id: number): Observable<Object> {
+  public deleteById(id: any) {
     return this.http.delete(this.vacancyUrl + '/' + id, httpOptions);
   }
 
@@ -59,5 +59,6 @@ export class VacancyService {
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
   }
+
 
 }
