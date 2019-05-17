@@ -23,7 +23,6 @@ import { AccessDeniedPageComponent } from './access-denied-page/access-denied-pa
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 import { SearchCVComponent } from './search-cv/search-cv.component';
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
-import {SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
 import { MyCompanyComponent } from './company/my-company/my-company.component';
 import { SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
 import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';

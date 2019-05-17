@@ -131,7 +131,7 @@ const routes: Routes = [
     AdminComponent,
     AccessDeniedPageComponent,
     SearchVacancyComponent,
-    MyCompanyComponent
+    MyCompanyComponent,
     PasswordForgotComponent,
     PasswordRestoreComponent,
     SearchVacancyComponent,
