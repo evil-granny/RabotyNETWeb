@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-registrationconfirm',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationconfirmComponent implements OnInit {
 
-  constructor() { }
 
+  token: string;
+  valid: string;
+
+  constructor(private route: ActivatedRoute, private userService: UserService) { }
+  
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      console.log(params);
+      this.token = params['token'];
+    })
+
+    this.validToken();
   }
 
+  validToken(){
+      this.userService.validToken(this.token)
+        .subscribe(data => {
+          this.valid = data;
+          console.log(this.valid);
+        });   
+  }
+
+
+  resendToken(){
+    
+  }
 }

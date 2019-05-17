@@ -14,8 +14,7 @@ export class ComfirmComponent implements OnInit {
   }
 
   public close(){
-    this.MatDialogRef.close();    
-    location.reload(true);
+    this.MatDialogRef.close();  
   }
 
 }

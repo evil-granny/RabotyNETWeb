@@ -1,0 +1,129 @@
+
+body{
+  color: #333;
+  font-family: 'Helvetica', arial;
+  // background-color: rgb(192, 219, 217)
+}
+
+.wrap{
+  padding: 40px;
+  text-align: center;
+}
+
+hr {
+  clear: both;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border: 0;
+  border-top: 1px solid #aaa;
+}
+
+h1{
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+p{
+  margin-bottom: 40px/2;
+}
+
+.btn{
+  background: #428bca;
+  border: #428bca solid 1px;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 15px;
+  text-decoration: none;
+  text-align: center;
+  min-width: 60px;
+  position: relative;
+  transition: color .1s ease;
+  
+  &:hover{
+    background: #428bca;
+  }
+  
+  &.btn-big{
+    font-size: 18px;
+    padding: 15px 20px;
+    min-width: 100px;
+  }
+  
+}
+
+.btn-close{
+  color: rgb(214, 122, 122);
+  font-size: 30px;
+  text-decoration: none;
+  position: absolute; right: 5px; top: 0;
+  
+  &:hover{
+     color: darken(#aaa, 10%);
+  }
+  
+}
+
+
+.modal{
+   
+  // This is modal bg
+  &:before{
+    content: ""; 
+    display: none;
+    background: rgba(0,0,0,.6);
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0; 
+    z-index: 10;
+  }
+  
+  &:target{
+     
+    // Active animate in modal
+    &:before{
+      display: block;
+    }  
+    .modal-dialog{
+      top: 20%;  
+    }
+     
+  }
+  
+}
+
+.modal-dialog{
+  background: #fefefe;
+  border: #333 solid 1px;
+  border-radius: 5px;
+  margin-left: -200px;
+  position: fixed; 
+  left: 50%; 
+  top: -100%;  
+  z-index: 11; 
+  width: 360px;
+}
+
+.modal-body{
+  padding:  40px/2;
+}
+
+.modal-header,
+.modal-footer{
+  padding:  40px/4  40px/2;
+}
+
+.modal-header{
+  border-bottom:#eee solid 1px;
+  
+  h2{
+    font-size: 20px;
+  }
+  
+}
+
+.modal-footer{
+  border-top: #eee solid 1px;
+  text-align: right;
+}
+ 
