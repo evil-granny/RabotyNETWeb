@@ -10,6 +10,7 @@ import { PhotoService } from '../services/profile/photo.service';
 import { Photo } from '../models/photo.model';
 import { UserPrincipal } from '../models/userPrincipal.model';
 import { AuthenticationService } from '../services/authentication.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'rabotyNet',
@@ -34,7 +35,6 @@ export class ProfileComponent implements OnInit {
     this.personService.findById(this.currentUser.userId)
       .subscribe(data => {
         this.person = data;
-
         if (this.person.contact == null && this.person.address == null) {
           this.person.contact = new Contact();
           this.person.address = new Address();
@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
         if (this.person.photo != null) {
           this.loadPhoto(this.person.photo.photoId);
         }
+        
       });
   };
 

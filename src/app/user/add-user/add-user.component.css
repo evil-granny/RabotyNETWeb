@@ -33,7 +33,7 @@ background-color: cadetblue;
     min-height: 600px;
       max-height: 600px;
       width: 50%;  
-    background: scroll center url('https://files.slack.com/files-pri/TGS3N2GPL-FJTCTJRJT/logo.png');
+    background: scroll center url("../../../favicon.ico");
     background-size: 100% 100%;
   }
   

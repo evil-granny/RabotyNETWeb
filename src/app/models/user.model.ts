@@ -7,4 +7,6 @@ export class User {
     password: string;
 
     enabled: boolean;
+
+    roles: string[];
 }
