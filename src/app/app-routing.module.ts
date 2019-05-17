@@ -11,6 +11,8 @@ import { AddCompanyComponent } from './company/add-company/add-company.component
 
 import { CvComponent } from './cv/cv.component';
 import { AddCvComponent } from './cv/add-cv/add-cv.component';
+import { PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
+
 
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
@@ -23,6 +25,12 @@ import { SearchCVComponent } from './search-cv/search-cv.component';
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
 import {SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
 import { MyCompanyComponent } from './company/my-company/my-company.component';
+import { SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
+import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
+import {ViewVacancyComponent} from './vacancy/view-vacancy/view-vacancy.component';
+import {PasswordForgotComponent} from './password-forgot/password-forgot.component';
+import {PasswordRestoreComponent} from './password-restore/password-restore.component';
+import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -30,6 +38,7 @@ const routes: Routes = [
   { path: 'vacancies', component: VacancyComponent },
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
+  { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
 
   { path: 'companies', component: CompanyComponent },
   { path: 'companies/my', component: MyCompanyComponent },
@@ -40,15 +49,22 @@ const routes: Routes = [
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
+  { path: 'createPdf', component: PdfDesignerComponent },
+  { path: 'updateCvForPDF/:cvId', component: PdfDesignerComponent },
+
   { path: 'updateCV/:cvId', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
-  // { path: 'users', component: UserComponent },
-  //
-  // { path: 'admin', component: AdminComponent },
+  { path: 'forgotPassword', component: PasswordForgotComponent },
+  { path: 'confirmPassword', component: PasswordRestoreComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
+  { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
+  { path: 'registrationConfirm', component: RegistrationconfirmComponent },
+  // { path: 'users', component: UserComponent },
 
-   { path: 'vacancies/search', component: SearchVacancyComponent }
+  { path: 'searchCV', component: SearchCVComponent },
+
+  { path: 'vacancies/search', component: SearchVacancyComponent }
 ];
 
 @NgModule({

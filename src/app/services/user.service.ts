@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { User } from "../models/user.model";
 import { Observable } from "rxjs";
+import { isNull } from '@angular/compiler/src/output/output_ast';
+import { MatDialog } from '@angular/material';
+import { ComfirmComponent } from '../confirm/comfirm.component';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,13 +22,27 @@ const httpOptions = {
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public dialog: MatDialog) { }
 
   private userUrl = 'http://localhost:8080';
+
+  foundUser: User[];
+  error: any;
+
 
   public findAll(): Observable<any> {
     console.log("[findAll]");
     return this.http.get<User[]>(this.userUrl + "/users", httpOptions);
+  }
+
+  public findByEmail(user: User): Observable<any> {
+    console.log("[findByEmail]");
+    return this.http.get<User[]>(this.userUrl + "/users/" + user.login + "/", httpOptions);
+  }
+
+  public findById(userId:number): Observable<any> {
+    console.log("[findById]");
+    return this.http.get<User>(this.userUrl + "/user/" + userId, httpOptions);
   }
 
   public deleteById(user) {
@@ -33,14 +50,19 @@ export class UserService {
     return this.http.delete(this.userUrl + "/deleteUser/" + user.userId, httpOptions);
   }
 
-  public insert(user) {
-    console.log("[insert]");
-    console.log(user);
-    return this.http.post<User>(this.userUrl + "/registration", user, httpOptions);
+  public openModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } })
   }
 
-  public findById(userId){
-      return this.http.get<User>(this.userUrl +"/user/"+userId,httpOptions);
+  public insert(user: any, users: any) {
+      console.log("[insert]");
+      console.log(user);
+      this.openModal("User has been created successfully. Confirm your email and login into site!");
+      return this.http.post<User>(this.userUrl + "/registration", user, httpOptions);
   }
 
+  public validToken(token: String): Observable<any>{
+    console.log("[validToken]");
+    return this.http.get<String>(this.userUrl + "/registrationConfirm?token=" + token, httpOptions);
+  }
 }
