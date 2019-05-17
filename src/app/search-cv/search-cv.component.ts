@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
-import { SearchService } from '../services/search.service';
-import { Search } from '../models/SearchModel/search.model';
+import {SearchService} from '../services/search.service';
+import {Search} from '../models/SearchModel/search.model';
 import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
-import {Role} from '../models/roles.model';
-import {UserPrincipal} from '../models/userPrincipal.model';
-import {AuthenticationService} from '../services/authentication.service';
 import {PdfService} from '../services/pdf.service';
 
 @Component({
@@ -16,8 +13,6 @@ import {PdfService} from '../services/pdf.service';
 })
 
 export class SearchCVComponent implements OnInit {
-
-  currentUser: UserPrincipal;
 
   search: Search = new Search();
   searchCVResponse: SearchCVResponse = new SearchCVResponse();
@@ -30,15 +25,9 @@ export class SearchCVComponent implements OnInit {
   bottomButtons = true;
   urlPdf = 'false';
 
-  constructor(private app: AuthenticationService,
-              private router: Router,
+  constructor(private router: Router,
               private pdfService: PdfService,
               private searchCVService: SearchService) {
-    this.app.currentUser.subscribe(x => this.currentUser = x);
-  }
-
-  get isCowner() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
   }
 
   startSearch() {
@@ -47,6 +36,7 @@ export class SearchCVComponent implements OnInit {
     this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
+        console.log('CV response = ' + JSON.stringify(this.searchCVResponse));
         this.buttonsEnabled();
       });
   }
@@ -104,24 +94,25 @@ export class SearchCVComponent implements OnInit {
       });
   }
 
-  searchVacancyPage() {
-    this.router.navigateByUrl('/vacancies/search');
-  }
-
   ngOnInit(): void {
     this.search.searchDocument = 'resume';
   }
 
   viewCv(id: Uint8Array) {
     this.pdfService.show(id)
-      .subscribe(data =>   {
-        var file = new Blob([data], { type: 'application/pdf' });
+      .subscribe(data => {
+        var file = new Blob([data], {type: 'application/pdf'});
         console.log(file);
         var fileURL = URL.createObjectURL(file);
         console.log(fileURL);
-        this.urlPdf= fileURL;
+        this.urlPdf = fileURL;
         window.open(fileURL);
         window.focus();
       });
+  }
+
+  findResume(search: Search) {
+    this.search = search;
+    this.startSearch();
   }
 }

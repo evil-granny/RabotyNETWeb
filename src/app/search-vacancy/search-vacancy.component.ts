@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserPrincipal} from '../models/userPrincipal.model';
-import {AuthenticationService} from '../services/authentication.service';
 import {Router} from '@angular/router';
-import {Role} from '../models/roles.model';
 import {Search} from '../models/SearchModel/search.model';
 import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
 import {SearchService} from '../services/search.service';
@@ -13,7 +10,6 @@ import {SearchService} from '../services/search.service';
   styleUrls: ['./search-vacancy.component.scss']
 })
 export class SearchVacancyComponent implements OnInit {
-  currentUser: UserPrincipal;
   search: Search = new Search();
   searchVacancyResponse: SearchVacancyResponse = new SearchVacancyResponse();
   pageNumber: number;
@@ -24,15 +20,8 @@ export class SearchVacancyComponent implements OnInit {
   nextButton: boolean;
   bottomButtons = true;
 
-  constructor(private app: AuthenticationService,
-              private router: Router,
-              private searchService: SearchService) {
-    this.app.currentUser.subscribe(x => this.currentUser = x);
-  }
-
-  get isCowner() {
-    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
-  }
+  constructor(private router: Router,
+              private searchService: SearchService) {}
 
   ngOnInit() {
     console.log('OnInit Search Vacancy');
@@ -46,7 +35,7 @@ export class SearchVacancyComponent implements OnInit {
     this.searchService.getVacancyResult(this.search)
       .subscribe(data => {
         this.searchVacancyResponse = data;
-        console.log('Response = ' + JSON.stringify(this.searchVacancyResponse));
+        console.log('Vacancy Response = ' + JSON.stringify(this.searchVacancyResponse));
         this.buttonsEnabled();
       });
   }
@@ -104,15 +93,8 @@ export class SearchVacancyComponent implements OnInit {
       });
   }
 
-  searchCVPage() {
-    this.router.navigateByUrl('/searchCV');
-  }
-
-  find(search: Search) {
+  findVacancies(search: Search) {
     this.search = search;
     this.startSearch();
-  }
-
-  refresh() {
   }
 }

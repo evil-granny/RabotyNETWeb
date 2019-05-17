@@ -1,7 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Search} from '../models/SearchModel/search.model';
-import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
-
+import {UserPrincipal} from '../models/userPrincipal.model';
+import {AuthenticationService} from '../services/authentication.service';
+import {Role} from '../models/roles.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -10,15 +12,34 @@ import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component
 })
 
 export class SearchComponent implements OnInit {
-  @Output() find = new EventEmitter<Search>();
+  @Output() findVacancies = new EventEmitter<Search>();
+  @Output() findResume = new EventEmitter<Search>();
   search: Search = new Search();
   button = false;
   form = true;
+  vacancySelect = true;
+  resumeSelect = true;
+  private currentUser: UserPrincipal;
 
-  constructor() { }
+  constructor(private app: AuthenticationService, private router: Router) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
 
   ngOnInit() {
-    this.search.searchDocument = 'vacancies';
+    switch (this.search.searchDocument) {
+      case 'resume':
+        this.resumeSelect = false;
+        this.vacancySelect = true;
+        break;
+      case 'vacancies':
+        this.resumeSelect = true;
+        this.vacancySelect = false;
+        break;
+    }
   }
 
   hide() {
@@ -32,6 +53,28 @@ export class SearchComponent implements OnInit {
   }
 
   start() {
-    this.find.emit(this.search);
+    switch (this.search.searchDocument) {
+      case 'resume':
+        this.router.navigateByUrl('/searchCV');
+        this.findResume.emit(this.search);
+        break;
+      case 'vacancies':
+        this.router.navigateByUrl('/vacancies/search');
+        this.findVacancies.emit(this.search);
+        break;
+    }
+  }
+
+  selectDocument() {
+    switch (this.search.searchDocument) {
+      case 'resume':
+        this.resumeSelect = false;
+        this.vacancySelect = true;
+        break;
+      case 'vacancies':
+        this.resumeSelect = true;
+        this.vacancySelect = false;
+        break;
+    }
   }
 }
