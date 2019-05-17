@@ -5,11 +5,13 @@ import {SearchService} from '../services/search.service';
 import {Search} from '../models/SearchModel/search.model';
 import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
 import {PdfService} from '../services/pdf.service';
+import {SearchComponent} from '../search/search.component';
 
 @Component({
   selector: 'app-search-cv',
   templateUrl: './search-cv.component.html',
   styleUrls: ['./search-cv.component.scss'],
+  providers: [SearchComponent]
 })
 
 export class SearchCVComponent implements OnInit {
@@ -28,6 +30,7 @@ export class SearchCVComponent implements OnInit {
   constructor(private router: Router,
               private pdfService: PdfService,
               private route: ActivatedRoute,
+              private searchComponent: SearchComponent,
               private searchCVService: SearchService) {
   }
 
@@ -45,6 +48,7 @@ export class SearchCVComponent implements OnInit {
   }
 
   startSearch() {
+    this.searchComponent.form = false;
     console.log('Search parameters resume = ' + JSON.stringify(this.search));
     this.search.firstResultNumber = 0;
     this.resultText = false;

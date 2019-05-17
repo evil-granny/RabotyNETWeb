@@ -3,11 +3,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Search} from '../models/SearchModel/search.model';
 import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
 import {SearchService} from '../services/search.service';
+import {SearchComponent} from '../search/search.component';
 
 @Component({
   selector: 'app-search-vacancy',
   templateUrl: './search-vacancy.component.html',
-  styleUrls: ['./search-vacancy.component.scss']
+  styleUrls: ['./search-vacancy.component.scss'],
+  providers: [SearchComponent]
 })
 export class SearchVacancyComponent implements OnInit {
   search: Search = new Search();
@@ -22,6 +24,7 @@ export class SearchVacancyComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
+              private searchComponent: SearchComponent,
               private searchService: SearchService) {
   }
 
@@ -39,6 +42,7 @@ export class SearchVacancyComponent implements OnInit {
   }
 
   startSearch() {
+    this.searchComponent.form = false;
     console.log('Search parameters vacancy= ' + JSON.stringify(this.search));
     this.search.firstResultNumber = 0;
     this.resultText = false;
