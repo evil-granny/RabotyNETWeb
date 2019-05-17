@@ -1,4 +1,4 @@
-<app-search></app-search>
+<app-search  (find)="find($event)"></app-search>
 <div class="searchContainer">
   <form class="search-form">
     <label class="select-control" *ngIf="isCowner">Search</label>
@@ -67,6 +67,7 @@
     <button class="btn btn-info" [disabled]="previousButton" (click)="previousPage()">&laquo; Previous</button>
     <button class="btn btn-info" [disabled]="nextButton" (click)="nextPage()">Next &raquo;</button>
   </div>
+  <button class="btn btn-info" (click)="refresh()">Reload</button>
 </div>
 
 

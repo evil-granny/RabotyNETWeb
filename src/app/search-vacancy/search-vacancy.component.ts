@@ -108,9 +108,11 @@ export class SearchVacancyComponent implements OnInit {
     this.router.navigateByUrl('/searchCV');
   }
 
-  sendToSearch(search: Search) {
+  find(search: Search) {
     this.search = search;
     this.startSearch();
   }
 
+  refresh() {
+  }
 }

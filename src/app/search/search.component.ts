@@ -1,23 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Search} from '../models/SearchModel/search.model';
 import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
-import {Router} from '@angular/router';
 
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
-  providers: [SearchVacancyComponent],
+  styleUrls: ['./search.component.scss']
 })
 
 export class SearchComponent implements OnInit {
+  @Output() find = new EventEmitter<Search>();
   search: Search = new Search();
   button = false;
   form = true;
 
-  constructor(private searchVacancyComponent: SearchVacancyComponent,
-              private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
     this.search.searchDocument = 'vacancies';
@@ -34,6 +32,6 @@ export class SearchComponent implements OnInit {
   }
 
   start() {
-    this.searchVacancyComponent.sendToSearch(this.search);
+    this.find.emit(this.search);
   }
 }
