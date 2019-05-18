@@ -1,3 +1,4 @@
+
 <div class="show_button" [hidden]="button">
   <button class="btn btn-info" (click)="show()">Search</button>
 </div>
@@ -31,7 +32,8 @@
   </select>
   </div>
 
-  <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control">
+  <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control"
+         pattern="^[A-Za-z]{1,20}$">
   <button class="btn btn-info" (click)="start()">Start search</button><br><br><br>
 
   <button class="btn btn-info" (click)="hide()">Hide</button>

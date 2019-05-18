@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
-import {Router, ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { Search } from './models/SearchModel/search.model';
 import { UserPrincipal } from './models/userPrincipal.model';
-
-
+import {Role} from './models/roles.model';
 
 @Component({
   selector: 'app-root',
@@ -17,17 +16,61 @@ export class AppComponent {
   search: Search = new Search();
   currentUser: UserPrincipal;
 
-  constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute) {
+  constructor(private app: AuthenticationService,
+              private router: Router) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
-  };
-  
-  title = 'RabotyNet';
+  }
 
-  searchCVPage() {
-    this.router.navigateByUrl('/searchCV');
+  title = 'RabotyNet';
+  searchForm = true;
+  searchShown = false;
+  vacancySelect = false;
+  resumeSelect = true;
+
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
+
+  hide() {
+    this.searchForm = true;
+    this.searchShown = false;
+  }
+
+  showSearchForm() {
+    this.searchForm = false;
+    this.searchShown = true;
+  }
+
+  selectDocument() {
+    switch (this.search.searchDocument) {
+      case 'resume':
+        this.resumeSelect = false;
+        this.vacancySelect = true;
+        break;
+      case 'vacancies':
+        this.resumeSelect = true;
+        this.vacancySelect = false;
+        break;
+    }
   }
 
   startSearch() {
-    this.router.navigate(['/vacancies/search', {doc: this.search.searchDocument, text: this.search.searchText, sParam: this.search.searchParameter}]);
+    switch (this.search.searchDocument) {
+      case 'resume':
+        this.router.navigate(['/searchCV', {
+          searchDoc: this.search.searchDocument,
+          searchText: this.search.searchText,
+          searchParameter: this.search.searchParameter
+        }]);
+        break;
+      case 'vacancies':
+        this.router.navigate(['/vacancies/search', {
+          searchDoc: this.search.searchDocument,
+          searchText: this.search.searchText,
+          searchParameter: this.search.searchParameter
+        }]);
+        break;
+    }
+    this.hide();
   }
 }
