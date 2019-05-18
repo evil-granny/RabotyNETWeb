@@ -9,6 +9,22 @@
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Main Info</h3>
                 
+                <div class="form-group" *ngIf="company.companyId != null">
+                  <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                    <img *ngIf="avatar" class="rounded img-responsive" style="width: 160px; height: 180px" [src]="avatar"
+                      alt="">
+                    <img *ngIf="!avatar" class="rounded img-responsive" style="width: 160px; height: 180px"
+                      src="/assets/img/user.jpg" alt="">
+                  </figure>
+                  <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                    <input type="file" class="custom-file-input" id="customFile" accept="image/*"
+                      (change)="handlePhoto($event.target.files)">
+                    <label class="custom-file-label" for="customFile" style="width: 160px;"></label>
+                    <input class="btn btn-primary" type="button" value="Update Photo" (click)="uploadPhoto()"
+                      style="width: 160px; margin-top: 10px; ">
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <label for="name" class="col-md-2 col-sm-3 col-xs-12 control-label">Company Name</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">

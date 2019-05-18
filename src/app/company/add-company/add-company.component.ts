@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from '../../models/CompanyModel/company.model';
 import { CompanyService } from '../../services/company.service'
 import { UserService } from 'src/app/services/user.service';
+import { Photo } from 'src/app/models/photo.model';
+import { PhotoService } from 'src/app/services/profile/photo.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'rabotyNet',
@@ -13,9 +16,13 @@ import { UserService } from 'src/app/services/user.service';
 export class AddCompanyComponent implements OnInit {
 
   company: Company = new Company();
+  photo: Photo = new Photo();
+
+  avatar: any;
+  fileToUpload: File;
 
   constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
-    private userService: UserService) { }
+    private userService: UserService, private photoService: PhotoService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     var companyName = this.route.snapshot.paramMap.get("companyName");
@@ -23,6 +30,10 @@ export class AddCompanyComponent implements OnInit {
       this.companyService.findByName(companyName)
         .subscribe(data => {
           this.company = data;
+
+          if (this.company.photo != null) {
+            this.loadPhoto(this.company.photo.photoId);
+          }
         });
     }
   }
@@ -49,5 +60,28 @@ export class AddCompanyComponent implements OnInit {
           alert("Validation problem has been occured");  
     });  
   };
+
+  handlePhoto(file: FileList) {
+    this.fileToUpload = file.item(0);
+
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.avatar = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+  }
+
+  loadPhoto(photoId: BigInteger) {
+    this.photoService.load(photoId)
+      .subscribe(data => {
+        this.photo = data;
+        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + this.photo.image);
+      });
+  }
+
+  uploadPhoto() {
+    this.photoService.uploadLogo(this.fileToUpload, this.company.name)
+      .subscribe(() => window.location.reload());
+  }
 
 }

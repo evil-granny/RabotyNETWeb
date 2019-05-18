@@ -2,6 +2,7 @@ import { Contact } from '../contact.model';
 import { Address } from '../address.model';
 import { User } from '../user.model';
 import { Claim } from '../claim.model';
+import { Photo } from '../photo.model';
 
 export class Company {
 
@@ -26,4 +27,6 @@ export class Company {
     claims: Claim[] = new Array();
 
     status: string;
+
+    photo: Photo = new Photo();
 }
