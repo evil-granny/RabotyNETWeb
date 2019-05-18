@@ -18,7 +18,8 @@ export class PdfDesignerComponent implements OnInit {
   contact: Contact = new Contact();
   people: Person = new Person();
   cv: CV = new CV();
-  urlPdf: string ="false";
+  
+  send: boolean = true;
   
    
   
@@ -50,25 +51,25 @@ export class PdfDesignerComponent implements OnInit {
 
     this.pdfService.update(this.cv)
       .subscribe(data => {
-        if(data != null)
-          alert("CV has been updated successfully.");
-        else
+        if(data != null){
+          
+          this.pdfService.show(this.cv.cvId, this.send)
+          .subscribe(data =>   {
+            var file = new Blob([data], { type: 'application/pdf' });
+            console.log(file);
+            var fileURL = URL.createObjectURL(file);   
+            console.log(fileURL);
+            
+            window.open(fileURL);  
+            window.focus();
+           }); 
+          }
+          else
           alert("Validation problem has been occured"); 
-      });    
+      });
         
-      this.pdfService.show(this.cv.cvId)
-      .subscribe(data =>   {
-        var file = new Blob([data], { type: 'application/pdf' });
-        console.log(file);
-        var fileURL = URL.createObjectURL(file);   
-        console.log(fileURL);
-        this.urlPdf= fileURL;
-        window.open(fileURL);  
-        window.focus();
-       });   
   };
 
-  
     
   
   
