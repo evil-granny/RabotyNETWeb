@@ -60,7 +60,7 @@ const routes: Routes = [
 
   { path: 'searchCV', component: SearchCVComponent },
 
-  { path: 'vacancies/search', component: SearchVacancyComponent }
+  // { path: 'vacancies/search', component: SearchVacancyComponent }
 ];
 
 @NgModule({
