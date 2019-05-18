@@ -20,7 +20,7 @@ export class AppComponent {
   constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
   };
-  
+
   title = 'RabotyNet';
 
   searchCVPage() {
@@ -30,4 +30,11 @@ export class AppComponent {
   startSearch() {
     this.router.navigate(['/vacancies/search', {doc: this.search.searchDocument, text: this.search.searchText, sParam: this.search.searchParameter}]);
   }
+
+  logout() {
+    const user = this.app.logout();
+    this.router.navigateByUrl('/vacancies');
+  }
+
+
 }

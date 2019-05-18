@@ -84,11 +84,6 @@ export class VacancyComponent implements OnInit {
     return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
   }
 
-  logout() {
-    const user = this.app.logout();
-      this.router.navigateByUrl('/vacancies');
-  }
-
   canPreviousPage() : boolean {
     return this.page > 0;
   }
