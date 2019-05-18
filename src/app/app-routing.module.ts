@@ -30,6 +30,9 @@ import {ViewVacancyComponent} from './vacancy/view-vacancy/view-vacancy.componen
 import {PasswordForgotComponent} from './password-forgot/password-forgot.component';
 import {PasswordRestoreComponent} from './password-restore/password-restore.component';
 import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
+import {AuthGuard} from './_guards/auth.guard';
+import {Role} from './models/roles.model';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -39,7 +42,7 @@ const routes: Routes = [
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
 
-  { path: 'companies', component: CompanyComponent },
+  // { path: 'companies', component: CompanyComponent },
   { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
@@ -47,7 +50,7 @@ const routes: Routes = [
   { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
 
   { path: 'cvs', component: CvComponent },
-  { path: 'createCV', component: AddCvComponent },
+  // { path: 'createCV', component: AddCvComponent },
   { path: 'createPdf', component: PdfDesignerComponent },
   { path: 'updateCvForPDF/:cvId', component: PdfDesignerComponent },
 
@@ -61,9 +64,61 @@ const routes: Routes = [
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
   // { path: 'users', component: UserComponent },
 
-  { path: 'searchCV', component: SearchCVComponent },
+  // { path: 'searchCV', component: SearchCVComponent },
 
   // { path: 'vacancies/search', component: SearchVacancyComponent }
+
+  {
+    path: 'vacancies',
+    component: VacancyComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_ADMIN] }
+  },
+  {
+    path: 'vacancies/search',
+    component: SearchVacancyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_ADMIN] }
+  },
+  {
+    path: 'companies',
+    component: CompanyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
+  },
+  {
+    path: 'createCV',
+    component: AddCvComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
+  },
+  {
+    path: 'searchCV',
+    component: SearchCVComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER] }
+  },
+  {
+    path: 'users',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_USER] }
+  },
+  {
+    path: 'registrationConfirm',
+    component: RegistrationconfirmComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+
+  { path: '**', redirectTo: 'vacancies' }
 ];
 
 @NgModule({
