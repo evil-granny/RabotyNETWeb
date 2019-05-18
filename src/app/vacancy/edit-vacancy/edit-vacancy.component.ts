@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, HostListener} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {Vacancy} from '../../models/vacancy/vacancy.model';
@@ -7,6 +7,7 @@ import {Requirement} from 'src/app/models/requirement.model';
 import { UserPrincipal } from 'src/app/models/userPrincipal.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Role } from 'src/app/models/roles.model';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -21,9 +22,13 @@ export class EditVacancyComponent implements OnInit {
   requirements:  Requirement[] = Array<Requirement>();
   currentUser: UserPrincipal;
 
-  constructor(private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
+  constructor(private location: Location,private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
   }
+
+    goBack() {
+        this.location.back();
+    }
 
   ngOnInit(): void {
     let vacancyId = this.route.snapshot.paramMap.get('vacancyId');
@@ -46,7 +51,7 @@ export class EditVacancyComponent implements OnInit {
     console.log(this.vacancy);
       this.vacancyService.update(this.vacancy)
        .subscribe(data => {
-         this.gotoList();
+        this.goBack();
        }, error => console.error(error));
 
   };

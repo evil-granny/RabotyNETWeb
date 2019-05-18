@@ -17,7 +17,7 @@ export class ViewCompanyComponent implements OnInit {
 
   company: Company = new Company();
   claim: Claim = new Claim();
-  vacancies: Observable<Vacancy[]>;
+  vacancies: Vacancy[];
 
   claiming: boolean = false;
 
@@ -112,5 +112,13 @@ export class ViewCompanyComponent implements OnInit {
   hasClaims() : boolean {
     return this.company.claims != null && this.company.claims.length > 0;
   }
+
+  deleteVacancyById(vacancy: Vacancy): void {
+    this.vacancyService.deleteById(vacancy.vacancyId)
+      .subscribe( data => {
+        this.vacancies = this.vacancies.filter(p => p !== vacancy);
+        this.size = this.size - 1;
+      })
+  };
 
 }

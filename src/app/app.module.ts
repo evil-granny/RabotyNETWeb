@@ -62,6 +62,7 @@ import { PasswordForgotComponent } from './password-forgot/password-forgot.compo
 import { PasswordRestoreComponent } from './password-restore/password-restore.component';
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
+import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 import { SearchComponent } from './search/search.component';
 // import {SidebarModule} from 'ng-sidebar';
 
@@ -72,6 +73,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 const routes: Routes = [
   {
     path: 'vacancies',
+    component: VacancyComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'hotVacancies',
     component: VacancyComponent,
     canActivate: [AuthGuard]
   },
@@ -138,6 +144,8 @@ const routes: Routes = [
     PasswordRestoreComponent,
     SearchVacancyComponent,
     ViewVacancyComponent,
+    AccessNonauthorizedPageComponent,
+    HotVacancyComponent,
     AccessNonauthorizedPageComponent,
     SearchComponent
   ],
