@@ -26,6 +26,7 @@ export class SearchCVComponent implements OnInit {
   topButtons = true;
   bottomButtons = true;
   urlPdf = 'false';
+  send = false;
 
   constructor(private router: Router,
               private pdfService: PdfService,
@@ -113,7 +114,7 @@ export class SearchCVComponent implements OnInit {
   }
 
   viewCv(id: Uint8Array) {
-    this.pdfService.show(id)
+    this.pdfService.show(id, this.send)
       .subscribe(data => {
         var file = new Blob([data], {type: 'application/pdf'});
         console.log(file);
