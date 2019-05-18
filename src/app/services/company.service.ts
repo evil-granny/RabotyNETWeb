@@ -24,12 +24,12 @@ export class CompanyService {
 
   public findAll() {
     console.log("[find all companies]");
-    return this.http.get<Company[]>(this.companyURL);
+    return this.http.get<Company[]>(this.companyURL + "/all");
   }
 
   public findAllWothPagination(first: number, count: number) {
     console.log("[find all companies by pagination]");
-    return this.http.get<CompanyPaginationDTO>(this.companyURL + "/" + first + "/" + count);
+    return this.http.get<CompanyPaginationDTO>(this.companyURL + "/all/" + first + "/" + count);
   }
 
   public findAllByUser() {
@@ -39,17 +39,17 @@ export class CompanyService {
 
   public deleteById(company) {
     console.log("[delete company]");
-    return this.http.delete(this.companyURL + "/" + company.companyId, httpOptions);
+    return this.http.delete(this.companyURL + "/delete/" + company.companyId, httpOptions);
   }
 
   public create(company) {
     console.log("[create company]");
-    return this.http.post<Company>(this.companyURL + "/", company, httpOptions);
+    return this.http.post<Company>(this.companyURL + "/create", company, httpOptions);
   }
 
   public update(company) {
     console.log("[update company]");
-    return this.http.put<Company>(this.companyURL + "/", company, httpOptions);
+    return this.http.put<Company>(this.companyURL + "/update", company, httpOptions);
   }
 
   public approve(company) {
@@ -59,7 +59,7 @@ export class CompanyService {
 
   public findByName(companyName) {
     console.log("[find company by name]");
-    return this.http.get<Company>(this.companyURL + "/" + companyName, httpOptions);
+    return this.http.get<Company>(this.companyURL + "/byName/" + companyName, httpOptions);
   }
 
   public createClaim(claim) {
