@@ -6,7 +6,7 @@
       <section class="module">
         <div class="module-inner">
           <div class="content-panel">
-            <h2>List of Companies</h2>
+            <h2>My Companies</h2>
             <br>
             <table class="table table-striped">
               <thead>
@@ -64,7 +64,6 @@
                       title="Unblock"><i class="fa fa-unlock"></i></a>
                   </td>
                 </tr>
-
                 <tr>
                   <td colspan="6">
                     <div *ngIf="company.companyId == currentClaim" width="100%">
@@ -96,10 +95,6 @@
                 </tr>
               </tbody>
             </table>
-            <button *ngIf="canPrev()" class="btn btn-info" (click)="prev();">&laquo; Previous</button>
-            <button *ngIf="!canPrev()" disabled class="btn btn-info" (click)="prev();">&laquo; Previous</button>
-            <button *ngIf="canNext()" class="btn btn-info" (click)="next();">Next &raquo;</button>
-            <button *ngIf="!canNext()" disabled class="btn btn-info" (click)="next();">Next &raquo;</button>
           </div>
         </div>
       </section>

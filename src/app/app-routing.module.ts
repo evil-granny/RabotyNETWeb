@@ -23,6 +23,7 @@ import { AccessDeniedPageComponent } from './access-denied-page/access-denied-pa
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 import { SearchCVComponent } from './search-cv/search-cv.component';
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
+import { MyCompanyComponent } from './company/my-company/my-company.component';
 import { SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
 import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
 import {ViewVacancyComponent} from './vacancy/view-vacancy/view-vacancy.component';
@@ -38,6 +39,8 @@ const routes: Routes = [
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
 
+  { path: 'companies', component: CompanyComponent },
+  { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName', component: ApproveCompanyComponent },
