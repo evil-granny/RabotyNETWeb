@@ -63,7 +63,7 @@ import { PasswordRestoreComponent } from './password-restore/password-restore.co
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { SearchComponent } from './search/search.component';
-import {SidebarModule} from 'ng-sidebar';
+// import {SidebarModule} from 'ng-sidebar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -153,7 +153,7 @@ const routes: Routes = [
     PerfectScrollbarModule,
 
     MatDialogModule,
-    BsDropdownModule.forRoot(), MatSidenavModule, SidebarModule
+    BsDropdownModule.forRoot(), MatSidenavModule
   ],
   bootstrap: [AppComponent],
   entryComponents: [ComfirmComponent],

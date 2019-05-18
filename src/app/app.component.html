@@ -1,20 +1,25 @@
 <router-outlet></router-outlet>
 <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse" style="height:70px">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-          data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-          aria-label="Toggle navigation">
+    data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+    aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" routerLink="/vacancies" style="color: white; font-size: 35px;">RabotyNet</a>
 
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="1"></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="2"></a>
-      </li>
+      </li> -->
+      <a class="navbar-brand" routerLink="/admin" *ngIf="isAdmin">Admin</a>
+      <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin || isCowner">My companies</a>
+      <a class="navbar-brand" routerLink="/users" *ngIf="isUser">User</a>
+
+
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item" style="margin-top: 5px; margin-right: 60px;">
@@ -25,13 +30,14 @@
       <li class="nav-item">
         <div class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            <img src="/assets/img/user.jpg" class="rounded-circle z-depth-0"
-                 style="width: 50px; height: 50px;">
+            <img src="/assets/img/user.jpg" class="rounded-circle z-depth-0" style="width: 50px; height: 50px;">
           </a>
           <div class="list dropdown-menu">
             <a class="dropdown-item" routerLink="/profile">Profile</a>
             <a class="dropdown-item" routerLink="/companies">My companies</a>
-            <a class="dropdown-item" href="/logout">Log out</a>
+            <a class="dropdown-item" href="/login">Login</a>
+            <a class="dropdown-item" (click)="logout()" *ngIf="currentUser">Log out</a>
+            <a class="dropdown-item"  routerLink="/registration" *ngIf="!currentUser">Registration</a>
           </div>
         </div>
       </li>
@@ -43,7 +49,7 @@
   <form class="search-form">
     <div class="select-control" *ngIf="isCowner">Search</div>
     <select [(ngModel)]="search.searchDocument" (ngModelChange)="selectDocument()" name="searchDocument"
-            class="form-control" *ngIf="isCowner">
+      class="form-control" *ngIf="isCowner">
       <option [defaultSelected]="search.searchDocument" value="vacancies">vacancies</option>
       <option value="resume">resume</option>
     </select>
@@ -69,8 +75,8 @@
       </select>
     </div>
 
-    <input  type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control"
-           pattern="^[A-Za-z]{1,20}$"><br>
+    <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control"
+      pattern="^[A-Za-z]{1,20}$"><br>
     <button id="startButton" class="btn btn-info" (click)="startSearch()">Start search</button>
   </form>
 </div>
