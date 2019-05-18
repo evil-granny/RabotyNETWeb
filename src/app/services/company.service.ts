@@ -32,6 +32,11 @@ export class CompanyService {
     return this.http.get<CompanyPaginationDTO>(this.companyURL + "/" + first + "/" + count);
   }
 
+  public findAllByUser() {
+    console.log("[find all by user]");
+    return this.http.get<Company[]>(this.companyURL + "/my");
+  }
+
   public deleteById(company) {
     console.log("[delete company]");
     return this.http.delete(this.companyURL + "/" + company.companyId, httpOptions);

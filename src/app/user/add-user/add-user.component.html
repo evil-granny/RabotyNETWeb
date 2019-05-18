@@ -1,81 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vacancy</title>
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
 <body>
-<nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="#">RabotyNet</a>
-</nav>
-<div class="container signin_top">
-  <div class="view-account">
-    <section class="module">
-      <div class="module-inner">
-        <div class="content-panel">
-  <h2 class="title">Sign up</h2>
-    <form class="form-horizontal" (ngSubmit)="findByEmail()" #userForm="ngForm">
-      <fieldset class="fieldset">
-        <div class="form-group">
-          <label for="login" class="col-md-2 col-sm-3 col-xs-12 control-label" minlength="3" >Email</label>
-          <div class="col-md-10 col-sm-9 col-xs-12">
-            <input type="email" class="form-control" [(ngModel)]="user.login"
-              placeholder="Email" id="login" name="login" #login="ngModel" required
-              autocomplete="off">
-            <div *ngIf="login.errors && (login.dirty || login.touched)" class="alert alert-danger">
-              <div [hidden]="!login.errors.required">Email is required!</div>
-              <div [hidden]="!login.errors.incorrect">Login is incorrect!</div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-signin flex-row my-5">
+          <div class="card-img-left d-none d-md-flex">
+<!--            <img src="../../../favicon.ico" style="width: 100%">-->
           </div>
-        </div>
-        <div class="form-group">
-          <label for="password" class="col-md-2 col-sm-3 col-xs-12 control-label">Password</label>
-          <div class="col-md-10 col-sm-9 col-xs-12">
-            <input type="password" class="form-control" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"  [(ngModel)]="user.password"
-              placeholder="Password" id="password" name="password" #password="ngModel" required
-              autocomplete="off">
-            <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
-              <div [hidden]="!password.errors.required">Password is required!</div>
-              <div [hidden]="!password.errors.pattern">Password must contain upper, lower, number!</div>
-            </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">Register</h5>
+            <form class="form-signin" (ngSubmit)="findByEmail()" #userForm="ngForm">
+              <div class="form-label-group">
+                <input type="text" id="login" class="form-control" placeholder="Email" required autofocus
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login" #login="ngModel" [(ngModel)]="user.login"
+                autocomplete="off">
+                <label for="login">Email</label>
+              </div>
+              <div *ngIf="login.errors && login.dirty" class="alert alert-danger">
+                <div [hidden]="!login.errors.required">Email is required!</div>
+                <div [hidden]="!login.errors.pattern">Login is incorrect!</div>
+              </div>
+              <hr>
+
+              <div class="form-label-group">
+                <input type="password" id="password" class="form-control" placeholder="Password"  name = "password" #password="ngModel" required
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"  [(ngModel)]="user.password">
+                <label for="password">Password</label>
+              </div>
+              <div *ngIf="password.errors && password.dirty" class="alert alert-danger">
+                <div [hidden]="!password.errors.required">Password is required!</div>
+                <div [hidden]="!password.errors.pattern && login.errors.pattern">Password must be no less than 8 symbols (uppercase, lowercase, number and one special symbol)!</div>
+              </div>
+              <div class="form-label-group">
+                <input type="password" class="form-control"  [(ngModel)]="user.matchingPassword"
+                placeholder="Confirm Password" id="matchingPassword" name="matchingPassword" #matchingPassword="ngModel" required
+                >
+                <label for="matchingPassword">Confirm password</label>
+              </div>
+              <div *ngIf="matchingPassword.errors && matchingPassword.dirty" class="alert alert-danger">
+                <div [hidden]="!matchingPassword.errors.required">Confirm password!</div>
+              </div>
+              <div *ngIf="user.matchingPassword != user.password" class="alert alert-danger">Passwords don`t match!
+              </div>
+
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="!userForm.form.valid">Register</button>
+              <hr class="my-4">
+              <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button> -->
+              <!-- <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button> -->
+            </form>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="matchingPassword" class="col-md-2 col-sm-3 col-xs-12 control-label">Confirm Password</label>
-          <div class="col-md-10 col-sm-9 col-xs-12">
-            <input type="password" class="form-control"  [(ngModel)]="user.matchingPassword"
-              placeholder="Confirm Password" id="matchingPassword" name="matchingPassword" #matchingPassword="ngModel" required
-              autocomplete="off">
-            <div *ngIf="matchingPassword.errors && (matchingPassword.dirty || matchingPassword.touched)" class="alert alert-danger">
-              <div [hidden]="!matchingPassword.errors.required">Confirm password!</div>
-            </div>
-            <div *ngIf="user.matchingPassword != user.password" class="alert alert-danger">Passwords don`t match!
-            </div>
-          </div>
-        </div>
-      </fieldset>
-      <hr>
-      <fieldset class="fieldset">
-      <div class="form-group">
-        <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-          <input class="btn btn-primary" type="submit" [disabled]="!userForm.form.valid"
-            value="Sign up">
-            <div>{{error}}</div>
         </div>
       </div>
-    </fieldset>
-    </form>
+    </div>
   </div>
-</div>  
-</section>
-</div>
-</div>
+</body>

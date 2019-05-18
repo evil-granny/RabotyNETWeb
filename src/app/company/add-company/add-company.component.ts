@@ -38,22 +38,16 @@ export class AddCompanyComponent implements OnInit {
   };
 
   create(): void {
-    this.userService.findById(1)
+    this.company.status = 'CREATED';
+
+    this.companyService.create(this.company)
       .subscribe(data => {
-        console.log(data);
-        this.company.user = data;
-
-        this.company.status = 'CREATED';
-
-        this.companyService.create(this.company)
-          .subscribe(data => {
-            if(data != null) {
-              this.router.navigate(['/updateCompany/' + this.company.name]);
-            }
-            else
-              alert("Validation problem has been occured");  
-        }); 
-      }); 
+        if(data != null) {
+          this.router.navigate(['/updateCompany/' + this.company.name]);
+        }
+        else
+          alert("Validation problem has been occured");  
+    });  
   };
 
 }

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {UserPrincipal} from '../models/userPrincipal.model';
+import { UserPrincipal } from '../models/userPrincipal.model';
 import { map } from 'rxjs/operators';
-import {logger} from 'codelyzer/util/logger';
+import { logger } from 'codelyzer/util/logger';
 
-
-@Injectable( { providedIn: 'root' } )
+@Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<UserPrincipal>;
@@ -27,7 +26,7 @@ export class AuthenticationService {
   public authenticate(credentials) {
 
     const authHeader = credentials ? {
-      'Authorization' : 'Basic ' + btoa(credentials.username + ':' + credentials.password),
+      'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password),
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': 'true',
       'Content-Type': 'application/json'
