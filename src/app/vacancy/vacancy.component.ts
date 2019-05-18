@@ -72,23 +72,6 @@ export class VacancyComponent implements OnInit {
         error => console.log(error));
   };
 
-  get isAdmin() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
-  }
-
-  get isCowner() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
-  }
-
-  get isUser() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
-  }
-
-  logout() {
-    const user = this.app.logout();
-      this.router.navigateByUrl('/vacancies');
-  }
-
   canPreviousPage() : boolean {
     return this.page > 0;
   }
@@ -111,11 +94,4 @@ export class VacancyComponent implements OnInit {
     }
   }
 
-  searchCVPage() {
-    this.router.navigateByUrl('/searchCV');
-  }
-
-  startSearch() {
-    this.router.navigate(['/vacancies/search', {doc: this.search.searchDocument, text: this.search.searchText, sParam: this.search.searchParameter}]);
-  }
 }

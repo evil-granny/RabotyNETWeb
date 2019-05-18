@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
 import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
 import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
+import {Observable} from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({

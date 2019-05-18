@@ -1,22 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { SearchService } from '../services/search.service';
-import { Search } from '../models/SearchModel/search.model';
+import {SearchService} from '../services/search.service';
+import {Search} from '../models/SearchModel/search.model';
 import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
-import {Role} from '../models/roles.model';
-import {UserPrincipal} from '../models/userPrincipal.model';
-import {AuthenticationService} from '../services/authentication.service';
+import {PdfService} from '../services/pdf.service';
+import {SearchComponent} from '../search/search.component';
 
 @Component({
   selector: 'app-search-cv',
   templateUrl: './search-cv.component.html',
-  styleUrls: ['./search-cv.component.scss']
+  styleUrls: ['./search-cv.component.scss'],
+  providers: [SearchComponent]
 })
 
 export class SearchCVComponent implements OnInit {
-
-  currentUser: UserPrincipal;
 
   search: Search = new Search();
   searchCVResponse: SearchCVResponse = new SearchCVResponse();
@@ -25,45 +23,59 @@ export class SearchCVComponent implements OnInit {
   previousButton = true;
   pagesCount: number;
   pageNumber: number;
+  topButtons = true;
+  bottomButtons = true;
+  urlPdf = 'false';
 
-  constructor(private app: AuthenticationService, private router: Router, private searchCVService: SearchService) {
-    this.app.currentUser.subscribe(x => this.currentUser = x);
+  constructor(private router: Router,
+              private pdfService: PdfService,
+              private route: ActivatedRoute,
+              private searchComponent: SearchComponent,
+              private searchCVService: SearchService) {
   }
 
-  get isAdmin() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
-  }
-
-  get isCowner() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
-  }
-
-  get isUser() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
-  }
-
-  logout() {
-    const user = this.app.logout();
-    this.router.navigateByUrl('/vacancies');
+  ngOnInit(): void {
+    console.log('OnInit SearchResume');
+    this.route.params
+      .subscribe(params => {
+        this.search.searchDocument = params['searchDoc'];
+        this.search.searchText = params['searchText'];
+        this.search.searchParameter = params['searchParameter'];
+      });
+    if (this.search.searchText !== undefined) {
+      this.startSearch();
+    }
   }
 
   startSearch() {
+    // console.log('Search parameters resume = ' + JSON.stringify(this.search));
     this.search.firstResultNumber = 0;
     this.resultText = false;
     this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
-        this.pagesCount = Math.ceil(this.searchCVResponse.count / parseInt(this.search.resultsOnPage, 10));
-        if (this.searchCVResponse.count > parseInt(this.search.resultsOnPage, 10)) {
-          this.nextButton = false;
-          this.previousButton = true;
-          this.pageNumber = 1;
-        } else {
-          this.nextButton = true;
-          this.previousButton = true;
-          this.pageNumber = 1;
-        }
+        // console.log('CV response = ' + JSON.stringify(this.searchCVResponse));
+        this.buttonsEnabled();
       });
+  }
+
+  buttonsEnabled() {
+    this.pagesCount = Math.ceil(this.searchCVResponse.count / parseInt(this.search.resultsOnPage, 10));
+    if (this.searchCVResponse.count > parseInt(this.search.resultsOnPage, 10)) {
+      this.topButtons = false;
+      this.nextButton = false;
+      this.previousButton = true;
+      this.pageNumber = 1;
+      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchCVResponse.searchCVDTOs.length > 15) {
+        this.bottomButtons = false;
+      }
+    } else {
+      this.topButtons = true;
+      this.nextButton = true;
+      this.previousButton = true;
+      this.pageNumber = 1;
+      this.bottomButtons = true;
+    }
   }
 
   nextPage() {
@@ -100,12 +112,21 @@ export class SearchCVComponent implements OnInit {
       });
   }
 
-  searchVacancyPage() {
-    this.search.searchDocument = 'vacancies';
-    this.router.navigateByUrl('/vacancies/search');
+  viewCv(id: Uint8Array) {
+    this.pdfService.show(id)
+      .subscribe(data => {
+        var file = new Blob([data], {type: 'application/pdf'});
+        console.log(file);
+        var fileURL = URL.createObjectURL(file);
+        console.log(fileURL);
+        this.urlPdf = fileURL;
+        window.open(fileURL);
+        window.focus();
+      });
   }
 
-  ngOnInit(): void {
-    this.search.searchDocument = 'cvs';
+  findResume(search: Search) {
+    this.search = search;
+    this.startSearch();
   }
 }

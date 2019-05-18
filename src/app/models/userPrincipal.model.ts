@@ -1,16 +1,18 @@
 export class UserPrincipal {
 
-  constructor(username: string, roles: string[], token: string, userId: number) {
-    this.username = username;
-    this.roles = roles;
-    this.token = token;
-  }
-
   username: string;
 
   roles: string[];
 
   token: string;
 
-  userId: number;
+  userId: BigInteger;
+
+  constructor(username: string, roles: string[], token: string, userId: BigInteger) {
+    this.username = username;
+    this.roles = roles;
+    this.token = token;
+    this.userId = userId;
+  }
+
 }

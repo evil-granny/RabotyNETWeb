@@ -7,6 +7,7 @@ import {Requirement} from 'src/app/models/requirement.model';
 import { UserPrincipal } from 'src/app/models/userPrincipal.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Role } from 'src/app/models/roles.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-view-vacancy',
@@ -19,10 +20,13 @@ export class ViewVacancyComponent implements OnInit {
   requirements:  Requirement[] = Array<Requirement>();
   currentUser: UserPrincipal;
 
-  constructor(private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
+  constructor(private location: Location,private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
+  goBack() {
+    this.location.back();
+}
   ngOnInit(): void {
     let vacancyId = this.route.snapshot.paramMap.get('vacancyId');
     if (vacancyId !== null) {
