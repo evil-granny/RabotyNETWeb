@@ -18,8 +18,9 @@ export class AuthInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           Authorization: `${currentUser.token}`,
-          'X-XSRF-TOKEN': token,
-        }
+          // 'X-XSRF-TOKEN': token,
+        },
+        // withCredentials: true,
       });
     }
     console.log('---------REQUEST AFTER---------')

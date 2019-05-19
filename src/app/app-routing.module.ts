@@ -64,9 +64,9 @@ const routes: Routes = [
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
   // { path: 'users', component: UserComponent },
 
-  // { path: 'searchCV', component: SearchCVComponent },
+  { path: 'searchCV', component: SearchCVComponent },
 
-  // { path: 'vacancies/search', component: SearchVacancyComponent }
+  { path: 'vacancies/search', component: SearchVacancyComponent },
 
   {
     path: 'vacancies',
@@ -79,12 +79,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_ADMIN] }
   },
-  {
-    path: 'vacancies/search',
-    component: SearchVacancyComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_ADMIN] }
-  },
+  // {
+  //   path: 'vacancies/search',
+  //   component: SearchVacancyComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: [Role.ROLE_ADMIN] }
+  // },
   {
     path: 'companies',
     component: CompanyComponent,
@@ -97,12 +97,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
-  {
-    path: 'searchCV',
-    component: SearchCVComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER] }
-  },
+  // {
+  //   path: 'searchCV',
+  //   component: SearchCVComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: [Role.ROLE_COWNER] }
+  // },
   {
     path: 'users',
     component: UserComponent,
