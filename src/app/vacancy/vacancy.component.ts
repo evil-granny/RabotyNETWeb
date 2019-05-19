@@ -20,12 +20,7 @@ import {Search} from '../models/SearchModel/search.model';
 })
 export class VacancyComponent implements OnInit {
   vacancies: Observable<Vacancy[]>;
-  search: Search = new Search();
-  requirements: Observable<Requirement[]>;
-
   currentUser: UserPrincipal;
-
-  p: number = 1;
 
   vacancy: Vacancy = new Vacancy();
 
@@ -38,14 +33,12 @@ export class VacancyComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.search.searchDocument = 'vacancies';
     this.findAll();
   };
 
   findAll() {
      this.vacancyService.findAllWithPagination(this.page * this.count, this.count).subscribe(
        data => {
-         this.vacancies = data;
          this.vacancies = data.vacancies;
          this.size = data.count;
        }
@@ -54,22 +47,6 @@ export class VacancyComponent implements OnInit {
 
   gotoList() {
     this.router.navigate(['/vacancies']);
-  };
-
-  update(vacancyId): void {
-    this.vacancyService.update(this.vacancyService.get(vacancyId))
-      .subscribe(data => {
-        this.gotoList();
-      }, error => console.error(error));
-  };
-
-  deleteById(id: number): void {
-    this.vacancyService.deleteById(id)
-      .subscribe(
-        data => {
-          this.findAll();
-        },
-        error => console.log(error));
   };
 
   canPreviousPage() : boolean {
