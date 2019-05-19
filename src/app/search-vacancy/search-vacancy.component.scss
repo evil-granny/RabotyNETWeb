@@ -1,30 +1,58 @@
-.search-result{
-  padding-top: 50px;
-  padding-left: 300px;
-  padding-right: 300px;
+#searchMenu {
+  position: fixed;
+  width: 250px;
+  height: 400px;
+  top: 90px;
+  right: 10px;
+  border-radius: 7px;
+  background-color: rgba(0,0,0,0.8);
 }
 
-.page{
-  float: left;
-  padding: 10px;
+.search-form{
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
 
+.form-control{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.select-control{
+  font-size: 18px;
+  color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#startButton{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#hideButton{
+  float: right;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.main{
+  margin-top: 100px;
+  padding-right: 270px;
+  padding-left: 50px;
+  padding-bottom: 70px;
+}
+
+.page {
+  float: left;
 }
 
 .resultOnPage{
   float: right;
-  padding-top: 50px;
 }
 
 .page .btn {
   margin: 10px;
-}
-
-.searchContainer{
-  padding-top: 70px;
-  padding-left: 300px;
-  padding-right: 300px;
-}
-
-.resultOnPage{
-  float: right;
 }

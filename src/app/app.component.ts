@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {Router} from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
@@ -11,7 +11,7 @@ import {Role} from './models/roles.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   search: Search = new Search();
   currentUser: UserPrincipal;
@@ -29,6 +29,12 @@ export class AppComponent {
 
   get isCowner() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
+
+  ngOnInit() {
+    if (this.router.url.includes('/search')) {
+      this.searchShown = true;
+    }
   }
 
   hide() {

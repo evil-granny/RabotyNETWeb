@@ -13,25 +13,41 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<app-search  (findVacancies)="findVacancies($event)"></app-search>
-<div class="searchContainer">
-<!--  <form class="search-form">-->
-<!--    <label class="select-control" *ngIf="isCowner">Search</label>-->
-<!--    <select [(ngModel)]="search.searchDocument" (change)="searchCVPage()" name="searchDocument"-->
-<!--            class="form-control" *ngIf="isCowner">-->
-<!--      <option [defaultSelected]="search.searchDocument" value="vacancies">vacancies</option>-->
-<!--      <option value="resume">resume</option>-->
-<!--    </select>-->
-<!--    <label class="select-control">Search vacancies by:</label>-->
-<!--    <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">-->
-<!--      <option [defaultSelected]="search.searchParameter" value="position">position</option>-->
-<!--      <option value="city">city</option>-->
-<!--      <option value="company">company</option>-->
-<!--    </select>-->
-<!--    <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control">-->
-<!--    <button class="btn btn-info" (click)="startSearch()">Start search</button>-->
-<!--  </form>-->
 
+<div id="searchMenu">
+  <form class="search-form">
+    <div class="select-control" *ngIf="isCowner">Search</div>
+    <select [(ngModel)]="search.searchDocument" (ngModelChange)="selectDocument()" name="searchDocument"
+            class="form-control" *ngIf="isCowner">
+      <option [defaultSelected]="search.searchDocument" value="vacancies">vacancies</option>
+      <option value="resume">resume</option>
+    </select>
+    <div class="vacancy-select" [hidden]="vacancySelect">
+      <div class="select-control" *ngIf="!isCowner">Search vacancies by:</div>
+      <div class="select-control" *ngIf="isCowner">by:</div>
+      <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
+        <option [defaultSelected]="search.searchParameter" value="position">position</option>
+        <option value="city">city</option>
+        <option value="company">company</option>
+      </select>
+    </div>
+    <div class="resume-select" [hidden]="resumeSelect" *ngIf="isCowner">
+      <div class="select-control" *ngIf="isCowner">by:</div>
+      <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
+        <option [defaultSelected]="search.searchParameter" value="name">name</option>
+        <option value="skill">skill</option>
+        <option value="phoneNumber">phone</option>
+        <option value="city">city</option>
+        <option value="position">position</option>
+      </select>
+    </div>
+    <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control"
+           pattern="^[A-Za-z]{1,20}$"><br>
+    <button id="startButton" class="btn btn-info" (click)="start()">Start search</button>
+  </form>
+</div>
+
+<div class="main">
   <div class="resultOnPage" [hidden]="resultText">
     <label>Results on page:
       <select [(ngModel)]="search.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
@@ -39,44 +55,47 @@
         <option value="20">20</option>
         <option value="50">50</option>
       </select>
-    </label><br>
+    </label>
   </div>
 
   <div class="search-result" [hidden]="resultText">
     <h2>Search result</h2>
     <h5>{{searchVacancyResponse.count}} Vacancies founded</h5>
-    <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
   </div>
 
   <div class="page" [hidden]="topButtons">
+    <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
     <button class="btn btn-info" [disabled]="previousButton" (click)="previousPage()">&laquo; Previous</button>
     <button class="btn btn-info" [disabled]="nextButton" (click)="nextPage()">Next &raquo;</button>
   </div>
 
-  <table class="table table-striped" [hidden]="resultText">
-    <thead>
-    <tr>
-      <th class="d-none">Id</th>
-      <th>Position</th>
-      <th>Company</th>
-      <th>City</th>
-      <th>Employment</th>
-      <th>Salary</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let searchVacancyResult of searchVacancyResponse.searchVacancyDTOS">
-      <td class="d-none">{{searchVacancyResult.vacancyId}}</td>
-      <td>{{searchVacancyResult.position}}</td>
-      <td>{{searchVacancyResult.companyName}}</td>
-      <td>{{searchVacancyResult.city}}</td>
-      <td>{{searchVacancyResult.employment}}</td>
-      <td>{{searchVacancyResult.salary}} usd</td>
-      <td><a class="btn btn-info" style="left: 0; vertical-align: bottom"
-             role="button" routerLink="/viewVacancy/{{searchVacancyResult.vacancyId}}">View details &raquo;</a></td>
-    </tr>
-    </tbody>
-  </table>
+  <div id="table">
+    <table class="table table-striped" [hidden]="resultText">
+      <thead>
+      <tr>
+        <th class="d-none">Id</th>
+        <th>Position</th>
+        <th>Company</th>
+        <th>City</th>
+        <th>Employment</th>
+        <th>Salary</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let searchVacancyResult of searchVacancyResponse.searchVacancyDTOS">
+        <td class="d-none">{{searchVacancyResult.vacancyId}}</td>
+        <td>{{searchVacancyResult.position}}</td>
+        <td>{{searchVacancyResult.companyName}}</td>
+        <td>{{searchVacancyResult.city}}</td>
+        <td>{{searchVacancyResult.employment}}</td>
+        <td>{{searchVacancyResult.salary}} usd</td>
+        <td><a class="btn btn-info" style="left: 0; vertical-align: bottom"
+               role="button" routerLink="/viewVacancy/{{searchVacancyResult.vacancyId}}">View details &raquo;</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class="page" [hidden]="bottomButtons">
     <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
     <button class="btn btn-info" [disabled]="previousButton" (click)="previousPage()">&laquo; Previous</button>
@@ -85,3 +104,4 @@
 </div>
 </body>
 
+</html>
