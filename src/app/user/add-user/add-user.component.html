@@ -1,55 +1,101 @@
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-10 col-xl-9 mx-auto">
-        <div class="card card-signin flex-row my-5">
-          <div class="card-img-left d-none d-md-flex">
-<!--            <img src="../../../favicon.ico" style="width: 100%">-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body class="form-v8">
+  <div class="page-content">
+    <div class="form-v8-content">
+      <div class="form-left">
+        <img src="../../../favicon.ico" style="width: 100%" height="100%" alt="form">
+      </div>
+      <div class="form-right">
+        <div class="tab">
+          <div class="tab-inner">
+            <button class="tablinks" onclick="openCity(event, 'sign-up')" id="defaultOpen">Sign Up</button>
           </div>
-          <div class="card-body">
-            <h5 class="card-title text-center">Register</h5>
-            <form class="form-signin" (ngSubmit)="findByEmail()" #userForm="ngForm">
-              <div class="form-label-group">
-                <input type="text" id="login" class="form-control" placeholder="Email" required autofocus
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login" #login="ngModel" [(ngModel)]="user.login"
-                autocomplete="off">
-                <label for="login">Email</label>
-              </div>
+          <div class="tab-inner">
+            <button class="tablinks" onclick="openCity(event, 'sign-in')">Sign In</button>
+          </div>
+        </div>
+        <form class="form-detail" (ngSubmit)="findByEmail()" #userForm="ngForm">
+          <div class="tabcontent" id="sign-up">
+            <div class="form-row">
+              <label class="form-row-inner">
+                <input type="text" id="login" class="input-text" placeholder="Email" required autofocus
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login" #login="ngModel"
+                  [(ngModel)]="user.login" autocomplete="off">
+                <span class="label">E-Mail</span>
+                <span class="border"></span>
+              </label>
               <div *ngIf="login.errors && login.dirty" class="alert alert-danger">
                 <div [hidden]="!login.errors.required">Email is required!</div>
                 <div [hidden]="!login.errors.pattern">Login is incorrect!</div>
               </div>
-              <hr>
-
-              <div class="form-label-group">
-                <input type="password" id="password" class="form-control" placeholder="Password"  name = "password" #password="ngModel" required
-                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"  [(ngModel)]="user.password">
-                <label for="password">Password</label>
-              </div>
+            </div>
+            <div class="form-row">
+              <label class="form-row-inner">
+                <input type="password" id="password" class="input-text" placeholder="Password" name="password"
+                  #password="ngModel" required
+                  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
+                  [(ngModel)]="user.password">
+                <span class="label">Password</span>
+                <span class="border"></span>
+              </label>
               <div *ngIf="password.errors && password.dirty" class="alert alert-danger">
                 <div [hidden]="!password.errors.required">Password is required!</div>
-                <div [hidden]="!password.errors.pattern && login.errors.pattern">Password must be no less than 8 symbols (uppercase, lowercase, number and one special symbol)!</div>
+                <div [hidden]="!password.errors.pattern && login.errors.pattern">Password must be no less than 8 symbols
+                  (uppercase, lowercase, number and one special symbol)!</div>
               </div>
-              <div class="form-label-group">
-                <input type="password" class="form-control"  [(ngModel)]="user.matchingPassword"
-                placeholder="Confirm Password" id="matchingPassword" name="matchingPassword" #matchingPassword="ngModel" required
-                >
-                <label for="matchingPassword">Confirm password</label>
-              </div>
-              <div *ngIf="matchingPassword.errors && matchingPassword.dirty" class="alert alert-danger">
+            </div>
+            <div class="form-row">
+              <label class="form-row-inner">
+                <input type="password" class="input-text" [(ngModel)]="user.matchingPassword"
+                  placeholder="Confirm Password" id="matchingPassword" name="matchingPassword"
+                  #matchingPassword="ngModel" required>
+                <span class="label">Comfirm Password</span>
+                <span class="border"></span>
+              </label>
+              <div *ngIf="matchingPassword.errors && matchingPassword.touched" class="alert alert-danger">
                 <div [hidden]="!matchingPassword.errors.required">Confirm password!</div>
               </div>
               <div *ngIf="user.matchingPassword != user.password" class="alert alert-danger">Passwords don`t match!
               </div>
-
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="!userForm.form.valid">Register</button>
-              <hr class="my-4">
-              <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button> -->
-              <!-- <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button> -->
-            </form>
+            </div>
+            <div class="form-row-last">
+              <input type="submit" name="register" class="register" [disabled]="!userForm.form.valid" value="Register">
+            </div>
           </div>
-        </div>
+        </form>
+        <form class="form-detail" (ngSubmit)="login()" #userForm="ngForm">
+          <div class="tabcontent" id="sign-in">
+            <div class="form-row">
+              <label class="form-row-inner">
+                <input type="text" name="your_email_1" id="your_email_1" class="input-text" required>
+                <span class="label">E-Mail</span>
+                <span class="border"></span>
+              </label>
+            </div>
+            <div class="form-row">
+              <label class="form-row-inner">
+                <input type="password" name="password_1" id="password_1" class="input-text" required>
+                <span class="label">Password</span>
+                <span class="border"></span>
+              </label>
+            </div>
+            <div class="form-row-last">
+              <input type="submit" name="register" class="register" value="Sign In">
+            </div>
+          </div>
+        </form>
+        <script>document.getElementById("defaultOpen").click();</script>
+
       </div>
     </div>
   </div>
-</body>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>

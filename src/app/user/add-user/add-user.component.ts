@@ -7,7 +7,8 @@ import { ComfirmComponent } from '../../confirm/comfirm.component';
 import { MatDialog } from '@angular/material';
 @Component({
   templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  styleUrls: ['./add-user.component.css'],
+
 })
 export class AddUserComponent implements OnInit {
 
@@ -17,10 +18,22 @@ export class AddUserComponent implements OnInit {
   user: User = new User();
   error: any;
 
-  constructor(private router: Router, private userService: UserService, public dialog: MatDialog) { }
+  constructor(private router: Router, private userService: UserService, public dialog: MatDialog) {
+    
+  }
 
   ngOnInit() {
+    this.loadScripts();
   }
+
+  loadScripts() {
+    document.getElementById("script1").remove();
+    var script1 = document.createElement("script");
+    script1.setAttribute("id", "script1");
+    script1.setAttribute("src", "app/user/js/app.js");
+    document.head.appendChild(script1);
+    document.getElementById("defaultOpen").click();
+}
 
   findByEmail() {
     this.userService.findByEmail(this.user)
