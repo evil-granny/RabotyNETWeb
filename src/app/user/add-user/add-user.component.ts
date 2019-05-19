@@ -23,17 +23,24 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadScripts();
+    document.getElementById("defaultOpen").click();
   }
 
-  loadScripts() {
-    document.getElementById("script1").remove();
-    var script1 = document.createElement("script");
-    script1.setAttribute("id", "script1");
-    script1.setAttribute("src", "app/user/js/app.js");
-    document.head.appendChild(script1);
-    document.getElementById("defaultOpen").click();
-}
+ 
+     openCity(evt, cityName) {
+      var i: number, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
 
   findByEmail() {
     this.userService.findByEmail(this.user)
