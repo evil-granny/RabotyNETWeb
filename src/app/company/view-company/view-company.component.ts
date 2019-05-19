@@ -22,7 +22,7 @@ export class ViewCompanyComponent implements OnInit {
   claiming: boolean = false;
 
   page: number = 0;
-  count: number = 4;
+  count: number = 9;
   size: number = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
@@ -113,7 +113,7 @@ export class ViewCompanyComponent implements OnInit {
     return this.company.claims != null && this.company.claims.length > 0;
   }
 
-  deleteVacancyById(vacancy: Vacancy): void {
+  deleteVacancy(vacancy: Vacancy): void {
     this.vacancyService.deleteById(vacancy.vacancyId)
       .subscribe( data => {
         this.vacancies = this.vacancies.filter(p => p !== vacancy);

@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <ng-template #updateBlock>
-                            <input type = "text" class="form-control" [ngModelOptions]="{standalone: true}"   
+                            <input type = "text" class="form-control" [ngModelOptions]="{standalone: true}"  
                             placeholder="Input requirement" maxlength="100" id="description" pattern="^[a-zA-Z0-9_,.\- &]{3,100}$" [(ngModel)]="item.description" 
                             autocomplete="off" #description>
                             <div *ngIf="description.errors && (description.dirty || description.touched)" class="alert alert-danger">
