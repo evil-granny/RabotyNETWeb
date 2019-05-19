@@ -6,12 +6,17 @@
         <div class="module-inner">
           <div class="content-panel">
             <h2> 
-                <i *ngIf="isApproved() && !isBlocked() && !hasClaims()" class="fa fa-thumbs-up" style="color: green;"></i>
-                <i *ngIf="isApproved() && hasClaims()" class="fa fa-warning" style="color: orange;"></i>
-                <i *ngIf="!isApproved()" class="fa fa-times" style="color: red;"></i>
-                <i *ngIf="isApproved() && isBlocked()" class="fa fa-thumbs-down" style="color: red"></i>
+                <i *ngIf="company.status == 'APPROVED' && !hasClaims()" class="fa fa-thumbs-up"
+                  style="color: green; font-size: 150%;"></i>
+                <i *ngIf="company.status == 'APPROVED' && hasClaims()" class="fa fa-warning"
+                  style="color: orange; font-size: 150%;"></i>
+                <i *ngIf="company.status == 'CREATED'" class="fa fa-times" style="color: red; font-size: 150%;"></i>
+                <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" style="color: black; font-size: 150%;"></i>
               {{company.name}}</h2>
-              <img src="assets/img/company.png" alt="Company logo" height="150" style="float: left">
+                <img *ngIf="avatar" style="height: 150px; float: left; margin-right: 5%;" [src]="avatar"
+                  alt="">
+                <img *ngIf="!avatar" style="height: 150px; float: left; margin-right: 5%;"
+                  src="/assets/img/company.png" alt="">
               
               <p>{{company.description}}</p>
 
@@ -49,7 +54,7 @@
               </div>
 
               <br>
-              <button *ngIf="claiming == false" class="btn btn-warning" (click)="claiming = true;">Claim</button>
+              <button *ngIf="claiming == false && !checkUser()" class="btn btn-warning" (click)="claiming = true;">Claim</button>
               <div *ngIf="claiming == true">
                 <form class="form-horizontal" (ngSubmit)="createClaim()" #claimForm="ngForm">
                   <fieldset class="fieldset">
@@ -90,7 +95,7 @@
                 </form>
               </div>
 
-              <a class="btn btn-primary" style = "margin: 20px" routerLink="/createVacancy/{{company.name}}">Create Vacancy</a>
+              <a *ngIf="checkUser()" class="btn btn-primary" style = "margin: 20px" routerLink="/createVacancy/{{company.name}}">Create Vacancy</a>
               
 
               <h4 class="fieldset-title"></h4>
@@ -111,9 +116,9 @@
                   </div>
                 </div>
                 <button *ngIf="canPrev()" class="btn btn-info" (click)="prev();">&laquo; Previous</button>
-                <button *ngIf="!canPrev()" disabled class="btn btn-info" (click)="prev();">&laquo; Previous</button>
+                <!-- <button *ngIf="!canPrev()" disabled class="btn btn-info" (click)="prev();">&laquo; Previous</button> -->
                 <button *ngIf="canNext()" class="btn btn-info" (click)="next();">Next &raquo;</button>
-                <button *ngIf="!canNext()" disabled class="btn btn-info" (click)="next();">Next &raquo;</button>
+                <!-- <button *ngIf="!canNext()" disabled class="btn btn-info" (click)="next();">Next &raquo;</button> -->
     
                 </div>
 

@@ -52,8 +52,13 @@ export class CompanyService {
     return this.http.put<Company>(this.companyURL + "/update", company, httpOptions);
   }
 
+  public sendMail(company) {
+    console.log("[send mail to approve company]");
+    return this.http.put<Company>(this.companyURL + "/sendMail", company, httpOptions);
+  }
+
   public approve(company) {
-    console.log("[approve company]");
+    console.log("[approve company by user]");
     return this.http.put<Company>(this.companyURL + "/approve", company, httpOptions);
   }
 
@@ -62,16 +67,21 @@ export class CompanyService {
     return this.http.get<Company>(this.companyURL + "/byName/" + companyName, httpOptions);
   }
 
+  public exists(companyName) {
+    console.log("[check company name for exists]");
+    return this.http.get<boolean>(this.companyURL + "/exists/" + companyName, httpOptions);
+  }
+
   public createClaim(claim) {
     console.log("[claim company]");
-    return this.http.post<Company>(this.claimURL + "/", claim, httpOptions);
+    return this.http.post<Company>(this.claimURL + "/create", claim, httpOptions);
   }
 
   public findClaims(company) {
-    return this.http.get<Claim[]>(this.claimURL + "/" + company.companyId, httpOptions);
+    return this.http.get<Claim[]>(this.claimURL + "/byCompany/" + company.companyId, httpOptions);
   }
 
   public deleteClaimById(claim) {
-    return this.http.delete(this.claimURL + "/" + claim.claimId, httpOptions);
+    return this.http.delete(this.claimURL + "/delete/" + claim.claimId, httpOptions);
   }
 }

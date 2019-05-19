@@ -7,6 +7,10 @@ import { UserService } from 'src/app/services/user.service';
 import { Vacancy } from 'src/app/models/vacancy/vacancy.model';
 import { VacancyService } from 'src/app/services/vacancy.service';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Photo } from 'src/app/models/photo.model';
+import { PhotoService } from 'src/app/services/profile/photo.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'rabotyNet',
@@ -19,6 +23,9 @@ export class ViewCompanyComponent implements OnInit {
   claim: Claim = new Claim();
   vacancies: Observable<Vacancy[]>;
 
+  avatar: any;
+  photo: Photo = new Photo();
+
   claiming: boolean = false;
 
   page: number = 0;
@@ -26,7 +33,8 @@ export class ViewCompanyComponent implements OnInit {
   size: number = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
-    private userService: UserService, private vacancyService: VacancyService) { }
+    private userService: UserService, private vacancyService: VacancyService,
+    private app: AuthenticationService, private photoService: PhotoService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     var companyName = this.route.snapshot.paramMap.get("companyName");
@@ -41,6 +49,10 @@ export class ViewCompanyComponent implements OnInit {
               });
 
               this.company = data;
+
+              if (this.company.photo != null) {
+                this.loadPhoto(this.company.photo.photoId);
+              }
             });   
         })
     }
@@ -58,7 +70,6 @@ export class ViewCompanyComponent implements OnInit {
   }
 
   createClaim(): void {
-
     this.userService.findById(1)
       .subscribe(data => {
         this.claiming = false;
@@ -72,7 +83,14 @@ export class ViewCompanyComponent implements OnInit {
             this.company = data;
           });
       });
-    
+  }
+
+  loadPhoto(photoId: BigInteger) {
+    this.photoService.load(photoId)
+      .subscribe(data => {
+        this.photo = data;
+        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + this.photo.image);
+      });
   }
 
   canPrev() : boolean {
@@ -111,6 +129,10 @@ export class ViewCompanyComponent implements OnInit {
 
   hasClaims() : boolean {
     return this.company.claims != null && this.company.claims.length > 0;
+  }
+
+  checkUser(): boolean {
+    return this.app.currentUserValue.userId == this.company.user.userId;
   }
 
 }

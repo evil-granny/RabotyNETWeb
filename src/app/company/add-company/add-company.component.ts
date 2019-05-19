@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Company } from '../../models/CompanyModel/company.model';
-import { CompanyService } from '../../services/company.service'
+import { CompanyService } from '../../services/company.service';
 import { UserService } from 'src/app/services/user.service';
 import { Photo } from 'src/app/models/photo.model';
 import { PhotoService } from 'src/app/services/profile/photo.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'rabotyNet',
@@ -22,14 +23,21 @@ export class AddCompanyComponent implements OnInit {
   fileToUpload: File;
 
   constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
-    private userService: UserService, private photoService: PhotoService, private sanitizer: DomSanitizer) { }
+    private userService: UserService, private photoService: PhotoService, private sanitizer: DomSanitizer,
+    private app: AuthenticationService) { }
 
   ngOnInit(): void {
+
     var companyName = this.route.snapshot.paramMap.get("companyName");
     if (companyName !== null) {
       this.companyService.findByName(companyName)
         .subscribe(data => {
           this.company = data;
+
+          console.log(this.app.currentUserValue.userId, this.company.user.userId);
+          if(this.app.currentUserValue.userId != this.company.user.userId) {
+            this.router.navigate(['accessDenied']);
+          }
 
           if (this.company.photo != null) {
             this.loadPhoto(this.company.photo.photoId);
@@ -41,24 +49,33 @@ export class AddCompanyComponent implements OnInit {
   update(): void {
     this.companyService.update(this.company)
       .subscribe(data => {
-        if(data != null)
+        if (data != null)
           alert("Company has been updated successfully.");
         else
-          alert("Validation problem has been occured"); 
+          alert("Validation problem has been occured");
       });
   };
 
   create(): void {
     this.company.status = 'CREATED';
 
-    this.companyService.create(this.company)
-      .subscribe(data => {
-        if(data != null) {
-          this.router.navigate(['/updateCompany/' + this.company.name]);
+    this.companyService.exists(this.company.name)
+      .subscribe(flag => {
+        if (flag == false) {
+          this.companyService.create(this.company)
+            .subscribe(data => {
+              if (data != null) {
+                this.router.navigate(['/updateCompany/' + this.company.name]);
+              }
+              else
+                alert("Validation problem has been occured");
+            });
+        } else {
+          alert("Company with that name already exists!");
         }
-        else
-          alert("Validation problem has been occured");  
-    });  
+      });
+
+
   };
 
   handlePhoto(file: FileList) {

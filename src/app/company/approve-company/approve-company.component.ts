@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from 'src/app/models/CompanyModel/company.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'rabotyNet',
@@ -12,7 +13,8 @@ export class ApproveCompanyComponent implements OnInit {
 
   company: Company = new Company();
 
-  constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
+              private app:AuthenticationService) { }
   
   ngOnInit() {
     var companyName = this.route.snapshot.paramMap.get("companyName");
@@ -20,14 +22,19 @@ export class ApproveCompanyComponent implements OnInit {
       this.companyService.findByName(companyName)
         .subscribe(data => {
           this.company = data;
-          
-          this.company.status = 'APPROVED';
 
-          this.companyService.update(this.company)
-            .subscribe(data => {
-              console.log("[approved]");
-              this.router.navigate(['updateCompany/' + companyName]);
-            });
+          if(this.app.currentUserValue.userId != this.company.user.userId) {
+            this.router.navigate(['accessDenied']);
+          }
+          else {
+            this.companyService.approve(this.company)
+              .subscribe(data => {
+                if(data.status == 'APPROVED')
+                  this.router.navigate(['updateCompany/' + companyName]);
+                else
+                  this.router.navigate(['login']);
+              });
+          }
         });
         
     }
