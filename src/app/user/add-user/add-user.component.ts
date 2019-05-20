@@ -9,6 +9,8 @@ import { RegistrationconfirmComponent } from 'src/app/confirm/registrationconfir
 import { LoginComponent } from 'src/app/login/login.component';
 import { AnimationMetadataType } from '@angular/animations';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import {Role} from '../../models/roles.model';
+import {UserPrincipal} from '../../models/userPrincipal.model';
 @Component({
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
@@ -16,7 +18,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class AddUserComponent implements OnInit {
 
-
+  currentUser: UserPrincipal;
   users: User[];
   foundUser: User[];
   user: User = new User();
@@ -26,7 +28,7 @@ export class AddUserComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService, public dialog: MatDialog,
     private app: AuthenticationService) {
-
+    this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {
@@ -96,7 +98,15 @@ export class AddUserComponent implements OnInit {
 
   signin() {
     const user = this.app.authenticate(this.credentials).subscribe(data => {
-      this.router.navigateByUrl('/vacancies');
+      if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1) {
+        this.router.navigateByUrl('/companies');
+      }
+      if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1) {
+        this.router.navigateByUrl('/companies/my');
+      }
+      if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1) {
+        this.router.navigateByUrl('/cvs');
+      }
     });
   }
 }
