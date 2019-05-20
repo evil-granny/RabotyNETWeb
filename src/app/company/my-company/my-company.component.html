@@ -1,12 +1,26 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vacancy</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+    integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 <body>
-  <div class="container">
+  <div class="container" style="margin-top:70px">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
           <div class="content-panel">
             <h2>My Companies</h2>
+            <a class="btn btn-primary" routerLink="/createCompany"> Create company</a>
             <br>
             <table class="table table-striped">
               <thead>
@@ -56,12 +70,6 @@
                         title="Update"></i></a>
                     <a class="btn" (click)="deleteById(company)"><i class="fa fa-trash" rel="tooltip"
                         title="Delete"></i></a>
-                    <a *ngIf="company.status == 'CREATED'" class="btn" (click)="approve(company)" rel="tooltip"
-                      title="Approve"><i class="fa fa-thumbs-up"></i></a>
-                    <a *ngIf="company.status == 'APPROVED'" class="btn" (click)="block(company)" rel="tooltip"
-                      title="Block"><i class="fa fa-lock"></i></a>
-                    <a *ngIf="company.status == 'BLOCKED'" class="btn" (click)="block(company)" rel="tooltip"
-                      title="Unblock"><i class="fa fa-unlock"></i></a>
                   </td>
                 </tr>
                 <tr>

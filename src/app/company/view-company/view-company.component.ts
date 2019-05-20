@@ -7,6 +7,12 @@ import { UserService } from 'src/app/services/user.service';
 import { Vacancy } from 'src/app/models/vacancy/vacancy.model';
 import { VacancyService } from 'src/app/services/vacancy.service';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Photo } from 'src/app/models/photo.model';
+import { PhotoService } from 'src/app/services/profile/photo.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { UserPrincipal } from 'src/app/models/userPrincipal.model';
+import { Role } from 'src/app/models/roles.model';
 
 @Component({
   selector: 'rabotyNet',
@@ -18,17 +24,23 @@ export class ViewCompanyComponent implements OnInit {
   company: Company = new Company();
   claim: Claim = new Claim();
   vacancies: Vacancy[];
+  currentUser: UserPrincipal;
+
+  avatar: any;
+  photo: Photo = new Photo();
 
   claiming: boolean = false;
 
   page: number = 0;
-  count: number = 9;
+  count: number = 8;
   size: number = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
-    private userService: UserService, private vacancyService: VacancyService) { }
+    private userService: UserService, private vacancyService: VacancyService,
+    private app: AuthenticationService, private photoService: PhotoService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
     var companyName = this.route.snapshot.paramMap.get("companyName");
     if(companyName != null) {
       this.companyService.findByName(companyName)
@@ -41,11 +53,16 @@ export class ViewCompanyComponent implements OnInit {
               });
 
               this.company = data;
-            });   
+
+              if (this.company.photo != null) {
+                this.loadPhoto(this.company.photo.photoId);
+              }
+            });
         })
     }
     this.findVacancies();
   }
+  
 
   findVacancies() {
     this.vacancyService.findVacanciesByCompanyName(this.route.snapshot.paramMap.get("companyName"), this.page * this.count, this.count).subscribe(
@@ -58,7 +75,6 @@ export class ViewCompanyComponent implements OnInit {
   }
 
   createClaim(): void {
-
     this.userService.findById(1)
       .subscribe(data => {
         this.claiming = false;
@@ -72,7 +88,14 @@ export class ViewCompanyComponent implements OnInit {
             this.company = data;
           });
       });
-    
+  }
+
+  loadPhoto(photoId: BigInteger) {
+    this.photoService.load(photoId)
+      .subscribe(data => {
+        this.photo = data;
+        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + this.photo.image);
+      });
   }
 
   canPrev() : boolean {
@@ -113,6 +136,10 @@ export class ViewCompanyComponent implements OnInit {
     return this.company.claims != null && this.company.claims.length > 0;
   }
 
+  checkUser(): boolean {
+    return this.app.currentUserValue.userId == this.company.user.userId;
+  }
+
   deleteVacancy(vacancy: Vacancy): void {
     this.vacancyService.deleteById(vacancy.vacancyId)
       .subscribe( data => {
@@ -120,5 +147,9 @@ export class ViewCompanyComponent implements OnInit {
         this.size = this.size - 1;
       })
   };
+
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
 
 }
