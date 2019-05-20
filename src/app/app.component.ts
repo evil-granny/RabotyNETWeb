@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {Router} from '@angular/router';
-import { AuthenticationService } from './services/authentication.service';
-import { Search } from './models/SearchModel/search.model';
-import { UserPrincipal } from './models/userPrincipal.model';
+import {AuthenticationService} from './services/authentication.service';
+import {Search} from './models/SearchModel/search.model';
+import {UserPrincipal} from './models/userPrincipal.model';
 import {Role} from './models/roles.model';
 
 @Component({
@@ -11,7 +11,7 @@ import {Role} from './models/roles.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   search: Search = new Search();
   currentUser: UserPrincipal;
@@ -43,6 +43,9 @@ export class AppComponent {
 
   get isUser() {
     return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
+  }
+
+  ngOnInit() {
   }
 
   hide() {
