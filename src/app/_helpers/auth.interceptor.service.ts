@@ -29,12 +29,4 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 
-  // intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  //   let requestToForward = req;
-  //   let token = this.tokenExtractor.getToken() as string;
-  //   if (token !== null) {
-  //     requestToForward = req.clone({ setHeaders: { "X-XSRF-TOKEN": token } });
-  //   }
-  //   return next.handle(requestToForward);
-  // }
 }

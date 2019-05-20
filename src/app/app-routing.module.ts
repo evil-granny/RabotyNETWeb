@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
 
-  // { path: 'companies', component: CompanyComponent },
+  { path: 'companies', component: CompanyComponent },
   { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
@@ -50,7 +50,7 @@ const routes: Routes = [
   { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
 
   { path: 'cvs', component: CvComponent },
-  // { path: 'createCV', component: AddCvComponent },
+  { path: 'createCV', component: AddCvComponent },
   { path: 'createPdf', component: PdfDesignerComponent },
   { path: 'updateCvForPDF/:cvId', component: PdfDesignerComponent },
 
@@ -62,7 +62,7 @@ const routes: Routes = [
   { path: 'accessDenied', component: AccessDeniedPageComponent },
   { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
-  // { path: 'users', component: UserComponent },
+  { path: 'users', component: UserComponent },
 
   { path: 'searchCV', component: SearchCVComponent },
 
@@ -76,8 +76,8 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_ADMIN] }
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.ROLE_ADMIN] }
   },
   // {
   //   path: 'vacancies/search',
@@ -88,14 +88,14 @@ const routes: Routes = [
   {
     path: 'companies',
     component: CompanyComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
   },
   {
     path: 'createCV',
     component: AddCvComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
   // {
   //   path: 'searchCV',
@@ -106,8 +106,8 @@ const routes: Routes = [
   {
     path: 'users',
     component: UserComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_USER] }
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.ROLE_USER] }
   },
   {
     path: 'registrationConfirm',
