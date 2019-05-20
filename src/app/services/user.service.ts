@@ -35,6 +35,11 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl + "/users", httpOptions);
   }
 
+  enabledUser(user: User) {
+    console.log("[enabledUser]");
+    return this.http.get<Boolean>(this.userUrl + "/login/enabled/" + user.login + "/", httpOptions)
+  }
+
   public findByEmail(user: User): Observable<any> {
     console.log("[findByEmail]");
     return this.http.get<User[]>(this.userUrl + "/users/" + user.login + "/", httpOptions);
@@ -56,7 +61,6 @@ export class UserService {
 
   public insert(user: any, users: any) {
       console.log("[insert]");
-      console.log(user);
       this.openModal("User has been created successfully. Confirm your email and login into site!");
       return this.http.post<User>(this.userUrl + "/registration", user, httpOptions);
   }
@@ -64,5 +68,10 @@ export class UserService {
   public validToken(token: String): Observable<any>{
     console.log("[validToken]");
     return this.http.get<String>(this.userUrl + "/registrationConfirm?token=" + token, httpOptions);
+  }
+
+  public resendToken(email: String): Observable<any>{
+    console.log("[resendToken]");
+    return this.http.post<String>(this.userUrl + "/user/resendRegistrationToken", email, httpOptions);
   }
 }

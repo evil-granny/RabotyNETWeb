@@ -30,11 +30,13 @@ import {ViewVacancyComponent} from './vacancy/view-vacancy/view-vacancy.componen
 import {PasswordForgotComponent} from './password-forgot/password-forgot.component';
 import {PasswordRestoreComponent} from './password-restore/password-restore.component';
 import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
+import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
   { path: 'vacancies', component: VacancyComponent },
+  { path: 'hotVacancies', component: HotVacancyComponent },
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
@@ -48,8 +50,8 @@ const routes: Routes = [
 
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
-  { path: 'createPdf', component: PdfDesignerComponent },
-  { path: 'updateCvForPDF/:cvId', component: PdfDesignerComponent },
+
+  { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
 
   { path: 'updateCV/:cvId', component: AddCvComponent },
 

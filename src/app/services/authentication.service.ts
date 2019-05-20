@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserPrincipal } from '../models/userPrincipal.model';
 import { map } from 'rxjs/operators';
-import { logger } from 'codelyzer/util/logger';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -23,7 +22,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  public authenticate(credentials) {
+  public authenticate(credentials: { username: any; password: any; }) {
 
     const authHeader = credentials ? {
       'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password),
@@ -42,15 +41,16 @@ export class AuthenticationService {
           const name = currentUser.username;
           const userRoles = currentUser.authorities;
           const roles: Array<string> = new Array<string>();
-          userRoles.forEach(function (key) {
+          userRoles.forEach(function (key: { authority: string; }) {
             roles.push(key.authority);
           });
-          const userId = currentUser.userID;
+          const userId = currentUser.userId;
           const token = 'Basic ' + btoa(credentials.username + ':' + credentials.password);
           userPrincipal = new UserPrincipal(name, roles, token, userId);
           localStorage.setItem('currentUser', JSON.stringify(userPrincipal));
           this.currentUserSubject.next(userPrincipal);
         }
+        
         return userPrincipal;
       }));
   }

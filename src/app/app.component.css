@@ -1,5 +1,45 @@
 .list {
-    position: absolute;
-     top: 60px;
-     left: -60px;
+  position: absolute;
+  top: 60px;
+  left: -80px;
+}
+
+#overlay {
+  position: fixed;
+  width: 250px;
+  height: 330px;
+  top: 80px;
+  right: 10px;
+  border-radius: 7px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.search-form {
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.select-control {
+  font-size: 18px;
+  color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#startButton {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#hideButton {
+  float: right;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
