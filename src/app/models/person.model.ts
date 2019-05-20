@@ -9,9 +9,9 @@ export class Person {
 
     firstName: string = "";
 
-    lastName: string= "";
+    lastName: string = "";
 
-    birthday: Date= null;
+    birthday: Date = null;
 
     photo: Photo = new Photo();
 
@@ -20,4 +20,5 @@ export class Person {
     contact: Contact = new Contact();
 
     user: User = new User();
+
 }
