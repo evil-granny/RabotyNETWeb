@@ -20,12 +20,7 @@ import {Search} from '../models/SearchModel/search.model';
 })
 export class VacancyComponent implements OnInit {
   vacancies: Observable<Vacancy[]>;
-  search: Search = new Search();
-  requirements: Observable<Requirement[]>;
-
   currentUser: UserPrincipal;
-
-  p: number = 1;
 
   vacancy: Vacancy = new Vacancy();
 
@@ -38,14 +33,12 @@ export class VacancyComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.search.searchDocument = 'vacancies';
     this.findAll();
   };
 
   findAll() {
      this.vacancyService.findAllWithPagination(this.page * this.count, this.count).subscribe(
        data => {
-         this.vacancies = data;
          this.vacancies = data.vacancies;
          this.size = data.count;
        }
@@ -55,39 +48,6 @@ export class VacancyComponent implements OnInit {
   gotoList() {
     this.router.navigate(['/vacancies']);
   };
-
-  update(vacancyId): void {
-    this.vacancyService.update(this.vacancyService.get(vacancyId))
-      .subscribe(data => {
-        this.gotoList();
-      }, error => console.error(error));
-  };
-
-  deleteById(id: number): void {
-    this.vacancyService.deleteById(id)
-      .subscribe(
-        data => {
-          this.findAll();
-        },
-        error => console.log(error));
-  };
-
-  get isAdmin() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
-  }
-
-  get isCowner() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
-  }
-
-  get isUser() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
-  }
-
-  logout() {
-    const user = this.app.logout();
-      this.router.navigateByUrl('/vacancies');
-  }
 
   canPreviousPage() : boolean {
     return this.page > 0;
@@ -111,11 +71,4 @@ export class VacancyComponent implements OnInit {
     }
   }
 
-  searchCVPage() {
-    this.router.navigateByUrl('/searchCV');
-  }
-
-  startSearch() {
-    this.router.navigate(['/vacancies/search', {doc: this.search.searchDocument, text: this.search.searchText, sParam: this.search.searchParameter}]);
-  }
 }

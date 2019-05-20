@@ -1,44 +1,82 @@
-
 <router-outlet></router-outlet>
- <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse" style="height:70px">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+
+<nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse" style="height:70px">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+    data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" routerLink="/vacancies" style="color: white; font-size: 30px;">RabotyNet</a>
+
+  <div class="collapse navbar-collapse" style="margin-left: 100px;">
+    <ul class="navbar-nav mr-auto">
+      <a class="navbar-brand" routerLink="/companies" *ngIf="isCowner">My companies</a>
+      <a class="navbar-brand" routerLink="/cvs" *ngIf="isUser || isCowner">My resumes</a>
+      <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin">Сompanies</a>
+      <a class="navbar-brand" routerLink="/hotVacancies">Hot Vacancies</a>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" style="margin-top: 5px; margin-right: 60px;">
+        <button class="btn btn-outline-success my-2 my-sm-0" [disabled]="searchShown" (click)="showSearchForm()"
+          style="width: 200px;">
+          Search
         </button>
-        <a class="navbar-brand" routerLink="/vacancies" style="color: white; font-size: 35px;">RabotyNet</a>
-    
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="1"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="2"></a>
-                </li>
-            </ul>
-             <ul class="navbar-nav ml-auto">
-                <li class="nav-item" style="margin-top: 5px; width: 300px;">
-                    <input type="text" [(ngModel)]="search.searchText" placeholder="Search..." name="searchText"
-                        class="form-control mr-sm-2">
-                </li>
-                <li class="nav-item" style="margin-top: 5px; margin-right: 60px;">
-                    <button class="btn btn-outline-success my-2 my-sm-0" (click)="startSearch()">Search</button>
-                </li>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/assets/img/user.jpg" class="rounded-circle z-depth-0"
-                                style="width: 50px; height: 50px;">
-                        </a>
-                        <div class="list dropdown-menu">
-                            <a class="dropdown-item" routerLink="/profile">Profile</a>
-                            <a class="dropdown-item" routerLink="/companies">My companies</a>
-                            <a class="dropdown-item" href="/logout">Log out</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            <img *ngIf="(isUser || isCowner) && avatar" class="rounded-circle img-responsive z-depth-0"
+              style="width: 50px; height: 50px" [src]="avatar" alt="">
+            <img *ngIf="isAdmin" class="rounded-circle img-responsive z-depth-0" style="width: 50px; height: 50px"
+              src="/assets/img/admin.jpg" alt="">
+            <img *ngIf="!currentUser || (!isAdmin && !avatar)" class="rounded-circle img-responsive z-depth-0"
+              style="width: 50px; height: 50px" src="/assets/img/user.jpg" alt="">
+          </a>
+          <div class="list dropdown-menu">
+            <a class="dropdown-item" routerLink="/profile" *ngIf="isUser || isCowner">Profile</a>
+            <a class="dropdown-item" routerLink="/login" *ngIf="!currentUser">Login</a>
+            <a class="dropdown-item" (click)="logout()" *ngIf="currentUser">Log out</a>
+            <a class="dropdown-item" routerLink="/registration" *ngIf="!currentUser">Registration</a>
+          </div>
         </div>
-    </nav> 
-   
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div id="overlay" [hidden]="searchForm">
+  <button id="hideButton" (click)="hide()" style="color: white" class="btn"><i class="fa fa-close"></i></button>
+  <form class="search-form">
+    <div class="select-control" *ngIf="isCowner">Search</div>
+    <select [(ngModel)]="search.searchDocument" (ngModelChange)="selectDocument()" name="searchDocument"
+      class="form-control" *ngIf="isCowner">
+      <option [defaultSelected]="search.searchDocument" value="vacancies">vacancy</option>
+      <option value="resume">resume</option>
+    </select>
+
+    <div class="vacancy-select" [hidden]="vacancySelect">
+      <div class="select-control" *ngIf="!isCowner">Search vacancy by</div>
+      <div class="select-control" *ngIf="isCowner">by</div>
+      <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
+        <option [defaultSelected]="search.searchParameter" value="position">position</option>
+        <option value="city">city</option>
+        <option value="company">company</option>
+      </select>
+    </div>
+
+    <div class="resume-select" [hidden]="resumeSelect" *ngIf="isCowner">
+      <div class="select-control" *ngIf="isCowner">by</div>
+      <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
+        <option [defaultSelected]="search.searchParameter" value="name">name</option>
+        <option value="skill">skill</option>
+        <option value="phoneNumber">phone</option>
+        <option value="city">city</option>
+        <option value="position">position</option>
+      </select>
+    </div>
+
+    <input type="text" [(ngModel)]="search.searchText" placeholder="Search..." name="searchText" class="form-control"
+      pattern="^[A-Za-z]{1,20}$"><br>
+    <button id="startButton" class="btn btn-info" (click)="startSearch()">Start search</button>
+  </form>
+</div>

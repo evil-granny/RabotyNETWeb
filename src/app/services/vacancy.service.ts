@@ -37,11 +37,15 @@ export class VacancyService {
     return this.http.get<VacancyDTO>(this.vacancyUrl + "/" + first+ "/" + count, httpOptions);
   }
 
+  public findAllHotVacanciesWithPagination(first: number, count: number) : Observable<any> {
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/hotVacancies/" + first+ "/" + count, httpOptions);
+  }
+
   get(vacancyId: string) {
     return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
   }
 
-  public deleteById(id: number): Observable<Object> {
+  public deleteById(id: any) {
     return this.http.delete(this.vacancyUrl + '/' + id, httpOptions);
   }
 
@@ -55,5 +59,6 @@ export class VacancyService {
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
   }
+
 
 }

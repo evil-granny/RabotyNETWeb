@@ -1,10 +1,10 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ErrorHandler, NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { MatDatepickerModule, MatInputModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
+import { MatDatepickerModule, MatInputModule, MatNativeDateModule, MAT_DATE_LOCALE, MatSidenavModule } from '@angular/material';
 
 import { ProfileComponent } from './profile/profile.component';
 
@@ -46,22 +46,24 @@ import { ApproveCompanyComponent } from './company/approve-company/approve-compa
 
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
 
-import {RouterModule, Routes} from '@angular/router';
-import {AuthenticationService} from './services/authentication.service';
-import {LoginComponent} from './login/login.component';
-import {AdminComponent} from './admin/admin.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
+import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
 
-import {AuthInterceptor, ErrorInterceptor} from './_helpers';
-import {Role} from './models/roles.model';
-import {AuthGuard} from './_guards/auth.guard';
+import { AuthInterceptor, ErrorInterceptor } from './_helpers';
+import { Role } from './models/roles.model';
+import { AuthGuard } from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
-import {AppErrorHandler} from './_helpers/app.error.handler';
+import { AppErrorHandler } from './_helpers/app.error.handler';
 import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
 import { MyCompanyComponent } from './company/my-company/my-company.component';
 import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
 import { PasswordRestoreComponent } from './password-restore/password-restore.component';
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
+import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
+// import {SidebarModule} from 'ng-sidebar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -70,6 +72,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 const routes: Routes = [
   {
     path: 'vacancies',
+    component: VacancyComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'hotVacancies',
     component: VacancyComponent,
     canActivate: [AuthGuard]
   },
@@ -94,8 +101,8 @@ const routes: Routes = [
   {
     path: 'users',
     component: UserComponent,
-   // canActivate: [AuthGuard],
-   // data: { roles: [Role.ROLE_USER] }
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.ROLE_USER] }
   },
   {
     path: 'login',
@@ -136,7 +143,9 @@ const routes: Routes = [
     PasswordRestoreComponent,
     SearchVacancyComponent,
     ViewVacancyComponent,
-    AccessNonauthorizedPageComponent
+    AccessNonauthorizedPageComponent,
+    HotVacancyComponent,
+    AccessNonauthorizedPageComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -150,7 +159,7 @@ const routes: Routes = [
     PerfectScrollbarModule,
 
     MatDialogModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(), MatSidenavModule
   ],
   bootstrap: [AppComponent],
   entryComponents: [ComfirmComponent],
