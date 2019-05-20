@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div id="searchMenu">
+<div id="searchMenu" hidden="hidden">
   <form class="search-form">
     <div class="select-control" *ngIf="isCowner">Search</div>
     <select [(ngModel)]="search.searchDocument" (ngModelChange)="selectDocument()" name="searchDocument"

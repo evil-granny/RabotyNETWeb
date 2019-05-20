@@ -32,6 +32,7 @@ export class SearchVacancyComponent implements OnInit {
               private route: ActivatedRoute,
               private searchService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit() {

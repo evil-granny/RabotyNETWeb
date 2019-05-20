@@ -8,6 +8,7 @@ import {PdfService} from '../services/pdf.service';
 import {UserPrincipal} from '../models/userPrincipal.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {Role} from '../models/roles.model';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-search-cv',
@@ -37,6 +38,7 @@ export class SearchCVComponent implements OnInit {
               private route: ActivatedRoute,
               private searchCVService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit() {

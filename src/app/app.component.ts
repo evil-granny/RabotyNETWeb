@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 
 import {Router} from '@angular/router';
-import { AuthenticationService } from './services/authentication.service';
-import { Search } from './models/SearchModel/search.model';
-import { UserPrincipal } from './models/userPrincipal.model';
+import {AuthenticationService} from './services/authentication.service';
+import {Search} from './models/SearchModel/search.model';
+import {UserPrincipal} from './models/userPrincipal.model';
 import {Role} from './models/roles.model';
 
 @Component({
@@ -32,18 +32,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.includes('/searchCV')) {
-      this.disableSearchButton();
-    }
   }
 
   hide() {
     this.searchForm = true;
     this.searchShown = false;
-  }
-
-  disableSearchButton() {
-    this.searchShown = true;
   }
 
   showSearchForm() {
