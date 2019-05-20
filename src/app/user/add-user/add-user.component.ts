@@ -84,14 +84,19 @@ export class AddUserComponent implements OnInit {
     this.userService.enabledUser(this.user)
       .subscribe(data => {
         this.enabled = data;
+        console.log('-----------------------------')
+        console.log(this.enabled)
         if (!this.enabled) {
-          this.openModal("Your email is not confirmed!");
+          this.openModal('Your email is not confirmed!');
         } else {
-          const user = this.app.authenticate(this.credentials).subscribe(data => {
-            this.router.navigateByUrl('/vacancies');
-          });
+          this.signin();
         }
       });
   };
 
+  signin() {
+    const user = this.app.authenticate(this.credentials).subscribe(data => {
+      this.router.navigateByUrl('/vacancies');
+    });
+  }
 }

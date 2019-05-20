@@ -11,29 +11,20 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authenticationService.currentUserValue;
-    const token = this.tokenExtractor.getToken() as string;
-    console.log('---------REQUEST BEFORE---------')
-    console.log(request)
-    if (currentUser && currentUser.token && token !== null) {
+    // const token = this.tokenExtractor.getToken() as string;
+    // console.log('---------REQUEST BEFORE---------')
+    // console.log(request)
+    if (currentUser && currentUser.token) {
       request = request.clone({
         setHeaders: {
           Authorization: `${currentUser.token}`,
-          'X-XSRF-TOKEN': token,
+          // 'X-XSRF-TOKEN': token,
         }
       });
     }
-    console.log('---------REQUEST AFTER---------')
-    console.log(request)
+    // console.log('---------REQUEST AFTER---------')
+    // console.log(request)
 
     return next.handle(request);
   }
-
-  // intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  //   let requestToForward = req;
-  //   let token = this.tokenExtractor.getToken() as string;
-  //   if (token !== null) {
-  //     requestToForward = req.clone({ setHeaders: { "X-XSRF-TOKEN": token } });
-  //   }
-  //   return next.handle(requestToForward);
-  // }
 }
