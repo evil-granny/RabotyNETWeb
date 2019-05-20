@@ -98,12 +98,12 @@ const routes: Routes = [
    // data: { roles: [Role.ROLE_USER] }
   },
   {
-    path: 'registrationConfirm',
-    component: RegistrationconfirmComponent,
-  },
-  {
     path: 'login',
     component: LoginComponent
+  }, 
+   {
+    path: 'registrationConfirm',
+    component: RegistrationconfirmComponent
   },
 
   { path: '**', redirectTo: 'vacancies' }

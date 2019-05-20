@@ -25,6 +25,7 @@
     "@material/dialog": "^2.2.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
+    "jquery": "^3.4.1",
     "ngx-bootstrap": "^3.3.0",
     "ngx-pagination": "^3.2.1",
     "ngx-perfect-scrollbar": "^7.2.1",

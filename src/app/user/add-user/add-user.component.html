@@ -22,16 +22,16 @@
                         <button class="tablinks" onclick="openCity(event, 'sign-up')">Sign Up</button>
                     </div>
                 </div>
-                <form class="form-detail" (ngSubmit)="findByEmail()" #userForm="ngForm">
+                <form class="form-detail" (ngSubmit)="findByEmail()" #userForm1="ngForm">
                     <div class="tabcontent" id="sign-up">
                         <div class="form-row">
                             <label class="form-row-inner">
-                <input type="text" id="login" class="input-text" placeholder="Email" required autofocus
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login" #login="ngModel"
-                  [(ngModel)]="user.login" autocomplete="off">
-                <span class="label">E-Mail</span>
-                <span class="border"></span>
-              </label>
+                                <input type="text" id="login1" class="input-text" placeholder="Email" required autofocus
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login" #login="ngModel"
+                                    [(ngModel)]="user.login" autocomplete="off">
+                                <span class="label">E-Mail</span>
+                                <span class="border"></span>
+                            </label>
                             <div *ngIf="login.errors && login.dirty" class="alert alert-danger">
                                 <div [hidden]="!login.errors.required">Email is required!</div>
                                 <div [hidden]="!login.errors.pattern">Login is incorrect!</div>
@@ -39,55 +39,62 @@
                         </div>
                         <div class="form-row">
                             <label class="form-row-inner">
-                <input type="password" id="password" class="input-text" placeholder="Password" name="password"
-                  #password="ngModel" required
-                  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
-                  [(ngModel)]="user.password">
-                <span class="label">Password</span>
-                <span class="border"></span>
-              </label>
+                                <input type="password" id="password1"  class="input-text" placeholder="Password"
+                                    name="password" #password="ngModel" required
+                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
+                                    [(ngModel)]="user.password">
+                                <span class="label">Password</span>
+                                <span class="border"></span>
+                            </label>
                             <div *ngIf="password.errors && password.dirty" class="alert alert-danger">
                                 <div [hidden]="!password.errors.required">Password is required!</div>
-                                <div [hidden]="!password.errors.pattern && login.errors.pattern">Password must be no less than 8 symbols (uppercase, lowercase, number and one special symbol)!</div>
+                                <div [hidden]="!password.errors.pattern && login.errors.pattern">Password must be no
+                                    less than 8 symbols (uppercase, lowercase, number and one special symbol)!</div>
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="form-row-inner">
-                <input type="password" class="input-text" [(ngModel)]="user.matchingPassword"
-                  placeholder="Confirm Password" id="matchingPassword" name="matchingPassword"
-                  #matchingPassword="ngModel" required>
-                <span class="label">Comfirm Password</span>
-                <span class="border"></span>
-              </label>
+                                <input type="password" class="input-text" [(ngModel)]="user.matchingPassword"
+                                    placeholder="Confirm Password" id="matchingPassword" name="matchingPassword"
+                                    #matchingPassword="ngModel" required>
+                                <span class="label">Comfirm Password</span>
+                                <span class="border"></span>
+                            </label>
                             <div *ngIf="matchingPassword.errors && matchingPassword.touched" class="alert alert-danger">
                                 <div [hidden]="!matchingPassword.errors.required">Confirm password!</div>
                             </div>
-                            <div *ngIf="user.matchingPassword != user.password && matchingPassword.dirty" class="alert alert-danger">Passwords don`t match!
+                            <div *ngIf="user.matchingPassword != user.password && matchingPassword.dirty"
+                                class="alert alert-danger">Passwords don`t match!
                             </div>
                         </div>
                         <div class="form-row-last">
-                            <input type="submit" name="register" class="register" [disabled]="!userForm.form.valid" value="Register">
+                            <input type="submit" name="register" class="register" [disabled]="!userForm.form.valid"
+                                value="Register">
                         </div>
                     </div>
                 </form>
-                <form class="form-detail" (ngSubmit)="login()" #userForm="ngForm">
+                <form class="form-detail" (ngSubmit)="enabledUser()" #userForm="ngForm">
                     <div class="tabcontent" id="sign-in">
                         <div class="form-row">
                             <label class="form-row-inner">
-                <input type="text" name="your_email_1" id="your_email_1" class="input-text" required>
-                <span class="label">E-Mail</span>
-                <span class="border"></span>
-              </label>
+                                <input type="text" name="login" id="login" class="input-text" [(ngModel)]="user.login" required>
+                                <span class="label">E-Mail</span>
+                                <span class="border"></span>
+                            </label>
+                            <div *ngIf="login.errors && login.dirty" class="alert alert-danger">
+                                <div [hidden]="!login.errors.required">Email is required!</div>
+                                <div [hidden]="!login.errors.pattern">Login is incorrect!</div>
+                            </div>
                         </div>
                         <div class="form-row">
                             <label class="form-row-inner">
-                <input type="password" name="password_1" id="password_1" class="input-text" required>
-                <span class="label">Password</span>
-                <span class="border"></span>
-              </label>
+                                <input type="password" name="password" id="password" class="input-text"  [(ngModel)]="user.password" required>
+                                <span class="label">Password</span>
+                                <span class="border"></span>
+                            </label>
                         </div>
                         <div class="form-row-last">
-                            <input type="submit" name="register" class="register" value="Sign In">
+                            <input type="submit" name="register" class="register"  value="Sign In">
                         </div>
                     </div>
                 </form>
