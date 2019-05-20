@@ -24,8 +24,7 @@ export class AddUserComponent implements OnInit {
   enabled: Boolean;
   credentials = { username: '', password: '' };
 
-  constructor(private router: Router, private userService: UserService, public dialog: MatDialog,
-    private app: AuthenticationService) {
+  constructor(private router: Router, private userService: UserService, public dialog: MatDialog, private app: AuthenticationService) {
 
   }
 
@@ -55,7 +54,15 @@ export class AddUserComponent implements OnInit {
       .subscribe(data => {
         this.foundUser = data;
         console.log(this.foundUser);
-        if (this.foundUser.length > 0) {
+         if ((this.foundUser.length > 0)&&(!this.foundUser[0].enabled)) {
+          this.openModal("Your email is not confirmed!");
+        }
+        else if ((this.foundUser.length > 0)&&(this.foundUser[0].enabled)) {
+          const user = this.app.authenticate(this.credentials).subscribe(data => {
+          this.router.navigateByUrl('/vacancies');
+        });
+        }
+        else if (this.foundUser.length > 0) {
           this.openModal("There is an account with that email! Try with another one or login, please!")
           location.reload(true);
         } else {
@@ -81,17 +88,20 @@ export class AddUserComponent implements OnInit {
   }
 
   enabledUser(): void {
-    this.userService.enabledUser(this.user)
+    this.userService.enabledUser(this.credentials.username)
       .subscribe(data => {
         this.enabled = data;
         if (!this.enabled) {
           this.openModal("Your email is not confirmed!");
-        } else {
-          const user = this.app.authenticate(this.credentials).subscribe(data => {
-            this.router.navigateByUrl('/vacancies');
-          });
+        } else { 
+          this.signin();
         }
       });
-  };
+  }; 
 
+  signin() {
+    const user = this.app.authenticate(this.credentials).subscribe(data => {
+      this.router.navigateByUrl('/vacancies');
+    });
+  }
 }

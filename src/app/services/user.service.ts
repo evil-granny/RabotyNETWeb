@@ -35,9 +35,9 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl + "/users", httpOptions);
   }
 
-  enabledUser(user: User) {
+  enabledUser(email: any) {
     console.log("[enabledUser]");
-    return this.http.get<Boolean>(this.userUrl + "/login/enabled/" + user.login + "/", httpOptions)
+    return this.http.get<Boolean>(this.userUrl + "/login/enabled/" + email + "/", httpOptions)
   }
 
   public findByEmail(user: User): Observable<any> {
