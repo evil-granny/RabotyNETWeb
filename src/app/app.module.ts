@@ -71,6 +71,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 const routes: Routes = [
   {
+    path: 'companies',
+    component: CompanyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_ADMIN] }
+  },
+  {
     path: 'vacancies',
     component: VacancyComponent,
     canActivate: [AuthGuard]
@@ -91,12 +97,6 @@ const routes: Routes = [
     component: SearchVacancyComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_ADMIN] }
-  },
-  {
-    path: 'companies',
-    component: CompanyComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
   },
   // {
   //   path: 'searchCV',
