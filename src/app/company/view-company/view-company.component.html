@@ -110,7 +110,7 @@
                 </form>
               </div>
 
-              <a *ngIf="checkUser()" class="btn btn-primary" style = "margin: 20px" routerLink="/createVacancy/{{company.name}}">Create Vacancy</a>
+              <a *ngIf="checkUser() && company.status == 'APPROVED'" class="btn btn-primary" style = "margin: 20px" routerLink="/createVacancy/{{company.name}}">Create Vacancy</a>
               
 
             <h4 class="fieldset-title"></h4>
