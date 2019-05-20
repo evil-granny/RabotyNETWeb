@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Search} from '../models/SearchModel/search.model';
 import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
 import {SearchService} from '../services/search.service';
-import {SearchComponent} from '../search/search.component';
 import {Role} from '../models/roles.model';
 import {AuthenticationService} from '../services/authentication.service';
 import {UserPrincipal} from '../models/userPrincipal.model';
@@ -12,7 +11,6 @@ import {UserPrincipal} from '../models/userPrincipal.model';
   selector: 'app-search-vacancy',
   templateUrl: './search-vacancy.component.html',
   styleUrls: ['./search-vacancy.component.scss'],
-  providers: [SearchComponent]
 })
 export class SearchVacancyComponent implements OnInit {
 
@@ -32,7 +30,6 @@ export class SearchVacancyComponent implements OnInit {
   constructor(private app: AuthenticationService,
               private router: Router,
               private route: ActivatedRoute,
-              private searchComponent: SearchComponent,
               private searchService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
   }
@@ -47,6 +44,9 @@ export class SearchVacancyComponent implements OnInit {
       });
     if (this.search.searchText !== undefined) {
       this.startSearch();
+    } else {
+      this.search.searchDocument = 'vacancies';
+      this.search.searchParameter = 'position';
     }
   }
 
@@ -55,13 +55,11 @@ export class SearchVacancyComponent implements OnInit {
   }
 
   startSearch() {
-    // console.log('Search parameters vacancy= ' + JSON.stringify(this.search));
     this.search.firstResultNumber = 0;
     this.resultText = false;
     this.searchService.getVacancyResult(this.search)
       .subscribe(data => {
         this.searchVacancyResponse = data;
-        // console.log('Vacancy Response = ' + JSON.stringify(this.searchVacancyResponse));
         this.buttonsEnabled();
       });
   }

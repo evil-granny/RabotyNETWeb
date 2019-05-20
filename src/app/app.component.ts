@@ -32,14 +32,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.includes('/search')) {
-      this.searchShown = true;
+    if (this.router.url.includes('/searchCV')) {
+      this.disableSearchButton();
     }
   }
 
   hide() {
     this.searchForm = true;
     this.searchShown = false;
+  }
+
+  disableSearchButton() {
+    this.searchShown = true;
   }
 
   showSearchForm() {

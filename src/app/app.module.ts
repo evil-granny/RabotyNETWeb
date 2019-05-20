@@ -62,7 +62,6 @@ import { PasswordForgotComponent } from './password-forgot/password-forgot.compo
 import { PasswordRestoreComponent } from './password-restore/password-restore.component';
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
-import { SearchComponent } from './search/search.component';
 import {SidebarModule} from 'ng-sidebar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -139,7 +138,6 @@ const routes: Routes = [
     SearchVacancyComponent,
     ViewVacancyComponent,
     AccessNonauthorizedPageComponent,
-    SearchComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
