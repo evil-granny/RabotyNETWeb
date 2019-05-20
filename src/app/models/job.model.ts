@@ -12,6 +12,6 @@ export class Job {
 
     end: Date;
 
-    printPdf: Boolean;
+    printPdf: Boolean = true;
 
 }
