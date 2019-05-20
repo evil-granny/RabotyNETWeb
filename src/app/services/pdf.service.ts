@@ -31,14 +31,13 @@ export class PdfService {
 
   public update(cv) {
     console.log("[update cv]");
-    return this.http.put<CV>(this.cvURL + "/updatePDF", cv, httpOptions);
+    return this.http.put<CV>(this.cvURL + "/pdf/updatePDF", cv, httpOptions);
   }
 
-  public show(cvId) {
-    console.log("[update cv]");
+  public show(cvId, send) {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');    
-    return this.http.get(this.cvURL + "/createPdf/" + cvId,{ headers: headers, responseType: 'arraybuffer'});
+    return this.http.get(this.cvURL + "/pdf/createPdf/" + cvId + "&" + send,{ headers: headers, responseType: 'arraybuffer'});
   }
 
   

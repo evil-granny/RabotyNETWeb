@@ -17,7 +17,6 @@ import { Location } from '@angular/common';
 export class ViewVacancyComponent implements OnInit {
 
   vacancy: Vacancy = new Vacancy();
-  requirements:  Requirement[] = Array<Requirement>();
   currentUser: UserPrincipal;
 
   constructor(private location: Location,private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
@@ -36,16 +35,4 @@ export class ViewVacancyComponent implements OnInit {
         });
     }
   }
-  get isCowner() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
-  }
-
-  get isAdmin() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
-  }
-
-  get isUser() {
-    return this.currentUser && this.currentUser.roles  &&  this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
-  }
-
 }

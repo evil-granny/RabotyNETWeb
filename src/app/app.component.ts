@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title = 'RabotyNet';
 
@@ -53,6 +53,9 @@ export class AppComponent {
 
   get isUser() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
+  }
+
+  ngOnInit() {
   }
 
   hide() {

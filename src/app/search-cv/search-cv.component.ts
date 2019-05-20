@@ -5,17 +5,20 @@ import {SearchService} from '../services/search.service';
 import {Search} from '../models/SearchModel/search.model';
 import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
 import {PdfService} from '../services/pdf.service';
-import {SearchComponent} from '../search/search.component';
+import {UserPrincipal} from '../models/userPrincipal.model';
+import {AuthenticationService} from '../services/authentication.service';
+import {Role} from '../models/roles.model';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-search-cv',
   templateUrl: './search-cv.component.html',
   styleUrls: ['./search-cv.component.scss'],
-  providers: [SearchComponent]
 })
 
 export class SearchCVComponent implements OnInit {
 
+  currentUser: UserPrincipal;
   search: Search = new Search();
   searchCVResponse: SearchCVResponse = new SearchCVResponse();
   resultText = true;
@@ -25,17 +28,21 @@ export class SearchCVComponent implements OnInit {
   pageNumber: number;
   topButtons = true;
   bottomButtons = true;
+  vacancySelect = true;
+  resumeSelect = false;
   urlPdf = 'false';
+  send = false;
 
-  constructor(private router: Router,
+  constructor(private app: AuthenticationService,
+              private router: Router,
               private pdfService: PdfService,
               private route: ActivatedRoute,
-              private searchComponent: SearchComponent,
               private searchCVService: SearchService) {
+    this.app.currentUser.subscribe(x => this.currentUser = x);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
-  ngOnInit(): void {
-    console.log('OnInit SearchResume');
+  ngOnInit() {
     this.route.params
       .subscribe(params => {
         this.search.searchDocument = params['searchDoc'];
@@ -44,17 +51,22 @@ export class SearchCVComponent implements OnInit {
       });
     if (this.search.searchText !== undefined) {
       this.startSearch();
+    } else {
+      this.search.searchDocument = 'resume';
+      this.search.searchParameter = 'position';
     }
   }
 
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
+
   startSearch() {
-    // console.log('Search parameters resume = ' + JSON.stringify(this.search));
     this.search.firstResultNumber = 0;
     this.resultText = false;
     this.searchCVService.getCVResult(this.search)
       .subscribe(data => {
         this.searchCVResponse = data;
-        // console.log('CV response = ' + JSON.stringify(this.searchCVResponse));
         this.buttonsEnabled();
       });
   }
@@ -113,7 +125,7 @@ export class SearchCVComponent implements OnInit {
   }
 
   viewCv(id: Uint8Array) {
-    this.pdfService.show(id)
+    this.pdfService.show(id, this.send)
       .subscribe(data => {
         var file = new Blob([data], {type: 'application/pdf'});
         console.log(file);
@@ -125,8 +137,31 @@ export class SearchCVComponent implements OnInit {
       });
   }
 
-  findResume(search: Search) {
-    this.search = search;
-    this.startSearch();
+  selectDocument() {
+    switch (this.search.searchDocument) {
+      case 'resume':
+        this.resumeSelect = false;
+        this.vacancySelect = true;
+        break;
+      case 'vacancies':
+        this.resumeSelect = true;
+        this.vacancySelect = false;
+        break;
+    }
+  }
+
+  start() {
+    switch (this.search.searchDocument) {
+      case 'resume':
+        this.startSearch();
+        break;
+      case 'vacancies':
+        this.router.navigate(['/vacancies/search', {
+          searchDoc: this.search.searchDocument,
+          searchText: this.search.searchText,
+          searchParameter: this.search.searchParameter
+        }]);
+        break;
+    }
   }
 }

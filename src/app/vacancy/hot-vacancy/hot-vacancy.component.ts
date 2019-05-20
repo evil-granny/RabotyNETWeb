@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { Vacancy } from 'src/app/models/vacancy/vacancy.model';
 import { Observable } from 'rxjs';
-import { Requirement } from 'src/app/models/requirement.model';
 import { VacancyService } from 'src/app/services/vacancy.service';
 
 
@@ -14,13 +13,11 @@ import { VacancyService } from 'src/app/services/vacancy.service';
 })
 export class HotVacancyComponent implements OnInit {
   vacancies: Observable<Vacancy[]>;
-  requirements: Observable<Requirement[]>;
 
   page: number = 0;
   count: number = 9;
   size: number = 0;
   constructor(private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService) { 
-
   }
 
    ngOnInit() {
@@ -30,12 +27,8 @@ export class HotVacancyComponent implements OnInit {
   findAll() {
      this.vacancyService.findAllHotVacanciesWithPagination(this.page * this.count, this.count).subscribe(
        data => {
-         this.vacancies = data;
-         console.log(data);
          this.vacancies = data.vacancies;
-         console.log(this.vacancies);
          this.size = data.count;
-         console.log(this.size);
        }
      );
   }
@@ -43,8 +36,6 @@ export class HotVacancyComponent implements OnInit {
   gotoList() {
     this.router.navigate(['/vacancies']);
   };
-
-  
 
   canPreviousPage() : boolean {
     return this.page > 0;
