@@ -26,6 +26,13 @@ export class PhotoService {
     return this.http.post<Photo>(this.photoUrl + userId, body, httpOptions);
   }
 
+  public uploadLogo(file: File, companyName: string): Observable<Photo> {
+    let body = new FormData();
+    body.append("file", file);
+
+    return this.http.post<Photo>(this.photoUrl + "logo/" + companyName, body, httpOptions);
+  }
+
   public load(photoId: BigInteger): Observable<Photo> {
     return this.http.get<Photo>(this.photoUrl + photoId, httpOptions);
   }

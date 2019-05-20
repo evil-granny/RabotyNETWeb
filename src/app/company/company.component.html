@@ -1,7 +1,20 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vacancy</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+    integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 <body>
-  <div class="container">
+  <div class="container" style="margin-top:70px">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
@@ -23,13 +36,13 @@
               <tbody *ngFor="let company of companies">
                 <tr>
                   <td>
-                    <i *ngIf="isApproved(company) && !isBlocked(company) && !hasClaims(company)" class="fa fa-thumbs-up"
+                    <i *ngIf="company.status == 'APPROVED' && !hasClaims(company)" class="fa fa-thumbs-up"
                       style="color: green; font-size: 150%;"></i>
-                    <i *ngIf="isApproved(company) && hasClaims(company)" class="fa fa-warning"
+                    <i *ngIf="company.status == 'APPROVED' && hasClaims(company)" class="fa fa-warning"
                       style="color: orange; font-size: 150%;"></i>
-                    <i *ngIf="!isApproved(company)" class="fa fa-times" style="color: red; font-size: 150%;"></i>
-                    <i *ngIf="isApproved(company) && isBlocked(company)" class="fa fa-thumbs-down"
-                      style="color: red; font-size: 150%;"></i>
+                    <i *ngIf="company.status == 'CREATED'" class="fa fa-times" style="color: red; font-size: 150%;"></i>
+                    <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" style="color: black; font-size: 150%;"></i>
+                    <i *ngIf="company.status == 'MAIL_SENT'" class="fa fa-envelope" style="color: greenyellow; font-size: 150%;"></i>
                   </td>
                   <td class="d-none"
                     *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
@@ -52,12 +65,8 @@
                     *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
                     <a routerLink="/viewCompany/{{company.name}}" class="btn" rel="tooltip" title="View details"><i
                         class="fa fa-eye"></i></a>
-                    <a routerLink="/updateCompany/{{company.name}}" class="btn"><i class="fa fa-edit" rel="tooltip"
-                        title="Update"></i></a>
-                    <a class="btn" (click)="deleteById(company)"><i class="fa fa-trash" rel="tooltip"
-                        title="Delete"></i></a>
                     <a *ngIf="company.status == 'CREATED'" class="btn" (click)="approve(company)" rel="tooltip"
-                      title="Approve"><i class="fa fa-thumbs-up"></i></a>
+                      title="Approve"><i class="fa fa-send"></i></a>
                     <a *ngIf="company.status == 'APPROVED'" class="btn" (click)="block(company)" rel="tooltip"
                       title="Block"><i class="fa fa-lock"></i></a>
                     <a *ngIf="company.status == 'BLOCKED'" class="btn" (click)="block(company)" rel="tooltip"
@@ -84,7 +93,7 @@
                             <td>{{claim.description}}</td>
                             <td>
                               <button class="btn" (click)="rejectClaim(claim)" rel="tooltip" title="Reject claim"><i
-                                  class="fa fa-thumbs-down"></i></button>
+                                  class="fa fa-ban"></i></button>
                             </td>
                           </tr>
                         </tbody>
