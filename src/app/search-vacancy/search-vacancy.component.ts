@@ -1,65 +1,58 @@
 import {Component, OnInit} from '@angular/core';
-import {UserPrincipal} from '../models/userPrincipal.model';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Search} from '../models/SearchModel/search.model';
-import {AuthenticationService} from '../services/authentication.service';
-import {Router} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
+import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
 import {SearchService} from '../services/search.service';
 import {Role} from '../models/roles.model';
-import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
+import {AuthenticationService} from '../services/authentication.service';
+import {UserPrincipal} from '../models/userPrincipal.model';
 
 @Component({
   selector: 'app-search-vacancy',
   templateUrl: './search-vacancy.component.html',
-  styleUrls: ['./search-vacancy.component.scss']
+  styleUrls: ['./search-vacancy.component.scss'],
 })
 export class SearchVacancyComponent implements OnInit {
 
   currentUser: UserPrincipal;
-
   search: Search = new Search();
-  resultText = true;
-  nextButton = true;
-  previousButton = true;
-  pagesCount: number;
-  pageNumber: number;
   searchVacancyResponse: SearchVacancyResponse = new SearchVacancyResponse();
+  pageNumber: number;
+  pagesCount: number;
+  resultText = true;
+  topButtons = true;
+  previousButton: boolean;
+  nextButton: boolean;
+  bottomButtons = true;
+  vacancySelect = false;
+  resumeSelect = true;
 
-  constructor(private app: AuthenticationService, private router: Router, private searchService: SearchService, private route: ActivatedRoute) {
+  constructor(private app: AuthenticationService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private searchService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
-  get isAdmin() {
-    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
+  ngOnInit() {
+    console.log('OnInit SearchVacancy');
+    this.route.params
+      .subscribe(params => {
+        this.search.searchDocument = params['searchDoc'];
+        this.search.searchText = params['searchText'];
+        this.search.searchParameter = params['searchParameter'];
+      });
+    if (this.search.searchText !== undefined) {
+      this.startSearch();
+    } else {
+      this.search.searchDocument = 'vacancies';
+      this.search.searchParameter = 'position';
+    }
   }
 
   get isCowner() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
-  }
-
-  get isUser() {
-    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
-  }
-
-  logout() {
-    const user = this.app.logout();
-    this.router.navigateByUrl('/vacancies');
-  }
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.search.searchText = params['text'];
-      this.search.searchDocument = params['doc'];
-      this.search.searchParameter = params['sParam'];
-    });
-    if (this.search.searchText.length !== 0) {
-      this.startSearch();
-    }
-  }
-
-  searchCVPage() {
-    this.search.searchDocument = 'cvs';
-    this.router.navigateByUrl('/searchCV');
   }
 
   startSearch() {
@@ -68,17 +61,27 @@ export class SearchVacancyComponent implements OnInit {
     this.searchService.getVacancyResult(this.search)
       .subscribe(data => {
         this.searchVacancyResponse = data;
-        this.pagesCount = Math.ceil(this.searchVacancyResponse.count / parseInt(this.search.resultsOnPage, 10));
-        if (this.searchVacancyResponse.count > parseInt(this.search.resultsOnPage, 10)) {
-          this.nextButton = false;
-          this.previousButton = true;
-          this.pageNumber = 1;
-        } else {
-          this.nextButton = true;
-          this.previousButton = true;
-          this.pageNumber = 1;
-        }
+        this.buttonsEnabled();
       });
+  }
+
+  buttonsEnabled() {
+    this.pagesCount = Math.ceil(this.searchVacancyResponse.count / parseInt(this.search.resultsOnPage, 10));
+    if (this.searchVacancyResponse.count > parseInt(this.search.resultsOnPage, 10)) {
+      this.topButtons = false;
+      this.nextButton = false;
+      this.previousButton = true;
+      this.pageNumber = 1;
+      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchVacancyResponse.searchVacancyDTOS.length > 15) {
+        this.bottomButtons = false;
+      }
+    } else {
+      this.topButtons = true;
+      this.nextButton = true;
+      this.previousButton = true;
+      this.pageNumber = 1;
+      this.bottomButtons = true;
+    }
   }
 
   nextPage() {
@@ -113,5 +116,33 @@ export class SearchVacancyComponent implements OnInit {
           this.previousButton = true;
         }
       });
+  }
+
+  selectDocument() {
+    switch (this.search.searchDocument) {
+      case 'resume':
+        this.resumeSelect = false;
+        this.vacancySelect = true;
+        break;
+      case 'vacancies':
+        this.resumeSelect = true;
+        this.vacancySelect = false;
+        break;
+    }
+  }
+
+  start() {
+    switch (this.search.searchDocument) {
+      case 'resume':
+        this.router.navigate(['/searchCV', {
+          searchDoc: this.search.searchDocument,
+          searchText: this.search.searchText,
+          searchParameter: this.search.searchParameter
+        }]);
+        break;
+      case 'vacancies':
+        this.startSearch();
+        break;
+    }
   }
 }

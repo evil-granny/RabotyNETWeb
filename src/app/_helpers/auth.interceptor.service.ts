@@ -11,10 +11,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authenticationService.currentUserValue;
-    const token = this.tokenExtractor.getToken() as string;
-    console.log('---------REQUEST BEFORE---------')
-    console.log(request)
-    if (currentUser && currentUser.token && token !== null) {
+    // const token = this.tokenExtractor.getToken() as string;
+    // console.log('---------REQUEST BEFORE---------')
+    // console.log(request)
+    if (currentUser && currentUser.token) {
       request = request.clone({
         setHeaders: {
           Authorization: `${currentUser.token}`,
@@ -23,8 +23,8 @@ export class AuthInterceptor implements HttpInterceptor {
         // withCredentials: true,
       });
     }
-    console.log('---------REQUEST AFTER---------')
-    console.log(request)
+    // console.log('---------REQUEST AFTER---------')
+    // console.log(request)
 
     return next.handle(request);
   }

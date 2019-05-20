@@ -76,7 +76,7 @@ export class CompanyComponent implements OnInit {
   };
 
   approve(company: Company) : void {
-    this.companyService.approve(company)
+    this.companyService.sendMail(company)
       .subscribe( data => {
         this.companies.find((c) => c.companyId === company.companyId).status = 'MAIL_SENT';
       });
