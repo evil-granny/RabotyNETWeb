@@ -92,12 +92,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_ADMIN] }
   },
-  {
-    path: 'vacancies/search',
-    component: SearchVacancyComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_ADMIN] }
-  },
+  // {
+  //   path: 'vacancies/search',
+  //   component: SearchVacancyComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: [Role.ROLE_ADMIN] }
+  // },
   // {
   //   path: 'searchCV',
   //   component: SearchCVComponent,

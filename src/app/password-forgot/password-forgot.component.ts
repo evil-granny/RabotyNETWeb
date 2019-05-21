@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {UserPrincipal} from '../models/userPrincipal.model';
 
 @Component({
   selector: 'app-password-forgot',
@@ -29,14 +27,8 @@ export class PasswordForgotComponent {
       headers: new HttpHeaders(authHeader)
     };
 
-    console.log('-----------User Login------------')
-    console.log(this.resetPasswordUrl)
-    console.log(this.userLogin.username)
-
     const observable = this.http.post<any>(this.resetPasswordUrl, this.userLogin, httpOptions);
     observable.subscribe(data => {
-        console.log('=============Post data============');
-        console.log(data);
       }
     )
     this.router.navigateByUrl('/vacancies');
