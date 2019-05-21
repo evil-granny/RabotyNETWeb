@@ -167,7 +167,7 @@ body {
 }
 
 .form-v8-content .form-detail .form-row .input-text:focus+.label,
-.form-v8-content .form-detail .form-row .input-text:valid+.label {
+.form-v8-content .form-detail .form-row .input-text:valid+.label{
     transform: translateY(-26px) scale(1);
     -moz-transform: translateY(-26px) scale(1);
     -webkit-transform: translateY(-26px) scale(1);

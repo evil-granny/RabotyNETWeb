@@ -7,6 +7,7 @@ import { ComfirmComponent } from '../../confirm/comfirm.component';
 import { MatDialog } from '@angular/material';
 import { RegistrationconfirmComponent } from 'src/app/confirm/registrationconfirm/registrationconfirm.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { NgForm } from '@angular/forms';
 @Component({
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
@@ -20,7 +21,8 @@ export class AddUserComponent implements OnInit {
   user: User = new User();
   error: any;
   enabled: any;
-  valid:any;
+  resendedStatus: any;
+  valid: any;
   credentials = { username: '', password: '' };
 
   constructor(private router: Router, private userService: UserService, public dialog: MatDialog, private app: AuthenticationService) {
@@ -48,12 +50,12 @@ export class AddUserComponent implements OnInit {
 
 
   findByEmail() {
-    console.log(this.foundUser == undefined);
     this.userService.findByEmail(this.user)
       .subscribe(data => {
         this.foundUser = data;
         if (this.foundUser) {
-          this.openModal("There is an account with that email! Try with another one or login, please!")
+          this.openModal("There is an account with that email! Try with another one or login, please!");
+          this.credentials.username = this.user.login;
         } else {
           this.create();
         }
@@ -80,11 +82,11 @@ export class AddUserComponent implements OnInit {
     this.userService.validUser(this.credentials.username)
       .subscribe(data => {
         this.enabled = data;
-        console.log(this.enabled);
         if (this.enabled == true) {
           this.signin();
         } else if (this.enabled == "User not found!") {
           this.openModal("Unfortunately user not found! You can sign up.");
+          this.credentials.password = "";
         } else if (this.enabled == false) {
           this.validToken();
         }
@@ -99,15 +101,17 @@ export class AddUserComponent implements OnInit {
 
   validToken() {
     this.userService.findToken(this.credentials.username)
-    .subscribe(data => {
-      this.valid = data;
-      console.log(this.valid);
-      if (this.valid == "valid") {
-        this.openModal("Confirm you email, please!");
-      } else  {
-        this.openModal("Your account is not confirmed. Resend confirmation message?");
-        this.userService.resendToken(this.credentials.username);
-      } 
-    })
-}
+      .subscribe(data => {
+        this.valid = data;
+        var email = this.credentials.username;
+        if (this.valid == "valid") {
+          this.openModal("Confirm you email, please!");
+          this.credentials.password = "";
+        } else {
+          this.openModal("Your account is not confirmed. Resend confirmation message?");
+          this.credentials.password = "";
+          this.userService.resendToken(email);
+        }
+      })
+  }
 }
