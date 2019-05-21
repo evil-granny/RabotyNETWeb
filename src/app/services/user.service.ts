@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { User } from "../models/user.model";
@@ -35,9 +35,9 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl + "/users", httpOptions);
   }
 
-  enabledUser(user: User) {
-    console.log("[enabledUser]");
-    return this.http.get<Boolean>(this.userUrl + "/login/enabled/" + user.login + "/", httpOptions)
+  public validUser(email: any) {
+    console.log("[findUser]");
+    return this.http.get<String>(this.userUrl + "/login/enabled/" + email + "/", httpOptions)
   }
 
   public findByEmail(user: User): Observable<any> {
@@ -60,14 +60,19 @@ export class UserService {
   }
 
   public insert(user: any, users: any) {
-      console.log("[insert]");
-      this.openModal("User has been created successfully. Confirm your email and login into site!");
+      console.log("[insert]");  
       return this.http.post<User>(this.userUrl + "/registration", user, httpOptions);
   }
 
   public validToken(token: String): Observable<any>{
-    console.log("[validToken]");
+    console.log("[validToken]");    
     return this.http.get<String>(this.userUrl + "/registrationConfirm?token=" + token, httpOptions);
+  }
+
+
+  public findToken (username: String): Observable<any>{
+    console.log("[findToken]");
+    return this.http.get<String>(this.userUrl + "/user/findToken?username=" + username, httpOptions);
   }
 
   public resendToken(email: String): Observable<any>{

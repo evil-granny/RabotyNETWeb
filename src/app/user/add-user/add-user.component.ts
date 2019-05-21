@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { User } from '../../models/user.model';
@@ -6,8 +6,6 @@ import { UserService } from '../../services/user.service';
 import { ComfirmComponent } from '../../confirm/comfirm.component';
 import { MatDialog } from '@angular/material';
 import { RegistrationconfirmComponent } from 'src/app/confirm/registrationconfirm/registrationconfirm.component';
-import { LoginComponent } from 'src/app/login/login.component';
-import { AnimationMetadataType } from '@angular/animations';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 @Component({
   templateUrl: './add-user.component.html',
@@ -21,17 +19,16 @@ export class AddUserComponent implements OnInit {
   foundUser: User[];
   user: User = new User();
   error: any;
-  enabled: Boolean;
+  enabled: any;
+  valid:any;
   credentials = { username: '', password: '' };
 
-  constructor(private router: Router, private userService: UserService, public dialog: MatDialog,
-    private app: AuthenticationService) {
+  constructor(private router: Router, private userService: UserService, public dialog: MatDialog, private app: AuthenticationService) {
 
   }
 
   ngOnInit() {
     document.getElementById("defaultOpen").click();
-    // this.openConfirmModal();
   }
 
 
@@ -51,13 +48,12 @@ export class AddUserComponent implements OnInit {
 
 
   findByEmail() {
+    console.log(this.foundUser == undefined);
     this.userService.findByEmail(this.user)
       .subscribe(data => {
         this.foundUser = data;
-        console.log(this.foundUser);
-        if (this.foundUser.length > 0) {
+        if (this.foundUser) {
           this.openModal("There is an account with that email! Try with another one or login, please!")
-          location.reload(true);
         } else {
           this.create();
         }
@@ -80,18 +76,38 @@ export class AddUserComponent implements OnInit {
     this.dialog.open(RegistrationconfirmComponent)
   }
 
-  enabledUser(): void {
-    this.userService.enabledUser(this.user)
+  validUser(): void {
+    this.userService.validUser(this.credentials.username)
       .subscribe(data => {
         this.enabled = data;
-        if (!this.enabled) {
-          this.openModal("Your email is not confirmed!");
-        } else {
-          const user = this.app.authenticate(this.credentials).subscribe(data => {
-            this.router.navigateByUrl('/vacancies');
-          });
+        console.log(this.enabled);
+        if (this.enabled == true) {
+          this.signin();
+        } else if (this.enabled == "User not found!") {
+          this.openModal("Unfortunately user not found! You can sign up.");
+        } else if (this.enabled == false) {
+          this.validToken();
         }
       });
   };
 
+  signin() {
+    const user = this.app.authenticate(this.credentials).subscribe(data => {
+      this.router.navigateByUrl('/vacancies');
+    });
+  }
+
+  validToken() {
+    this.userService.findToken(this.credentials.username)
+    .subscribe(data => {
+      this.valid = data;
+      console.log(this.valid);
+      if (this.valid == "valid") {
+        this.openModal("Confirm you email, please!");
+      } else  {
+        this.openModal("Your account is not confirmed. Resend confirmation message?");
+        this.userService.resendToken(this.credentials.username);
+      } 
+    })
+}
 }

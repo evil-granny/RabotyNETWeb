@@ -82,11 +82,15 @@ export class EditVacancyComponent implements OnInit {
   }
 
   deleteRequirement(requirement: Requirement): void {
+    let flag = confirm("Are you really want delete?");
+    if(flag){
     this.vacancyService.deleteRequiremnetById(requirement.requirementId)
       .subscribe( data => {
         this.requirements = this.requirements.filter(p => p !== requirement);
         window.location.reload();
       })
+    }
+    else return;
   };
 
   removeInputField(index : number) : void{
