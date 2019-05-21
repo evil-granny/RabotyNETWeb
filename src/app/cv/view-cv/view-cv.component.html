@@ -15,10 +15,10 @@
 
 <body>
   <div class="container" style="margin-top:70px">
-    <a routerLink="/createCV">Create CV</a>
+    <a *ngIf="cv.cvId==null" routerLink="/createCV">Create CV</a>
 
     <div class="col-md-9">
-      <h2>List of CV</h2>
+      <h2>Your CV</h2>
 
       <table class="table table-striped">
         <thead>
