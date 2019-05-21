@@ -110,7 +110,7 @@ const routes: Routes = [
   }, 
    {
     path: 'registrationConfirm',
-    component: RegistrationconfirmComponent
+    redirectTo: 'registration'
   },
 
   { path: '**', redirectTo: 'vacancies' }
