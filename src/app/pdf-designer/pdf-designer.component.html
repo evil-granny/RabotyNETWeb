@@ -24,16 +24,13 @@
           <form class="form-horizontal" #cvForm="ngForm">
             <fieldset class="fieldset">
               <h3 class="fieldset-title">General Info</h3>
-              <div class="form-group">
-                <h3 class="fieldset-title-warning">Warning! Your changes will be reflected on your profile!</h3>
-              </div>
-              <div class="form-group">
+                <div class="form-group">
                 <label for="firstName" class="col-md-5" style="float: left; ">First Name</label>
                 <label for="firstName" class="col-md-5" style="float: left; ">Last Name</label>
                 <div class="col-md-5" style="float: left; ">
                   <input type="text" class="form-control" pattern="^[A-Za-z]{2,20}$" [(ngModel)]="cv.person.firstName"
                          placeholder="First Name" id="firstName" name="firstName" #firstName="ngModel" required
-                         autocomplete="off">
+                         autocomplete="off" disabled>
                   <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="alert alert-danger">
                     <div [hidden]="!firstName.errors.required">Degree is required!</div>
                     <div [hidden]="!firstName.errors.pattern">
@@ -44,7 +41,7 @@
                 <div class="col-md-5" style="float: left; ">
                   <input type="text" class="form-control" pattern="^[A-Za-z]{2,20}$" [(ngModel)]="cv.person.lastName"
                          placeholder="Last Name" id="lastName" name="lastName" #lastName="ngModel" required
-                         autocomplete="off">
+                         autocomplete="off" disabled>
                   <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="alert alert-danger">
                     <div [hidden]="!lastName.errors.required">School is required!</div>
                     <div [hidden]="!lastName.errors.pattern">
