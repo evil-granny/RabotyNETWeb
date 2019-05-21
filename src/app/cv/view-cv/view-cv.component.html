@@ -39,9 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let cv of cvs">
             <td class="d-none">{{cv.cvId}}</td>
-
             <td>{{cv.position}}</td>
             <td>
               <li *ngFor="let skill of cv.skills">{{skill.title}}</li>
@@ -70,10 +68,7 @@
             </td>
             <td>
               <a routerLink="/updateCV/{{cv.cvId}}" class="btn btn-success">Update</a>
-            <td>
-              <button class="btn btn-danger" (click)="deleteById(cv)">Delete</button>
             </td>
-          </tr>
         </tbody>
       </table>
     </div>
