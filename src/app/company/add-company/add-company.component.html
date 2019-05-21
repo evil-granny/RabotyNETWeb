@@ -43,7 +43,7 @@
                 <div class="form-group">
                   <label for="name" class="col-md-2 col-sm-3 col-xs-12 control-label">Company Name</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z0-9]{3,30}$" [(ngModel)]="company.name"
+                    <input type="text" class="form-control" pattern="^[A-Za-z0-9? ?A-Za-z0-9]{3,30}$" [(ngModel)]="company.name"
                       placeholder="Company Name" id="name" name="name" #name="ngModel" required
                       autocomplete="off">
                     <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
