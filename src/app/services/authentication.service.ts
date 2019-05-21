@@ -27,7 +27,6 @@ export class AuthenticationService {
     const authHeader = credentials ? {
       'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password),
       'Access-Control-Allow-Origin': '*',
-      // 'Access-Control-Allow-Credentials': 'true',
       'Content-Type': 'application/json'
     } : {};
     const httpOptions = {
@@ -48,9 +47,6 @@ export class AuthenticationService {
           const token = 'Basic ' + btoa(credentials.username + ':' + credentials.password);
           userPrincipal = new UserPrincipal(name, roles, token, userId);
           localStorage.setItem('currentUser', JSON.stringify(userPrincipal));
-          console.log('=========== User Principal =============');
-          console.log(userPrincipal.username);
-          console.log(userPrincipal.token);
           this.currentUserSubject.next(userPrincipal);
         }
 
@@ -59,9 +55,9 @@ export class AuthenticationService {
   }
 
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.http.get<any>(this.userLogoutUrl);
   }
+
 }

@@ -157,4 +157,8 @@ export class ViewCompanyComponent implements OnInit {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
   }
 
+  get isAdmin() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
+  }
+
 }

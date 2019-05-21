@@ -33,7 +33,9 @@ export class AppComponent {
     if (this.currentUser) {
       this.personService.findById(this.currentUser.userId)
         .subscribe(data => {
-          this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data.photo.image);
+          if (data.photo != null) {
+            this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data.photo.image);
+          }
         });
     }
   }
