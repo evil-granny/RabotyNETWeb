@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -16,17 +16,13 @@ export class PasswordRestoreComponent implements OnInit {
   changePassword = {newPassword: '', confirmPassword: ''};
 
   private changePasswordUrl = 'http://localhost:8080/changePassword';
-  private router: any;
+  private errors: any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    // console.log('Init Start')
     this.route.queryParams.subscribe(params => {
-      // console.log(params);
       this.token = params.token;
-      // console.log('----------Token---------');
-      // console.log(params['token']);
     })
 
     this.validToken();
@@ -38,8 +34,6 @@ export class PasswordRestoreComponent implements OnInit {
         this.valid = data;
         if (this.valid == 'confirmed') {
         }
-        // console.log(this.valid);
-        // console.log(this.token);
       });
   }
 
@@ -54,16 +48,19 @@ export class PasswordRestoreComponent implements OnInit {
       headers: new HttpHeaders(authHeader)
     };
 
-    // if (this.angular.equals(this.changePassword.newPassword, this.changePassword.confirmPassword)) {
-    //   console.log('New Password = ' + this.changePassword.newPassword)
-    //   console.log('Confirm Password = ' + this.changePassword.confirmPassword)
-    //   console.log('Result = ' + this.angular.equals(this.changePassword.newPassword, this.changePassword.confirmPassword))
-      const observable = this.http.post<any>(this.changePasswordUrl, {'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword}, httpOptions);
-    observable.subscribe(data => {
+    const sendTokenPaasword = {'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword};
+    const observable = this.http.post<any>(this.changePasswordUrl, sendTokenPaasword, httpOptions);
+    observable.subscribe(result =>  {
+        console.log(result);
+      },
+      error => {
+        this.errors = error;
+        alert(this.errors);
+      },
+      () => {
+        alert('Password restored successfully! Please go to the sign in page');
+        this.router.navigate(['/registration']);
       }
-    )
-      console.log(this.token)
-      console.log(this.changePassword.newPassword)
-      this.router.navigateByUrl('/vacancies');
+    );
     }
 }
