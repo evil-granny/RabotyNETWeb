@@ -8,8 +8,6 @@ export class CV {
 
     cvId: BigInteger;
 
-    photo: string;
-
     position: string;
 
     skills: Skill[] = [];
