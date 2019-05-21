@@ -31,17 +31,17 @@ export class AddCvComponent {
   update(): void {
     this.cvService.update(this.cv)
       .subscribe(data => {
-        if(data != null)
+        if (data != null)
           alert("CV has been updated successfully.");
         else
-          alert("Validation problem has been occured"); 
+          alert("Validation problem has been occured");
       });
   };
 
   insert(): void {
     this.cvService.insert(this.cv)
       .subscribe(data => {
-        if(data != null){
+        if (data != null) {
           this.router.navigate(['/userCV']);
         }
         else
@@ -51,7 +51,7 @@ export class AddCvComponent {
 
   deleteSkill(skill: Skill): void {
     this.cvService.deleteSkillById(skill.skillId)
-      .subscribe( data => {
+      .subscribe(data => {
         this.skills = this.skills.filter(p => p !== skill);
         window.location.reload();
       })
@@ -59,7 +59,7 @@ export class AddCvComponent {
 
   deleteJob(job: Job): void {
     this.cvService.deleteJobById(job.jobId)
-      .subscribe( data => {
+      .subscribe(data => {
         this.jobs = this.jobs.filter(p => p !== job);
         window.location.reload();
       })
@@ -73,12 +73,12 @@ export class AddCvComponent {
     this.cv.jobs.push(new Job());
   }
 
-  removeInputFieldSkill(index : number) : void{
-    this.cv.skills.splice(index,1); 
+  removeInputFieldSkill(index: number): void {
+    this.cv.skills.splice(index, 1);
   }
 
-  removeInputFieldJob(index : number) : void{
-    this.cv.jobs.splice(index,1); 
+  removeInputFieldJob(index: number): void {
+    this.cv.jobs.splice(index, 1);
   }
 
 }

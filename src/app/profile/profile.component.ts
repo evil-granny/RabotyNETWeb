@@ -7,7 +7,6 @@ import { PersonService } from '../services/profile/person.service';
 import { Contact } from '../models/contact.model';
 import { Address } from '../models/address.model';
 import { PhotoService } from '../services/profile/photo.service';
-import { Photo } from '../models/photo.model';
 import { UserPrincipal } from '../models/userPrincipal.model';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -21,7 +20,6 @@ export class ProfileComponent implements OnInit {
   currentUser: UserPrincipal;
 
   person: Person = new Person();
-  photo: Photo = new Photo();
 
   avatar: any;
   fileToUpload: File;
@@ -47,7 +45,6 @@ export class ProfileComponent implements OnInit {
   };
 
   update() {
-    console.log(this.person.birthday);
     this.personService.update(this.person)
       .subscribe(() => window.location.reload());
   };
@@ -65,13 +62,12 @@ export class ProfileComponent implements OnInit {
   loadPhoto(photoId: BigInteger) {
     this.photoService.load(photoId)
       .subscribe(data => {
-        this.photo = data;
-        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + this.photo.image);
+        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data.image);
       });
   }
 
   uploadPhoto() {
-    this.photoService.upload(this.fileToUpload, this.person.userId)
+    this.photoService.uploadAvatar(this.fileToUpload, this.person.userId)
       .subscribe(() => window.location.reload());
   }
 

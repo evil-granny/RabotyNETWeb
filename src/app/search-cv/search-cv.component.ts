@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {SearchService} from '../services/search.service';
-import {Search} from '../models/SearchModel/search.model';
-import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
-import {PdfService} from '../services/pdf.service';
-import {UserPrincipal} from '../models/userPrincipal.model';
-import {AuthenticationService} from '../services/authentication.service';
-import {Role} from '../models/roles.model';
-import {AppComponent} from '../app.component';
+import { SearchService } from '../services/search.service';
+import { Search } from '../models/SearchModel/search.model';
+import { SearchCVResponse } from '../models/SearchModel/SearchCVResponse.model';
+import { PdfService } from '../services/pdf.service';
+import { UserPrincipal } from '../models/userPrincipal.model';
+import { AuthenticationService } from '../services/authentication.service';
+import { Role } from '../models/roles.model';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-search-cv',
@@ -34,10 +34,10 @@ export class SearchCVComponent implements OnInit {
   send = false;
 
   constructor(private app: AuthenticationService,
-              private router: Router,
-              private pdfService: PdfService,
-              private route: ActivatedRoute,
-              private searchCVService: SearchService) {
+    private router: Router,
+    private pdfService: PdfService,
+    private route: ActivatedRoute,
+    private searchCVService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -127,10 +127,8 @@ export class SearchCVComponent implements OnInit {
   viewCv(id: Uint8Array) {
     this.pdfService.show(id, this.send)
       .subscribe(data => {
-        var file = new Blob([data], {type: 'application/pdf'});
-        console.log(file);
+        var file = new Blob([data], { type: 'application/pdf' });
         var fileURL = URL.createObjectURL(file);
-        console.log(fileURL);
         this.urlPdf = fileURL;
         window.open(fileURL);
         window.focus();

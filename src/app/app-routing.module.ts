@@ -15,9 +15,7 @@ import { PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
 
 
 import { AddUserComponent } from './user/add-user/add-user.component';
-import { UserComponent } from './user/user.component';
 
-import { AdminComponent } from './admin/admin.component';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
@@ -57,13 +55,12 @@ const routes: Routes = [
 
   { path: 'updateCV/:cvId', component: AddCvComponent },
 
-  { path: 'registration', component: AddUserComponent },
+  { path: 'login', component: AddUserComponent },
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
   { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
-  // { path: 'users', component: UserComponent },
 
   { path: 'searchCV', component: SearchCVComponent },
 

@@ -23,14 +23,6 @@ import { AddUserComponent } from './user/add-user/add-user.component';
 
 import { SearchCVComponent } from './search-cv/search-cv.component';
 
-import { CompanyService } from './services/company.service';
-import { CVService } from './services/cv.service';
-import { UserService } from './services/user.service';
-
-import { PdfService } from './services/pdf.service';
-
-import { SearchService } from './services/search.service';
-
 import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
@@ -45,15 +37,9 @@ import { RegistrationconfirmComponent } from './confirm/registrationconfirm/regi
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
-
-import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
-import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
 
 import { AuthInterceptor, ErrorInterceptor } from './_helpers';
-import { Role } from './models/roles.model';
-import { AuthGuard } from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 import { AppErrorHandler } from './_helpers/app.error.handler';
 import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
@@ -64,68 +50,10 @@ import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.compon
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 import { ViewCvComponent } from './cv/view-cv/view-cv.component';
-// import {SidebarModule} from 'ng-sidebar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
-
-const routes: Routes = [
-  {
-    path: 'vacancies',
-    component: VacancyComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'hotVacancies',
-    component: VacancyComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_ADMIN] }
-  },
-  {
-    path: 'companies',
-    component: CompanyComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
-  },
-  { path: 'createCV', 
-  component: AddCvComponent ,
-  canActivate: [AuthGuard],
-  data: { roles: [Role.ROLE_COWNER,Role.ROLE_USER] }
-  },
-  { path: 'cvs',
-    component: CvComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_ADMIN]}
-  },
-  // {
-  //   path: 'searchCV',
-  //   component: SearchCVComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: [Role.ROLE_COWNER] }
-  // },
-  {
-    path: 'users',
-    component: UserComponent,
-    // canActivate: [AuthGuard],
-    // data: { roles: [Role.ROLE_USER] }
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  }, 
-   {
-    path: 'registrationConfirm',
-    redirectTo: 'registration'
-  },
-
-  { path: '**', redirectTo: 'vacancies' }
-];
 
 @NgModule({
   declarations: [
@@ -145,8 +73,6 @@ const routes: Routes = [
     RegistrationconfirmComponent,
     ApproveCompanyComponent,
     ViewCompanyComponent,
-    LoginComponent,
-    AdminComponent,
     AccessDeniedPageComponent,
     SearchVacancyComponent,
     MyCompanyComponent,
@@ -160,7 +86,6 @@ const routes: Routes = [
     ViewCvComponent,
   ],
   imports: [
-    RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,

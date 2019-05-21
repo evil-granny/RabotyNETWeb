@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {CV} from '../models/cv.model';
-import {Person} from '../models/person.model';
-import {PdfService} from '../services/pdf.service';
-import {Router, ActivatedRoute} from '@angular/router';
-import {Contact} from '../models/contact.model';
+import { Component, OnInit } from '@angular/core';
+import { CV } from '../models/cv.model';
+import { Person } from '../models/person.model';
+import { PdfService } from '../services/pdf.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Contact } from '../models/contact.model';
 
 @Component({
   selector: 'app-pdf-designer',
@@ -52,7 +52,7 @@ export class PdfDesignerComponent implements OnInit {
 
             .subscribe(data => {
 
-              var file = new Blob([data], {type: 'application/pdf'});
+              var file = new Blob([data], { type: 'application/pdf' });
 
               var fileURL = URL.createObjectURL(file);
 
@@ -69,6 +69,5 @@ export class PdfDesignerComponent implements OnInit {
       });
 
   };
-
 
 }
