@@ -17,7 +17,7 @@ import { PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
-import { AdminComponent } from './admin/admin.component';
+
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
@@ -34,7 +34,7 @@ import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component
 import { ViewCvComponent } from './cv/view-cv/view-cv.component';
 import {AuthGuard} from './_guards/auth.guard';
 import {Role} from './models/roles.model';
-import {LoginComponent} from './login/login.component';
+
 
 const routes: Routes = [
 
@@ -45,11 +45,10 @@ const routes: Routes = [
     data: { roles: [Role.ROLE_ADMIN] }
   },
   { path: 'vacancies', component: VacancyComponent },
-  { path: 'hotVacancies', component: VacancyComponent },
+  { path: 'hotVacancies', component: HotVacancyComponent },
   { path: 'profile', component: ProfileComponent },
 
-  { path: 'login', component: LoginComponent },
-  { path: 'hotVacancies', component: HotVacancyComponent },
+  
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},

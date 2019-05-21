@@ -23,14 +23,6 @@ import { AddUserComponent } from './user/add-user/add-user.component';
 
 import { SearchCVComponent } from './search-cv/search-cv.component';
 
-import { CompanyService } from './services/company.service';
-import { CVService } from './services/cv.service';
-import { UserService } from './services/user.service';
-
-import { PdfService } from './services/pdf.service';
-
-import { SearchService } from './services/search.service';
-
 import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
@@ -45,17 +37,10 @@ import { RegistrationconfirmComponent } from './confirm/registrationconfirm/regi
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 
 import { ViewCompanyComponent } from './company/view-company/view-company.component';
-
-import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
-import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
 
 import { AuthInterceptor, ErrorInterceptor } from './_helpers';
-import { Role } from './models/roles.model';
-import { AuthGuard } from './_guards/auth.guard';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
-import { AppErrorHandler } from './_helpers/app.error.handler';
 import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
 import { MyCompanyComponent } from './company/my-company/my-company.component';
 import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
@@ -64,7 +49,6 @@ import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.compon
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 import { ViewCvComponent } from './cv/view-cv/view-cv.component';
-// import {SidebarModule} from 'ng-sidebar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -88,8 +72,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RegistrationconfirmComponent,
     ApproveCompanyComponent,
     ViewCompanyComponent,
-    LoginComponent,
-    AdminComponent,
     AccessDeniedPageComponent,
     SearchVacancyComponent,
     MyCompanyComponent,
@@ -111,7 +93,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     AppRoutingModule,
     PerfectScrollbarModule,
-
     MatDialogModule,
     BsDropdownModule.forRoot(), MatSidenavModule
   ],
@@ -121,7 +102,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { provide: MAT_DATE_LOCALE, useValue: 'uk-UK' },
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: AppErrorHandler }]
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+   ]
 })
 export class AppModule { }
