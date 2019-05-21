@@ -17,7 +17,6 @@ import { PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
-import { AdminComponent } from './admin/admin.component';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
@@ -36,6 +35,52 @@ import {Role} from './models/roles.model';
 import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
+
+  {
+    path: 'companies',
+    component: CompanyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_ADMIN] }
+  },
+  {
+    path: 'vacancies',
+    component: VacancyComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'hotVacancies',
+    component: VacancyComponent,
+    canActivate: [AuthGuard]
+  },
+  // {
+  //   path: 'vacancies/search',
+  //   component: SearchVacancyComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: [Role.ROLE_ADMIN] }
+  // },
+  // {
+  //   path: 'searchCV',
+  //   component: SearchCVComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: [Role.ROLE_COWNER] }
+  // },
+  {
+    path: 'users',
+    component: UserComponent,
+    // canActivate: [AuthGuard],
+    // data: { roles: [Role.ROLE_USER] }
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'registrationConfirm',
+    component: RegistrationconfirmComponent
+  },
+
+  { path: '**', redirectTo: 'vacancies' },
+
   { path: 'profile', component: ProfileComponent },
 
   { path: 'vacancies', component: VacancyComponent },

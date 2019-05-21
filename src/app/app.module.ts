@@ -69,59 +69,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
-const routes: Routes = [
-  {
-    path: 'companies',
-    component: CompanyComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_ADMIN] }
-  },
-  {
-    path: 'vacancies',
-    component: VacancyComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'hotVacancies',
-    component: VacancyComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_ADMIN] }
-  },
-  // {
-  //   path: 'vacancies/search',
-  //   component: SearchVacancyComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: [Role.ROLE_ADMIN] }
-  // },
-  // {
-  //   path: 'searchCV',
-  //   component: SearchCVComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: [Role.ROLE_COWNER] }
-  // },
-  {
-    path: 'users',
-    component: UserComponent,
-    // canActivate: [AuthGuard],
-    // data: { roles: [Role.ROLE_USER] }
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-   {
-    path: 'registrationConfirm',
-    component: RegistrationconfirmComponent
-  },
-
-  { path: '**', redirectTo: 'vacancies' }
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,7 +101,6 @@ const routes: Routes = [
     AccessNonauthorizedPageComponent,
   ],
   imports: [
-    RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
