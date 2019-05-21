@@ -15,6 +15,8 @@ import { PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
 
 
 import { AddUserComponent } from './user/add-user/add-user.component';
+import { UserComponent } from './user/user.component';
+
 
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 
@@ -30,12 +32,23 @@ import {PasswordRestoreComponent} from './password-restore/password-restore.comp
 import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 import { ViewCvComponent } from './cv/view-cv/view-cv.component';
+import {AuthGuard} from './_guards/auth.guard';
+import {Role} from './models/roles.model';
+
 
 const routes: Routes = [
-  { path: 'profile', component: ProfileComponent },
 
+  {
+    path: 'companies',
+    component: CompanyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_ADMIN] }
+  },
   { path: 'vacancies', component: VacancyComponent },
   { path: 'hotVacancies', component: HotVacancyComponent },
+  { path: 'profile', component: ProfileComponent },
+
+  
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
@@ -55,16 +68,18 @@ const routes: Routes = [
 
   { path: 'updateCV/:cvId', component: AddCvComponent },
 
-  { path: 'login', component: AddUserComponent },
+  { path: 'registration', component: AddUserComponent },
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
   { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
-
+  { path: 'users', component: UserComponent },
   { path: 'searchCV', component: SearchCVComponent },
 
-  { path: 'vacancies/search', component: SearchVacancyComponent }
+  { path: 'vacancies/search', component: SearchVacancyComponent },
+
+  { path: '**', redirectTo: 'vacancies' }
 ];
 
 @NgModule({

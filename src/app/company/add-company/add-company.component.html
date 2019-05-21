@@ -23,11 +23,11 @@
             <form class="form-horizontal" #companyForm="ngForm">
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Main Info</h3>
-
+                
                 <div class="form-group" *ngIf="company.companyId != null">
                   <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                    <img *ngIf="avatar" class="rounded img-responsive" style="width: 160px; height: 180px"
-                      [src]="avatar" alt="">
+                    <img *ngIf="avatar" class="rounded img-responsive" style="width: 160px; height: 180px" [src]="avatar"
+                      alt="">
                     <img *ngIf="!avatar" class="rounded img-responsive" style="width: 160px; height: 180px"
                       src="/assets/img/company.png" alt="">
                   </figure>
@@ -43,8 +43,9 @@
                 <div class="form-group">
                   <label for="name" class="col-md-2 col-sm-3 col-xs-12 control-label">Company Name</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z0-9]{3,30}$" [(ngModel)]="company.name"
-                      placeholder="Company Name" id="name" name="name" #name="ngModel" required autocomplete="off">
+                    <input type="text" class="form-control" pattern="^[A-Za-z0-9? ?A-Za-z0-9]{3,30}$" [(ngModel)]="company.name"
+                      placeholder="Company Name" id="name" name="name" #name="ngModel" required
+                      autocomplete="off">
                     <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
                       <div [hidden]="!name.errors.required">Company Name is required!</div>
                       <div [hidden]="!name.errors.pattern">
@@ -58,7 +59,8 @@
                   <label for="edrpou" class="col-md-2 col-sm-3 col-xs-12 control-label">EDRPOU</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
                     <input type="text" class="form-control" pattern="^[0-9]{8,10}$" [(ngModel)]="company.edrpou"
-                      placeholder="EDRPOU" id="edrpou" name="edrpou" #edrpou="ngModel" required autocomplete="off">
+                      placeholder="EDRPOU" id="edrpou" name="edrpou" #edrpou="ngModel" required
+                      autocomplete="off">
                     <div *ngIf="edrpou.errors && (edrpou.dirty || edrpou.touched)" class="alert alert-danger">
                       <div [hidden]="!edrpou.errors.required">EDRPOU is required!</div>
                       <div [hidden]="!edrpou.errors.pattern">
@@ -74,10 +76,9 @@
                   <div class="col-md-10 col-sm-9 col-xs-12">
                     <textarea class="form-control" pattern="^[\s\S]{0,2000}$" [(ngModel)]="company.description"
                       placeholder="Description" id="description" name="description" #description="ngModel"
-                      autocomplete="off" style="resize: none" rows="5" required>
+                      autocomplete="off" style="resize: none" rows="5" required> 
                     </textarea>
-                    <div *ngIf="description.errors && (description.dirty || description.touched)"
-                      class="alert alert-danger">
+                    <div *ngIf="description.errors && (description.dirty || description.touched)" class="alert alert-danger">
                       <div [hidden]="!description.errors.pattern">
                         Description is incorrect (up to 2000 characters)!
                       </div>
@@ -89,10 +90,9 @@
                 <div class="form-group">
                   <label for="website" class="col-md-2 col-sm-3 col-xs-12 control-label">Website</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" maxlength="50"
-                      pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
-                      [(ngModel)]="company.website" placeholder="Website" id="website" name="website" #website="ngModel"
-                      required autocomplete="off">
+                    <input type="text" class="form-control" maxlength="50" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$" [(ngModel)]="company.website"
+                      placeholder="Website" id="website" name="website" #website="ngModel" required
+                      autocomplete="off">
                     <div *ngIf="website.errors && (website.dirty || website.touched)" class="alert alert-danger">
                       <div [hidden]="!website.errors.required">Website URL is required!</div>
                       <div [hidden]="!website.errors.pattern">
@@ -101,18 +101,17 @@
                     </div>
                   </div>
                 </div>
-              </fieldset> <br>
-
+              </fieldset>  <br>
+                
               <fieldset class="fieldset">
-                <h3 class="fieldset-title">Contact Info</h3>
+                <h3 class="fieldset-title">Contacts Info</h3>
 
                 <div class="form-group">
                   <label for="email" class="col-md-2 col-sm-3 col-xs-12 control-label">Email</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" maxlength="50"
-                      pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-                      [(ngModel)]="company.contact.email" placeholder="Email" id="email" name="email" #email="ngModel"
-                      required autocomplete="off">
+                    <input type="text" class="form-control" maxlength="50" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$" [(ngModel)]="company.contact.email"
+                      placeholder="Email" id="email" name="email" #email="ngModel" required
+                      autocomplete="off">
                     <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
                       <div [hidden]="!email.errors.required">Email is required!</div>
                       <div [hidden]="!email.errors.pattern">
@@ -125,12 +124,10 @@
                 <div class="form-group">
                   <label for="phoneNumber" class="col-md-2 col-sm-3 col-xs-12 control-label">Phone Number</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" maxlength="20"
-                      pattern="^[+]*[0-9][0-9][(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
-                      [(ngModel)]="company.contact.phoneNumber" placeholder="Phone Number" id="phoneNumber"
-                      name="phoneNumber" #phoneNumber="ngModel" required autocomplete="off">
-                    <div *ngIf="phoneNumber.errors && (phoneNumber.dirty || phoneNumber.touched)"
-                      class="alert alert-danger">
+                    <input type="text" class="form-control" maxlength="20" pattern="^[+]*[0-9][0-9][(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" [(ngModel)]="company.contact.phoneNumber"
+                      placeholder="Phone Number" id="phoneNumber" name="phoneNumber" #phoneNumber="ngModel" required
+                      autocomplete="off">
+                    <div *ngIf="phoneNumber.errors && (phoneNumber.dirty || phoneNumber.touched)" class="alert alert-danger">
                       <div [hidden]="!phoneNumber.errors.required">Phone Number is required!</div>
                       <div [hidden]="!phoneNumber.errors.pattern">
                         Phone Number is incorrect!
@@ -218,23 +215,19 @@
 
                 <div class="form-group">
                   <div *ngIf="company.companyId == null">
-                    <button [disabled]="!companyForm.form.valid" class="btn btn-primary"
-                      (click)="create()">Create</button>
+                    <button [disabled]="!companyForm.form.valid" class="btn btn-primary" (click)="create()">Create</button>
                   </div>
                   <div *ngIf="company.companyId != null">
-                    <button [disabled]="!companyForm.form.valid" class="btn btn-success"
-                      (click)="update()">Update</button>
+                    <button [disabled]="!companyForm.form.valid" class="btn btn-success" (click)="update()">Update</button>
                   </div>
                   <a class="btn btn-danger" (click)="goBack()" style="font-size: 15px;margin-top:15px">Go back</a>
                 </div>
               </fieldset>
-
+                
             </form>
           </div>
-        </div>
+        </div>  
       </section>
     </div>
   </div>
 </body>
-
-</html>

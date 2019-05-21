@@ -10,7 +10,7 @@ import { CVService } from 'src/app/services/cv.service';
 })
 export class ViewCvComponent implements OnInit {
 
-  cv: CV;
+  cv: CV = new CV();
 
   constructor(private router: Router,private route: ActivatedRoute, private cvService: CVService) { }
 

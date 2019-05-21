@@ -41,7 +41,6 @@ import { AuthenticationService } from './services/authentication.service';
 
 import { AuthInterceptor, ErrorInterceptor } from './_helpers';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
-import { AppErrorHandler } from './_helpers/app.error.handler';
 import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
 import { MyCompanyComponent } from './company/my-company/my-company.component';
 import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
@@ -94,7 +93,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     AppRoutingModule,
     PerfectScrollbarModule,
-
     MatDialogModule,
     BsDropdownModule.forRoot(), MatSidenavModule
   ],
@@ -104,7 +102,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { provide: MAT_DATE_LOCALE, useValue: 'uk-UK' },
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: AppErrorHandler }]
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+   ]
 })
 export class AppModule { }
