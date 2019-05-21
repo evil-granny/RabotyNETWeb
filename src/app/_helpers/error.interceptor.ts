@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (err.status === 401) {
         console.log('========== ERRORS ==========')
         console.log(err.status);
-        // this.router.navigate(['/nonauthorized']);
+        this.router.navigate(['/nonauthorized']);
       }
       if (err.status === 403) {
         console.log('========== ERRORS ==========')

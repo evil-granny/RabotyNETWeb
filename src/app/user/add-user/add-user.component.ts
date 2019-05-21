@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material';
 import { RegistrationconfirmComponent } from 'src/app/confirm/registrationconfirm/registrationconfirm.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NgForm } from '@angular/forms';
+import {Role} from '../../models/roles.model';
+import {UserPrincipal} from '../../models/userPrincipal.model';
 @Component({
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
@@ -15,7 +17,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AddUserComponent implements OnInit {
 
-
+  currentUser: UserPrincipal;
   users: User[];
   foundUser: User[];
   user: User = new User();
@@ -25,8 +27,8 @@ export class AddUserComponent implements OnInit {
   valid: any;
   credentials = { username: '', password: '' };
 
-  constructor(private router: Router, private userService: UserService, public dialog: MatDialog, private app: AuthenticationService) {
-
+  constructor(private router: Router, private userService: UserService, public dialog: MatDialog, private authenticationService: AuthenticationService) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {
@@ -94,8 +96,16 @@ export class AddUserComponent implements OnInit {
   };
 
   signin() {
-    const user = this.app.authenticate(this.credentials).subscribe(data => {
-      this.router.navigateByUrl('/vacancies');
+    this.authenticationService.authenticate(this.credentials).subscribe(data => {
+      if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1) {
+        this.router.navigateByUrl('/companies');
+      }
+      if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1) {
+        this.router.navigateByUrl('/companies/my');
+      }
+      if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1) {
+        this.router.navigateByUrl('/cvs');
+      }
     });
   }
 

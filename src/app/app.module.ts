@@ -70,63 +70,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
-const routes: Routes = [
-  {
-    path: 'vacancies',
-    component: VacancyComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'hotVacancies',
-    component: VacancyComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_ADMIN] }
-  },
-  {
-    path: 'companies',
-    component: CompanyComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER, Role.ROLE_ADMIN] }
-  },
-  { path: 'createCV', 
-  component: AddCvComponent ,
-  canActivate: [AuthGuard],
-  data: { roles: [Role.ROLE_COWNER,Role.ROLE_USER] }
-  },
-  { path: 'cvs',
-    component: CvComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_ADMIN]}
-  },
-  // {
-  //   path: 'searchCV',
-  //   component: SearchCVComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: [Role.ROLE_COWNER] }
-  // },
-  {
-    path: 'users',
-    component: UserComponent,
-    // canActivate: [AuthGuard],
-    // data: { roles: [Role.ROLE_USER] }
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  }, 
-   {
-    path: 'registrationConfirm',
-    redirectTo: 'registration'
-  },
-
-  { path: '**', redirectTo: 'vacancies' }
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -160,7 +103,6 @@ const routes: Routes = [
     ViewCvComponent,
   ],
   imports: [
-    RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,

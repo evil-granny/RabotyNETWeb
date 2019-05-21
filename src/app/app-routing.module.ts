@@ -32,11 +32,23 @@ import {PasswordRestoreComponent} from './password-restore/password-restore.comp
 import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 import { ViewCvComponent } from './cv/view-cv/view-cv.component';
+import {AuthGuard} from './_guards/auth.guard';
+import {Role} from './models/roles.model';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
+
+  {
+    path: 'companies',
+    component: CompanyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_ADMIN] }
+  },
+  { path: 'vacancies', component: VacancyComponent },
+  { path: 'hotVacancies', component: VacancyComponent },
   { path: 'profile', component: ProfileComponent },
 
-  { path: 'vacancies', component: VacancyComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'hotVacancies', component: HotVacancyComponent },
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
@@ -63,11 +75,12 @@ const routes: Routes = [
   { path: 'accessDenied', component: AccessDeniedPageComponent },
   { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
-  // { path: 'users', component: UserComponent },
-
+  { path: 'users', component: UserComponent },
   { path: 'searchCV', component: SearchCVComponent },
 
-  { path: 'vacancies/search', component: SearchVacancyComponent }
+  { path: 'vacancies/search', component: SearchVacancyComponent },
+
+  { path: '**', redirectTo: 'vacancies' }
 ];
 
 @NgModule({

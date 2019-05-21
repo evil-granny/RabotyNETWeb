@@ -102,20 +102,19 @@
                                 <span class="border"></span>
                             </label>
                         </div>
-                        <!-- <div *ngIf="password.errors && password.dirty" class="alert alert-danger">
-                            <div [hidden]="!password.errors.required">Password is required!</div>
-                            <div [hidden]="!password.errors.pattern && password.untouched">Password is required!</div>
-                        </div> -->
+                        <div *ngIf="signinPassword.errors && signinPassword.dirty" class="alert alert-danger">
+                            <div [hidden]="!signinPassword.errors.required">Password is required!</div>
+                            <div [hidden]="!signinPassword.errors.pattern && signinPassword.untouched">Password is required!</div>
+                        </div>
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Sign In">
                         </div>
                     </div>
                 </form>
-
+              <div align="center" pagination-template><a routerLink="/forgotPassword"><h5>Forgot password?</h5></a></div>
             </div>
         </div>
     </div>
 </body>
-<!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>
