@@ -12,7 +12,7 @@
     <ul class="navbar-nav mr-auto">
       <a class="navbar-brand" routerLink="/companies/my" *ngIf="isCowner">My companies</a>
       <a class="navbar-brand" routerLink="/createCompany" *ngIf="isCownerAndUser">Create company</a>
-      <a class="navbar-brand" routerLink="/cvs" *ngIf="isUser || isCowner">My resumes</a>
+      <a class="navbar-brand" routerLink="/userCV" *ngIf="isCownerAndUser">My resumes</a>
       <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin">Сompanies</a>
       <a class="navbar-brand" routerLink="/hotVacancies">Hot Vacancies</a>
     </ul>

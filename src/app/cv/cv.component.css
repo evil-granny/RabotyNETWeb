@@ -327,7 +327,7 @@ button {
     width: 130px;
     margin-right: 15px;
     display: inline-block;
-    float: left
+    float: left;
 }
 
 .drive-wrapper .drive-item:hover {
