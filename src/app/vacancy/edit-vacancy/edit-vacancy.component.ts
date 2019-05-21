@@ -8,6 +8,7 @@ import {UserPrincipal} from 'src/app/models/userPrincipal.model';
 import {AuthenticationService} from 'src/app/services/authentication.service';
 import {Role} from 'src/app/models/roles.model';
 import {Location} from '@angular/common';
+import { FormArray } from '@angular/forms';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class EditVacancyComponent implements OnInit {
   currentUser: UserPrincipal;
   employment = 'FULL PART_TIME HOURLY TRAINEE'.split(' ');
   selectedEmployment = 'FULL';
+  size : number = 0;
 
   constructor(private location: Location, private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
@@ -78,5 +80,17 @@ export class EditVacancyComponent implements OnInit {
   get isAdmin() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
   }
+
+  deleteRequirement(requirement: Requirement): void {
+    this.vacancyService.deleteRequiremnetById(requirement.requirementId)
+      .subscribe( data => {
+        this.requirements = this.requirements.filter(p => p !== requirement);
+        window.location.reload();
+      })
+  };
+
+  removeInputField(index : number) : void{
+  this.vacancy.requirements.splice(index,1); 
+}
 
 }
