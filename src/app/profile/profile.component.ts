@@ -71,7 +71,7 @@ export class ProfileComponent implements OnInit {
   }
 
   uploadPhoto() {
-    this.photoService.upload(this.fileToUpload, this.person.userId)
+    this.photoService.uploadAvatar(this.fileToUpload, this.person.userId)
       .subscribe(() => window.location.reload());
   }
 

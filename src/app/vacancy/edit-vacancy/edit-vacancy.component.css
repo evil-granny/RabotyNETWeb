@@ -607,5 +607,6 @@ legend.experience-border {
     margin-top: 20px;
 }
 .checkboxC{
-   text-align:left;
+margin-left: 100px; 
+margin-top:-40px; 
 }

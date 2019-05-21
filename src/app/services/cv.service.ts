@@ -43,4 +43,17 @@ export class CVService {
     console.log("[find cv by id]");
     return this.http.get<CV>(this.cvUrl + "/cv/" + cvId, httpOptions);
   }
+
+  public findByUserId(){
+    console.log("[find cv by user id]");
+    return this.http.get<CV>(this.cvUrl + "/userCV", httpOptions);
+  }
+
+  public deleteSkillById(id: any) {
+    return this.http.delete(this.cvUrl + '/skill/' + id, httpOptions);
+  }
+
+  public deleteJobById(id: any) {
+    return this.http.delete(this.cvUrl + '/job/' + id, httpOptions);
+  }
 }

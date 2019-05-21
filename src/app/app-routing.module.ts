@@ -31,6 +31,7 @@ import {PasswordForgotComponent} from './password-forgot/password-forgot.compone
 import {PasswordRestoreComponent} from './password-restore/password-restore.component';
 import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
+import { ViewCvComponent } from './cv/view-cv/view-cv.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
   { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
 
+  { path: 'userCV', component: ViewCvComponent },
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
 

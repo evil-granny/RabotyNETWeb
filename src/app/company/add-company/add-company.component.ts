@@ -36,7 +36,6 @@ export class AddCompanyComponent implements OnInit {
         .subscribe(data => {
           this.company = data;
 
-          console.log(this.app.currentUserValue.userId, this.company.user.userId);
           if(this.app.currentUserValue.userId != this.company.user.userId) {
             this.router.navigate(['accessDenied']);
           }
@@ -56,7 +55,7 @@ export class AddCompanyComponent implements OnInit {
     this.companyService.update(this.company)
       .subscribe(data => {
         if (data != null)
-        this.router.navigate(['companies/my']);
+        this.router.navigate(['vacancies']);
         else
           alert("Validation problem has been occured");
       });

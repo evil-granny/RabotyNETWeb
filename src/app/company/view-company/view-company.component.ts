@@ -141,11 +141,16 @@ export class ViewCompanyComponent implements OnInit {
   }
 
   deleteVacancy(vacancy: Vacancy): void {
+    let flag = confirm("Are you really want delete?");
+    if(flag){
     this.vacancyService.deleteById(vacancy.vacancyId)
       .subscribe( data => {
         this.vacancies = this.vacancies.filter(p => p !== vacancy);
         this.size = this.size - 1;
       })
+    }
+    else 
+      return ;
   };
 
   get isCowner() {
