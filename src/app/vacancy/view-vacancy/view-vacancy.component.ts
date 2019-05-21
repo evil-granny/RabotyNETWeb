@@ -17,10 +17,8 @@ import { Location } from '@angular/common';
 export class ViewVacancyComponent implements OnInit {
 
   vacancy: Vacancy = new Vacancy();
-  currentUser: UserPrincipal;
-
+ 
   constructor(private location: Location,private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
-    this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
   goBack() {

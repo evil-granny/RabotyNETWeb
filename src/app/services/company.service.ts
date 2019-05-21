@@ -57,9 +57,9 @@ export class CompanyService {
     return this.http.put<Company>(this.companyURL + "/sendMail", company, httpOptions);
   }
 
-  public approve(company) {
+  public approve(company, token) {
     console.log("[approve company by user]");
-    return this.http.put<Company>(this.companyURL + "/approve", company, httpOptions);
+    return this.http.put<Company>(this.companyURL + "/approve/" + token, company, httpOptions);
   }
 
   public findByName(companyName) {

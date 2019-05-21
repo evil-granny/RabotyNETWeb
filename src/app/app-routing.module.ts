@@ -45,7 +45,7 @@ const routes: Routes = [
   { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
-  { path: 'approveCompany/:companyName', component: ApproveCompanyComponent },
+  { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
   { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
 
   { path: 'cvs', component: CvComponent },

@@ -19,134 +19,151 @@
       <section class="module">
         <div class="module-inner">
           <div class="content-panel">
-            <h2 class="title">Create Vacancy</h2>
+            <h3> {{vacancy.vacancyId==null ? 'Create Vacancy' : 'Update Vacancy'}}</h3>
             <form class="form-horizontal" #personForm="ngForm">
               <fieldset class="fieldset">
-                <h3 class="fieldset-title">Main Info</h3>
-                <div class="form-group">
+                <fieldset class="experience-border">
+                  <legend class="experience-border">
+                    <h5>Main info</h5>
+                  </legend>
+                  <div class="form-group">
                     <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Description</label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[A-Za-z0-9\s\S]{3,40}$" [(ngModel)]="vacancy.description"
-                        placeholder="Input description" id="description" name="description" #description="ngModel" required
-                        autocomplete="off">
-                      <div *ngIf="description.errors && (description.dirty || description.touched)" class="alert alert-danger">
+                      <input type="text" class="form-control" pattern="^[A-Za-z0-9\s\S]{3,40}$"
+                        [(ngModel)]="vacancy.description" placeholder="Input description" id="description"
+                        name="description" #description="ngModel" required autocomplete="off">
+                      <div *ngIf="description.errors && (description.dirty || description.touched)"
+                        class="alert alert-danger">
                         <div [hidden]="!description.errors.required">Description is required!</div>
                         <div [hidden]="!description.errors.pattern">
-                            Description can only contain letters and numbers (3-40 characters)!
+                          Description can only contain letters and numbers (3-40 characters)!
                         </div>
                       </div>
                     </div>
                   </div>
-                <div class="form-group">
-                  <label for="position" class="col-md-2 col-sm-3 col-xs-12 control-label">Posistion</label>
-                  <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z0-9\s\S]{3,40}$" [(ngModel)]="vacancy.position"
-                      placeholder="Input position" id="position" name="position" #position="ngModel" required
-                      autocomplete="off">
-                    <div *ngIf="position.errors && (position.dirty || position.touched)" class="alert alert-danger">
-                      <div [hidden]="!position.errors.required">Position is required!</div>
-                      <div [hidden]="!position.errors.pattern">
-                        Position can only contain letters and numbers (3-40 characters)!
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="employment" class="col-md-2 col-sm-3 col-xs-12 control-label">Employment</label>
-                  <div class="col-md-10 col-sm-9 col-xs-12">
-                           <select class='form-control' [(ngModel)]="vacancy.employment" (change)="changingValue($event)" name="sel3"   id="employment" name="employment" required
-                           autocomplete="off" > 
-                            <option [ngValue]="i" *ngFor="let i of employment">{{i}}</option>
-                        </select> 
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="salary" class="col-md-2 col-sm-3 col-xs-12 control-label">Salary</label>
-                  <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[0-9]{3,11}$" [(ngModel)]="vacancy.salary"
-                      placeholder="Input salary" id="salary" name="salary" #salary="ngModel" 
-                      autocomplete="off">
-                    <div *ngIf="salary.errors && (salary.dirty || salary.touched)" class="alert alert-danger">
-                      <div [hidden]="!salary.errors.required">Salary is required!</div>
-                      <div [hidden]="!salary.errors.pattern">
-                       Salary can only contain numbers (3-11 digits)!
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                 <div class="form-group">
-                  <label for="hotVacancy" class="col-md-2 col-sm-3 col-xs-12 control-label">Hot vacancy</label>
-                  <div class= "checkboxC">
-                  <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="checkbox" style="width: 40px;height: 40px" [(ngModel)]="vacancy.hotVacancy"
-                      placeholder="Check if vacancy is hot" id="hotVacancy" name="hotVacancy" #hotVacancy="ngModel" checked
-                      autocomplete="off">
-                  </div>
-                </div>
-                </div> 
-
-              </fieldset>  <br>
-              <fieldset class="fieldset">
-                <h3 class="fieldset-title">Requirements Info</h3>
-                <div class="form-group">
-                     <div class="col-md-10 col-sm-9 col-xs-12" *ngFor="let item of vacancy.requirements;let index = index;"> 
-                     <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Requirement:{{index+1}}</label>
-                       <div *ngIf = "vacancy.vacancyId == null; else updateBlock"> 
-                          <input type = "text" class="form-control" name="description" pattern="^[a-zA-Z0-9_,.\- &]{3,100}$" [ngModelOptions]="{standalone: true}" 
-                            placeholder="Input requirement" maxlength="100" id="description" [(ngModel)]="item.description" #description="ngModel"
-                            autocomplete="off" >
-                            <div *ngIf="description.errors && (description.dirty || description.touched)" class="alert alert-danger">
-                              <div [hidden]="!description.errors.required">Description is required!</div>
-                              <div [hidden]="!description.errors.pattern">
-                                Description can only contain numbers and letters (max 100 digits)!
-                              </div>
-                            </div>
+                  <div class="form-group">
+                    <label for="position" class="col-md-2 col-sm-3 col-xs-12 control-label">Posistion</label>
+                    <div class="col-md-10 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" pattern="^[A-Za-z0-9\s\S]{3,40}$"
+                        [(ngModel)]="vacancy.position" placeholder="Input position" id="position" name="position"
+                        #position="ngModel" required autocomplete="off">
+                      <div *ngIf="position.errors && (position.dirty || position.touched)" class="alert alert-danger">
+                        <div [hidden]="!position.errors.required">Position is required!</div>
+                        <div [hidden]="!position.errors.pattern">
+                          Position can only contain letters and numbers (3-40 characters)!
                         </div>
-                        <ng-template #updateBlock>
-                            <input type = "text" class="form-control" [ngModelOptions]="{standalone: true}"  
-                            placeholder="Input requirement" maxlength="100" id="description" pattern="^[a-zA-Z0-9_,.\- &]{3,100}$" [(ngModel)]="item.description" 
-                            autocomplete="off" #description>
-                            <div *ngIf="description.errors && (description.dirty || description.touched)" class="alert alert-danger">
-                              <div [hidden]="!description.errors.required">Description is required!</div>
-                              <div [hidden]="!description.errors.pattern">
-                                Description can only contain numbers and letters (max 100 digits)!
-                              </div>
-                            </div>
-                          </ng-template>     
-                   </div> 
-                  <td>
-                    <div class="addRequirement">
-                        <div>
-                         <button class="btn btn-success" type="button" (click)="addFieldValue()">Add new requirement</button>
-                       </div>
+                      </div>
                     </div>
-                  </td>
+                  </div>
 
-                </div>
-              
+                  <div class="form-group">
+                    <label for="employment" class="col-md-2 col-sm-3 col-xs-12 control-label">Employment</label>
+                    <div class="col-md-10 col-sm-9 col-xs-12">
+                      <select class='form-control' [(ngModel)]="vacancy.employment" (change)="changingValue($event)"
+                        name="sel3" id="employment" name="employment" required autocomplete="off">
+                        <option [ngValue]="i" *ngFor="let i of employment">{{i}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="salary" class="col-md-2 col-sm-3 col-xs-12 control-label">Salary</label>
+                    <div class="col-md-10 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" pattern="^[0-9]{3,11}$" [(ngModel)]="vacancy.salary"
+                        placeholder="Input salary" id="salary" name="salary" #salary="ngModel" autocomplete="off">
+                      <div *ngIf="salary.errors && (salary.dirty || salary.touched)" class="alert alert-danger">
+                        <div [hidden]="!salary.errors.required">Salary is required!</div>
+                        <div [hidden]="!salary.errors.pattern">
+                          Salary can only contain numbers (3-11 digits)!
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="hotVacancy" class="col-md-2 col-sm-3 col-xs-12 control-label">Hot vacancy</label>
+                    <div class="checkboxC">
+                      <div class="col-md-10 col-sm-9 col-xs-12">
+                        <input type="checkbox" style="width: 34px;height: 34px;" [(ngModel)]="vacancy.hotVacancy"
+                          placeholder="Check if vacancy is hot" id="hotVacancy" name="hotVacancy" #hotVacancy="ngModel"
+                          checked autocomplete="off">
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+
               </fieldset> <br>
-
+              <fieldset class="fieldset">
+                <fieldset class="experience-border">
+                  <legend class="experience-border">
+                    <h5>Requirements Info</h5>
+                  </legend>
+                  <div class="form-group">
+                    <div class="col-md-10 col-sm-9 col-xs-12"
+                      *ngFor="let item of vacancy.requirements;let index = index;">
+                      <label for="description"
+                        class="col-md-2 col-sm-3 col-xs-12 control-label">Requirement:{{index+1}}</label>
+                      <div *ngIf="vacancy.vacancyId == null; else updateBlock">
+                        <input type="text" class="form-control" name="description" pattern="^[a-zA-Z0-9_,.\- &]{3,100}$"
+                          [ngModelOptions]="{standalone: true}" placeholder="Input requirement" maxlength="100"
+                          id="description" [(ngModel)]="item.description" #description="ngModel" required
+                          autocomplete="off">
+                        <div *ngIf="description.errors && (description.dirty || description.touched)"
+                          class="alert alert-danger">
+                          <div [hidden]="!description.errors.required">Description is required!</div>
+                          <div [hidden]="!description.errors.pattern">
+                            Description can only contain numbers and letters (3 - 100 digits)!
+                          </div>
+                        </div>
+                        <a class="btn" style="margin-top:-70px;margin-left:100%;font-size:48px;color:red"
+                        (click)="removeInputField(index)"><i class="fa fa-remove" rel="tooltip"
+                          title="Delete"></i></a>
+                      </div>
+                      <ng-template #updateBlock>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                          placeholder="Input requirement" maxlength="100" id="description"
+                          pattern="^[a-zA-Z0-9_,.\- &]{3,100}$" [(ngModel)]="item.description" required
+                          autocomplete="off" #description="ngModel">
+                        <div *ngIf="description.errors && (description.dirty || description.touched)"
+                          class="alert alert-danger">
+                          <div [hidden]="!description.errors.required">Description is required!</div>
+                          <div [hidden]="!description.errors.pattern">
+                            Description can only contain numbers and letters (max 100 digits)!
+                          </div>
+                        </div>
+                        <a class="btn" style="margin-top:-70px;margin-left:100%;font-size:48px;color:red"
+                          (click)="deleteRequirement(item)"><i class="fa fa-remove" rel="tooltip"
+                            title="Delete"></i></a>
+                      </ng-template>
+                    </div>
+                    <td>
+                      <div class="addRequirement">
+                        <div>
+                          <button class="btn btn-success" type="button" style="margin-left: 14px"
+                            [disabled]="!personForm.form.valid" (click)="addFieldValue()">Add new requirement</button>
+                        </div>
+                      </div>
+                    </td>
+                  </div>
+                </fieldset>
+              </fieldset> <br>
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Action</h3>
-
                 <div class="form-group">
                   <div *ngIf="vacancy.vacancyId == null">
-                    <button class="btn btn-primary" style="margin-top: 20px" type="submit" [disabled]="!personForm.form.valid"
-                        (click)="create()">Create</button>
+                    <button class="btn btn-primary" style="margin-top: 20px" type="submit"
+                      [disabled]="!personForm.form.valid" (click)="create()">Create</button>
                   </div>
-                   <div *ngIf="vacancy.vacancyId != null && (isCowner==true)">
-                    <button class="btn btn-success" style="font-size: 18px;" (click)="update()" [disabled]="!personForm.form.valid">Update</button>
+                  <div *ngIf="vacancy.vacancyId != null && (isCowner==true)">
+                    <button class="btn btn-success" style="font-size: 18px;" (click)="update()"
+                      [disabled]="!personForm.form.valid">Update</button>
                   </div>
                   <a class="btn btn-danger" (click)="goBack()" style="font-size: 16px;margin-top:15px">Go back</a>
                 </div>
               </fieldset>
-                
             </form>
           </div>
-        </div>  
+        </div>
       </section>
     </div>
   </div>
