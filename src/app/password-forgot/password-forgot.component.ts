@@ -33,7 +33,7 @@ export class PasswordForgotComponent {
     console.log(this.resetPasswordUrl)
     console.log(this.userLogin.username)
 
-    const observable = this.http.post<any>(this.resetPasswordUrl, this.userLogin.username.toString(), httpOptions);
+    const observable = this.http.post<any>(this.resetPasswordUrl, this.userLogin, httpOptions);
     observable.subscribe(data => {
         console.log('=============Post data============');
         console.log(data);
