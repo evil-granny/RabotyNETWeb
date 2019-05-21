@@ -28,7 +28,7 @@
                         <button class="tablinks" onclick="openCity(event, 'sign-up')">Sign Up</button>
                     </div>
                 </div>
-                <form class="form-detail" (ngSubmit)="findByEmail()" #userForm1="ngForm">
+                <form class="form-detail" (ngSubmit)="findByEmail()" #userForm="ngForm">
                     <div class="tabcontent" id="sign-up">
                         <div class="form-row">
                             <label class="form-row-inner">
@@ -39,14 +39,13 @@
                                 <span class="border"></span>
                             </label>
                             <div *ngIf="login1.errors && login1.dirty" class="alert alert-danger">
-                                <div [hidden]="!login1.errors.required">Email is required!</div>
                                 <div [hidden]="!login1.errors.pattern">Login is incorrect!</div>
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="form-row-inner">
-                                <input type="password" id="password1" class="input-text"
-                                    name="password1" #password1="ngModel" required
+                                <input type="password" id="password1" class="input-text" name="password1"
+                                    #password1="ngModel" required
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
                                     [(ngModel)]="user.password">
                                 <span class="label">Password</span>
@@ -61,12 +60,12 @@
                         <div class="form-row">
                             <label class="form-row-inner">
                                 <input type="password" class="input-text" [(ngModel)]="user.matchingPassword"
-                                     id="matchingPassword" name="matchingPassword"
-                                    #matchingPassword="ngModel" required>
+                                    id="matchingPassword" name="matchingPassword" #matchingPassword="ngModel" required>
                                 <span class="label">Comfirm Password</span>
                                 <span class="border"></span>
                             </label>
-                            <div *ngIf="matchingPassword.errors && matchingPassword.touched && matchingPassword.dirty" class="alert alert-danger">
+                            <div *ngIf="matchingPassword.errors && matchingPassword.touched && matchingPassword.dirty"
+                                class="alert alert-danger">
                                 <div [hidden]="!matchingPassword.errors.required">Confirm password!</div>
                             </div>
                             <div *ngIf="user.matchingPassword != user.password && matchingPassword.dirty"
@@ -74,7 +73,8 @@
                             </div>
                         </div>
                         <div class="form-row-last">
-                            <input type="submit" name="register" class="register" [disabled]="!userForm1.form.valid"
+                            <input type="submit" name="register" class="register"
+                            [disabled]="!(userForm.form.valid || matchingPassword.untouched)"
                                 value="Register">
                         </div>
                     </div>
@@ -83,30 +83,31 @@
                     <div class="tabcontent" id="sign-in">
                         <div class="form-row">
                             <label class="form-row-inner">
-                                <input type="text" name="username" id="username" class="input-text" #username="ngModel" [(ngModel)]="credentials.username" required autofocus
-                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                <input type="text" name="username" id="username" class="input-text" #username="ngModel"
+                                    [(ngModel)]="credentials.username" required autofocus
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                                 <span class="label">E-Mail</span>
                                 <span class="border"></span>
                             </label>
                             <div *ngIf="username.errors && username.dirty" class="alert alert-danger">
-                                <div [hidden]="!username.errors.required">Email is required!</div>
                                 <div [hidden]="!username.errors.pattern">Please check your login!</div>
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="form-row-inner">
-                                <input type="password" name="password" id="password" class="input-text" #signinPassword="ngModel" [(ngModel)]="credentials.password" required autofocus
-                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                <input type="password" name="password" id="password" class="input-text"
+                                    #signinPassword="ngModel" [(ngModel)]="credentials.password" required
+                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}">
                                 <span class="label">Password</span>
                                 <span class="border"></span>
                             </label>
-                          <!--<div *ngIf="signinPassword.errors && signinPassword.dirty" class="alert alert-danger">-->
-                            <!--<div [hidden]="!signinPassword.errors.required">Password is required!</div>-->
-                            <!--<div [hidden]="!signinPassword.errors.pattern">Please check your password!</div>-->
-                          <!--</div>-->
+                        </div>
+                        <div *ngIf="signinPassword.errors && signinPassword.dirty" class="alert alert-danger">
+                            <div [hidden]="!signinPassword.errors.required">Password is required!</div>
+                            <div [hidden]="!signinPassword.errors.pattern && signinPassword.untouched">Password is required!</div>
                         </div>
                         <div class="form-row-last">
-                            <input type="submit" name="register" class="register"  value="Sign In" >
+                            <input type="submit" name="register" class="register" value="Sign In">
                         </div>
                     </div>
                 </form>

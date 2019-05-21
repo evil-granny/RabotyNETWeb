@@ -17,6 +17,7 @@ import { PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
+import { AdminComponent } from './admin/admin.component';
 import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 
 import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
@@ -30,6 +31,7 @@ import {PasswordForgotComponent} from './password-forgot/password-forgot.compone
 import {PasswordRestoreComponent} from './password-restore/password-restore.component';
 import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
+import { ViewCvComponent } from './cv/view-cv/view-cv.component';
 import {AuthGuard} from './_guards/auth.guard';
 import {Role} from './models/roles.model';
 import {LoginComponent} from './login/login.component';
@@ -48,26 +50,26 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'hotVacancies', component: HotVacancyComponent },
-
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
-  { path: 'companies', component: CompanyComponent },
 
+  { path: 'companies', component: CompanyComponent },
   { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
   { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
-  { path: 'cvs', component: CvComponent },
 
+  { path: 'userCV', component: ViewCvComponent },
+  { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
+
   { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
 
   { path: 'updateCV/:cvId', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
-
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
