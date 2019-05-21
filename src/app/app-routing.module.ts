@@ -42,78 +42,43 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_ADMIN] }
   },
-  {
-    path: 'vacancies',
-    component: VacancyComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'hotVacancies',
-    component: VacancyComponent,
-    canActivate: [AuthGuard]
-  },
-  // {
-  //   path: 'vacancies/search',
-  //   component: SearchVacancyComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: [Role.ROLE_ADMIN] }
-  // },
-  // {
-  //   path: 'searchCV',
-  //   component: SearchCVComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: [Role.ROLE_COWNER] }
-  // },
-  {
-    path: 'users',
-    component: UserComponent,
-    // canActivate: [AuthGuard],
-    // data: { roles: [Role.ROLE_USER] }
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'registrationConfirm',
-    component: RegistrationconfirmComponent
-  },
-
-  { path: '**', redirectTo: 'vacancies' },
-
+  { path: 'vacancies', component: VacancyComponent },
+  { path: 'hotVacancies', component: VacancyComponent },
   { path: 'profile', component: ProfileComponent },
 
-  { path: 'vacancies', component: VacancyComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'hotVacancies', component: HotVacancyComponent },
+
   { path: 'createVacancy/:companyName', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
-
   { path: 'companies', component: CompanyComponent },
+
   { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName', component: ApproveCompanyComponent },
   { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
-
   { path: 'cvs', component: CvComponent },
-  { path: 'createCV', component: AddCvComponent },
 
+  { path: 'createCV', component: AddCvComponent },
   { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
 
   { path: 'updateCV/:cvId', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
+
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
   { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
   { path: 'users', component: UserComponent },
-
   { path: 'searchCV', component: SearchCVComponent },
 
-  { path: 'vacancies/search', component: SearchVacancyComponent }
+  { path: 'vacancies/search', component: SearchVacancyComponent },
+
+  { path: '**', redirectTo: 'vacancies' }
 ];
 
 @NgModule({
