@@ -20,12 +20,14 @@
         <div class="module-inner">
           <div class="content-panel">
             <h2> 
-                <i *ngIf="company.status == 'APPROVED' && !hasClaims()" class="fa fa-thumbs-up"
-                  style="color: green; font-size: 150%;"></i>
-                <i *ngIf="company.status == 'APPROVED' && hasClaims()" class="fa fa-warning"
-                  style="color: orange; font-size: 150%;"></i>
-                <i *ngIf="company.status == 'CREATED'" class="fa fa-times" style="color: red; font-size: 150%;"></i>
-                <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" style="color: black; font-size: 150%;"></i>
+              <i *ngIf="company.status == 'APPROVED' && !hasClaims()" class="fa fa-thumbs-up"
+                rel="tooltip" title="This company is approved"style="color: green; font-size: 150%;"></i>
+              <i *ngIf="company.status == 'APPROVED' && hasClaims()" class="fa fa-warning"
+                rel="tooltip" title="This company has claims"style="color: orange; font-size: 150%;"></i>
+              <i *ngIf="company.status == 'CREATED'" class="fa fa-times" style="color: red; font-size: 150%;"
+                rel="tooltip" title="This company is not approved"></i>
+              <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" style="color: black; font-size: 150%;"
+                rel="tooltip" title="This company is blocked"></i>
               {{company.name}}</h2>
                 <img *ngIf="avatar" style="height: 150px; float: left; margin-right: 5%;" [src]="avatar"
                   alt="">
