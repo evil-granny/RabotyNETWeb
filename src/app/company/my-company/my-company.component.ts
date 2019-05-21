@@ -28,7 +28,6 @@ export class MyCompanyComponent implements OnInit {
     this.companyService.findAllByUser()
       .subscribe( data => {
         this.companies = data;
-        console.log("Data", data);
 
         this.companies.forEach(company => {
           this.companyService.findClaims(company)
@@ -39,8 +38,6 @@ export class MyCompanyComponent implements OnInit {
               });
             });
         });
-
-        console.log(this.companies);
       });
   }
 
