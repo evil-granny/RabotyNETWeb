@@ -18,6 +18,7 @@ export class ApproveCompanyComponent implements OnInit {
   
   ngOnInit() {
     var companyName = this.route.snapshot.paramMap.get("companyName");
+    var companyToken = this.route.snapshot.paramMap.get("companyToken");
     if (companyName !== null) {
       this.companyService.findByName(companyName)
         .subscribe(data => {
@@ -27,7 +28,7 @@ export class ApproveCompanyComponent implements OnInit {
             this.router.navigate(['accessDenied']);
           }
           else {
-            this.companyService.approve(this.company)
+            this.companyService.approve(this.company, companyToken)
               .subscribe(data => {
                 if(data.status == 'APPROVED')
                   this.router.navigate(['updateCompany/' + companyName]);
