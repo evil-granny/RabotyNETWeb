@@ -51,7 +51,6 @@ export class PasswordRestoreComponent implements OnInit {
     const sendTokenPaasword = {'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword};
     const observable = this.http.post<any>(this.changePasswordUrl, sendTokenPaasword, httpOptions);
     observable.subscribe(result =>  {
-        console.log(result);
       },
       error => {
         this.errors = error;

@@ -14,17 +14,10 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(request).pipe(catchError(err => {
-      console.log('---------SOME BACK ERROR--------')
-      console.log(err)
-      console.log(err.status)
       if (err.status === 401) {
-        console.log('========== ERRORS ==========')
-        console.log(err.status);
         this.router.navigate(['/nonauthorized']);
       }
       if (err.status === 403) {
-        console.log('========== ERRORS ==========')
-        console.log(err.status);
         this.router.navigate(['/accessDenied']);
       }
 

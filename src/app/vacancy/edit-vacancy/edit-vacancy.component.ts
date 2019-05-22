@@ -52,7 +52,6 @@ export class EditVacancyComponent implements OnInit {
   };
 
   update(): void {
-    console.log(this.vacancy);
     this.vacancyService.update(this.vacancy)
       .subscribe(data => {
         this.goBack();

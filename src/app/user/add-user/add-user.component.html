@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register"
-                            [disabled]="!(userForm.form.valid || matchingPassword.untouched)"
+                            [disabled]="userForm.form.valid"
                                 value="Register">
                         </div>
                     </div>

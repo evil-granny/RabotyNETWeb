@@ -17,7 +17,6 @@ export class RegistrationconfirmComponent implements OnInit {
   
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      console.log(params);
       this.token = params['token'];
     })
 
@@ -31,8 +30,7 @@ export class RegistrationconfirmComponent implements OnInit {
           if(this.valid == "confirmed"){
             location.replace("http://localhost:4200/registration")
           }
-          console.log(this.valid);
-        });   
+        });
   }
 
 

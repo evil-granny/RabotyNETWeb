@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {errorObject} from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'app-password-forgot',
@@ -31,7 +30,6 @@ export class PasswordForgotComponent {
 
     const observable = this.http.post<any>(this.resetPasswordUrl, this.userLogin, httpOptions);
     observable.subscribe(result =>  {
-        console.log(result);
       },
         error => {
           this.errors = error;

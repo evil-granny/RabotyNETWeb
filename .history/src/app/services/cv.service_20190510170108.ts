@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { CV } from "../models/cv.model";
+import { CV } from '../models/cv.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
