@@ -23,7 +23,7 @@
               <div class="form-group">
                 <label for="position" class="col-md-2 col-sm-3 col-xs-12 control-label">Position</label>
                 <div class="col-md-10 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" pattern="^[A-Za-z]{3,50}$" [(ngModel)]="cv.position"
+                  <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,50}$" [(ngModel)]="cv.position"
                     placeholder="Position" id="position" name="position" #position="ngModel" required
                     autocomplete="off">
                   <div *ngIf="position.errors && (position.dirty || position.touched)" class="alert alert-danger">
@@ -42,7 +42,7 @@
                   <div class="form-group">
                     <label for="title" class="col-md-2 col-sm-3 col-xs-12 control-label">Title</label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[A-Za-z]{3,30}$" [(ngModel)]="skill.title"
+                      <input type="text" class="form-control" pattern="^[A-Za-z]{3,30}$" [(ngModel)]="skill.title" [ngModelOptions]="{standalone: true}"
                         placeholder="Title" id="title" name="title" #title="ngModel" required
                         autocomplete="off">
                       <div *ngIf="title.errors && (title.dirty || title.touched)" class="alert alert-danger">
@@ -55,7 +55,7 @@
                   <div class="form-group">
                     <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Description</label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" maxlength="255" [(ngModel)]="skill.description" placeholder="Description"
+                      <input type="text" class="form-control" maxlength="255" [(ngModel)]="skill.description" placeholder="Description" [ngModelOptions]="{standalone: true}"
                         id="description" name="description" #description="ngModel" autocomplete="off">
                       <div *ngIf="description.errors && (description.dirty || description.touched)" class="alert alert-danger">
                         <div [hidden]="!description.errors.pattern">Maximum lenght description is 255 characters.</div>
@@ -84,7 +84,7 @@
                   <div class="form-group">
                     <label for="position" class="col-md-2  col-sm-3 col-xs-12 control-label">Position</label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[A-Za-z]{3,40}" [(ngModel)]="job.position" placeholder="Position"
+                      <input type="text" class="form-control" pattern="^[A-Za-z]{3,40}" [(ngModel)]="job.position" placeholder="Position" [ngModelOptions]="{standalone: true}"
                         id="positionJob" name="positionjob" #positionJob="ngModel" required autocomplete="off">
                       <div *ngIf="positionJob.errors && (positionJob.dirty || positionJob.touched)" class="alert alert-danger">
                           <div [hidden]="!positionJob.errors.pattern">Position can only contain letters of the alphabet (from
@@ -96,7 +96,7 @@
                   <div class="form-group">
                     <label for="begin" class="col-md-2  col-sm-3 col-xs-12 control-label">Begin Work</label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="date" class="form-control"
+                      <input type="date" class="form-control" [ngModelOptions]="{standalone: true}"
                         [(ngModel)]="job.begin" placeholder="Begin Work" id="begin"
                         name="begin" #begin="ngModel"  autocomplete="off">
                       <div *ngIf="begin.errors && (begin.dirty || begin.touched)"
@@ -107,7 +107,7 @@
                   <div class="form-group">
                     <label for="end" class="col-md-2  col-sm-3 col-xs-12 control-label">End Work</label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="date" class="form-control"
+                      <input type="date" class="form-control" [ngModelOptions]="{standalone: true}"
                         [(ngModel)]="job.end" placeholder="End Work" id="end" name="end"
                         #end="ngModel" autocomplete="off">
                       <div *ngIf="end.errors && (end.dirty || end.touched)" class="alert alert-danger">
@@ -117,7 +117,7 @@
                   <div class="form-group">
                     <label for="companyName" class="col-md-10 col-form-label form-control-label"></label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[A-Za-z]{5,50}$"
+                      <input type="text" class="form-control" pattern="^[A-Za-z]{5,50}$" [ngModelOptions]="{standalone: true}"
                         [(ngModel)]="job.companyName" placeholder="Company Name" id="companyName" name="companyName" #companyName="ngModel"
                         autocomplete="off">
                       <div *ngIf="companyName.errors && (companyName.dirty || companyName.touched)" class="alert alert-danger">
@@ -129,7 +129,7 @@
                   <div class="form-group">
                       <label for="descriptionJob" class="col-md-10 col-form-label form-control-label"></label>
                       <div class="col-md-10 col-sm-9 col-xs-12">
-                        <input type="text" class="form-control" maxlength="200"
+                        <input type="text" class="form-control" maxlength="200" [ngModelOptions]="{standalone: true}"
                           [(ngModel)]="job.description" placeholder="Description" id="descriptionJob" name="descriptionJob"
                           #descriptionJob="ngModel" autocomplete="off">
                         <div *ngIf="descriptionJob.errors && (descriptionJob.dirty || descriptionJob.touched)" class="alert alert-danger">
@@ -157,7 +157,7 @@
                 <div class="form-group">
                   <label for="degree" class="col-md-2 col-sm-3 col-xs-12 control-label">Degree</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z]{3,30}$" [(ngModel)]="cv.education.degree"
+                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,30}$" [(ngModel)]="cv.education.degree"
                       placeholder="Degree" id="degree" name="degree" #degree="ngModel" required
                       autocomplete="off">
                     <div *ngIf="degree.errors && (degree.dirty || degree.touched)" class="alert alert-danger">
@@ -181,12 +181,12 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="speciality" class="col-md-2 col-sm-3 col-xs-12 control-label">Speciality</label>
+                  <label for="specialty" class="col-md-2 col-sm-3 col-xs-12 control-label">Speciality</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{0,100}$" [(ngModel)]="cv.education.speciality" placeholder="Speciality"
-                      id="speciality" name="speciality" #speciality="ngModel"  autocomplete="off">
-                    <div *ngIf="speciality.errors && (speciality.dirty || speciality.touched)" class="alert alert-danger">
-                      <div [hidden]="!speciality.errors.pattern">Speciality can only contain letters of the alphabet (till 100 characters).</div>
+                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{0,100}$" [(ngModel)]="cv.education.specialty" placeholder="Speciality"
+                      id="specialty" name="specialty" #specialty="ngModel"  autocomplete="off">
+                    <div *ngIf="specialty.errors && (specialty.dirty || specialty.touched)" class="alert alert-danger">
+                      <div [hidden]="!specialty.errors.pattern">Speciality can only contain letters of the alphabet (till 100 characters).</div>
                     </div>
                   </div>
                 </div>

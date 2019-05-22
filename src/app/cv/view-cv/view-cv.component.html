@@ -67,7 +67,7 @@
               <li *ngFor="let job of cv.jobs">{{job.end}}</li>
             </td>
             <td>
-              <a routerLink="/updateCV/{{cv.cvId}}" class="btn btn-success">Update</a>
+              <a *ngIf="cv.cvId != null" routerLink="/updateCV/{{cv.cvId}}" class="btn btn-success">Update</a>
             </td>
         </tbody>
       </table>

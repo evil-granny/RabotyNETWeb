@@ -104,7 +104,7 @@ export class AddUserComponent implements OnInit {
         this.router.navigateByUrl('/companies/my');
       }
       if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1) {
-        this.router.navigateByUrl('/cvs');
+        this.router.navigateByUrl('/userCV');
       }
     });
   }
