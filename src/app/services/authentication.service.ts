@@ -26,7 +26,7 @@ export class AuthenticationService {
 
     const authHeader = credentials ? {
       'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password),
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
       'Content-Type': 'application/json'
     } : {};
     const httpOptions = {
