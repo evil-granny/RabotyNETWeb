@@ -37,7 +37,7 @@ export class VacancyComponent implements OnInit {
   };
 
   findAll() {
-     this.vacancyService.findAllWithPagination(this.page * this.count, this.count).subscribe(
+     this.vacancyService.findAllWithPagination(this.page * this.count).subscribe(
        data => {
          this.vacancies = data.vacancies;
          this.size = data.count;

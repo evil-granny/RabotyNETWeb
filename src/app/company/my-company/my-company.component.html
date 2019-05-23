@@ -67,7 +67,7 @@
                   </td>
                   <td
                     *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
-                    <a routerLink="/viewCompany/{{company.name}}" class="btn" rel="tooltip" title="View details"><i
+                    <a routerLink="/viewCompany/{{company.companyId}}" class="btn" rel="tooltip" title="View details"><i
                         class="fa fa-eye"></i></a>
                     <a routerLink="/updateCompany/{{company.name}}" class="btn"><i class="fa fa-edit" rel="tooltip"
                         title="Update"></i></a>
