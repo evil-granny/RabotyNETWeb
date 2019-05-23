@@ -169,14 +169,14 @@
                 </div>
                 
                 <div class="form-group">
-                  <label for="school" class="col-md-2 col-sm-3 col-xs-12 control-label">School</label>
+                  <label for="school" class="col-md-2 col-sm-3 col-xs-12 control-label">Educational institution</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
                     <input type="text" class="form-control" pattern="^[A-Za-z0-9? ?A-Za-z0-9]{3,30}$" [(ngModel)]="cv.education.school"
-                      placeholder="School" id="school" name="school" #school="ngModel" required
+                      placeholder="Educational institution" id="school" name="school" #school="ngModel" required
                       autocomplete="off">
                     <div *ngIf="school.errors && (school.dirty || school.touched)" class="alert alert-danger">
-                      <div [hidden]="!school.errors.required">School is required!</div>
-                      <div [hidden]="!school.errors.pattern">School can only contain letters of the alphabet (till 30 characters).</div>
+                      <div [hidden]="!school.errors.required">Educational institution is required!</div>
+                      <div [hidden]="!school.errors.pattern">Educational institution can only contain letters of the alphabet (till 30 characters).</div>
                     </div>
                   </div>
                 </div>
@@ -212,12 +212,8 @@
                   <div *ngIf="cv.cvId != null">
                     <button [disabled]="!cvForm.form.valid" class="btn btn-success" (click)="update()">Update</button>
                   </div>
-                  <div *ngIf="cv.cvId != null">
-                    <hr>
-                    <a  routerLink ="/createCvPdf/{{cv.cvId}}" class="btn btn-success">Create PDF</a>
-                  </div>
                   <hr>
-                  <a class="cancel" routerLink="/userCV" style="font-size: 17px;margin-left: 10px;margin-top:30px">Cancel</a>
+                  <a class="cancel" routerLink="/resume/user" style="font-size: 17px;margin-left: 10px;margin-top:30px">Cancel</a>
                 </div>
               </fieldset>
           </form>

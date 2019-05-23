@@ -15,62 +15,33 @@
 
 <body>
   <div class="container" style="margin-top:70px">
-    <a *ngIf = "cv.cvId==null" routerLink="/createCV">Create CV</a>
-
-    <div class="col-md-9">
-      <h2>Your CV</h2>
-
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th class="d-none">Id</th>
-            <th>Position</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Degree</th>
-            <th>School</th>
-            <th>Speciality</th>
-            <th>Graduation</th>
-            <th>Begin Work</th>
-            <th>Company Name</th>
-            <th>Position Job</th>
-            <th>Description Job</th>
-            <th>End Job</th>
-          </tr>
-        </thead>
-        <tbody>
-            <td class="d-none">{{cv.cvId}}</td>
-            <td>{{cv.position}}</td>
-            <td>
-              <li *ngFor="let skill of cv.skills">{{skill.title}}</li>
-            </td>
-            <td>
-              <li *ngFor="let skill of cv.skills ">{{skill.description}}</li>
-            </td>
-            <td>{{cv.education.degree}}</td>
-            <td>{{cv.education.school}}</td>
-            <td>{{cv.education.specialty}}</td>
-            <td>{{cv.education.graduation}}</td>
-            <td>
-              <li *ngFor="let job of cv.jobs">{{job.begin}}</li>
-            </td>
-            <td>
-              <li *ngFor="let job of cv.jobs">{{job.companyName}}</li>
-            </td>
-            <td>
-              <li *ngFor="let job of cv.jobs">{{job.position}}</li>
-            </td>
-            <td>
-              <li *ngFor="let job of cv.jobs">{{job.description}}</li>
-            </td>
-            <td>
-              <li *ngFor="let job of cv.jobs">{{job.end}}</li>
-            </td>
-            <td>
-              <a *ngIf="cv.cvId != null" routerLink="/updateCV/{{cv.cvId}}" class="btn btn-success">Update</a>
-            </td>
-        </tbody>
-      </table>
+    <div class="view-account">
+      <section class="module">
+        <div class="module-inner">
+          <div class="content-panel">
+            <h2>Your Resume</h2>
+            <form class="form-horizontal" #personForm="ngForm">
+              <fieldset class="fieldset">
+                <h3 class="fieldset-title">Main Info</h3>
+                <div class="simpleVacancy" >
+                    <p><span class="mySpan" >Position: </span>{{cv.position}}</p>
+                    <p class="mySpan">Your Skill:</p>
+                    <td>
+                      <li style="margin-left: 10px;" *ngFor="let skill of cv.skills ">
+                        {{skill.title}}</li>
+                    </td>
+                </div>
+                </fieldset>
+             <hr>
+             <a *ngIf = "cv.cvId == null" routerLink="/resume/create">Create CV</a>
+             <div *ngIf="cv.cvId != null">
+             <a class="btn btn-primary"  routerLink="/createPdf/{{cv.cvId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Create Pdf</a>
+             <a class="btn btn-primary"  routerLink="/update/{{cv.cvId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Show all info</a>
+             </div>
+            </form>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </body>
