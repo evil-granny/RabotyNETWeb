@@ -40,6 +40,7 @@
                             </label>
                             <div *ngIf="login1.errors && login1.dirty" class="alert alert-danger">
                                 <div [hidden]="!login1.errors.pattern">Login is incorrect!</div>
+                                <div [hidden]="!login1.errors.required">Login is required!</div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -54,14 +55,14 @@
                             <div *ngIf="password1.errors && password1.dirty" class="alert alert-danger">
                                 <div [hidden]="!password1.errors.required">Password is required!</div>
                                 <div [hidden]="!password1.errors.pattern && login1.errors.pattern">Password must be no
-                                    less than 8 symbols (uppercase, lowercase, number and one special symbol)!</div>
+                                    less than 9 symbols (uppercase, lowercase, number and one special symbol)!</div>
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="form-row-inner">
                                 <input type="password" class="input-text" [(ngModel)]="user.matchingPassword"
                                     id="matchingPassword" name="matchingPassword" #matchingPassword="ngModel" required>
-                                <span class="label">Comfirm Password</span>
+                                <span class="label">Confirm Password</span>
                                 <span class="border"></span>
                             </label>
                             <div *ngIf="matchingPassword.errors && matchingPassword.touched && matchingPassword.dirty"
@@ -73,8 +74,7 @@
                             </div>
                         </div>
                         <div class="form-row-last">
-                            <input type="submit" name="register" class="register"
-                            [disabled]="userForm.form.valid"
+                            <input type="submit" name="register" class="register" [disabled]="userForm.form.valid"
                                 value="Register">
                         </div>
                     </div>
@@ -102,16 +102,20 @@
                                 <span class="border"></span>
                             </label>
                         </div>
-                        <div *ngIf="signinPassword.errors && signinPassword.dirty" class="alert alert-danger">
+                        <div *ngIf="signinPassword.errors && signinPassword.dirty && (isAdmin || isCowner)"
+                            class="alert alert-danger">
                             <div [hidden]="!signinPassword.errors.required">Password is required!</div>
-                            <div [hidden]="!signinPassword.errors.pattern && signinPassword.untouched">Password is required!</div>
+                            <div [hidden]="!signinPassword.errors.pattern && signinPassword.untouched">Password is
+                                required!</div>
                         </div>
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Sign In">
                         </div>
                     </div>
                 </form>
-              <div align="center" pagination-template><a routerLink="/forgotPassword"><h5>Forgot password?</h5></a></div>
+                <div align="center" pagination-template><a routerLink="/forgotPassword">
+                        <h5>Forgot password?</h5>
+                    </a></div>
             </div>
         </div>
     </div>
