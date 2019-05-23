@@ -21,7 +21,7 @@ import { PdfDesignerComponent } from './pdf-designer/pdf-designer.component';
 import { UserComponent } from './user/user.component';
 import { AddUserComponent } from './user/add-user/add-user.component';
 
-import { SearchCVComponent } from './search-cv/search-cv.component';
+import { SearchResumeComponent } from './search-resume/search-resume.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap';
@@ -66,7 +66,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddCvComponent,
     UserComponent,
     AddUserComponent,
-    SearchCVComponent,
+    SearchResumeComponent,
     PdfDesignerComponent,
     ComfirmComponent,
     RegistrationconfirmComponent,

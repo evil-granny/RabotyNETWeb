@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Vacancy} from '../models/vacancy/vacancy.model';
 import {Observable} from 'rxjs';
 import { Requirement } from '../models/requirement.model';
-import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
+import {SearchResumeResponse} from '../models/SearchModel/SearchResumeResponse.model';
 import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
 import { VacancyDTO } from '../models/vacancy/vacancyDTO.model';
 

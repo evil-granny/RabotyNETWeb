@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
+import {SearchResumeResponse} from '../models/SearchModel/SearchResumeResponse.model';
 import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
 
 const httpOptions = {
@@ -19,12 +19,12 @@ export class SearchService {
 
   private searchUrl = 'http://localhost:8080';
 
-  public getCVResult(searchCV) {
-    return this.http.post<SearchCVResponse>(this.searchUrl + '/searchCV', searchCV, httpOptions);
+  public getResumeResult(searchResume) {
+    return this.http.post<SearchResumeResponse>(this.searchUrl + '/search/resume', searchResume, httpOptions);
   }
 
   public getVacancyResult(searchVacancy) {
-    return this.http.post<SearchVacancyResponse>(this.searchUrl + '/vacancies/search', searchVacancy, httpOptions);
+    return this.http.post<SearchVacancyResponse>(this.searchUrl + '/search/vacancies', searchVacancy, httpOptions);
   }
 
 }
