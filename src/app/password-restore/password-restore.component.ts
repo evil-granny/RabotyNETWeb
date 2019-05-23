@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../services/user.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-password-restore',
@@ -7,11 +10,56 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PasswordRestoreComponent implements OnInit {
 
-  restorePassword = {newPassword: '', confirmPassword: ''};
+  token: string;
+  valid: string;
 
-  constructor() { }
+  changePassword = {newPassword: '', confirmPassword: ''};
+
+  private changePasswordUrl = 'http://localhost:8080/changePassword';
+  private errors: any;
+
+  constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+    })
+
+    this.validToken();
   }
 
+  validToken() {
+    this.userService.validToken(this.token)
+      .subscribe(data => {
+        this.valid = data;
+        if (this.valid == 'confirmed') {
+        }
+      });
+  }
+
+  restorePassword() {
+
+    const authHeader = {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json'
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders(authHeader)
+    };
+
+    const sendTokenPaasword = {'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword};
+    const observable = this.http.post<any>(this.changePasswordUrl, sendTokenPaasword, httpOptions);
+    observable.subscribe(result =>  {
+      },
+      error => {
+        this.errors = error;
+        alert(this.errors);
+      },
+      () => {
+        alert('Password restored successfully! Please go to the sign in page');
+        this.router.navigate(['/registration']);
+      }
+    );
+    }
 }

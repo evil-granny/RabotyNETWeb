@@ -14,29 +14,26 @@ export class RegistrationconfirmComponent implements OnInit {
   valid: string;
 
   constructor(private route: ActivatedRoute, private userService: UserService) { }
-  
+
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      console.log(params);
       this.token = params['token'];
     })
 
     this.validToken();
   }
 
-  validToken(){
-      this.userService.validToken(this.token)
-        .subscribe(data => {  
-          this.valid = data;
-          if(this.valid == "confirmed"){
-            location.replace("http://localhost:4200/registration")
-          }
-          console.log(this.valid);
-        });   
+  validToken() {
+    this.userService.validToken(this.token)
+      .subscribe(data => {
+        this.valid = data;
+        location.replace("http://localhost:4200/registration")
+
+      });
   }
 
 
-  resendToken(){
-    
+  resendToken() {
+
   }
 }

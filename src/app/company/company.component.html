@@ -24,7 +24,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>*</th>
+                  <th>Status</th>
                   <th class="d-none">Id</th>
                   <th>Name</th>
                   <th>EDRPOU</th>
@@ -37,12 +37,15 @@
                 <tr>
                   <td>
                     <i *ngIf="company.status == 'APPROVED' && !hasClaims(company)" class="fa fa-thumbs-up"
-                      style="color: green; font-size: 150%;"></i>
+                      rel="tooltip" title="This company is approved" style="color: green; font-size: 150%;"></i>
                     <i *ngIf="company.status == 'APPROVED' && hasClaims(company)" class="fa fa-warning"
-                      style="color: orange; font-size: 150%;"></i>
-                    <i *ngIf="company.status == 'CREATED'" class="fa fa-times" style="color: red; font-size: 150%;"></i>
-                    <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" style="color: black; font-size: 150%;"></i>
-                    <i *ngIf="company.status == 'MAIL_SENT'" class="fa fa-envelope" style="color: greenyellow; font-size: 150%;"></i>
+                      rel="tooltip" title="This company has claims" style="color: orange; font-size: 150%;"></i>
+                    <i *ngIf="company.status == 'CREATED'" class="fa fa-times" style="color: red; font-size: 150%;"
+                      rel="tooltip" title="This company is not approved"></i>
+                    <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" style="color: black; font-size: 150%;"
+                      rel="tooltip" title="This company is blocked"></i>
+                    <i *ngIf="company.status == 'MAIL_SENT'" class="fa fa-envelope" style="color: greenyellow; font-size: 150%;"
+                      rel="tooltip" title="This company is approved, but not confirmed"></i>
                   </td>
                   <td class="d-none"
                     *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
@@ -106,9 +109,7 @@
               </tbody>
             </table>
             <button *ngIf="canPrev()" class="btn btn-info" (click)="prev();">&laquo; Previous</button>
-            <button *ngIf="!canPrev()" disabled class="btn btn-info" (click)="prev();">&laquo; Previous</button>
             <button *ngIf="canNext()" class="btn btn-info" (click)="next();">Next &raquo;</button>
-            <button *ngIf="!canNext()" disabled class="btn btn-info" (click)="next();">Next &raquo;</button>
           </div>
         </div>
       </section>

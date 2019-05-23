@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {UserPrincipal} from '../models/userPrincipal.model';
 
 @Component({
   selector: 'app-password-forgot',
@@ -15,6 +13,7 @@ export class PasswordForgotComponent {
   userLogin = {username: ''};
 
   private resetPasswordUrl = 'http://localhost:8080/resetPassword';
+  private errors: any;
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -29,16 +28,18 @@ export class PasswordForgotComponent {
       headers: new HttpHeaders(authHeader)
     };
 
-    console.log('-----------User Login------------')
-    console.log(this.resetPasswordUrl)
-    console.log(this.userLogin.username)
-
-    const observable = this.http.post<any>(this.resetPasswordUrl, this.userLogin.username.toString(), httpOptions);
-    observable.subscribe(data => {
-        console.log('=============Post data============');
-        console.log(data);
-      }
-    )
-    this.router.navigateByUrl('/vacancies');
+    const observable = this.http.post<any>(this.resetPasswordUrl, this.userLogin, httpOptions);
+    observable.subscribe(result =>  {
+      },
+        error => {
+          this.errors = error;
+          alert(this.errors);
+          location.reload(true);
+        },
+    () => {
+      alert('Please check mail for further instructions!');
+      this.router.navigate(['/vacancies']);
+    }
+    );
   }
 }

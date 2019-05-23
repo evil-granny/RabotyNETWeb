@@ -141,15 +141,24 @@ export class ViewCompanyComponent implements OnInit {
   }
 
   deleteVacancy(vacancy: Vacancy): void {
+    let flag = confirm("Are you really want delete?");
+    if(flag){
     this.vacancyService.deleteById(vacancy.vacancyId)
       .subscribe( data => {
         this.vacancies = this.vacancies.filter(p => p !== vacancy);
         this.size = this.size - 1;
       })
+    }
+    else 
+      return ;
   };
 
   get isCowner() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
   }
 
 }

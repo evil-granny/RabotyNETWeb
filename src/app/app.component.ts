@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   title = 'RabotyNet';
 
@@ -28,18 +28,20 @@ export class AppComponent implements OnInit {
   resumeSelect = true;
 
   constructor(private app: AuthenticationService, private router: Router, private personService: PersonService, private sanitizer: DomSanitizer) {
-    this.app.currentUser.subscribe(x => this.currentUser = x);
+    this.app.currentUser.subscribe(data => this.currentUser = data);
 
     if (this.currentUser) {
       this.personService.findById(this.currentUser.userId)
         .subscribe(data => {
-          this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data.photo.image);
+          if (data.photo != null) {
+            this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data.photo.image);
+          }
         });
     }
   }
 
   logout() {
-    const user = this.app.logout();
+    this.app.logout();
     this.router.navigateByUrl('/vacancies');
   }
 
@@ -57,10 +59,7 @@ export class AppComponent implements OnInit {
 
   get isCownerAndUser() {
     return this.currentUser && this.currentUser.roles && (this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1
-    || this.currentUser.roles.indexOf(Role.ROLE_USER) > -1);
-  }
-
-  ngOnInit() {
+      || this.currentUser.roles.indexOf(Role.ROLE_USER) > -1);
   }
 
   hide() {
@@ -89,14 +88,14 @@ export class AppComponent implements OnInit {
   startSearch() {
     switch (this.search.searchDocument) {
       case 'resume':
-        this.router.navigate(['/searchCV', {
+        this.router.navigate(['/search/resume', {
           searchDoc: this.search.searchDocument,
           searchText: this.search.searchText,
           searchParameter: this.search.searchParameter
         }]);
         break;
       case 'vacancies':
-        this.router.navigate(['/vacancies/search', {
+        this.router.navigate(['/search/vacancies', {
           searchDoc: this.search.searchDocument,
           searchText: this.search.searchText,
           searchParameter: this.search.searchParameter

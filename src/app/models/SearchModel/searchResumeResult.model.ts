@@ -1,4 +1,4 @@
-export class SearchCVResult {
+export class SearchResumeResult {
 
   id: BigInteger;
 

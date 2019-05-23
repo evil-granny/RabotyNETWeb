@@ -49,15 +49,15 @@ export class AuthenticationService {
           localStorage.setItem('currentUser', JSON.stringify(userPrincipal));
           this.currentUserSubject.next(userPrincipal);
         }
-        
+
         return userPrincipal;
       }));
   }
 
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.http.get<any>(this.userLogoutUrl);
   }
+
 }

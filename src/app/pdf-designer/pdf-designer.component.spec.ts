@@ -8,9 +8,9 @@ describe('PdfDesignerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PdfDesignerComponent ]
+      declarations: [PdfDesignerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

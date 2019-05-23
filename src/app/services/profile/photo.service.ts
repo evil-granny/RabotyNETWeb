@@ -19,18 +19,18 @@ export class PhotoService {
 
   private photoUrl = "http://localhost:8080/photo/";
 
-  public upload(file: File, userId: BigInteger): Observable<Photo> {
+  public uploadAvatar(file: File, userId: BigInteger): Observable<Photo> {
     let body = new FormData();
     body.append("file", file);
 
-    return this.http.post<Photo>(this.photoUrl + userId, body, httpOptions);
+    return this.http.post<Photo>(this.photoUrl + "avatars/" + userId, body, httpOptions);
   }
 
   public uploadLogo(file: File, companyName: string): Observable<Photo> {
     let body = new FormData();
     body.append("file", file);
 
-    return this.http.post<Photo>(this.photoUrl + "logo/" + companyName, body, httpOptions);
+    return this.http.post<Photo>(this.photoUrl + "logos/" + companyName, body, httpOptions);
   }
 
   public load(photoId: BigInteger): Observable<Photo> {

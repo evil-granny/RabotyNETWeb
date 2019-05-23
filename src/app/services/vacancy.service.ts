@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Vacancy} from '../models/vacancy/vacancy.model';
 import {Observable} from 'rxjs';
 import { Requirement } from '../models/requirement.model';
-import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
+import {SearchResumeResponse} from '../models/SearchModel/SearchResumeResponse.model';
 import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
 import { VacancyDTO } from '../models/vacancy/vacancyDTO.model';
 
@@ -24,6 +24,7 @@ export class VacancyService {
   }
 
   private vacancyUrl = 'http://localhost:8080/vacancies';
+  private requirementUrl = 'http://localhost:8080/requirements';
 
   public findAll(): Observable<any> {
     return this.http.get(this.vacancyUrl , httpOptions);
@@ -47,6 +48,10 @@ export class VacancyService {
 
   public deleteById(id: any) {
     return this.http.delete(this.vacancyUrl + '/' + id, httpOptions);
+  }
+
+  public deleteRequiremnetById(id: any) {
+    return this.http.delete(this.requirementUrl + '/' + id, httpOptions);
   }
 
   public update(vacancy: any): Observable<Vacancy> {
