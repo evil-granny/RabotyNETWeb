@@ -23,7 +23,7 @@ export class PasswordForgotComponent {
   forgotPassword() {
     const authHeader = {
       'Access-Control-Allow-Origin': 'http://localhost:4200',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     };
 
     const httpOptions = {

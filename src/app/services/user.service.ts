@@ -12,7 +12,7 @@ const httpOptions = {
     'Access-Control-Allow-Origin': 'http://localhost:4200',
     'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE',
     'Access-Control-Max-Age': '3600',
-    'Access-Control-Allow-Headers': 'X-requested-with, Content-Type'
+    'Access-Control-Allow-Headers': 'X-requested-with, Content-Type',
   })
 };
 
