@@ -6,8 +6,9 @@ import { Photo } from 'src/app/models/photo.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': '*'
-  })
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Credentials': 'true',
+  }), withCredentials: true
 };
 
 @Injectable({

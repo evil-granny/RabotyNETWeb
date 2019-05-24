@@ -10,8 +10,9 @@ import { CVService } from './cv.service';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  })
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Credentials': 'true',
+  }), withCredentials: true
 };
 
 @Injectable({
@@ -34,7 +35,7 @@ export class PdfService {
 
   public show(cvId, send) {
     let headers = new HttpHeaders();
-    headers = headers.set('Accept', 'application/pdf');    
+    headers = headers.set('Accept', 'application/pdf');
     return this.http.get(this.cvURL + "/pdf/createPdf/" + cvId + "&" + send,{ headers: headers, responseType: 'arraybuffer'});
   }
 

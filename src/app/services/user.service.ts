@@ -9,11 +9,9 @@ import { ComfirmComponent } from '../confirm/comfirm.component';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
-    'Access-Control-Max-Age': '3600',
-    'Access-Control-Allow-Headers': 'X-requested-with, Content-Type'
-  })
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Credentials': 'true',
+  }), withCredentials: true
 };
 
 @Injectable({

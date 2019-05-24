@@ -11,10 +11,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser && currentUser.token) {
+    const token = this.tokenExtractor.getToken();
+    if (currentUser && currentUser.token && token) {
       request = request.clone({
         setHeaders: {
           Authorization: `${currentUser.token}`,
+          'X-XSRF-TOKEN': token,
         },
       });
     }

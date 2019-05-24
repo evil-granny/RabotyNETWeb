@@ -26,11 +26,12 @@ export class AuthenticationService {
 
     const authHeader = credentials ? {
       'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password),
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
     } : {};
     const httpOptions = {
-      headers: new HttpHeaders(authHeader)
+      headers: new HttpHeaders(authHeader), withCredentials: true
     };
 
     return this.http.post<any>(this.userLoginUrl, credentials, httpOptions)
