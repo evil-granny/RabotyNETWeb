@@ -27,7 +27,7 @@ export class RegistrationconfirmComponent implements OnInit {
     this.userService.validToken(this.token)
       .subscribe(data => {
         this.valid = data;
-        location.replace("http://localhost:4200/registration")
+        location.replace("http://localhost:4200/users/auth")
 
       });
   }

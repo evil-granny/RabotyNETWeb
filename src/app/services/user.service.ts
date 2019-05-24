@@ -36,7 +36,7 @@ export class UserService {
   }
 
   public findByEmail(user: User): Observable<any> {
-    return this.http.get<User[]>(this.userUrl +"username"+ user.login + "/", httpOptions);
+    return this.http.get<User[]>(this.userUrl +"username/"+ user.login + "/", httpOptions);
   }
 
   public findById(userId:number): Observable<any> {
