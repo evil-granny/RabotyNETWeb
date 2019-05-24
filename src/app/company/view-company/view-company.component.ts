@@ -45,7 +45,6 @@ export class ViewCompanyComponent implements OnInit {
     if(companyId != null) {
       this.companyService.findById(companyId)
         .subscribe(data => {
-          console.log(data);
           this.companyService.findClaims(data)
             .subscribe( data1 => {
               data.claims = [];
