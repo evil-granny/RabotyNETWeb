@@ -106,7 +106,11 @@ export class AddUserComponent implements OnInit {
       if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1) {
         this.router.navigateByUrl('/userCV');
       }
-    });
+    },
+      error => {
+        this.error = error;
+        this.openLoginErrorModal('Are you sure that login and password are reliable?');
+      });
   }
 
   validToken() {
@@ -123,6 +127,10 @@ export class AddUserComponent implements OnInit {
           this.userService.resendToken(email);
         }
       })
+  }
+
+  public openLoginErrorModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } });
   }
 
   get isAdmin() {
