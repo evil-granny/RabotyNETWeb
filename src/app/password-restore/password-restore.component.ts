@@ -42,10 +42,11 @@ export class PasswordRestoreComponent implements OnInit {
     const authHeader = {
       'Access-Control-Allow-Origin': 'http://localhost:4200',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
     };
 
     const httpOptions = {
-      headers: new HttpHeaders(authHeader)
+      headers: new HttpHeaders(authHeader), withCredentials: true
     };
 
     const sendTokenPaasword = {'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword};
