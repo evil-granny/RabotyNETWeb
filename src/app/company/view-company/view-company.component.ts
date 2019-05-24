@@ -79,11 +79,8 @@ export class ViewCompanyComponent implements OnInit {
     this.userService.findById(1)
       .subscribe(data => {
         this.claiming = false;
-
         this.claim.user = data;
-        
         this.claim.company = this.company;
-
         this.companyService.createClaim(this.claim)
           .subscribe(data => {
             this.company = data;
@@ -142,16 +139,17 @@ export class ViewCompanyComponent implements OnInit {
   }
 
   deleteVacancy(vacancy: Vacancy): void {
-    let flag = confirm("Are you really want delete?");
-    if(flag){
+    let flag = confirm("Do you really want to delete?");
+    if(flag==false){
+      return;
+    }
+    else{
     this.vacancyService.deleteById(vacancy.vacancyId)
       .subscribe( data => {
         this.vacancies = this.vacancies.filter(p => p !== vacancy);
         this.size = this.size - 1;
       })
     }
-    else 
-      return ;
   };
 
   get isCowner() {
