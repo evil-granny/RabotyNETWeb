@@ -69,8 +69,14 @@ const routes: Routes = [
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
   {
-    path: 'createCV',
+    path: 'resume/create',
     component: AddCvComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
+  },
+  {
+    path: 'resume/user',
+    component: ViewCvComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
@@ -90,13 +96,13 @@ const routes: Routes = [
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
   { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
 
-  { path: 'userCV', component: ViewCvComponent },
-  { path: 'cvs', component: CvComponent },
-  { path: 'createCV', component: AddCvComponent },
+  { path: 'resume/user', component: ViewCvComponent },
+  { path: 'resume/all', component: CvComponent },
+  { path: 'resume/create', component: AddCvComponent },
 
   { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
 
-  { path: 'updateCV/:cvId', component: AddCvComponent },
+  { path: 'update/:cvId', component: AddCvComponent },
 
   { path: 'registration', component: AddUserComponent },
   { path: 'forgotPassword', component: PasswordForgotComponent },

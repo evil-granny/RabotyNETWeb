@@ -31,8 +31,9 @@ export class AddCvComponent {
   update(): void {
     this.cvService.update(this.cv)
       .subscribe(data => {
-        if (data != null)
-          alert("CV has been updated successfully.");
+        if (data != null) {
+          this.router.navigate(['/resume/user']);
+        }
         else
           alert("Validation problem has been occured");
       });
@@ -42,7 +43,7 @@ export class AddCvComponent {
     this.cvService.insert(this.cv)
       .subscribe(data => {
         if (data != null) {
-          this.router.navigate(['/userCV']);
+          this.router.navigate(['/resume/user']);
         }
         else
           alert("Validation problem has been occured");

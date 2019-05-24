@@ -15,7 +15,6 @@ export class ViewCvComponent implements OnInit {
   constructor(private router: Router,private route: ActivatedRoute, private cvService: CVService) { }
 
   ngOnInit() {
-    var userId = this.route.snapshot.paramMap.get("userId");
     this.cvService.findByUserId()
       .subscribe(data => {
         this.cv = data;
