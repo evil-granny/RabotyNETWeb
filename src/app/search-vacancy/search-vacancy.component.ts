@@ -133,7 +133,7 @@ export class SearchVacancyComponent implements OnInit {
   start() {
     switch (this.search.searchDocument) {
       case 'resume':
-        this.router.navigate(['/searchCV', {
+        this.router.navigate(['/search/resume', {
           searchDoc: this.search.searchDocument,
           searchText: this.search.searchText,
           searchParameter: this.search.searchParameter

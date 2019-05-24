@@ -21,7 +21,7 @@ import {UserComponent} from './user/user.component';
 import {AccessDeniedPageComponent} from './access-denied-page/access-denied-page.component';
 
 import {ApproveCompanyComponent} from './company/approve-company/approve-company.component';
-import {SearchCVComponent} from './search-cv/search-cv.component';
+import {SearchResumeComponent} from './search-resume/search-resume.component';
 import {ViewCompanyComponent} from './company/view-company/view-company.component';
 import {MyCompanyComponent} from './company/my-company/my-company.component';
 import {SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
@@ -57,8 +57,8 @@ const routes: Routes = [
     data: { roles: [Role.ROLE_COWNER] }
   },
   {
-    path: 'searchCV',
-    component: SearchCVComponent,
+    path: 'search/resume',
+    component: SearchResumeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER] }
   },
@@ -79,7 +79,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
 
-  { path: 'createVacancy/:companyName', component: EditVacancyComponent },
+  { path: 'createVacancy/:companyId', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
 
@@ -88,7 +88,7 @@ const routes: Routes = [
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
-  { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
+  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
 
   { path: 'userCV', component: ViewCvComponent },
   { path: 'cvs', component: CvComponent },
@@ -105,9 +105,8 @@ const routes: Routes = [
   { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
   { path: 'registrationConfirm', component: RegistrationconfirmComponent },
   { path: 'users', component: UserComponent },
-  // { path: 'searchCV', component: SearchCVComponent },
 
-  { path: 'vacancies/search', component: SearchVacancyComponent },
+  { path: 'search/vacancies', component: SearchVacancyComponent },
 
   { path: '**', redirectTo: 'vacancies' }
 ];

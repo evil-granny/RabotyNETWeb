@@ -112,8 +112,8 @@
               </form>
             </div>
 
-            <a *ngIf="checkUser() && isCowner && company.status == 'APPROVED'" class="btn btn-primary" style="margin: 20px"
-              routerLink="/createVacancy/{{company.name}}">Create Vacancy</a>
+            <a *ngIf="checkUser() && isCowner && company.status == 'APPROVED'" class="btn btn-primary"
+              style="margin: 20px" routerLink="/createVacancy/{{company.companyId}}">Create Vacancy</a>
 
 
             <h4 class="fieldset-title"></h4>
@@ -159,10 +159,14 @@
                     </div>
                   </div>
                 </div>
-                <button *ngIf="canPrev()" class="btn btn-info" (click)="prev();">&laquo; Previous</button>
-                <button *ngIf="canNext()" class="btn btn-info" (click)="next();">Next &raquo;</button>
-
+             
               </div>
+              <footer>
+                <div class="paginations">
+                  <button *ngIf="canPrev()" class="btn btn-info" style="margin-right:40px" (click)="prev();">&laquo; Previous</button>
+                  <button *ngIf="canNext()" class="btn btn-info" style="margin-right:40px" (click)="next();">Next &raquo;</button>
+                </div>
+              </footer>
 
             </div>
           </div>

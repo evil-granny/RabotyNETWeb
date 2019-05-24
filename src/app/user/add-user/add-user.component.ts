@@ -8,8 +8,8 @@ import { MatDialog } from '@angular/material';
 import { RegistrationconfirmComponent } from 'src/app/confirm/registrationconfirm/registrationconfirm.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NgForm } from '@angular/forms';
-import {Role} from '../../models/roles.model';
-import {UserPrincipal} from '../../models/userPrincipal.model';
+import { Role } from '../../models/roles.model';
+import { UserPrincipal } from '../../models/userPrincipal.model';
 @Component({
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
@@ -123,5 +123,13 @@ export class AddUserComponent implements OnInit {
           this.userService.resendToken(email);
         }
       })
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) > -1;
+  }
+
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
   }
 }

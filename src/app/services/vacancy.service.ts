@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Vacancy} from '../models/vacancy/vacancy.model';
 import {Observable} from 'rxjs';
 import { Requirement } from '../models/requirement.model';
-import {SearchCVResponse} from '../models/SearchModel/SearchCVResponse.model';
+import {SearchResumeResponse} from '../models/SearchModel/SearchResumeResponse.model';
 import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
 import { VacancyDTO } from '../models/vacancy/vacancyDTO.model';
 
@@ -31,16 +31,16 @@ export class VacancyService {
     return this.http.get(this.vacancyUrl , httpOptions);
   }
 
-  public findVacanciesByCompanyName(companyName : any, first : number, count : number): Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + '/' + companyName + "/" + first + "/" + count, httpOptions);
+  public findVacanciesByCompanyId(companyId : string, first : number): Observable<any> {
+    return this.http.get<VacancyDTO>(this.vacancyUrl + '/' + companyId + "/" + first , httpOptions);
   }
 
-  public findAllWithPagination(first: number, count: number) : Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + "/" + first+ "/" + count, httpOptions);
+  public findAllWithPagination(first: number) : Observable<any> {
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/findAll/" + first, httpOptions);
   }
 
-  public findAllHotVacanciesWithPagination(first: number, count: number) : Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + "/hotVacancies/" + first+ "/" + count, httpOptions);
+  public findAllHotVacanciesWithPagination(first: number) : Observable<any> {
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/hotVacancies/" + first, httpOptions);
   }
 
   get(vacancyId: string) {
@@ -59,8 +59,8 @@ export class VacancyService {
     return this.http.put<Vacancy>(this.vacancyUrl , vacancy, httpOptions);
   }
 
-  public createVacancy(vacancy: Vacancy, companyName : string): Observable<Object> {
-    return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + companyName, vacancy, httpOptions);
+  public createVacancy(vacancy: Vacancy, companyId : any): Observable<Object> {
+    return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + companyId, vacancy, httpOptions);
   }
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);

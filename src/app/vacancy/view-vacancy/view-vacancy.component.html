@@ -26,6 +26,7 @@
                 <div class="simpleVacancy" >
                     <p><span class="mySpan" >Position: </span>{{vacancy.position}}</p>
                     <p><span class="mySpan">Employment: </span>{{vacancy.employment}}</p>
+                    <p><span class="mySpan">Salary: </span>{{vacancy.salary}} {{vacancy.currency}}</p>
                     <p class="mySpan">Requirements:</p>
                     <td>
                       <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements ">
@@ -34,7 +35,8 @@
                 </div>
                 </fieldset>
              <hr>
-             <a class="btn btn-primary"  (click)="goBack()" style="font-size: 17px;margin-left: 10px;margin-top:20px">Show all vacancies</a>
+             <a class="btn btn-primary"  (click)="goBack()" style="font-size: 17px;margin-left: 10px;margin-top:20px;color:white">Show all vacancies</a>
+             <a class="btn btn-primary"  routerLink="/viewCompany/{{company.companyId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px;">Show company</a> 
             </form>
           </div>
         </div>

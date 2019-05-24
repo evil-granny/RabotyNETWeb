@@ -60,7 +60,7 @@
 
   <div class="search-result" [hidden]="resultText">
     <h2>Search result</h2>
-    <h5>{{searchCVResponse.count}} Resume founded</h5>
+    <h5>{{searchResumeResponse.count}} Resume founded</h5>
   </div>
 
   <div class="page" [hidden]="topButtons">
@@ -83,15 +83,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let searchCVResult of searchCVResponse.searchCVDTOs">
-      <td class="d-none">{{searchCVResult.id}}</td>
-      <td>{{searchCVResult.firstName}}</td>
-      <td>{{searchCVResult.lastName}}</td>
-      <td>{{searchCVResult.age}} years old</td>
-      <td>{{searchCVResult.position}}</td>
-      <td>{{searchCVResult.city}}</td>
-      <td>{{searchCVResult.phoneNumber}}</td>
-      <td><button class="btn btn-info" (click)="viewCv(searchCVResult.id)">View details</button></td>
+    <tr *ngFor="let searchResumeResult of searchResumeResponse.searchResumeDTOs">
+      <td class="d-none">{{searchResumeResult.id}}</td>
+      <td>{{searchResumeResult.firstName}}</td>
+      <td>{{searchResumeResult.lastName}}</td>
+      <td>{{searchResumeResult.age}} years old</td>
+      <td>{{searchResumeResult.position}}</td>
+      <td>{{searchResumeResult.city}}</td>
+      <td>{{searchResumeResult.phoneNumber}}</td>
+      <td><button class="btn btn-info" (click)="viewCv(searchResumeResult.id)">View details</button></td>
     </tr>
     </tbody>
   </table>

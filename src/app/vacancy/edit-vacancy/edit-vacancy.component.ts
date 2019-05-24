@@ -9,6 +9,7 @@ import {AuthenticationService} from 'src/app/services/authentication.service';
 import {Role} from 'src/app/models/roles.model';
 import {Location} from '@angular/common';
 import { FormArray } from '@angular/forms';
+import { Company } from 'src/app/models/CompanyModel/company.model';
 
 
 @Component({
@@ -22,8 +23,10 @@ export class EditVacancyComponent implements OnInit {
   vacancy: Vacancy = new Vacancy();
   requirements: Requirement[] = Array<Requirement>();
   currentUser: UserPrincipal;
+  company: Company = new Company();
   employment = 'FULL PART_TIME HOURLY TRAINEE'.split(' ');
   selectedEmployment = 'FULL';
+  selectedCurrency = 'USD';
   size : number = 0;
 
   constructor(private location: Location, private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
@@ -45,9 +48,9 @@ export class EditVacancyComponent implements OnInit {
   }
 
   create(): void {
-    this.vacancyService.createVacancy(this.vacancy, this.route.snapshot.paramMap.get('companyName'))
+    this.vacancyService.createVacancy(this.vacancy, this.route.snapshot.paramMap.get('companyId'))
       .subscribe(data => {
-        this.router.navigate(['/viewCompany/' + this.route.snapshot.paramMap.get('companyName')]);
+        this.router.navigate(['/viewCompany/' + this.route.snapshot.paramMap.get('companyId')]);
       }, error => console.error(error));
   };
 
@@ -81,15 +84,17 @@ export class EditVacancyComponent implements OnInit {
   }
 
   deleteRequirement(requirement: Requirement): void {
-    let flag = confirm("Are you really want delete?");
-    if(flag){
+    let flag = confirm("Do you really want to delete?");
+    if(flag==false){
+      return;
+    }
+    else{
     this.vacancyService.deleteRequiremnetById(requirement.requirementId)
       .subscribe( data => {
         this.requirements = this.requirements.filter(p => p !== requirement);
         window.location.reload();
       })
     }
-    else return;
   };
 
   removeInputField(index : number) : void{
