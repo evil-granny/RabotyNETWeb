@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { CV } from '../models/cv.model';
-import { CVService } from './cv.service';
+import { CV } from '../models/resume.model';
+import { CVService } from './resume.service';
 
 
 
