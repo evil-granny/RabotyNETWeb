@@ -8,6 +8,8 @@ import { UserPrincipal } from 'src/app/models/userPrincipal.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Role } from 'src/app/models/roles.model';
 import { Location } from '@angular/common';
+import { Company } from 'src/app/models/CompanyModel/company.model';
+import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
   selector: 'app-view-vacancy',
@@ -17,8 +19,10 @@ import { Location } from '@angular/common';
 export class ViewVacancyComponent implements OnInit {
 
   vacancy: Vacancy = new Vacancy();
+  company : Company = new Company();
  
-  constructor(private location: Location,private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
+  constructor(private location: Location,private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService
+    ,private companyService: CompanyService) {
   }
 
   goBack() {
@@ -31,6 +35,11 @@ export class ViewVacancyComponent implements OnInit {
         .subscribe(data => {
           this.vacancy = data;
         });
-    }
+        this.companyService.getCompanyByVacanycId(vacancyId)
+        .subscribe(
+          com =>{
+            this.company = com;
+          });
+    } 
   }
 }

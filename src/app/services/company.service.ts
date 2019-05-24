@@ -73,4 +73,13 @@ export class CompanyService {
   public deleteClaimById(claim) {
     return this.http.delete(this.claimURL + "/delete/" + claim.claimId, httpOptions);
   }
+
+  public getCompanyByVacanycId(id) {
+    return this.http.get<Company>(this.companyURL+"/byVacancyId/" + id , httpOptions);
+}
+
+public findById(companyId) {
+  return this.http.get<Company>(this.companyURL + "/byId/" + companyId, httpOptions);
+}
+
 }

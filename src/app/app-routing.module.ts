@@ -85,7 +85,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
 
-  { path: 'createVacancy/:companyName', component: EditVacancyComponent },
+  { path: 'createVacancy/:companyId', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
 
@@ -94,7 +94,7 @@ const routes: Routes = [
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
-  { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
+  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
 
   { path: 'resume/user', component: ViewCvComponent },
   { path: 'resume/all', component: CvComponent },
