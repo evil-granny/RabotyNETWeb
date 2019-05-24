@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CV } from '../models/cv.model';
-import { CVService } from '../services/cv.service';
+import { CV } from '../models/resume.model';
+import { CVService } from '../services/resume.service';
 
 
 @Component({
   selector: 'app-cv',
-  templateUrl: './cv.component.html',
-  styleUrls: ['./cv.component.css']
+  templateUrl: './resume.component.html',
+  styleUrls: ['./resume.component.css']
 })
 export class CvComponent implements OnInit {
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CV } from '../models/cv.model';
+import { CV } from '../models/resume.model';
 import { Person } from '../models/person.model';
 import { PdfService } from '../services/pdf.service';
 import { Router, ActivatedRoute } from '@angular/router';

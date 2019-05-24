@@ -35,7 +35,7 @@
           </a>
           <div class="list dropdown-menu">
             <a class="dropdown-item" routerLink="/profile" *ngIf="isUser || isCowner">Profile</a>
-            <a class="dropdown-item" routerLink="/registration" *ngIf="!currentUser">Log in</a>
+            <a class="dropdown-item" routerLink="/users/auth" *ngIf="!currentUser">Log in</a>
             <a class="dropdown-item" (click)="logout()" *ngIf="currentUser">Log out</a>
           </div>
         </div>

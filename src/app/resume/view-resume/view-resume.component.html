@@ -33,7 +33,7 @@
                 </div>
                 </fieldset>
              <hr>
-             <a *ngIf = "cv.cvId == null" routerLink="/resume/create">Create CV</a>
+             <a *ngIf = "cv.cvId == null" routerLink="/resume/create">Create Resume</a>
              <div *ngIf="cv.cvId != null">
              <a class="btn btn-primary"  routerLink="/createPdf/{{cv.cvId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Create Pdf</a>
              <a class="btn btn-primary"  routerLink="/update/{{cv.cvId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Show all info</a>
