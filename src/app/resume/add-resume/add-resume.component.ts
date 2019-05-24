@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { CV } from '../../models/cv.model';
-import { CVService } from '../../services/cv.service';
+import { CV } from '../../models/resume.model';
+import { CVService } from '../../services/resume.service';
 import { Skill } from '../../models/skill.model';
 import { Job } from '../../models/job.model';
 
 @Component({
-  templateUrl: './add-cv.component.html',
-  styleUrls: ['./add-cv.component.css']
+  templateUrl: './add-resume.component.html',
+  styleUrls: ['./add-resume.component.css']
 })
 export class AddCvComponent {
 

@@ -14,8 +14,8 @@ import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.compon
 import { CompanyComponent } from './company/company.component';
 import { AddCompanyComponent } from './company/add-company/add-company.component';
 
-import { CvComponent } from './cv/cv.component';
-import { AddCvComponent } from './cv/add-cv/add-cv.component';
+import { CvComponent } from './resume/resume.component';
+import { AddCvComponent } from './resume/add-resume/add-resume.component';
 import { PdfDesignerComponent } from './pdf-designer/pdf-designer.component';
 
 import { UserComponent } from './user/user.component';
@@ -48,7 +48,7 @@ import { PasswordRestoreComponent } from './password-restore/password-restore.co
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
-import { ViewCvComponent } from './cv/view-cv/view-cv.component';
+import { ViewCvComponent } from './resume/view-resume/view-resume.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
