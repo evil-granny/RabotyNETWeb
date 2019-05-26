@@ -34,6 +34,7 @@ import {HotVacancyComponent} from './vacancy/hot-vacancy/hot-vacancy.component';
 import {ViewCvComponent} from './resume/view-resume/view-resume.component';
 import {AuthGuard} from './_guards/auth.guard';
 import {Role} from './models/roles.model';
+import { ShowResumeComponent } from './resume/show-resume/show-resume.component';
 
 
 const routes: Routes = [
@@ -99,6 +100,7 @@ const routes: Routes = [
   { path: 'resume/user', component: ViewCvComponent },
   { path: 'resume/all', component: CvComponent },
   { path: 'resume/create', component: AddCvComponent },
+  { path: 'showResume/:vacancyId', component : ShowResumeComponent},
 
   { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
 

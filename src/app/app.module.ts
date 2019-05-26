@@ -49,6 +49,7 @@ import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.compon
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 import { ViewCvComponent } from './resume/view-resume/view-resume.component';
+import { ShowResumeComponent } from './resume/show-resume/show-resume.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -83,6 +84,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HotVacancyComponent,
     AccessNonauthorizedPageComponent,
     ViewCvComponent,
+    ShowResumeComponent,
   ],
   imports: [
     BrowserModule,

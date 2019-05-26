@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { CV } from "../models/resume.model";
+import { Person } from '../models/person.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -50,6 +51,10 @@ export class CVService {
 
   public deleteJobById(id: any) {
     return this.http.delete(this.cvUrl + '/job/' + id, httpOptions);
+  }
+
+  public getResumeByVacancyId(id: any){
+    return this.http.get<CV[]>(this.cvUrl + "/byVacancyId/" + id,httpOptions);
   }
 
 }

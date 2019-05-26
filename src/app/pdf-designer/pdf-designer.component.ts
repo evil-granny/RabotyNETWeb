@@ -27,6 +27,7 @@ export class PdfDesignerComponent implements OnInit {
   ngOnInit(): void {
 
     var cvId = this.route.snapshot.paramMap.get('cvId');
+    
 
     if (cvId !== null) {
 

@@ -42,4 +42,9 @@ export class ViewVacancyComponent implements OnInit {
           });
     } 
   }
+
+  sendResume(){
+    // this.location.back();
+return;
+  }
 }
