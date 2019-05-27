@@ -47,10 +47,6 @@ export class UserService {
     return this.http.delete(this.userUrl + "delete/" + user.userId, httpOptions);
   }
 
-  public openModal(name: String) {
-    this.dialog.open(ComfirmComponent, { data: { name } })
-  }
-
   public insert(user: any, users: any) {
       return this.http.post<User>(this.userUrl + "auth", user, httpOptions);
   }
