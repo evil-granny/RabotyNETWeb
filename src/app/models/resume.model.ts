@@ -4,9 +4,9 @@ import { Job } from './job.model';
 import { Person } from './person.model';
 import { Contact } from './contact.model';
 
-export class CV {
+export class Resume {
 
-    cvId: BigInteger;
+    resumeId: BigInteger;
 
     position: string;
 

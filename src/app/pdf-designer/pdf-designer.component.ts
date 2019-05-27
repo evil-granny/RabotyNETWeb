@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CV } from '../models/resume.model';
+import { Resume } from '../models/resume.model';
 import { Person } from '../models/person.model';
 import { PdfService } from '../services/pdf.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,7 +17,7 @@ export class PdfDesignerComponent implements OnInit {
 
   people: Person = new Person();
 
-  cv: CV = new CV();
+  resume: Resume = new Resume();
 
   send: boolean = true;
 
@@ -26,7 +26,7 @@ export class PdfDesignerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    var cvId = this.route.snapshot.paramMap.get('cvId');
+    var cvId = this.route.snapshot.paramMap.get('resumeId');
 
     if (cvId !== null) {
 
@@ -34,7 +34,7 @@ export class PdfDesignerComponent implements OnInit {
 
         .subscribe(data => {
 
-          this.cv = data;
+          this.resume = data;
 
         });
     }
@@ -42,13 +42,13 @@ export class PdfDesignerComponent implements OnInit {
 
   showPdf(): void {
 
-    this.pdfService.update(this.cv)
+    this.pdfService.update(this.resume)
 
       .subscribe(data => {
 
         if (data != null) {
 
-          this.pdfService.show(this.cv.cvId, this.send)
+          this.pdfService.show(this.resume.resumeId, this.send)
 
             .subscribe(data => {
 

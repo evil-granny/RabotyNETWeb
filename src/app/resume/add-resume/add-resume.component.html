@@ -16,14 +16,14 @@
     <section class="module">
       <div class="module-inner">
         <div class="content-panel">
-          <h2 class="title">CV</h2>
+          <h2 class="title">Resume</h2>
           <form class="form-horizontal" #cvForm="ngForm">
             <fieldset class="fieldset">
-              <h3 class="fieldset-title">CV Info</h3>
+              <h3 class="fieldset-title">Resume Info</h3>
               <div class="form-group">
                 <label for="position" class="col-md-2 col-sm-3 col-xs-12 control-label">Position</label>
                 <div class="col-md-10 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,50}$" [(ngModel)]="cv.position"
+                  <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,50}$" [(ngModel)]="resume.position"
                     placeholder="Position" id="position" name="position" #position="ngModel" required
                     autocomplete="off">
                   <div *ngIf="position.errors && (position.dirty || position.touched)" class="alert alert-danger">
@@ -37,7 +37,7 @@
               <fieldset class="fieldset">
                 <fieldset class="experience-border">
                   <legend class="experience-border">Skill Info</legend>
-                <div *ngFor = "let skill of cv.skills; let index = index;">
+                <div *ngFor = "let skill of resume.skills; let index = index;">
                     <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Skill:{{index+1}}</label>
                   <div class="form-group">
                     <label for="title" class="col-md-2 col-sm-3 col-xs-12 control-label">Title</label>
@@ -62,12 +62,12 @@
                       </div>
                     </div>
                   </div>
-                  <div *ngIf="cv.cvId == null">
+                  <div *ngIf="resume.resumeId == null">
                     <p style="margin-top:10px"><a class="btn btn-danger"
                       style="left: 0;" role="button"
                       (click)="removeInputFieldSkill(index)">Delete Skill</a></p>
                   </div>
-                  <div *ngIf="cv.cvId != null">
+                  <div *ngIf="resume.resumeId != null">
                       <p style="margin-top:10px"><a class="btn btn-danger"
                         style="left: 0;" role="button"
                         (click)="deleteSkill(skill)">Delete Skill</a></p>
@@ -79,7 +79,7 @@
             <fieldset class="fieldset">
               <fieldset class="experience-border">
                 <legend class="experience-border">Job Info</legend>
-                <div *ngFor = "let job of cv.jobs; let index = index;">
+                <div *ngFor = "let job of resume.jobs; let index = index;">
                     <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Job:{{index+1}}</label>
                   <div class="form-group">
                     <label for="position" class="col-md-2  col-sm-3 col-xs-12 control-label">Position</label>
@@ -137,12 +137,12 @@
                         </div>
                       </div>
                   </div>
-                  <div *ngIf="cv.cvId == null">
+                  <div *ngIf="resume.resumeId == null">
                     <p style="margin-top:10px"><a class="btn btn-danger"
                       style="left: 0;" role="button"
                       (click)="removeInputFieldJob(index)">Delete Job</a></p>
                   </div>
-                  <div *ngIf="cv.cvId != null">
+                  <div *ngIf="resume.resumeId != null">
                     <p style="margin-top:10px"><a class="btn btn-danger"
                       style="left: 0;" role="button"
                       (click)="deleteJob(job)">Delete Job</a></p>
@@ -157,7 +157,7 @@
                 <div class="form-group">
                   <label for="degree" class="col-md-2 col-sm-3 col-xs-12 control-label">Degree</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,30}$" [(ngModel)]="cv.education.degree"
+                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,30}$" [(ngModel)]="resume.education.degree"
                       placeholder="Degree" id="degree" name="degree" #degree="ngModel" required
                       autocomplete="off">
                     <div *ngIf="degree.errors && (degree.dirty || degree.touched)" class="alert alert-danger">
@@ -171,7 +171,7 @@
                 <div class="form-group">
                   <label for="school" class="col-md-2 col-sm-3 col-xs-12 control-label">Educational institution</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z0-9? ?A-Za-z0-9]{3,30}$" [(ngModel)]="cv.education.school"
+                    <input type="text" class="form-control" pattern="^[A-Za-z0-9? ?A-Za-z0-9]{3,30}$" [(ngModel)]="resume.education.school"
                       placeholder="Educational institution" id="school" name="school" #school="ngModel" required
                       autocomplete="off">
                     <div *ngIf="school.errors && (school.dirty || school.touched)" class="alert alert-danger">
@@ -183,7 +183,7 @@
                 <div class="form-group">
                   <label for="specialty" class="col-md-2 col-sm-3 col-xs-12 control-label">Speciality</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{0,100}$" [(ngModel)]="cv.education.specialty" placeholder="Speciality"
+                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{0,100}$" [(ngModel)]="resume.education.specialty" placeholder="Speciality"
                       id="specialty" name="specialty" #specialty="ngModel"  autocomplete="off">
                     <div *ngIf="specialty.errors && (specialty.dirty || specialty.touched)" class="alert alert-danger">
                       <div [hidden]="!specialty.errors.pattern">Speciality can only contain letters of the alphabet (till 100 characters).</div>
@@ -193,7 +193,7 @@
                 <div class="form-group">
                     <label for="graduation" class="col-md-2 col-sm-3 col-xs-12 control-label">Graduation</label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[1-9][0-9]{3}$" [(ngModel)]="cv.education.graduation" placeholder="Graduation"
+                      <input type="text" class="form-control" pattern="^[1-9][0-9]{3}$" [(ngModel)]="resume.education.graduation" placeholder="Graduation"
                         id="graduation" name="graduation" #graduation="ngModel" autocomplete="off">
                       <div *ngIf="graduation.errors && (graduation.dirty || graduation.touched)" class="alert alert-danger">
                         <div [hidden]="!graduation.errors.pattern">Graduation can only contain numbers.</div>
@@ -206,10 +206,10 @@
                 <h3 class="fieldset-title">Action</h3>
 
                 <div class="form-group">
-                  <div *ngIf="cv.cvId == null">
+                  <div *ngIf="resume.resumeId == null">
                     <button [disabled]="!cvForm.form.valid" class="btn btn-primary" (click)="insert()">Create</button>
                   </div>
-                  <div *ngIf="cv.cvId != null">
+                  <div *ngIf="resume.resumeId != null">
                     <button [disabled]="!cvForm.form.valid" class="btn btn-success" (click)="update()">Update</button>
                   </div>
                   <hr>
