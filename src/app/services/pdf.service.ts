@@ -28,6 +28,10 @@ export class PdfService {
     return this.http.get<CV>(this.cvURL + "/pdf/" + cvId, httpOptions);
   }
 
+  public findByUserId() {
+    return this.http.get<CV>(this.cvURL + "/pdf", httpOptions);
+  }
+
   public update(cv) {
     return this.http.put<CV>(this.cvURL + "/pdf/updatePDF", cv, httpOptions);
   }

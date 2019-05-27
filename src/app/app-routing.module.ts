@@ -94,7 +94,8 @@ const routes: Routes = [
   { path: 'cvs', component: CvComponent },
   { path: 'createCV', component: AddCvComponent },
 
-  { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
+  //{ path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
+  { path: 'createCvPdf', component: PdfDesignerComponent },
 
   { path: 'updateCV/:cvId', component: AddCvComponent },
 

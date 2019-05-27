@@ -24,13 +24,25 @@ export class PdfDesignerComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService) {
   }
 
+  // ngOnInit(): void {
+
+  //   var cvId = this.route.snapshot.paramMap.get('cvId');
+
+  //   if (cvId !== null) {
+
+  //     this.pdfService.findById(cvId)
+
+  //       .subscribe(data => {
+
+  //         this.cv = data;
+
+  //       });
+  //   }
+  // }
+
   ngOnInit(): void {
 
-    var cvId = this.route.snapshot.paramMap.get('cvId');
-
-    if (cvId !== null) {
-
-      this.pdfService.findById(cvId)
+     this.pdfService.findByUserId()
 
         .subscribe(data => {
 
@@ -38,7 +50,7 @@ export class PdfDesignerComponent implements OnInit {
 
         });
     }
-  }
+  
 
   showPdf(): void {
 
