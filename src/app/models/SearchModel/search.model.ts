@@ -6,6 +6,8 @@ export class Search {
 
   searchDocument: string;
 
+  searchSort: string;
+
   resultsOnPage: string;
 
   firstResultNumber: number;
@@ -15,6 +17,7 @@ export class Search {
     this.firstResultNumber = 0;
     this.searchParameter = 'position';
     this.searchDocument = 'vacancies';
+    this.searchSort = 'name';
   }
 
 }

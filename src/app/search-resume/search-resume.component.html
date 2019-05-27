@@ -83,15 +83,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let searchResumeResult of searchResumeResponse.searchResumeDTOs">
-      <td class="d-none">{{searchResumeResult.id}}</td>
+    <tr *ngFor="let searchResumeResult of searchResumeResponse.searchResumeDTOS">
+      <td class="d-none">{{searchResumeResult.resumeId}}</td>
       <td>{{searchResumeResult.firstName}}</td>
       <td>{{searchResumeResult.lastName}}</td>
       <td>{{searchResumeResult.age}} years old</td>
       <td>{{searchResumeResult.position}}</td>
       <td>{{searchResumeResult.city}}</td>
       <td>{{searchResumeResult.phoneNumber}}</td>
-      <td><button class="btn btn-info" (click)="viewCv(searchResumeResult.id)">View details</button></td>
+      <td><button class="btn btn-info" (click)="viewCv(searchResumeResult.resumeId)">View details</button></td>
     </tr>
     </tbody>
   </table>
