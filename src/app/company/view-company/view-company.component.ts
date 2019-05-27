@@ -42,13 +42,13 @@ export class ViewCompanyComponent implements OnInit {
   ngOnInit() {
     this.app.currentUser.subscribe(x => this.currentUser = x);
     var companyId = this.route.snapshot.paramMap.get("companyId");
-    if(companyId != null) {
+    if (companyId != null) {
       this.companyService.findById(companyId)
         .subscribe(data => {
           this.companyService.findClaims(data)
-            .subscribe( data1 => {
+            .subscribe(data1 => {
               data.claims = [];
-              data1.forEach(function(claim) {
+              data1.forEach(function (claim) {
                 data.claims.push(claim);
               });
 
@@ -62,15 +62,15 @@ export class ViewCompanyComponent implements OnInit {
     }
     this.findVacancies();
   }
-  
+
 
   findVacancies() {
     this.vacancyService.findVacanciesByCompanyId(this.route.snapshot.paramMap.get("companyId"), this.page * this.count).subscribe(
       data => {
-             this.vacancies = data;
-             this.vacancies = data.vacancies;
-             this.size = data.count; 
-        }
+        this.vacancies = data;
+        this.vacancies = data.vacancies;
+        this.size = data.count;
+      }
     )
   }
 
@@ -90,46 +90,45 @@ export class ViewCompanyComponent implements OnInit {
   loadPhoto(photoId: BigInteger) {
     this.photoService.load(photoId)
       .subscribe(data => {
-        this.photo = data;
-        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + this.photo.image);
+        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
       });
   }
 
-  canPrev() : boolean {
+  canPrev(): boolean {
     return this.page > 0;
   }
 
   prev() {
-    if(this.canPrev()) {
+    if (this.canPrev()) {
       this.page = this.page - 1;
       this.findVacancies();
     }
   }
 
-  canNext() : boolean {
+  canNext(): boolean {
     return (this.page + 1) * this.count < this.size;
   }
 
   next() {
-    if(this.canNext()) {
+    if (this.canNext()) {
       this.page = this.page + 1;
       this.findVacancies();
     }
   }
 
-  isApproved() : boolean {
+  isApproved(): boolean {
     return this.company.status == 'APPROVED';
   }
 
-  isMailSent() : boolean {
+  isMailSent(): boolean {
     return this.company.status == 'MAIL_SENT';
   }
 
-  isBlocked() : boolean {
+  isBlocked(): boolean {
     return this.company.status == 'BLOCKED';
   }
 
-  hasClaims() : boolean {
+  hasClaims(): boolean {
     return this.company.claims != null && this.company.claims.length > 0;
   }
 
@@ -139,15 +138,15 @@ export class ViewCompanyComponent implements OnInit {
 
   deleteVacancy(vacancy: Vacancy): void {
     let flag = confirm("Do you really want to delete?");
-    if(flag==false){
+    if (flag == false) {
       return;
     }
-    else{
-    this.vacancyService.deleteById(vacancy.vacancyId)
-      .subscribe( data => {
-        this.vacancies = this.vacancies.filter(p => p !== vacancy);
-        this.size = this.size - 1;
-      })
+    else {
+      this.vacancyService.deleteById(vacancy.vacancyId)
+        .subscribe(data => {
+          this.vacancies = this.vacancies.filter(p => p !== vacancy);
+          this.size = this.size - 1;
+        })
     }
   };
 

@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser'
 
 import { Person } from '../models/person.model';
-import { PersonService } from '../services/profile/person.service';
 import { Contact } from '../models/contact.model';
 import { Address } from '../models/address.model';
+
+import { PersonService } from '../services/profile/person.service';
 import { PhotoService } from '../services/profile/photo.service';
+
 import { UserPrincipal } from '../models/userPrincipal.model';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -18,12 +20,13 @@ import { AuthenticationService } from '../services/authentication.service';
 export class ProfileComponent implements OnInit {
 
   currentUser: UserPrincipal;
-
   person: Person = new Person();
 
   avatar: any;
   fileToUpload: File;
   maxDate: Date = new Date();
+
+  location: Object;
 
   constructor(private app: AuthenticationService, private router: Router, private personService: PersonService, private photoService: PhotoService, private sanitizer: DomSanitizer) {
     this.app.currentUser.subscribe(data => this.currentUser = data);
@@ -62,7 +65,7 @@ export class ProfileComponent implements OnInit {
   loadPhoto(photoId: BigInteger) {
     this.photoService.load(photoId)
       .subscribe(data => {
-        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data.image);
+        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
       });
   }
 

@@ -34,8 +34,8 @@ export class PhotoService {
     return this.http.post<Photo>(this.photoUrl + "logos/" + companyName, body, httpOptions);
   }
 
-  public load(photoId: BigInteger): Observable<Photo> {
-    return this.http.get<Photo>(this.photoUrl + photoId, httpOptions);
+  public load(photoId: BigInteger): Observable<BinaryType> {
+    return this.http.get<BinaryType>(this.photoUrl + photoId, httpOptions);
   }
 
 }
