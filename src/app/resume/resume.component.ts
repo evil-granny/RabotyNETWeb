@@ -1,32 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CV } from '../models/resume.model';
-import { CVService } from '../services/resume.service';
+import { Resume } from '../models/resume.model';
+import { ResumeService } from '../services/resume.service';
 
 
 @Component({
-  selector: 'app-cv',
+  selector: 'app-resume',
   templateUrl: './resume.component.html',
   styleUrls: ['./resume.component.css']
 })
-export class CvComponent implements OnInit {
+export class ResumeComponent implements OnInit {
 
-  cvs: CV[];
+  resumes: Resume[];
 
-  constructor(private router: Router, private cvService: CVService) { }
+  constructor(private router: Router, private resumeService: ResumeService) { }
 
   ngOnInit() {
-    this.cvService.findAll()
+    this.resumeService.findAll()
       .subscribe(data => {
-        this.cvs = data;
+        this.resumes = data;
       });
   };
 
-  deleteById(cv: CV): void {
-    this.cvService.deleteById(cv)
+  deleteById(cv: Resume): void {
+    this.resumeService.deleteById(cv)
       .subscribe(data => {
-        this.cvs = this.cvs.filter(p => p !== cv);
+        this.resumes = this.resumes.filter(p => p !== cv);
       })
   };
 

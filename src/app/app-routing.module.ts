@@ -9,8 +9,8 @@ import {EditVacancyComponent} from './vacancy/edit-vacancy/edit-vacancy.componen
 import {CompanyComponent} from './company/company.component';
 import {AddCompanyComponent} from './company/add-company/add-company.component';
 
-import {CvComponent} from './resume/resume.component';
-import {AddCvComponent} from './resume/add-resume/add-resume.component';
+import {ResumeComponent} from './resume/resume.component';
+import {AddResumeComponent} from './resume/add-resume/add-resume.component';
 import {PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
 
 
@@ -31,7 +31,7 @@ import {PasswordForgotComponent} from './password-forgot/password-forgot.compone
 import {PasswordRestoreComponent} from './password-restore/password-restore.component';
 import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
 import {HotVacancyComponent} from './vacancy/hot-vacancy/hot-vacancy.component';
-import {ViewCvComponent} from './resume/view-resume/view-resume.component';
+import {ViewResumeComponent} from './resume/view-resume/view-resume.component';
 import {AuthGuard} from './_guards/auth.guard';
 import {Role} from './models/roles.model';
 
@@ -70,13 +70,13 @@ const routes: Routes = [
   },
   {
     path: 'resume/create',
-    component: AddCvComponent,
+    component: AddResumeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
   {
     path: 'resume/user',
-    component: ViewCvComponent,
+    component: ViewResumeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
@@ -96,13 +96,13 @@ const routes: Routes = [
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
   { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
 
-  { path: 'resume/user', component: ViewCvComponent },
-  { path: 'resume/all', component: CvComponent },
-  { path: 'resume/create', component: AddCvComponent },
+  { path: 'resume/user', component: ViewResumeComponent },
+  { path: 'resume/all', component: ResumeComponent },
+  { path: 'resume/create', component: AddResumeComponent },
 
-  { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
+  { path: 'createCvPdf/:resumeId', component: PdfDesignerComponent },
 
-  { path: 'update/:cvId', component: AddCvComponent },
+  { path: 'update/:resumeId', component: AddResumeComponent },
 
   { path: 'users/auth', component: AddUserComponent },
   { path: 'forgotPassword', component: PasswordForgotComponent },
