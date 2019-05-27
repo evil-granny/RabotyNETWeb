@@ -21,6 +21,8 @@ export class PdfDesignerComponent implements OnInit {
 
   send: boolean = true;
 
+  fileURL: string = "hello world"
+
   constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService) {
   }
 
