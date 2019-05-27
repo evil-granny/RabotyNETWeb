@@ -169,27 +169,75 @@ export class SearchResumeComponent implements OnInit {
   }
 
   sort(sortText: string) {
-    this.hideAll();
     switch (sortText) {
       case 'firstName':
-        this.fnHidden = false;
+        if (this.fnHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.fnHidden = false;
+        } else {
+          this.hideAll();
+          this.fnHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       case 'lastName':
-        this.lnHidden = false;
+        if (this.lnHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.lnHidden = false;
+        } else {
+          this.hideAll();
+          this.lnHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       case 'age':
-        this.aHidden = false;
+        if (this.aHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.aHidden = false;
+        } else {
+          this.hideAll();
+          this.aHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       case 'position':
-        this.posHidden = false;
+        if (this.posHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.posHidden = false;
+        } else {
+          this.hideAll();
+          this.posHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       case 'city':
-        this.cHidden = false;
+        if (this.cHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.cHidden = false;
+        } else {
+          this.hideAll();
+          this.cHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       case 'phone':
-        this.phHidden = false;
+        if (this.phHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.phHidden = false;
+        } else {
+          this.hideAll();
+          this.phHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       default:
+        this.search.direction = 'asc';
         this.hideAll();
     }
     this.search.searchSort = sortText;

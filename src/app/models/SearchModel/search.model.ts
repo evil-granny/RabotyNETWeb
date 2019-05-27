@@ -8,6 +8,8 @@ export class Search {
 
   searchSort: string;
 
+  direction: string;
+
   resultsOnPage: string;
 
   firstResultNumber: number;
@@ -18,6 +20,7 @@ export class Search {
     this.searchParameter = 'position';
     this.searchDocument = 'vacancies';
     this.searchSort = 'position';
+    this.direction = 'asc';
   }
 
 }

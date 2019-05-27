@@ -151,25 +151,65 @@ export class SearchVacancyComponent implements OnInit {
   }
 
   sort(sortText: string) {
-    this.hideAll()
     switch (sortText) {
       case 'position':
-        this.posHidden = false;
+        if (this.posHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.posHidden = false;
+        } else {
+          this.hideAll();
+          this.posHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       case 'company':
-        this.coHidden = false;
+        if (this.coHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.coHidden = false;
+        } else {
+          this.hideAll();
+          this.coHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       case 'city':
-        this.cHidden = false;
+        if (this.cHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.cHidden = false;
+        } else {
+          this.hideAll();
+          this.cHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       case 'employment':
-        this.emHidden = false;
+        if (this.emHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.emHidden = false;
+        } else {
+          this.hideAll();
+          this.emHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       case 'salary':
-        this.sHidden = false;
+        if (this.sHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.sHidden = false;
+        } else {
+          this.hideAll();
+          this.sHidden = false;
+          this.search.direction = 'asc';
+        }
         break;
       default:
         this.hideAll();
+        this.search.direction = 'asc';
     }
     this.search.searchSort = sortText;
     this.startSearch();
