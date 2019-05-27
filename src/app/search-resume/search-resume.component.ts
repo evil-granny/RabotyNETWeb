@@ -161,4 +161,9 @@ export class SearchResumeComponent implements OnInit {
         break;
     }
   }
+
+  sort(sortText: string) {
+    this.search.searchSort = sortText;
+    this.startSearch();
+  }
 }

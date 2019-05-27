@@ -144,4 +144,9 @@ export class SearchVacancyComponent implements OnInit {
         break;
     }
   }
+
+  sort(sortText: string) {
+    this.search.searchSort = sortText;
+    this.startSearch();
+  }
 }

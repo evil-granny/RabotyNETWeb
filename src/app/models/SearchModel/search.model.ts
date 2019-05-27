@@ -17,7 +17,7 @@ export class Search {
     this.firstResultNumber = 0;
     this.searchParameter = 'position';
     this.searchDocument = 'vacancies';
-    this.searchSort = 'name';
+    this.searchSort = 'position';
   }
 
 }
