@@ -26,6 +26,11 @@ export class SearchVacancyComponent implements OnInit {
   bottomButtons = true;
   vacancySelect = false;
   resumeSelect = true;
+  posHidden = false;
+  coHidden = true;
+  cHidden = true;
+  emHidden = true;
+  sHidden = true;
 
   constructor(private app: AuthenticationService,
     private router: Router,
@@ -143,5 +148,78 @@ export class SearchVacancyComponent implements OnInit {
         this.startSearch();
         break;
     }
+  }
+
+  sort(sortText: string) {
+    switch (sortText) {
+      case 'position':
+        if (this.posHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.posHidden = false;
+        } else {
+          this.hideAll();
+          this.posHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      case 'company':
+        if (this.coHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.coHidden = false;
+        } else {
+          this.hideAll();
+          this.coHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      case 'city':
+        if (this.cHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.cHidden = false;
+        } else {
+          this.hideAll();
+          this.cHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      case 'employment':
+        if (this.emHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.emHidden = false;
+        } else {
+          this.hideAll();
+          this.emHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      case 'salary':
+        if (this.sHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.sHidden = false;
+        } else {
+          this.hideAll();
+          this.sHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      default:
+        this.hideAll();
+        this.search.direction = 'asc';
+    }
+    this.search.searchSort = sortText;
+    this.startSearch();
+  }
+
+  hideAll() {
+    this.posHidden = true;
+    this.coHidden = true;
+    this.cHidden = true;
+    this.emHidden = true;
+    this.sHidden = true;
   }
 }

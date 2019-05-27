@@ -74,24 +74,24 @@
     <thead>
     <tr>
       <th class="d-none">Id</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Age</th>
-      <th>Position</th>
-      <th>City</th>
-      <th>Phone</th>
+      <th (click)="sort('firstName')">First Name <i class="fa fa-arrows-v" [hidden]="fnHidden"></i></th>
+      <th (click)="sort('lastName')">Last Name <i class="fa fa-arrows-v" [hidden]="lnHidden"></i></th>
+      <th (click)="sort('age')">Age <i class="fa fa-arrows-v" [hidden]="aHidden"></i></th>
+      <th (click)="sort('position')">Position <i class="fa fa-arrows-v" [hidden]="posHidden"></i></th>
+      <th (click)="sort('city')">City <i class="fa fa-arrows-v" [hidden]="cHidden"></i></th>
+      <th (click)="sort('phone')">Phone <i class="fa fa-arrows-v" [hidden]="phHidden"></i></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let searchResumeResult of searchResumeResponse.searchResumeDTOs">
-      <td class="d-none">{{searchResumeResult.id}}</td>
+    <tr *ngFor="let searchResumeResult of searchResumeResponse.searchResumeDTOS">
+      <td class="d-none">{{searchResumeResult.resumeId}}</td>
       <td>{{searchResumeResult.firstName}}</td>
       <td>{{searchResumeResult.lastName}}</td>
       <td>{{searchResumeResult.age}} years old</td>
       <td>{{searchResumeResult.position}}</td>
       <td>{{searchResumeResult.city}}</td>
       <td>{{searchResumeResult.phoneNumber}}</td>
-      <td><button class="btn btn-info" (click)="viewCv(searchResumeResult.id)">View details</button></td>
+      <td><button class="btn btn-info" (click)="viewCv(searchResumeResult.resumeId)">View details</button></td>
     </tr>
     </tbody>
   </table>
