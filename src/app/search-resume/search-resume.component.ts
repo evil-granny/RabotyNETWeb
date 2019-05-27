@@ -31,6 +31,12 @@ export class SearchResumeComponent implements OnInit {
   resumeSelect = false;
   urlPdf = 'false';
   send = false;
+  fnHidden = false;
+  lnHidden = true;
+  aHidden = true;
+  posHidden = true;
+  cHidden = true;
+  phHidden = true;
 
   constructor(private app: AuthenticationService,
     private router: Router,
@@ -163,7 +169,39 @@ export class SearchResumeComponent implements OnInit {
   }
 
   sort(sortText: string) {
+    this.hideAll();
+    switch (sortText) {
+      case 'firstName':
+        this.fnHidden = false;
+        break;
+      case 'lastName':
+        this.lnHidden = false;
+        break;
+      case 'age':
+        this.aHidden = false;
+        break;
+      case 'position':
+        this.posHidden = false;
+        break;
+      case 'city':
+        this.cHidden = false;
+        break;
+      case 'phone':
+        this.phHidden = false;
+        break;
+      default:
+        this.hideAll();
+    }
     this.search.searchSort = sortText;
     this.startSearch();
+  }
+
+  hideAll() {
+    this.fnHidden = true;
+    this.lnHidden = true;
+    this.aHidden = true;
+    this.posHidden = true;
+    this.cHidden = true;
+    this.phHidden = true;
   }
 }

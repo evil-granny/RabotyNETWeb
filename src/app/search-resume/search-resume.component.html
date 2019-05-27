@@ -74,12 +74,12 @@
     <thead>
     <tr>
       <th class="d-none">Id</th>
-      <th (click)="sort('firstName')">First Name</th>
-      <th (click)="sort('lastName')">Last Name</th>
-      <th (click)="sort('age')">Age</th>
-      <th (click)="sort('position')">Position</th>
-      <th (click)="sort('city')">City</th>
-      <th (click)="sort('phone')">Phone</th>
+      <th (click)="sort('firstName')">First Name <i class="arrow down" [hidden]="fnHidden"></i></th>
+      <th (click)="sort('lastName')">Last Name <i class="arrow down" [hidden]="lnHidden"></i></th>
+      <th (click)="sort('age')">Age <i class="arrow down" [hidden]="aHidden"></i></th>
+      <th (click)="sort('position')">Position <i class="arrow down" [hidden]="posHidden"></i></th>
+      <th (click)="sort('city')">City <i class="arrow down" [hidden]="cHidden"></i></th>
+      <th (click)="sort('phone')">Phone <i class="arrow down" [hidden]="phHidden"></i></th>
     </tr>
     </thead>
     <tbody>

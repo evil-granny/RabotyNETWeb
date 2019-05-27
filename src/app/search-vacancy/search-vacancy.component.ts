@@ -26,6 +26,11 @@ export class SearchVacancyComponent implements OnInit {
   bottomButtons = true;
   vacancySelect = false;
   resumeSelect = true;
+  posHidden = false;
+  coHidden = true;
+  cHidden = true;
+  emHidden = true;
+  sHidden = true;
 
   constructor(private app: AuthenticationService,
     private router: Router,
@@ -146,7 +151,35 @@ export class SearchVacancyComponent implements OnInit {
   }
 
   sort(sortText: string) {
+    this.hideAll()
+    switch (sortText) {
+      case 'position':
+        this.posHidden = false;
+        break;
+      case 'company':
+        this.coHidden = false;
+        break;
+      case 'city':
+        this.cHidden = false;
+        break;
+      case 'employment':
+        this.emHidden = false;
+        break;
+      case 'salary':
+        this.sHidden = false;
+        break;
+      default:
+        this.hideAll();
+    }
     this.search.searchSort = sortText;
     this.startSearch();
+  }
+
+  hideAll() {
+    this.posHidden = true;
+    this.coHidden = true;
+    this.cHidden = true;
+    this.emHidden = true;
+    this.sHidden = true;
   }
 }
