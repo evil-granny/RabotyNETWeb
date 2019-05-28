@@ -67,8 +67,8 @@ export class VacancyService {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
   }
 
-  public sendResume(resume:CV) : Observable<CV>{
-    return this.http.post<CV>(this.vacancyUrl + '/sendResume', resume, httpOptions);
+  public sendResume(resume:CV,vacancyId:Uint8Array) : Observable<CV>{
+    return this.http.post<CV>(this.vacancyUrl + '/sendResume/'+vacancyId, resume, httpOptions);
   }
 
 

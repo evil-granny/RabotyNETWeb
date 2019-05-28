@@ -48,15 +48,12 @@ export class ViewVacancyComponent implements OnInit {
   }
 
   sendResume(){
-    // this.app.currentUser
     this.resumeService.findByUserId().subscribe(data=>{
-   this.resume = data;
-   console.log(this.resume);
-    });
-    this.vacancyService.sendResume(this.resume).subscribe(data => {
-    }, error => console.error(error));;
-    // console.log(resume);
-    // this.location.back();
+    this.resume = data;
+  });
+    this.vacancyService.sendResume(this.resume,this.vacancy.vacancyId).subscribe(data => {
+      alert("Resume was sent on this resume")
+    }, error => console.error(error));
   }
 
 }

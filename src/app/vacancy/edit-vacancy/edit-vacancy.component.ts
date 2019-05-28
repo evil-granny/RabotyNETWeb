@@ -72,7 +72,9 @@ export class EditVacancyComponent implements OnInit {
   }
 
   addFieldValue() {
+    
     this.vacancy.requirements.push(new Requirement());
+    console.log(this.vacancy.requirements.length);
   }
 
   get isCowner() {
