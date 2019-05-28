@@ -113,16 +113,21 @@ export class AddUserComponent implements OnInit {
     this.userService.findToken(this.credentials.username)
       .subscribe(data => {
         this.valid = data;
-        var email = this.credentials.username;
         if (this.valid == "valid") {
           this.openModal("Confirm you email, please!");
           this.credentials.password = "";
-        } else {
-          this.openModal("Your account is not confirmed. Resend confirmation message?");
-          this.credentials.password = "";
-          this.userService.resendToken(email);
+        } else {          
+          this.resendToken();
         }
       })
+  }
+
+  resendToken(){
+    this.userService.resendToken(this.credentials.username)
+    .subscribe(data => {
+      this.openModal("Your account is not confirmed. Confirmation message has been sent to you again"); 
+    });
+    this.credentials.password = "";
   }
 
   get isAdmin() {

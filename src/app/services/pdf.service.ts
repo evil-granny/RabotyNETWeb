@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { CV } from '../models/cv.model';
-import { CVService } from './cv.service';
+import { Resume } from '../models/resume.model';
+import { ResumeService } from './resume.service';
 
 
 
@@ -10,8 +10,9 @@ import { CVService } from './cv.service';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  })
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Credentials': 'true',
+  }), withCredentials: true
 };
 
 @Injectable({
@@ -22,20 +23,20 @@ export class PdfService {
   
   constructor(private http: HttpClient) { }
 
-  private cvURL = 'http://localhost:8080';
+  private resumeURL = 'http://localhost:8080';
 
   public findById(cvId) {
-    return this.http.get<CV>(this.cvURL + "/pdf/" + cvId, httpOptions);
+    return this.http.get<Resume>(this.resumeURL + "/pdf/" + cvId, httpOptions);
   }
 
   public update(cv) {
-    return this.http.put<CV>(this.cvURL + "/pdf/updatePDF", cv, httpOptions);
+    return this.http.put<Resume>(this.resumeURL + "/pdf/updatePDF", cv, httpOptions);
   }
 
   public show(cvId, send) {
     let headers = new HttpHeaders();
-    headers = headers.set('Accept', 'application/pdf');    
-    return this.http.get(this.cvURL + "/pdf/createPdf/" + cvId + "&" + send,{ headers: headers, responseType: 'arraybuffer'});
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.get(this.resumeURL + "/pdf/createPdf/" + cvId + "&" + send,{ headers: headers, responseType: 'arraybuffer'});
   }
 
   

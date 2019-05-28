@@ -25,10 +25,11 @@ export class HotVacancyComponent implements OnInit {
   };
 
   findAll() {
-     this.vacancyService.findAllHotVacanciesWithPagination(this.page * this.count, this.count).subscribe(
+     this.vacancyService.findAllHotVacanciesWithPagination(this.page * this.count).subscribe(
        data => {
          this.vacancies = data.vacancies;
          this.size = data.count;
+         console.log(data);
        }
      );
   }

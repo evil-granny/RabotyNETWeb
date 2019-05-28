@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 import { MatDatepickerModule, MatInputModule, MatNativeDateModule, MAT_DATE_LOCALE, MatSidenavModule } from '@angular/material';
 
@@ -14,8 +14,8 @@ import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.compon
 import { CompanyComponent } from './company/company.component';
 import { AddCompanyComponent } from './company/add-company/add-company.component';
 
-import { CvComponent } from './cv/cv.component';
-import { AddCvComponent } from './cv/add-cv/add-cv.component';
+import { ResumeComponent } from './resume/resume.component';
+import { AddResumeComponent } from './resume/add-resume/add-resume.component';
 import { PdfDesignerComponent } from './pdf-designer/pdf-designer.component';
 
 import { UserComponent } from './user/user.component';
@@ -48,7 +48,7 @@ import { PasswordRestoreComponent } from './password-restore/password-restore.co
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
-import { ViewCvComponent } from './cv/view-cv/view-cv.component';
+import { ViewResumeComponent } from './resume/view-resume/view-resume.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -62,8 +62,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EditVacancyComponent,
     CompanyComponent,
     AddCompanyComponent,
-    CvComponent,
-    AddCvComponent,
+    ResumeComponent,
+    AddResumeComponent,
     UserComponent,
     AddUserComponent,
     SearchResumeComponent,
@@ -82,7 +82,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AccessNonauthorizedPageComponent,
     HotVacancyComponent,
     AccessNonauthorizedPageComponent,
-    ViewCvComponent,
+    ViewResumeComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +90,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserAnimationsModule,
     MatDatepickerModule, MatInputModule, MatNativeDateModule,
     HttpClientModule,
+    HttpClientXsrfModule.withOptions({cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN'}),
     ReactiveFormsModule,
     AppRoutingModule,
     PerfectScrollbarModule,

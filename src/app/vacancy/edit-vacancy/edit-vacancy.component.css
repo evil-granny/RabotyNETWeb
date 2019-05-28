@@ -608,5 +608,13 @@ legend.experience-border {
 }
 .checkboxC{
 margin-left: 100px; 
-margin-top:-40px; 
+margin-top:-35px; 
+}
+.forSalary{
+    position: relative;
+}
+.forCurrency{
+    position: relative;
+    margin-left: 50%;
+    margin-top: -9%;
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CvComponent } from './cv.component';
+import { ViewResumeComponent } from './view-resume.component';
 
-describe('CvComponent', () => {
-  let component: CvComponent;
-  let fixture: ComponentFixture<CvComponent>;
+describe('ViewCvComponent', () => {
+  let component: ViewResumeComponent;
+  let fixture: ComponentFixture<ViewResumeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CvComponent ]
+      declarations: [ ViewResumeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CvComponent);
+    fixture = TestBed.createComponent(ViewResumeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

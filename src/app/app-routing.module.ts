@@ -9,8 +9,8 @@ import {EditVacancyComponent} from './vacancy/edit-vacancy/edit-vacancy.componen
 import {CompanyComponent} from './company/company.component';
 import {AddCompanyComponent} from './company/add-company/add-company.component';
 
-import {CvComponent} from './cv/cv.component';
-import {AddCvComponent} from './cv/add-cv/add-cv.component';
+import {ResumeComponent} from './resume/resume.component';
+import {AddResumeComponent} from './resume/add-resume/add-resume.component';
 import {PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
 
 
@@ -31,7 +31,7 @@ import {PasswordForgotComponent} from './password-forgot/password-forgot.compone
 import {PasswordRestoreComponent} from './password-restore/password-restore.component';
 import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
 import {HotVacancyComponent} from './vacancy/hot-vacancy/hot-vacancy.component';
-import {ViewCvComponent} from './cv/view-cv/view-cv.component';
+import {ViewResumeComponent} from './resume/view-resume/view-resume.component';
 import {AuthGuard} from './_guards/auth.guard';
 import {Role} from './models/roles.model';
 
@@ -69,8 +69,14 @@ const routes: Routes = [
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
   {
-    path: 'createCV',
-    component: AddCvComponent,
+    path: 'resume/create',
+    component: AddResumeComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
+  },
+  {
+    path: 'resume/user',
+    component: ViewResumeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
@@ -79,7 +85,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
 
-  { path: 'createVacancy/:companyName', component: EditVacancyComponent },
+  { path: 'createVacancy/:companyId', component: EditVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
   { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
 
@@ -88,22 +94,22 @@ const routes: Routes = [
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
-  { path: 'viewCompany/:companyName', component: ViewCompanyComponent },
+  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
 
-  { path: 'userCV', component: ViewCvComponent },
-  { path: 'cvs', component: CvComponent },
-  { path: 'createCV', component: AddCvComponent },
+  { path: 'resume/user', component: ViewResumeComponent },
+  { path: 'resume/all', component: ResumeComponent },
+  { path: 'resume/create', component: AddResumeComponent },
 
-  { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
+  { path: 'createCvPdf/:resumeId', component: PdfDesignerComponent },
 
-  { path: 'updateCV/:cvId', component: AddCvComponent },
+  { path: 'update/:resumeId', component: AddResumeComponent },
 
-  { path: 'registration', component: AddUserComponent },
+  { path: 'users/auth', component: AddUserComponent },
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
   { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
-  { path: 'registrationConfirm', component: RegistrationconfirmComponent },
+  { path: 'users/auth/confirm', component: RegistrationconfirmComponent },
   { path: 'users', component: UserComponent },
 
   { path: 'search/vacancies', component: SearchVacancyComponent },

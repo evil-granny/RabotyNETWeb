@@ -1,48 +1,49 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { CV } from '../../models/cv.model';
-import { CVService } from '../../services/cv.service';
+import { Resume } from '../../models/resume.model';
+import { ResumeService } from '../../services/resume.service';
 import { Skill } from '../../models/skill.model';
 import { Job } from '../../models/job.model';
 
 @Component({
-  templateUrl: './add-cv.component.html',
-  styleUrls: ['./add-cv.component.css']
+  templateUrl: './add-resume.component.html',
+  styleUrls: ['./add-resume.component.css']
 })
-export class AddCvComponent {
+export class AddResumeComponent {
 
-  cv: CV = new CV();
+  resume: Resume = new Resume();
   skills: Skill[] = Array<Skill>();
   jobs: Job[] = Array<Job>();
 
-  constructor(private router: Router, private route: ActivatedRoute, private cvService: CVService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private resumeService: ResumeService) { }
 
   ngOnInit(): void {
-    var cvId = this.route.snapshot.paramMap.get("cvId");
+    var cvId = this.route.snapshot.paramMap.get("resumeId");
     if (cvId !== null) {
-      this.cvService.findById(cvId)
+      this.resumeService.findById(cvId)
         .subscribe(data => {
-          this.cv = data;
+          this.resume = data;
         });
     }
   }
 
   update(): void {
-    this.cvService.update(this.cv)
+    this.resumeService.update(this.resume)
       .subscribe(data => {
-        if (data != null)
-          alert("CV has been updated successfully.");
+        if (data != null) {
+          this.router.navigate(['/resume/user']);
+        }
         else
           alert("Validation problem has been occured");
       });
   };
 
   insert(): void {
-    this.cvService.insert(this.cv)
+    this.resumeService.insert(this.resume)
       .subscribe(data => {
         if (data != null) {
-          this.router.navigate(['/userCV']);
+          this.router.navigate(['/resume/user']);
         }
         else
           alert("Validation problem has been occured");
@@ -50,7 +51,7 @@ export class AddCvComponent {
   };
 
   deleteSkill(skill: Skill): void {
-    this.cvService.deleteSkillById(skill.skillId)
+    this.resumeService.deleteSkillById(skill.skillId)
       .subscribe(data => {
         this.skills = this.skills.filter(p => p !== skill);
         window.location.reload();
@@ -58,7 +59,7 @@ export class AddCvComponent {
   }
 
   deleteJob(job: Job): void {
-    this.cvService.deleteJobById(job.jobId)
+    this.resumeService.deleteJobById(job.jobId)
       .subscribe(data => {
         this.jobs = this.jobs.filter(p => p !== job);
         window.location.reload();
@@ -66,19 +67,19 @@ export class AddCvComponent {
   }
 
   newSkill() {
-    this.cv.skills.push(new Skill());
+    this.resume.skills.push(new Skill());
   }
 
   newJob() {
-    this.cv.jobs.push(new Job());
+    this.resume.jobs.push(new Job());
   }
 
   removeInputFieldSkill(index: number): void {
-    this.cv.skills.splice(index, 1);
+    this.resume.skills.splice(index, 1);
   }
 
   removeInputFieldJob(index: number): void {
-    this.cv.jobs.splice(index, 1);
+    this.resume.jobs.splice(index, 1);
   }
 
 }
