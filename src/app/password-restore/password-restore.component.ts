@@ -45,11 +45,13 @@ export class PasswordRestoreComponent implements OnInit {
     observable.subscribe(result =>  {
       },
       error => {
+      console.log('Error from back')
+      console.log(error)
         this.errors = error;
         this.openErrorModal(this.errors);
       },
       () => {
-        this.openSuccessModal('Password restored successfully! Please go to the sign in page');
+        this.openSuccessModal('Password restored successfully! Please sign in.');
         this.router.navigate(['/users/auth']);
       }
     );

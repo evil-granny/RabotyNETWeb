@@ -110,6 +110,7 @@ export class AddUserComponent implements OnInit {
       error => {
         this.error = error;
         this.openErrorModal(this.error);
+        this.router.navigateByUrl('/users/auth');
       });
   }
 
