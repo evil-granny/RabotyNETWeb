@@ -32,6 +32,10 @@ export class PdfService {
     return this.http.get<CV>(this.cvURL + "/pdf", httpOptions);
   }
 
+  public send() {
+    return this.http.get(this.cvURL + "/pdf/sendEmail", httpOptions);
+  }
+
   public update(cv) {
     return this.http.put<CV>(this.cvURL + "/pdf/updatePDF", cv, httpOptions);
   }

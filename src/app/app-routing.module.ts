@@ -34,6 +34,7 @@ import {HotVacancyComponent} from './vacancy/hot-vacancy/hot-vacancy.component';
 import {ViewCvComponent} from './cv/view-cv/view-cv.component';
 import {AuthGuard} from './_guards/auth.guard';
 import {Role} from './models/roles.model';
+import { PdfPreviewComponent } from './pdf-preview/pdf-preview.component';
 
 
 const routes: Routes = [
@@ -96,6 +97,7 @@ const routes: Routes = [
 
   //{ path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
   { path: 'createCvPdf', component: PdfDesignerComponent },
+  { path: 'previewCvPdf/:cvId', component: PdfPreviewComponent },
 
   { path: 'updateCV/:cvId', component: AddCvComponent },
 

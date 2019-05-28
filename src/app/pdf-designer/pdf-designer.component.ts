@@ -21,7 +21,7 @@ export class PdfDesignerComponent implements OnInit {
 
   send: boolean = true;
 
-  fileURL: string = "hello world"
+  fileURL: string = "hello people"
 
   constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService) {
   }
@@ -72,7 +72,7 @@ export class PdfDesignerComponent implements OnInit {
 
               window.open(fileURL);
 
-              window.focus();
+              window.focus();              
 
             });
         } else {
@@ -83,5 +83,17 @@ export class PdfDesignerComponent implements OnInit {
       });
 
   };
+
+  showPreviewPdf(): void {
+
+    this.pdfService.update(this.cv)
+      .subscribe(data => {
+        if (data != null)
+          window.open("/previewCvPdf/"+this.cv.cvId)
+        else
+          alert("Validation problem has been occured");
+      });
+
+}
 
 }
