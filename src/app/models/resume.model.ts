@@ -17,5 +17,7 @@ export class CV {
     jobs: Job[] = [];
 
     person: Person = new Person();
+
+    reviewed: boolean;
    
 }

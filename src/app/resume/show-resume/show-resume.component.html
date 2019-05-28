@@ -33,7 +33,7 @@
                 </tr>
               </thead>
               <tbody *ngFor="let resume of resumes">
-                <tr *ngIf="status=='NEW'" style="background: white">
+                <tr *ngIf="resume.reviewed==null||resume.reviewed==false; else reviewBlock" style="background: white">
                   <td class="d-none">{{resume.cvId}}</td>
                   <td>{{resume.person.firstName}}</td>
                   <td>{{resume.person.lastName}}</td>
@@ -42,10 +42,25 @@
                   <td>
                     <a (click)="showPdf(resume)" class="btn" rel="tooltip" title="View resume"><i
                         class="fa fa-eye"></i></a>
-                    <a class="btn" (click)="changeStatus()" rel="tooltip"
-                      title="Show"><i class="fa fa-send"></i></a>
+                    <a class="btn" (click)="changeStatus(resume)" rel="tooltip"
+                      title="Show">&#10008;</a>
                   </td>
                 </tr>
+                <ng-template #reviewBlock>
+                  <tr>
+                    <td class="d-none">{{resume.cvId}}</td>
+                    <td>{{resume.person.firstName}}</td>
+                    <td>{{resume.person.lastName}}</td>
+                    <td>{{resume.person.contact.phoneNumber}}</td>
+                    <td>{{resume.person.contact.email}}</td>
+                    <td>
+                      <a (click)="showPdf(resume)" class="btn" rel="tooltip" title="View resume"><i
+                          class="fa fa-eye"></i></a>
+                      <a class="btn" (click)="changeStatusOnNew(resume)" rel="tooltip"
+                        title="Vacancy revised">&#10004;</a>
+                    </td>
+                  </tr>
+                </ng-template>
               </tbody>
             </table>
           </div>

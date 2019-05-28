@@ -7,6 +7,7 @@ import { Requirement } from '../models/requirement.model';
 import {SearchResumeResponse} from '../models/SearchModel/SearchResumeResponse.model';
 import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
 import { VacancyDTO } from '../models/vacancy/vacancyDTO.model';
+import { CV } from '../models/resume.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -64,6 +65,10 @@ export class VacancyService {
   }
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
+  }
+
+  public sendResume(resume:CV) : Observable<CV>{
+    return this.http.post<CV>(this.vacancyUrl + '/sendResume', resume, httpOptions);
   }
 
 

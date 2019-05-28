@@ -16,7 +16,7 @@ export class ShowResumeComponent implements OnInit {
   resumes: CV[];
   send: boolean = true;
   // status: boolean = true;
-  status: string = "NEW";
+  // status: string = "NEW";
 
   // persons: Person[];
 
@@ -38,10 +38,21 @@ export class ShowResumeComponent implements OnInit {
               window.open(fileURL);
               window.focus();
             });
+            setTimeout(() => {this.changeStatus(resume)}, 5000);
   };
 
-  changeStatus(){
-    this.status = "REVIEW";
+  changeStatus(resume){
+    resume.reviewed = true;
+    this.cvService.update(resume)
+    .subscribe(data => {
+    });
+  }
+
+  changeStatusOnNew(resume){
+    resume.reviewed = false;
+    this.cvService.update(resume)
+    .subscribe(data => {
+    });
   }
 
 }
