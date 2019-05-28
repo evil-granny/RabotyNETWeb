@@ -32,7 +32,7 @@
                       placeholder="First Name" id="firstName" name="firstName" #firstName="ngModel" required
                       autocomplete="off" disabled>
                     <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="alert alert-danger">
-                      <div [hidden]="!firstName.errors.required">Degree is required!</div>
+                      <div [hidden]="!firstName.errors.required">First Name is required!</div>
                       <div [hidden]="!firstName.errors.pattern">
                         First Name can only contain letters and numbers (2-20 characters)!
                       </div>
@@ -43,7 +43,7 @@
                       placeholder="Last Name" id="lastName" name="lastName" #lastName="ngModel" required
                       autocomplete="off" disabled>
                     <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="alert alert-danger">
-                      <div [hidden]="!lastName.errors.required">School is required!</div>
+                      <div [hidden]="!lastName.errors.required">Last Name is required!</div>
                       <div [hidden]="!lastName.errors.pattern">
                         Last Name can only contain letters and numbers (3-30 characters)!
                       </div>
@@ -104,7 +104,7 @@
                 <h3 class="fieldset-title">Education</h3>
                 <div class="form-group">
                   <label for="phoneNumber" class="col-md-5" style="float: left; ">Degree</label>
-                  <label for="school" class="col-md-5" style="float: left; ">School</label>
+                  <label for="school" class="col-md-5" style="float: left; ">Education institution</label>
                   <div class="col-md-5" style="float: left; ">
                     <input type="text" class="form-control" pattern="^[A-Za-z]{3,30}$" [(ngModel)]="resume.education.degree"
                       placeholder="First Name" id="degree" name="degree" #degree="ngModel" required autocomplete="off">
@@ -132,9 +132,9 @@
                   <div class="col-md-5" style="float: left; ">
                     <input type="text" class="form-control" pattern="^[\s\S]{3,100}$"
                            [(ngModel)]="resume.education.specialty" placeholder="Specialty" id="specialty" name="specialty"
-                           #specialty="ngModel" required autocomplete="off">
+                           #specialty="ngModel"  autocomplete="off">
                     <div *ngIf="specialty.errors && (specialty.dirty || specialty.touched)" class="alert alert-danger">
-                      <div [hidden]="!specialty.errors.required">Specialty is required!</div>
+                      <!-- <div [hidden]="!specialty.errors.required">Specialty is required!</div> -->
                       <div [hidden]="!specialty.errors.pattern">
                         Specialty can only contain letters and numbers (3-100 characters)!
                       </div>
@@ -143,10 +143,10 @@
                   <div class="col-md-5" style="float: left; ">
                     <input type="text" class="form-control" pattern="^((19|20)[0-9]{2})$"
                            [(ngModel)]="resume.education.graduation" placeholder="graduation" id="graduation" name="graduation"
-                           #graduation="ngModel" required autocomplete="off">
+                           #graduation="ngModel"  autocomplete="off">
                     <div *ngIf="graduation.errors && (graduation.dirty || graduation.touched)"
                       class="alert alert-danger">
-                      <div [hidden]="!graduation.errors.required">Graduatioin is required!</div>
+                      <!-- <div [hidden]="!graduation.errors.required">Graduatioin is required!</div> -->
                       <div [hidden]="!graduation.errors.pattern">
                         Graduatioin can only contain letters and numbers (3-30 characters)!
                       </div>
@@ -174,7 +174,7 @@
                       <div class="col-md-5" style="float: left; ">
                         <input type="text" class="form-control" pattern="^[\s\S]{3,50}$" [(ngModel)]="job.companyName"
                           placeholder="company" id="company{{in}}" name="company{{in}}" #company{{in}}="ngModel"
-                          required autocomplete="off">
+                          autocomplete="off">
                       </div>
                     </div>
                     <div class="form-group">
@@ -194,7 +194,7 @@
                       <div class="col-md-10" style="float: left; ">
                         <input type="text" class="form-control" pattern="^[\s\S]{3,200}$" [(ngModel)]="job.description"
                           placeholder="description" id="description{{in}}" name="description{{in}}"
-                          #description{{in}}="ngModel" required autocomplete="off">
+                          #description{{in}}="ngModel"  autocomplete="off">
                       </div>
                     </div>
                   </fieldset>
@@ -223,7 +223,7 @@
                       <div class="col-md-10 col-sm-9 col-xs-12">
                         <input type="text" class="form-control" pattern="^[\s\S]{0,255}$"
                           [(ngModel)]="skill.description" placeholder="Description" id="descriptionSkill{{in}}"
-                          name="descriptionSkill{{in}}" #descriptionSkill{{in}}="ngModel" required autocomplete="off">
+                          name="descriptionSkill{{in}}" #descriptionSkill{{in}}="ngModel"  autocomplete="off">
                       </div>
                     </div>
                   </fieldset>
