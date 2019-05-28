@@ -104,9 +104,13 @@ export class AddUserComponent implements OnInit {
         this.router.navigateByUrl('/companies/my');
       }
       if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1) {
-        this.router.navigateByUrl('/userCV');
+        this.router.navigateByUrl('/resume/user');
       }
-    });
+    },
+      error => {
+        this.error = error;
+        this.openErrorModal(this.error);
+      });
   }
 
   validToken() {
@@ -128,6 +132,10 @@ export class AddUserComponent implements OnInit {
       this.openModal("Your account is not confirmed. Confirmation message has been sent to you again"); 
     });
     this.credentials.password = "";
+  }
+
+  public openErrorModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } });
   }
 
   get isAdmin() {
