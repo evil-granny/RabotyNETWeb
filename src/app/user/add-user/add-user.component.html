@@ -91,6 +91,7 @@
                             </label>
                             <div *ngIf="username.errors && username.dirty" class="alert alert-danger">
                                 <div [hidden]="!username.errors.pattern">Please check your login!</div>
+                                <div [hidden]="!username.errors.required">Login is required!</div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -111,11 +112,9 @@
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Sign In">
                         </div>
+                      <div align="center" pagination-template><a routerLink="/forgotPassword"><h5>Forgot password?</h5></a></div>
                     </div>
                 </form>
-                <div align="center" pagination-template><a routerLink="/forgotPassword">
-                        <h5>Forgot password?</h5>
-                    </a></div>
             </div>
         </div>
     </div>

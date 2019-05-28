@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ComfirmComponent} from '../confirm/comfirm.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-password-forgot',
@@ -15,17 +17,18 @@ export class PasswordForgotComponent {
   private resetPasswordUrl = 'http://localhost:8080/resetPassword';
   private errors: any;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, public dialog: MatDialog) {
   }
 
   forgotPassword() {
     const authHeader = {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
     };
 
     const httpOptions = {
-      headers: new HttpHeaders(authHeader)
+      headers: new HttpHeaders(authHeader), withCredentials: true
     };
 
     const observable = this.http.post<any>(this.resetPasswordUrl, this.userLogin, httpOptions);
@@ -33,13 +36,19 @@ export class PasswordForgotComponent {
       },
         error => {
           this.errors = error;
-          alert(this.errors);
-          location.reload(true);
+          this.openErrorModal(this.errors);
         },
     () => {
-      alert('Please check mail for further instructions!');
+      this.openSuccessModal('Please check mail for further instructions!');
       this.router.navigate(['/vacancies']);
     }
     );
+  }
+
+  public openErrorModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } });
+  }
+  public openSuccessModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } });
   }
 }

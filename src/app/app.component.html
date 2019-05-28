@@ -12,7 +12,7 @@
     <ul class="navbar-nav mr-auto">
       <a class="navbar-brand" routerLink="/companies/my" *ngIf="isCowner">My companies</a>
       <a class="navbar-brand" routerLink="/createCompany" *ngIf="isUser">Create company</a>
-      <a class="navbar-brand" routerLink="/userCV" *ngIf="isCownerAndUser">My resumes</a>
+      <a class="navbar-brand" routerLink="/resume/user" *ngIf="isCownerAndUser">My resumes</a>
       <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin">Сompanies</a>
       <a class="navbar-brand" routerLink="/hotVacancies">Hot Vacancies</a>
     </ul>
@@ -35,7 +35,7 @@
           </a>
           <div class="list dropdown-menu">
             <a class="dropdown-item" routerLink="/profile" *ngIf="isUser || isCowner">Profile</a>
-            <a class="dropdown-item" routerLink="/registration" *ngIf="!currentUser">Log in</a>
+            <a class="dropdown-item" routerLink="/users/auth" *ngIf="!currentUser">Log in</a>
             <a class="dropdown-item" (click)="logout()" *ngIf="currentUser">Log out</a>
           </div>
         </div>

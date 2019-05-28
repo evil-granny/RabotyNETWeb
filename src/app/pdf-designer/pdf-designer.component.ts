@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CV } from '../models/cv.model';
+import { Resume } from '../models/resume.model';
 import { Person } from '../models/person.model';
 import { PdfService } from '../services/pdf.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,11 +17,11 @@ export class PdfDesignerComponent implements OnInit {
 
   people: Person = new Person();
 
-  cv: CV = new CV();
+  resume: Resume = new Resume();
 
   send: boolean = true;
 
-  fileURL: string = "hello people"
+  fileURL: string = ""
 
   constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService) {
   }
@@ -48,21 +48,21 @@ export class PdfDesignerComponent implements OnInit {
 
         .subscribe(data => {
 
-          this.cv = data;
+          this.resume = data;
 
         });
     }
-  
+  }
 
   showPdf(): void {
 
-    this.pdfService.update(this.cv)
+    this.pdfService.update(this.resume)
 
       .subscribe(data => {
 
         if (data != null) {
 
-          this.pdfService.show(this.cv.cvId, this.send)
+          this.pdfService.show(this.resume.resumeId, this.send)
 
             .subscribe(data => {
 
@@ -72,7 +72,7 @@ export class PdfDesignerComponent implements OnInit {
 
               window.open(fileURL);
 
-              window.focus();              
+              window.focus();
 
             });
         } else {

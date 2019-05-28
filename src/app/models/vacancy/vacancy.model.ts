@@ -13,10 +13,17 @@ export class Vacancy {
 
     salary: Int8Array;
 
+    currency : string;
+
     hotVacancy: boolean;
 
     company: Company = new Company();
 
     requirements: Requirement[] = Array<Requirement>();
+
+    constructor() {
+        this.currency = 'USD';
+        this.employment = 'FULL';
+      }
 
 }

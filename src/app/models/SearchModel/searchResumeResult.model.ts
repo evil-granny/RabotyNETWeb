@@ -10,6 +10,8 @@ export class SearchResumeResult {
 
   position: string;
 
+  resumeId: BigInteger;
+
   city: string;
 
   phoneNumber: string;

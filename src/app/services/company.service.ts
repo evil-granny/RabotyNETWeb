@@ -8,8 +8,9 @@ import { CompanyPaginationDTO } from '../models/CompanyModel/companyPaginationDT
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  })
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Credentials': 'true',
+  }), withCredentials: true
 };
 
 @Injectable({
@@ -73,4 +74,13 @@ export class CompanyService {
   public deleteClaimById(claim) {
     return this.http.delete(this.claimURL + "/delete/" + claim.claimId, httpOptions);
   }
+
+  public getCompanyByVacanycId(id) {
+    return this.http.get<Company>(this.companyURL+"/byVacancyId/" + id , httpOptions);
+}
+
+public findById(companyId) {
+  return this.http.get<Company>(this.companyURL + "/byId/" + companyId, httpOptions);
+}
+
 }

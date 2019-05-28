@@ -74,11 +74,11 @@
       <thead>
       <tr>
         <th class="d-none">Id</th>
-        <th>Position</th>
-        <th>Company</th>
-        <th>City</th>
-        <th>Employment</th>
-        <th>Salary</th>
+        <th (click)="sort('position')">Position <i class="fa fa-arrows-v" [hidden]="posHidden"></i></th>
+        <th (click)="sort('company')">Company <i class="fa fa-arrows-v" [hidden]="coHidden"></i></th>
+        <th (click)="sort('city')">City <i class="fa fa-arrows-v" [hidden]="cHidden"></i></th>
+        <th (click)="sort('employment')">Employment <i class="fa fa-arrows-v" [hidden]="emHidden"></i></th>
+        <th (click)="sort('salary')">Salary <i class="fa fa-arrows-v" [hidden]="sHidden"></i></th>
       </tr>
       </thead>
       <tbody>
