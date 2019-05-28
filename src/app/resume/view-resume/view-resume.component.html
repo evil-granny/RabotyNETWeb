@@ -35,7 +35,7 @@
              <hr>
              <a *ngIf = "resume.resumeId == null" routerLink="/resume/create">Create Resume</a>
              <div *ngIf="resume.resumeId != null">
-             <a class="btn btn-primary" routerLink="/createPdf/{{resume.resumeId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Create Pdf</a>
+             <a class="btn btn-primary" routerLink="/createResumePdf" style="font-size: 17px;margin-left: 10px;margin-top:20px">Create Pdf</a>
              <a class="btn btn-primary" routerLink="/update/{{resume.resumeId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Show all info</a>
              </div>
             </form>

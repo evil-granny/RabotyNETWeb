@@ -232,30 +232,26 @@
               <br>
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Action</h3>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="send" class="col-md-5" style="float: left; ">Send email with CV</label>
                   <label for="empty" class="col-md-5" style="float: left; "></label>
                   <div class="col-md-10" style="float: left; ">
                     <input type="checkbox" [checked]="send" (change)="send = !send" />
                   </div>
-                </div>
-                <div class="form-group">
+                </div> -->
+                <!-- <div class="form-group">
                   <div *ngIf="resume.resumeId != null">
                     <button [disabled]="!cvForm.form.valid" class="btn btn-success" (click)="showPdf() ">Create PDF
                     </button>
                   </div>
-                </div>
+                </div> -->
                 <div class="form-group">
-                    <div *ngIf="cv.cvId != null">
+                    <div *ngIf="resume.resumeId != null">
                       <button [disabled]="!cvForm.form.valid" class="btn btn-success" (click)="showPreviewPdf() ">Preview PDF
                       </button>
                     </div>
                   </div>
-                <div class="form-group">
-                    <div *ngIf="cv.cvId != null">
-                      <a [routerLink]="['/previewCvPdf',fileURL]"><button [disabled]="!cvForm.form.valid" class="btn btn-success"> old Preview PDF</button></a>
-                    </div>
-                  </div>
+                
               </fieldset>
             </form>
           </div>

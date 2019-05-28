@@ -51,9 +51,8 @@ export class PdfDesignerComponent implements OnInit {
           this.resume = data;
 
         });
-    }
-  }
-
+    };
+  
   showPdf(): void {
 
     this.pdfService.update(this.resume)
@@ -86,14 +85,13 @@ export class PdfDesignerComponent implements OnInit {
 
   showPreviewPdf(): void {
 
-    this.pdfService.update(this.cv)
+    this.pdfService.update(this.resume)
       .subscribe(data => {
         if (data != null)
-          window.open("/previewCvPdf/"+this.cv.cvId)
+          this.router.navigate(['/previewResumePdf', this.resume.resumeId]); 
         else
           alert("Validation problem has been occured");
       });
-
 }
 
 }

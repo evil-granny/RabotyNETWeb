@@ -21,9 +21,9 @@ export class PdfPreviewComponent implements OnInit {
 
   ngOnInit():void {
 
-    var cvId = this.route.snapshot.paramMap.get('cvId');
+    var resumeId = this.route.snapshot.paramMap.get('resumeId');
 
-    this.pdfService.show(cvId, this.send)
+    this.pdfService.show(resumeId, this.send)
 
     .subscribe(data => {
 
@@ -47,13 +47,12 @@ export class PdfPreviewComponent implements OnInit {
 
   }
 
-  sendEmail():void {
+  sendEmail(): void {
 
-    this.pdfService.send();
-
-    window.open(this.urlTemp);
-
-    window.focus(); 
-  }
+    this.pdfService.send()
+      .subscribe( );
+}
 
 }
+
+
