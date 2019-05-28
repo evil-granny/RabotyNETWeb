@@ -34,6 +34,7 @@ import {HotVacancyComponent} from './vacancy/hot-vacancy/hot-vacancy.component';
 import {ViewResumeComponent} from './resume/view-resume/view-resume.component';
 import {AuthGuard} from './_guards/auth.guard';
 import {Role} from './models/roles.model';
+import { PdfPreviewComponent } from './pdf-preview/pdf-preview.component';
 
 
 const routes: Routes = [
@@ -100,7 +101,9 @@ const routes: Routes = [
   { path: 'resume/all', component: ResumeComponent },
   { path: 'resume/create', component: AddResumeComponent },
 
-  { path: 'createCvPdf/:resumeId', component: PdfDesignerComponent },
+  //{ path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
+  { path: 'createResumePdf', component: PdfDesignerComponent },
+  { path: 'previewResumePdf/:resumeId', component: PdfPreviewComponent },
 
   { path: 'update/:resumeId', component: AddResumeComponent },
 
