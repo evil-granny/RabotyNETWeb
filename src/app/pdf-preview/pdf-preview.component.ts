@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PdfService } from '../services/pdf.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {MatDialog} from '@angular/material';
+import {ComfirmComponent} from '../confirm/comfirm.component';
 
 @Component({
   selector: 'app-pdf-preview',
@@ -17,7 +19,7 @@ export class PdfPreviewComponent implements OnInit {
 
   send: boolean = false;
    
-  constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService, public sanitizer: DomSanitizer) { }
+  constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService, public sanitizer: DomSanitizer,public dialog: MatDialog) { }
 
   ngOnInit():void {
 
@@ -47,11 +49,17 @@ export class PdfPreviewComponent implements OnInit {
 
   }
 
-  sendEmail(): void {
-
-    this.pdfService.send()
-      .subscribe( );
+  sendEmail() {
+    this.pdfService.send().subscribe();
+    this.openModal("Mail send");
+        
 }
+
+
+
+  openModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } })
+  }
 
 }
 
