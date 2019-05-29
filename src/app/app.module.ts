@@ -1,6 +1,7 @@
+import { AppConfig, APP_CONFIG} from './app.config';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
@@ -50,6 +51,7 @@ import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/ac
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 import { ViewResumeComponent } from './resume/view-resume/view-resume.component';
 import { PdfPreviewComponent } from './pdf-preview/pdf-preview.component';
+import {ShowResumeComponent} from './resume/show-resume/show-resume.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -86,6 +88,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     PdfPreviewComponent,
     ViewResumeComponent,
+    ShowResumeComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { provide: MAT_DATE_LOCALE, useValue: 'uk-UK' },
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: APP_CONFIG, useValue: AppConfig }
    ]
 })
 export class AppModule { }

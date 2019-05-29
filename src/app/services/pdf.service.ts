@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Resume } from '../models/resume.model';
 import { ResumeService } from './resume.service';
+import {APP_CONFIG, IAppConfig} from '../app.config';
 import { ResumeComponent } from '../resume/resume.component';
 
 
@@ -22,9 +23,9 @@ const httpOptions = {
 
 export class PdfService {
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
-  private resumeURL = 'http://localhost:8080';
+  private resumeURL = this.rabotyNETEndpoint.apiEndpoint;
 
   public findById(resumeId) {
     return this.http.get<Resume>(this.resumeURL + "/pdf/" + resumeId, httpOptions);

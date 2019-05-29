@@ -1,12 +1,14 @@
-import {Injectable} from '@angular/core';
+import { APP_CONFIG, IAppConfig } from '../app.config';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Vacancy} from '../models/vacancy/vacancy.model';
-import {Observable} from 'rxjs';
+import {config, Observable} from 'rxjs';
 import { Requirement } from '../models/requirement.model';
 import {SearchResumeResponse} from '../models/SearchModel/SearchResumeResponse.model';
 import {SearchVacancyComponent} from '../search-vacancy/search-vacancy.component';
 import { VacancyDTO } from '../models/vacancy/vacancyDTO.model';
+import { Resume } from '../models/resume.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,11 +23,11 @@ const httpOptions = {
 })
 export class VacancyService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) {
   }
 
-  private vacancyUrl = 'http://localhost:8080/vacancies';
-  private requirementUrl = 'http://localhost:8080/requirements';
+  private vacancyUrl = this.rabotyNETEndpoint.apiEndpoint + `/vacancies`;
+  private requirementUrl = this.rabotyNETEndpoint.apiEndpoint + '/requirements';
 
   public findAll(): Observable<any> {
     return this.http.get(this.vacancyUrl , httpOptions);
@@ -64,6 +66,10 @@ export class VacancyService {
   }
   public updateRequirement(requirement: any): Observable<Requirement> {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement , httpOptions);
+  }
+
+  public sendResume(resume:Resume,vacancyId:Uint8Array) : Observable<Resume>{
+    return this.http.post<Resume>(this.vacancyUrl + '/sendResume/'+vacancyId, resume, httpOptions);
   }
 
 

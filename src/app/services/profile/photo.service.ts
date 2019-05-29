@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { Photo } from 'src/app/models/photo.model';
+import {APP_CONFIG, IAppConfig} from '../../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,9 +17,9 @@ const httpOptions = {
 })
 export class PhotoService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
-  private photoUrl = "http://localhost:8080/photo/";
+  private photoUrl = this.rabotyNETEndpoint.apiEndpoint + '/photo/';
 
   public uploadAvatar(file: File, userId: BigInteger): Observable<Photo> {
     let body = new FormData();

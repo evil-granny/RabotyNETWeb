@@ -62,7 +62,6 @@ export class EditVacancyComponent implements OnInit {
 
   };
 
-
   gotoList() {
     this.router.navigate(['/vacancies']);
   }

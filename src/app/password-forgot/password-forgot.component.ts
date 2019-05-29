@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ComfirmComponent} from '../confirm/comfirm.component';
 import {MatDialog} from '@angular/material';
+import {APP_CONFIG, IAppConfig} from '../app.config';
 
 @Component({
   selector: 'app-password-forgot',
@@ -14,10 +15,10 @@ export class PasswordForgotComponent {
 
   userLogin = {username: ''};
 
-  private resetPasswordUrl = 'http://localhost:8080/resetPassword';
+  private resetPasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/resetPassword';
   private errors: any;
 
-  constructor(private http: HttpClient, private router: Router, public dialog: MatDialog) {
+  constructor(private http: HttpClient, private router: Router, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) {
   }
 
   forgotPassword() {
