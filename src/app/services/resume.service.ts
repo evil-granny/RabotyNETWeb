@@ -3,6 +3,7 @@ import {Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Resume } from '../models/resume.model';
+import { Person } from '../models/person.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,27 +23,27 @@ export class ResumeService {
   private cvUrl = this.rabotyNETEndpoint.apiEndpoint + '/resume';
 
   public findAll() {
-    return this.http.get<Resume[]>(this.cvUrl + "/all", httpOptions);
+    return this.http.get<Resume[]>(this.cvUrl + '/all', httpOptions);
   }
 
   public deleteById(cv: Resume) {
-    return this.http.delete(this.cvUrl + "/delete/" + cv.resumeId, httpOptions);
+    return this.http.delete(this.cvUrl + '/delete/' + cv.resumeId, httpOptions);
   }
 
   public insert(cv: Resume) {
-    return this.http.post<Resume>(this.cvUrl + "/create", cv, httpOptions);
+    return this.http.post<Resume>(this.cvUrl + '/create', cv, httpOptions);
   }
 
   public update(cv: Resume) {
-    return this.http.put<Resume>(this.cvUrl + "/update", cv, httpOptions);
+    return this.http.put<Resume>(this.cvUrl + '/update', cv, httpOptions);
   }
 
   public findById(cvId: any) {
-    return this.http.get<Resume>(this.cvUrl + "/" + cvId, httpOptions);
+    return this.http.get<Resume>(this.cvUrl + '/' + cvId, httpOptions);
   }
 
   public findByUserId() {
-    return this.http.get<Resume>(this.cvUrl + "/user", httpOptions);
+    return this.http.get<Resume>(this.cvUrl + '/user', httpOptions);
   }
 
   public deleteSkillById(id: any) {
@@ -51,6 +52,10 @@ export class ResumeService {
 
   public deleteJobById(id: any) {
     return this.http.delete(this.cvUrl + '/job/' + id, httpOptions);
+  }
+
+  public getResumeByVacancyId(id: any) {
+    return this.http.get<Resume[]>(this.cvUrl + '/byVacancyId/' + id, httpOptions);
   }
 
 }

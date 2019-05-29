@@ -121,16 +121,16 @@ export class AddUserComponent implements OnInit {
         if (this.valid == "valid") {
           this.openModal("Confirm you email, please!");
           this.credentials.password = "";
-        } else {          
+        } else {
           this.resendToken();
         }
-      })
+      });
   }
 
   resendToken(){
     this.userService.resendToken(this.credentials.username)
     .subscribe(data => {
-      this.openModal("Your account is not confirmed. Confirmation message has been sent to you again"); 
+      this.openModal("Your account is not confirmed. Confirmation message has been sent to you again");
     });
     this.credentials.password = "";
   }
