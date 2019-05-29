@@ -1,4 +1,4 @@
-import { AppConfig, APP_CONFIG} from './app.config';
+import { AppConfig, APP_CONFIG } from './app.config';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -52,7 +52,7 @@ import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/ac
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 import { ViewResumeComponent } from './resume/view-resume/view-resume.component';
 import { PdfPreviewComponent } from './pdf-preview/pdf-preview.component';
-import {ShowResumeComponent} from './resume/show-resume/show-resume.component';
+import { ShowResumeComponent } from './resume/show-resume/show-resume.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -114,7 +114,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: APP_CONFIG, useValue: AppConfig }
-   ]
   ]
 })
 export class AppModule { }
