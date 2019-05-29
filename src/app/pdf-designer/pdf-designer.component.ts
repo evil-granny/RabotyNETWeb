@@ -21,25 +21,38 @@ export class PdfDesignerComponent implements OnInit {
 
   send: boolean = true;
 
+  fileURL: string = ""
+
   constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService) {
   }
 
+  // ngOnInit(): void {
+
+  //   var cvId = this.route.snapshot.paramMap.get('cvId');
+
+  //   if (cvId !== null) {
+
+  //     this.pdfService.findById(cvId)
+
+  //       .subscribe(data => {
+
+  //         this.cv = data;
+
+  //       });
+  //   }
+  // }
+
   ngOnInit(): void {
 
-    var cvId = this.route.snapshot.paramMap.get('resumeId');
-
-    if (cvId !== null) {
-
-      this.pdfService.findById(cvId)
+     this.pdfService.findByUserId()
 
         .subscribe(data => {
 
           this.resume = data;
 
         });
-    }
-  }
-
+    };
+  
   showPdf(): void {
 
     this.pdfService.update(this.resume)
@@ -69,5 +82,16 @@ export class PdfDesignerComponent implements OnInit {
       });
 
   };
+
+  showPreviewPdf(): void {
+
+    this.pdfService.update(this.resume)
+      .subscribe(data => {
+        if (data != null)
+          this.router.navigate(['/previewResumePdf', this.resume.resumeId]); 
+        else
+          alert("Validation problem has been occured");
+      });
+}
 
 }

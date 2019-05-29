@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Resume } from '../models/resume.model';
 import { ResumeService } from './resume.service';
+import { ResumeComponent } from '../resume/resume.component';
 
 
 
@@ -25,18 +26,26 @@ export class PdfService {
 
   private resumeURL = 'http://localhost:8080';
 
-  public findById(cvId) {
-    return this.http.get<Resume>(this.resumeURL + "/pdf/" + cvId, httpOptions);
+  public findById(resumeId) {
+    return this.http.get<Resume>(this.resumeURL + "/pdf/" + resumeId, httpOptions);
   }
 
-  public update(cv) {
-    return this.http.put<Resume>(this.resumeURL + "/pdf/updatePDF", cv, httpOptions);
+  public findByUserId() {
+    return this.http.get<Resume>(this.resumeURL + "/pdf", httpOptions);
   }
 
-  public show(cvId, send) {
+  public send() {
+    return this.http.get(this.resumeURL + "/pdf/sendEmail", httpOptions);
+  }
+
+  public update(resume) {
+    return this.http.put<Resume>(this.resumeURL + "/pdf/updatePDF", resume, httpOptions);
+  }
+
+  public show(resumeId, send) {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
-    return this.http.get(this.resumeURL + "/pdf/createPdf/" + cvId + "&" + send,{ headers: headers, responseType: 'arraybuffer'});
+    return this.http.get(this.resumeURL + "/pdf/createPdf/" + resumeId + "&" + send,{ headers: headers, responseType: 'arraybuffer'});
   }
 
   
