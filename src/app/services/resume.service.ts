@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { APP_CONFIG, IAppConfig } from '../app.config';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Resume } from "../models/resume.model";
+import { Resume } from '../models/resume.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,9 +17,9 @@ const httpOptions = {
 })
 export class ResumeService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
-  private cvUrl = 'http://localhost:8080/resume';
+  private cvUrl = this.rabotyNETEndpoint.apiEndpoint + '/resume';
 
   public findAll() {
     return this.http.get<Resume[]>(this.cvUrl + "/all", httpOptions);

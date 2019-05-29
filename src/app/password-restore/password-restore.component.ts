@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ComfirmComponent} from '../confirm/comfirm.component';
 import {MatDialog} from '@angular/material';
+import {APP_CONFIG, IAppConfig} from '../app.config';
 
 @Component({
   selector: 'app-password-restore',
@@ -17,10 +18,10 @@ export class PasswordRestoreComponent implements OnInit {
 
   changePassword = {newPassword: '', confirmPassword: ''};
 
-  private changePasswordUrl = 'http://localhost:8080/changePassword';
+  private changePasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/changePassword';
   private errors: any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService, private router: Router, public dialog: MatDialog) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService, private router: Router, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
