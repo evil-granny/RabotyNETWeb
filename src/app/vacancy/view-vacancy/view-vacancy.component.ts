@@ -10,6 +10,8 @@ import { Role } from 'src/app/models/roles.model';
 import { Location } from '@angular/common';
 import { Company } from 'src/app/models/CompanyModel/company.model';
 import { CompanyService } from 'src/app/services/company.service';
+import {Resume} from 'src/app/models/resume.model';
+import {ResumeService} from '../../services/resume.service';
 
 @Component({
   selector: 'app-view-vacancy',
@@ -17,12 +19,14 @@ import { CompanyService } from 'src/app/services/company.service';
   styleUrls: ['./view-vacancy.component.scss']
 })
 export class ViewVacancyComponent implements OnInit {
-
+  currentUser: UserPrincipal;
   vacancy: Vacancy = new Vacancy();
   company : Company = new Company();
+  resume : Resume = new Resume();
  
-  constructor(private location: Location,private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService
-    ,private companyService: CompanyService) {
+  constructor(private location: Location, private app: AuthenticationService,private resumeService : ResumeService , private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService
+    , private companyService: CompanyService) {
+      this.app.currentUser.subscribe(x => this.currentUser = x);
   }
 
   goBack() {
@@ -42,4 +46,14 @@ export class ViewVacancyComponent implements OnInit {
           });
     } 
   }
+
+  sendResume() {
+    this.resumeService.findByUserId().subscribe(data=>{
+    this.resume = data;
+  });
+    this.vacancyService.sendResume(this.resume,this.vacancy.vacancyId).subscribe(data => {
+      alert("Resume was sent on this resume")
+    }, error => console.error(error));
+  }
+
 }
