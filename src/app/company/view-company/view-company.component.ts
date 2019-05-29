@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Company } from 'src/app/models/CompanyModel/company.model';
 import { CompanyService } from 'src/app/services/company.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,7 +6,6 @@ import { Claim } from 'src/app/models/claim.model';
 import { UserService } from 'src/app/services/user.service';
 import { Vacancy } from 'src/app/models/vacancy/vacancy.model';
 import { VacancyService } from 'src/app/services/vacancy.service';
-import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Photo } from 'src/app/models/photo.model';
 import { PhotoService } from 'src/app/services/profile/photo.service';
@@ -30,6 +29,8 @@ export class ViewCompanyComponent implements OnInit {
   photo: Photo = new Photo();
 
   claiming: boolean = false;
+  wasClicked: boolean = false;
+  reasonForClosing: string;
 
   page: number = 0;
   count: number = 4;
@@ -62,7 +63,6 @@ export class ViewCompanyComponent implements OnInit {
     }
     this.findVacancies();
   }
-
 
   findVacancies() {
     this.vacancyService.findVacanciesByCompanyId(this.route.snapshot.paramMap.get("companyId"), this.page * this.count).subscribe(
@@ -136,19 +136,41 @@ export class ViewCompanyComponent implements OnInit {
     return this.app.currentUserValue.userId == this.company.user.userId;
   }
 
-  deleteVacancy(vacancy: Vacancy): void {
-    let flag = confirm("Do you really want to delete?");
-    if (flag == false) {
-      return;
+  closeVacancy(vacancy: Vacancy) {
+    vacancy.vacancyStatus = this.reasonForClosing.toUpperCase();
+
+    if (vacancy.vacancyStatus == 'OCCUPIED') {
+      vacancy.vacancyStatus = 'OUTDATED';
     }
-    else {
-      this.vacancyService.deleteById(vacancy.vacancyId)
-        .subscribe(data => {
-          this.vacancies = this.vacancies.filter(p => p !== vacancy);
-          this.size = this.size - 1;
-        })
+    else if (vacancy.vacancyStatus == 'OUTDATED') {
+      vacancy.vacancyStatus = "OCCUPIED";
     }
-  };
+
+    if (vacancy.hotVacancy) {
+      vacancy.hotVacancy = false;
+    }
+
+    this.vacancyService.update(vacancy)
+      .subscribe(() => {
+        this.vacancies = this.vacancies.filter(p => p !== vacancy);
+        this.size = this.size - 1;
+        window.location.reload();
+      })
+  }
+
+  openVacancy(vacancy: Vacancy) {
+    vacancy.vacancyStatus = 'OPEN';
+    this.vacancyService.update(vacancy)
+      .subscribe(() => {
+        this.vacancies = this.vacancies.filter(p => p !== vacancy);
+        this.size = this.size - 1;
+        window.location.reload();
+      });
+  }
+
+  ifClicked() {
+    this.wasClicked = !this.wasClicked;
+  }
 
   get isCowner() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;

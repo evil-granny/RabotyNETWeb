@@ -5,4 +5,5 @@ export class VacancyDTO {
     count: number;
 
     vacancies: Vacancy[] = [];
+
 }

@@ -65,11 +65,6 @@ export class AppComponent {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
   }
 
-  get isCownerAndUser() {
-    return this.currentUser && this.currentUser.roles && (this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1
-      || this.currentUser.roles.indexOf(Role.ROLE_USER) > -1);
-  }
-
   hide() {
     this.searchForm = true;
     this.searchShown = false;

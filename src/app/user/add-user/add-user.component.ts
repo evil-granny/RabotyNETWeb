@@ -7,7 +7,6 @@ import { ComfirmComponent } from '../../confirm/comfirm.component';
 import { MatDialog } from '@angular/material';
 import { RegistrationconfirmComponent } from 'src/app/confirm/registrationconfirm/registrationconfirm.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { NgForm } from '@angular/forms';
 import { Role } from '../../models/roles.model';
 import { UserPrincipal } from '../../models/userPrincipal.model';
 @Component({

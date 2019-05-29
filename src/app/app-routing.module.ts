@@ -1,44 +1,38 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AgmCoreModule } from '@agm/core';
 
 import { ProfileComponent } from './profile/profile.component';
 
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';
-import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
-import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
 
 import { CompanyComponent } from './company/company.component';
 import { AddCompanyComponent } from './company/add-company/add-company.component';
-import { ViewCompanyComponent } from './company/view-company/view-company.component';
-import { MyCompanyComponent } from './company/my-company/my-company.component';
-import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 
-import {CvComponent} from './resume/resume.component';
-import {AddCvComponent} from './resume/add-resume/add-resume.component';
-import {PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
-import { CvComponent } from './cv/cv.component';
-import { AddCvComponent } from './cv/add-cv/add-cv.component';
-import { ViewCvComponent } from './cv/view-cv/view-cv.component';
+import { CvComponent } from './resume/resume.component';
+import { AddCvComponent } from './resume/add-resume/add-resume.component';
 import { PdfDesignerComponent } from './pdf-designer/pdf-designer.component';
 
 import { AddUserComponent } from './user/add-user/add-user.component';
 import { UserComponent } from './user/user.component';
 
+import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
+
+import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
 import { SearchResumeComponent } from './search-resume/search-resume.component';
+import { ViewCompanyComponent } from './company/view-company/view-company.component';
+import { MyCompanyComponent } from './company/my-company/my-company.component';
 import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
-
 import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
-
+import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
 import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
 import { PasswordRestoreComponent } from './password-restore/password-restore.component';
-
-import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
-
+import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
+import { ViewCvComponent } from './resume/view-resume/view-resume.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { Role } from './models/roles.model';
+import { ClosedVacancyComponent } from './vacancy/closed-vacancy/closed-vacancy.component';
 
 const routes: Routes = [
   {
@@ -83,49 +77,45 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
-
   { path: 'profile', component: ProfileComponent },
 
-  { path: '**', redirectTo: 'vacancies' },
   { path: 'vacancies', component: VacancyComponent },
   { path: 'hotVacancies', component: HotVacancyComponent },
+  { path: 'closedVacancies', component: ClosedVacancyComponent },
   { path: 'createVacancy/:companyId', component: EditVacancyComponent },
-  { path: 'updateVacancy/:vacancyId', component: EditVacancyComponent },
   { path: 'viewVacancy/:vacancyId', component: ViewVacancyComponent },
+  { path: 'updateVacancy/:vacancyId', component: EditVacancyComponent },
 
   { path: 'companies', component: CompanyComponent },
   { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
+  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
-  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
 
   { path: 'resume/user', component: ViewCvComponent },
   { path: 'resume/all', component: CvComponent },
   { path: 'resume/create', component: AddCvComponent },
   { path: 'update/:cvId', component: AddCvComponent },
-  { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
 
-  { path: 'update/:cvId', component: AddCvComponent },
+  { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
 
   { path: 'users/auth', component: AddUserComponent },
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
-
   { path: 'accessDenied', component: AccessDeniedPageComponent },
-  { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
+  { path: 'nonauthorized', component: AccessNonauthorizedPageComponent },
   { path: 'users/auth/confirm', component: RegistrationconfirmComponent },
   { path: 'users', component: UserComponent },
 
-  { path: 'search/vacancies', component: SearchVacancyComponent }
+  { path: 'search/vacancies', component: SearchVacancyComponent },
+
+  { path: '**', redirectTo: 'vacancies' }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCJIPvqwF2zq-MDcUQiopLiU4we5vA1abM'
-    }),
+    RouterModule.forRoot(routes)
   ],
   exports: [
     RouterModule

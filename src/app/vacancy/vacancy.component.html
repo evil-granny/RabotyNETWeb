@@ -20,6 +20,7 @@
     </div>
     <div class="row">
       <div class="col-lg-4" *ngFor="let vacancy of vacancies ">
+
         <div class="hotVacancies" *ngIf="vacancy.hotVacancy==true">
           <div style="background: rgb(247, 248, 196)" class="card">
             <span class=" ribbon"><span class="badge badge-danger">HOT</span></span>
@@ -35,8 +36,11 @@
             </div>
           </div>
         </div>
+
         <div class="simpleVacancy" *ngIf="vacancy.hotVacancy!=true">
           <div class="card">
+            <span class="ribbon"><span class="badge badge-danger"
+                style="background-color: rgb(77, 189, 12)">OPEN</span></span>
             <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
             <p style="margin-left: 10px;">{{vacancy.employment}}</p>
             <td>
@@ -52,6 +56,7 @@
       </div>
     </div>
   </div>
+
   <footer>
     <div class="paginations">
       <button *ngIf="canPreviousPage()" class="btn btn-info" style="margin-right:40px" (click)="previousPage();">&laquo;

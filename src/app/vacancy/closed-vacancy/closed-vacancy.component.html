@@ -14,38 +14,54 @@
 </head>
 
 <body>
-
-  <div class="container" style="margin-top:70px">
-    <div class="masthead ">
+  <div class="container" style="margin-top: 70px;">
+    <div class="masthead">
       <h3 class="text-muted">Closed Vacancies</h3>
     </div>
     <div class="row">
-      <div class="col-lg-4" *ngFor="let vacancy of vacancies ">
-        <div class="closedVacancies">
-          <div style="background: rgb(247, 248, 196)" class="card">
-            <span class="ribbon"><span class="badge badge-danger">HOT</span></span>
+      <div class="col-lg-4" *ngFor="let vacancy of vacancies">
+
+        <div class="closedVacancies" *ngIf="vacancy.vacancyStatus == 'OCCUPIED'">
+          <div style="background: rgba(29, 128, 59, 0.1);" class="card">
+            <span class="ribbon"><span class="badge badge-danger" style="background-color: grey;">OCCUPIED</span></span>
             <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
             <p style="margin-left: 10px;">{{vacancy.employment}}</p>
             <td>
               <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
                 {{requirement.description}}</li>
             </td>
-            <div class="row align-items-end" style="height: 100%;margin: 0px;">
-              <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
+            <div class="row align-items-end" style="height: 100%; margin: 0px;">
+              <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom;"
+                  role="button" routerLink="/viewVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="closedVacancies" *ngIf="vacancy.vacancyStatus == 'OUTDATED'">
+          <div style="background: rgba(29, 128, 59, 0.1);" class="card">
+            <span class="ribbon"><span class="badge badge-danger" style="background-color: grey;">OUTDATED</span></span>
+            <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
+            <p style="margin-left: 10px;">{{vacancy.employment}}</p>
+            <td>
+              <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
+                {{requirement.description}}</li>
+            </td>
+            <div class="row align-items-end" style="height: 100%; margin: 0px;">
+              <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom;"
                   role="button" routerLink="/viewVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <footer>
     <div class="paginations">
-      <button *ngIf="canPreviousPage()" class="btn btn-info" style="margin-right:40px" (click)="previousPage();">&laquo;
+      <button *ngIf="canPreviousPage()" class="btn btn-info" style="margin-right:40px;"
+        (click)="previousPage();">&laquo;
         Previous</button>
-      <button *ngIf="canNextPage()" class="btn btn-info" style="margin-right:40px" (click)="nextPage();">Next
+      <button *ngIf="canNextPage()" class="btn btn-info" style="margin-right:40px;" (click)="nextPage();">Next
         &raquo;</button>
     </div>
   </footer>
