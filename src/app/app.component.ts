@@ -80,10 +80,12 @@ export class AppComponent {
       case 'resume':
         this.resumeSelect = false;
         this.vacancySelect = true;
+        this.search.searchSort = 'firstName';
         break;
       case 'vacancies':
         this.resumeSelect = true;
         this.vacancySelect = false;
+        this.search.searchSort = 'position';
         break;
     }
   }

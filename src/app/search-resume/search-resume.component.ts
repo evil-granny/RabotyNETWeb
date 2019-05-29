@@ -31,6 +31,12 @@ export class SearchResumeComponent implements OnInit {
   resumeSelect = false;
   urlPdf = 'false';
   send = false;
+  fnHidden = false;
+  lnHidden = true;
+  aHidden = true;
+  posHidden = true;
+  cHidden = true;
+  phHidden = true;
 
   constructor(private app: AuthenticationService,
     private router: Router,
@@ -77,7 +83,7 @@ export class SearchResumeComponent implements OnInit {
       this.nextButton = false;
       this.previousButton = true;
       this.pageNumber = 1;
-      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchResumeResponse.searchResumeDTOs.length > 15) {
+      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchResumeResponse.searchResumeDTOS.length > 15) {
         this.bottomButtons = false;
       }
     } else {
@@ -160,5 +166,90 @@ export class SearchResumeComponent implements OnInit {
         }]);
         break;
     }
+  }
+
+  sort(sortText: string) {
+    switch (sortText) {
+      case 'firstName':
+        if (this.fnHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.fnHidden = false;
+        } else {
+          this.hideAll();
+          this.fnHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      case 'lastName':
+        if (this.lnHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.lnHidden = false;
+        } else {
+          this.hideAll();
+          this.lnHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      case 'age':
+        if (this.aHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.aHidden = false;
+        } else {
+          this.hideAll();
+          this.aHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      case 'position':
+        if (this.posHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.posHidden = false;
+        } else {
+          this.hideAll();
+          this.posHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      case 'city':
+        if (this.cHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.cHidden = false;
+        } else {
+          this.hideAll();
+          this.cHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      case 'phone':
+        if (this.phHidden === false) {
+          this.search.direction === 'desc' ? this.search.direction = 'asc' : this.search.direction = 'desc';
+          this.hideAll();
+          this.phHidden = false;
+        } else {
+          this.hideAll();
+          this.phHidden = false;
+          this.search.direction = 'asc';
+        }
+        break;
+      default:
+        this.search.direction = 'asc';
+        this.hideAll();
+    }
+    this.search.searchSort = sortText;
+    this.startSearch();
+  }
+
+  hideAll() {
+    this.fnHidden = true;
+    this.lnHidden = true;
+    this.aHidden = true;
+    this.posHidden = true;
+    this.cHidden = true;
+    this.phHidden = true;
   }
 }

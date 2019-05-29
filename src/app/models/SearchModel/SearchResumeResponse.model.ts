@@ -4,6 +4,6 @@ export class SearchResumeResponse {
 
   count: number;
 
-  searchResumeDTOs: SearchResumeResult[];
+  searchResumeDTOS: SearchResumeResult[];
 
 }

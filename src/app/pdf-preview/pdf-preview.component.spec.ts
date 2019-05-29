@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewResumeComponent } from './view-resume.component';
+import { PdfPreviewComponent } from './pdf-preview.component';
 
-describe('ViewCvComponent', () => {
-  let component: ViewResumeComponent;
-  let fixture: ComponentFixture<ViewResumeComponent>;
+describe('PdfPreviewComponent', () => {
+  let component: PdfPreviewComponent;
+  let fixture: ComponentFixture<PdfPreviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewResumeComponent ]
+      declarations: [ PdfPreviewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewResumeComponent);
+    fixture = TestBed.createComponent(PdfPreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

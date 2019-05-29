@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { CV } from '../models/resume.model';
-import { CVService } from './resume.service';
+import { Resume } from '../models/resume.model';
+import { ResumeService } from './resume.service';
+import {APP_CONFIG, IAppConfig} from '../app.config';
+import { ResumeComponent } from '../resume/resume.component';
 
 
 
@@ -21,22 +23,30 @@ const httpOptions = {
 
 export class PdfService {
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
-  private cvURL = 'http://localhost:8080';
+  private resumeURL = this.rabotyNETEndpoint.apiEndpoint;
 
-  public findById(cvId) {
-    return this.http.get<CV>(this.cvURL + "/pdf/" + cvId, httpOptions);
+  public findById(resumeId) {
+    return this.http.get<Resume>(this.resumeURL + "/pdf/" + resumeId, httpOptions);
   }
 
-  public update(cv) {
-    return this.http.put<CV>(this.cvURL + "/pdf/updatePDF", cv, httpOptions);
+  public findByUserId() {
+    return this.http.get<Resume>(this.resumeURL + "/pdf", httpOptions);
   }
 
-  public show(cvId, send) {
+  public send() {
+    return this.http.get(this.resumeURL + "/pdf/sendEmail", httpOptions);
+  }
+
+  public update(resume) {
+    return this.http.put<Resume>(this.resumeURL + "/pdf/updatePDF", resume, httpOptions);
+  }
+
+  public show(resumeId, send) {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
-    return this.http.get(this.cvURL + "/pdf/createPdf/" + cvId + "&" + send,{ headers: headers, responseType: 'arraybuffer'});
+    return this.http.get(this.resumeURL + "/pdf/createPdf/" + resumeId + "&" + send,{ headers: headers, responseType: 'arraybuffer'});
   }
 
   

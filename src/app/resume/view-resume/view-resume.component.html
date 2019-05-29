@@ -24,19 +24,19 @@
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Main Info</h3>
                 <div class="simpleVacancy" >
-                    <p><span class="mySpan" >Position: </span>{{cv.position}}</p>
+                    <p><span class="mySpan" >Position: </span>{{resume.position}}</p>
                     <p class="mySpan">Your Skill:</p>
                     <td>
-                      <li style="margin-left: 10px;" *ngFor="let skill of cv.skills ">
+                      <li style="margin-left: 10px;" *ngFor="let skill of resume.skills ">
                         {{skill.title}}</li>
                     </td>
                 </div>
                 </fieldset>
              <hr>
-             <a *ngIf = "cv.cvId == null" routerLink="/resume/create">Create Resume</a>
-             <div *ngIf="cv.cvId != null">
-             <a class="btn btn-primary"  routerLink="/createPdf/{{cv.cvId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Create Pdf</a>
-             <a class="btn btn-primary"  routerLink="/update/{{cv.cvId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Show all info</a>
+             <a *ngIf = "resume.resumeId == null" routerLink="/resume/create">Create Resume</a>
+             <div *ngIf="resume.resumeId != null">
+             <a class="btn btn-primary" routerLink="/createResumePdf" style="font-size: 17px;margin-left: 10px;margin-top:20px">Create Pdf</a>
+             <a class="btn btn-primary" routerLink="/update/{{resume.resumeId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Show all info</a>
              </div>
             </form>
           </div>
