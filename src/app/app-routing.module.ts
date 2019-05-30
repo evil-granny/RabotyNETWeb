@@ -80,12 +80,23 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
+  { path: 'showResume/:vacancyId', 
+  component: ShowResumeComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.ROLE_COWNER]}
+  },
+  { path: 'createVacancy/:companyId', 
+  component: EditVacancyComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.ROLE_COWNER]} 
+  },
+
   { path: 'profile', component: ProfileComponent },
 
   { path: 'vacancies', component: VacancyComponent },
   { path: 'hotVacancies', component: HotVacancyComponent },
   { path: 'closedVacancies', component: ClosedVacancyComponent },
-  { path: 'createVacancy/:companyId', component: EditVacancyComponent },
+  
   { path: 'viewVacancy/:vacancyId', component: ViewVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component: EditVacancyComponent },
 
@@ -102,8 +113,7 @@ const routes: Routes = [
 
   { path: 'createResumePdf', component: PdfDesignerComponent },
   { path: 'previewResumePdf/:resumeId', component: PdfPreviewComponent },
-  { path: 'showResume/:vacancyId', component: ShowResumeComponent },
-
+  
   { path: 'update/:resumeId', component: AddResumeComponent },
 
   { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },

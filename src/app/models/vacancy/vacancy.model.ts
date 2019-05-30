@@ -26,6 +26,7 @@ export class Vacancy {
   constructor() {
     this.currency = 'USD';
     this.employment = 'FULL';
+    this.vacancyStatus = 'OPEN';
   }
 
 }

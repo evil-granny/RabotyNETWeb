@@ -51,9 +51,14 @@ export class ViewVacancyComponent implements OnInit {
     this.resumeService.findByUserId().subscribe(data=>{
     this.resume = data;
   });
+  console.log(this.resume);
     this.vacancyService.sendResume(this.resume,this.vacancy.vacancyId).subscribe(data => {
       alert("Resume was sent on this resume")
     }, error => console.error(error));
+  }
+
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
   }
 
 }
