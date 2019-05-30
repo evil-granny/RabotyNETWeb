@@ -4,6 +4,10 @@ import { PdfService } from '../services/pdf.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {MatDialog} from '@angular/material';
 import {ComfirmComponent} from '../confirm/comfirm.component';
+import { VacancyService } from '../services/vacancy.service';
+import { ResumeService } from '../services/resume.service';
+import { Resume } from '../models/resume.model';
+import { Vacancy } from '../models/vacancy/vacancy.model';
 
 @Component({
   selector: 'app-pdf-preview',
@@ -18,12 +22,22 @@ export class PdfPreviewComponent implements OnInit {
   urlTemp: string = "";
 
   send: boolean = false;
-   
-  constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService, public sanitizer: DomSanitizer,public dialog: MatDialog) { }
+
+  resume : Resume;
+
+  vacancy: Vacancy;
+
+  sendVacancy: string;  
+
+  vacancyIdBigInt: Uint8Array;
+     
+  constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService, public sanitizer: DomSanitizer,public dialog: MatDialog, private vacancyService: VacancyService, private resumeService : ResumeService) { }
 
   ngOnInit():void {
 
     var resumeId = this.route.snapshot.paramMap.get('resumeId');
+
+    this.sendVacancy = this.route.snapshot.paramMap.get('vacancyId');
 
     this.pdfService.show(resumeId, this.send)
 
@@ -49,7 +63,13 @@ export class PdfPreviewComponent implements OnInit {
 
   }
 
-  sendEmail() {
+sendEmail(){
+  if (this.sendVacancy == "not") this.sendResumeForUser()
+  else this.sendResumeForVacancy()
+}
+
+
+  sendResumeForUser() {
     this.pdfService.send().subscribe();
     this.openModal("Mail send");
         
@@ -60,6 +80,22 @@ export class PdfPreviewComponent implements OnInit {
   openModal(name: String) {
     this.dialog.open(ComfirmComponent, { data: { name } })
   }
+
+  sendResumeForVacancy() {
+
+    var vacancyId = this.route.snapshot.paramMap.get('vacancyId');
+    
+    this.pdfService.findByUserId().subscribe(data=>{
+    this.resume = data;
+    this.vacancyService.sendResume(this.resume, vacancyId).subscribe(data => {
+      this.openModal("Mail send");
+    }, error => console.error(error));
+  });
+  
+  	
+  
+  }
+
 
 }
 

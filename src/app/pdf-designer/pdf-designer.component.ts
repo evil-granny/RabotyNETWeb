@@ -21,7 +21,9 @@ export class PdfDesignerComponent implements OnInit {
 
   send: boolean = true;
 
-  fileURL: string = ""
+  fileURL: string = "";
+
+  sendVacancy: string = "not";
 
   constructor(private router: Router, private route: ActivatedRoute, private pdfService: PdfService) {
   }
@@ -88,7 +90,7 @@ export class PdfDesignerComponent implements OnInit {
     this.pdfService.update(this.resume)
       .subscribe(data => {
         if (data != null)
-          this.router.navigate(['/previewResumePdf', this.resume.resumeId]); 
+          this.router.navigate(['/previewResumePdf', this.resume.resumeId, this.sendVacancy]); 
         else
           alert("Validation problem has been occured");
       });

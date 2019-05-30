@@ -103,7 +103,7 @@ const routes: Routes = [
   { path: 'resume/create', component: AddResumeComponent },
 
   { path: 'createResumePdf', component: PdfDesignerComponent },
-  { path: 'previewResumePdf/:resumeId', component: PdfPreviewComponent },
+  { path: 'previewResumePdf/:resumeId/:vacancyId', component: PdfPreviewComponent },
   { path: 'showResume/:vacancyId', component : ShowResumeComponent},
 
   { path: 'update/:resumeId', component: AddResumeComponent },

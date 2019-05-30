@@ -47,13 +47,25 @@ export class ViewVacancyComponent implements OnInit {
     } 
   }
 
-  sendResume() {
-    this.resumeService.findByUserId().subscribe(data=>{
-    this.resume = data;
-  });
-    this.vacancyService.sendResume(this.resume,this.vacancy.vacancyId).subscribe(data => {
-      alert("Resume was sent on this resume")
-    }, error => console.error(error));
-  }
+  // sendResume() {
+  //   this.resumeService.findByUserId().subscribe(data=>{
+  //   this.resume = data;
+  // });
+  //   this.vacancyService.sendResume(this.resume,this.vacancyId).subscribe(data => {
+  //     alert("Resume was sent on this resume")
+  //   }, error => console.error(error));
+  // }
+
+  showPreviewPdf(): void {
+
+    this.resumeService.findByUserId()
+      .subscribe(data => {
+        if (data != null)
+          {this.resume = data;
+          this.router.navigate(['/previewResumePdf', this.resume.resumeId, this.vacancy.vacancyId])} 
+        else
+          alert("Validation problem has been occured");
+      });
+}
 
 }
