@@ -131,7 +131,7 @@
                         <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
                           {{requirement.description}}</li>
                       </td>
-                      <div class="row align-items-end" style="height: 100%; margin: 0px;">
+                      <div class="row align-items-end" *ngIf="company.status == 'APPROVED'" style="height: 100%; margin: 0px;">
                         <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
@@ -183,7 +183,7 @@
                         <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
                           {{requirement.description}}</li>
                       </td>
-                      <div class="row align-items-end" style="height: 100%; margin: 0px;">
+                      <div class="row align-items-end" *ngIf="company.status == 'APPROVED'" style="height: 100%; margin: 0px;">
                         <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
@@ -229,7 +229,7 @@
                         <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
                           {{requirement.description}}</li>
                       </td>
-                      <div class="row align-items-end" style="height: 100%; margin: 0px;">
+                      <div class="row align-items-end"  *ngIf="company.status == 'APPROVED'" style="height: 100%; margin: 0px;">
                         <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
