@@ -62,10 +62,14 @@ export class ViewVacancyComponent implements OnInit {
       .subscribe(data => {
         if (data != null)
           {this.resume = data;
-          this.router.navigate(['/previewResumePdf', this.resume.resumeId, this.vacancy.vacancyId])} 
+          this.router.navigate(['/previewResumePdf', this.resume.resumeId, this.vacancy.vacancyId])}
         else
           alert("Validation problem has been occured");
       });
 }
+
+  get isCowner() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
+  }
 
 }

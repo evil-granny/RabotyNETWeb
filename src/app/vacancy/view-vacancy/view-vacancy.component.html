@@ -37,10 +37,8 @@
              <hr>
              <a class="btn btn-primary"  (click)="goBack()" style="font-size: 17px;margin-left: 10px;margin-top:20px;color:white">Show all vacancies</a>
              <a class="btn btn-primary"  routerLink="/viewCompany/{{company.companyId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px;">Show company</a> 
-             <!-- <a class="btn btn-success" (click)=sendResume() style="font-size: 17px;margin-left: 10px;margin-top:20px;color:white">Send resume</a> -->
              <a class="btn btn-success" (click)=showPreviewPdf() style="font-size: 17px;margin-left: 10px;margin-top:20px;color:white">Send resume</a>
-             
-             <a class="btn btn-success"  routerLink="/showResume/{{vacancy.vacancyId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px;">Show candidates</a>  
+             <a class="btn btn-success" *ngIf="isCowner" routerLink="/showResume/{{vacancy.vacancyId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px;">Show candidates</a>
             </form>
           </div>
         </div>

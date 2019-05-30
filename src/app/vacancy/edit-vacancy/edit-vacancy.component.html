@@ -69,6 +69,17 @@
                   </div>
 
                   <div class="form-group">
+                    <label for="vacancyStatus" class="col-md-2 col-sm-3 col-xs-12 control-label">Vacancy status</label>
+                    <div class="col-md-10 col-sm-9 col-xs-12">
+                      <select [(ngModel)]="vacancy.vacancyStatus" name="vacancyStatus" class="form-control">
+                        <option value="OPEN" [defaultSelected]="vacancy.vacancyStatus">open</option>
+                        <option value="OUTDATED">outdated</option>
+                        <option value="OCCUPIED">occupied</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
                     <div class="forSalary">
                       <label for="salary" class="col-md-2 col-sm-3 col-xs-12 control-label">Salary</label>
                       <div class="col-md-6 col-sm-9 col-xs-12">

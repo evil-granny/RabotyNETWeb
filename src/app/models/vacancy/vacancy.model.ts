@@ -3,27 +3,30 @@ import { Company } from '../CompanyModel/company.model';
 
 export class Vacancy {
 
-    vacancyId: BigInteger;
+  vacancyId: BigInteger;
 
-    description: string;
+  description: string;
 
-    position: string;
+  position: string;
 
-    employment: string;
+  employment: string;
 
-    salary: Int8Array;
+  vacancyStatus: string;
 
-    currency : string;
+  salary: Int8Array;
 
-    hotVacancy: boolean;
+  currency: string;
 
-    company: Company = new Company();
+  hotVacancy: boolean;
 
-    requirements: Requirement[] = Array<Requirement>();
+  company: Company = new Company();
 
-    constructor() {
-        this.currency = 'USD';
-        this.employment = 'FULL';
-      }
+  requirements: Requirement[] = Array<Requirement>();
+
+  constructor() {
+    this.currency = 'USD';
+    this.employment = 'FULL';
+    this.vacancyStatus = 'OPEN';
+  }
 
 }
