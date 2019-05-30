@@ -42,6 +42,7 @@ export class AppComponent {
 
   logout() {
     this.app.logout();
+    this.vacancySelect = false;
     this.router.navigateByUrl('/vacancies');
   }
 
