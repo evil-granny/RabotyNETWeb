@@ -91,14 +91,14 @@ export class AppComponent {
   startSearch() {
     switch (this.search.searchDocument) {
       case 'resume':
-        this.router.navigate(['/search/resume', {
+        this.router.navigate(['/searchResume', {
           searchDoc: this.search.searchDocument,
           searchText: this.search.searchText,
           searchParameter: this.search.searchParameter
         }]);
         break;
       case 'vacancies':
-        this.router.navigate(['/search/vacancies', {
+        this.router.navigate(['/searchVacancy', {
           searchDoc: this.search.searchDocument,
           searchText: this.search.searchText,
           searchParameter: this.search.searchParameter

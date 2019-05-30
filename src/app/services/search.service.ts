@@ -21,11 +21,11 @@ export class SearchService {
   private searchUrl = 'http://localhost:8080';
 
   public getResumeResult(searchResume) {
-    return this.http.post<SearchResumeResponse>(this.searchUrl + '/search/resume', searchResume, httpOptions);
+    return this.http.post<SearchResumeResponse>(this.searchUrl + '/searchResume', searchResume, httpOptions);
   }
 
   public getVacancyResult(searchVacancy) {
-    return this.http.post<SearchVacancyResponse>(this.searchUrl + '/search/vacancies', searchVacancy, httpOptions);
+    return this.http.post<SearchVacancyResponse>(this.searchUrl + '/searchVacancy', searchVacancy, httpOptions);
   }
 
 }
