@@ -121,7 +121,8 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6" *ngFor="let vacancy of vacancies">
-                  <div class="hotVacancies" *ngIf="vacancy.hotVacancy==true">
+
+                  <div class="hotVacancies" *ngIf="vacancy.hotVacancy == true">
                     <div style="background: rgb(247, 248, 196)" class="card">
                       <span class=" ribbon"><span class="badge badge-danger">HOT</span></span>
                       <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
@@ -130,18 +131,144 @@
                         <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
                           {{requirement.description}}</li>
                       </td>
-                      <div class="row align-items-end" style="height: 100%;margin: 0px;">
-                        <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
+                      <div class="row align-items-end" style="height: 100%; margin: 0px;">
+                        <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
-                        <p style="margin-bottom:0;margin-left: 30px"><a class="btn btn-danger"
-                            style="left: 0; vertical-align: bottom" role="button" (click)="deleteVacancy(vacancy)"
-                            *ngIf="isCowner">Delete vacancy</a></p>
+                        <p style="margin-bottom: 0; margin-left: 30px;"><a class="btn btn-warning"
+                            style="left: 0; vertical-align: bottom;" role="button" href="#closeVacancyModal"
+                            data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Close vacancy</a></p>
+
+                        <div id="closeVacancyModal" class="modal fade" *ngIf="wasClicked == true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <form>
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Close vacancy</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                    (click)="ifClicked()">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="form-group">
+                                    <h4 class="text-muted">Reason for closing</h4>
+                                    <select name="closedVacancies" class="custom-select mb-3"
+                                      [(ngModel)]="reasonForClosing">
+                                      <option value="occupied">OUTDATED</option>
+                                      <option value="outdated">OCCUPIED</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"
+                                    (click)="ifClicked()">
+                                  <input type="submit" class="btn btn-success" value="Close"
+                                    (click)="closeVacancy(vacancy)">
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>
-                  <div class="simpleVacancy" *ngIf="vacancy.hotVacancy!=true">
+
+                  <div class="closedVacancies" *ngIf="vacancy.vacancyStatus == 'OUTDATED'">
+                    <div style="background: rgba(29, 128, 59, 0.1)" class="card">
+                      <span class="ribbon"><span class="badge badge-danger"
+                          style="background-color: grey">OUTDATED</span></span>
+                      <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
+                      <p style="margin-left: 10px;">{{vacancy.employment}}</p>
+                      <td>
+                        <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
+                          {{requirement.description}}</li>
+                      </td>
+                      <div class="row align-items-end" style="height: 100%; margin: 0px;">
+                        <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
+                            role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
+                            details &raquo;</a></p>
+                        <p style="margin-bottom: 0; margin-left: 30px"><a class="btn btn-success"
+                            style="left: 0; vertical-align: bottom" role="button" href="#openVacancyModal"
+                            data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Open vacancy</a></p>
+
+                        <div id="openVacancyModal" class="modal fade" *ngIf="wasClicked == true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <form>
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Open vacancy</h4>
+                                  <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="form-group">
+                                    <h5 class="text-muted">Are you sure you want to open this vacancy?</h5>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                  <input type="submit" class="btn btn-success" value="Open"
+                                    (click)="openVacancy(vacancy)">
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="closedVacancies" *ngIf="vacancy.vacancyStatus == 'OCCUPIED'">
+                    <div style="background: rgba(29, 128, 59, 0.1)" class="card">
+                      <span class="ribbon"><span class="badge badge-danger"
+                          style="background-color: grey">OCCUPIED</span></span>
+                      <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
+                      <p style="margin-left: 10px;">{{vacancy.employment}}</p>
+                      <td>
+                        <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
+                          {{requirement.description}}</li>
+                      </td>
+                      <div class="row align-items-end" style="height: 100%; margin: 0px;">
+                        <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
+                            role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
+                            details &raquo;</a></p>
+                        <p style="margin-bottom: 0; margin-left: 30px"><a class="btn btn-success"
+                            style="left: 0; vertical-align: bottom" role="button" href="#openVacancyModal"
+                            data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Open vacancy</a></p>
+
+                        <div id="openVacancyModal" class="modal fade" *ngIf="wasClicked == true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <form>
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Open vacancy</h4>
+                                  <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="form-group">
+                                    <h5 class="text-muted">Are you sure you want to open this vacancy?</h5>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                  <input type="submit" class="btn btn-success" value="Open"
+                                    (click)="openVacancy(vacancy)">
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="simpleVacancy" *ngIf="vacancy.hotVacancy != true && vacancy.vacancyStatus == 'OPEN'">
                     <div class="card">
+                      <span class="ribbon"><span class="badge badge-danger"
+                          style="background-color: rgb(77, 189, 12)">OPEN</span></span>
                       <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
                       <p style="margin-left: 10px;">{{vacancy.employment}}</p>
                       <td>
@@ -149,22 +276,55 @@
                           {{requirement.description}}</li>
                       </td>
                       <div class="row align-items-end" style="height: 100%;margin: 0px;">
-                        <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
+                        <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
-                        <p style="margin-bottom:0;margin-left: 30px"><a class="btn btn-danger"
-                            style="left: 0; vertical-align: bottom" role="button" (click)="deleteVacancy(vacancy)"
-                            *ngIf="isCowner">Delete vacancy</a></p>
+                        <p style="margin-bottom: 0; margin-left: 30px"><a class="btn btn-warning"
+                            style="left: 0; vertical-align: bottom" role="button" href="#closeVacancyModal"
+                            data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Close vacancy</a></p>
+
+                        <div id="closeVacancyModal" class="modal fade" *ngIf="wasClicked == true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <form>
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Close vacancy</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                    (click)="ifClicked()">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="form-group">
+                                    <h4 class="text-muted">Reason for closing</h4>
+                                    <select name="closedVacancies" class="custom-select mb-3"
+                                      [(ngModel)]="reasonForClosing">
+                                      <option value="occupied">OUTDATED</option>
+                                      <option value="outdated">OCCUPIED</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"
+                                    (click)="ifClicked()">
+                                  <input type="submit" class="btn btn-success" value="Close"
+                                    (click)="closeVacancy(vacancy)">
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>
                 </div>
-             
               </div>
+
               <footer>
                 <div class="paginations">
-                  <button *ngIf="canPrev()" class="btn btn-info" style="margin-right:40px" (click)="prev();">&laquo; Previous</button>
-                  <button *ngIf="canNext()" class="btn btn-info" style="margin-right:40px" (click)="next();">Next &raquo;</button>
+                  <button *ngIf="canPrev()" class="btn btn-info" style="margin-right:40px" (click)="prev();">&laquo;
+                    Previous</button>
+                  <button *ngIf="canNext()" class="btn btn-info" style="margin-right:40px" (click)="next();">Next
+                    &raquo;</button>
                 </div>
               </footer>
 

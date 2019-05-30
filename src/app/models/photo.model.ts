@@ -4,6 +4,4 @@ export class Photo {
 
     name: string;
 
-    image: BinaryType;
-
 }

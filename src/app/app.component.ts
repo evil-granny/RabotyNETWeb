@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
@@ -7,6 +7,7 @@ import { UserPrincipal } from './models/userPrincipal.model';
 import { Role } from './models/roles.model';
 import { PersonService } from './services/profile/person.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { PhotoService } from './services/profile/photo.service';
 
 @Component({
   selector: 'app-root',
@@ -27,17 +28,24 @@ export class AppComponent {
   vacancySelect = false;
   resumeSelect = true;
 
-  constructor(private app: AuthenticationService, private router: Router, private personService: PersonService, private sanitizer: DomSanitizer) {
+  constructor(private app: AuthenticationService, private router: Router, private personService: PersonService, private photoService: PhotoService, private sanitizer: DomSanitizer) {
     this.app.currentUser.subscribe(data => this.currentUser = data);
 
     if (this.currentUser) {
       this.personService.findById(this.currentUser.userId)
         .subscribe(data => {
           if (data.photo != null) {
-            this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data.photo.image);
+            this.loadPhoto(data.photo.photoId);
           }
         });
     }
+  }
+
+  loadPhoto(photoId: BigInteger) {
+    this.photoService.load(photoId)
+      .subscribe(data => {
+        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
+      });
   }
 
   logout() {
@@ -57,11 +65,6 @@ export class AppComponent {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
   }
 
-  get isCownerAndUser() {
-    return this.currentUser && this.currentUser.roles && (this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1
-      || this.currentUser.roles.indexOf(Role.ROLE_USER) > -1);
-  }
-
   hide() {
     this.searchForm = true;
     this.searchShown = false;
@@ -77,10 +80,12 @@ export class AppComponent {
       case 'resume':
         this.resumeSelect = false;
         this.vacancySelect = true;
+        this.search.searchSort = 'firstName';
         break;
       case 'vacancies':
         this.resumeSelect = true;
         this.vacancySelect = false;
+        this.search.searchSort = 'position';
         break;
     }
   }

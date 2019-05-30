@@ -1,43 +1,43 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {ProfileComponent} from './profile/profile.component';
+import { ProfileComponent } from './profile/profile.component';
 
-import {VacancyComponent} from './vacancy/vacancy.component';
-import {EditVacancyComponent} from './vacancy/edit-vacancy/edit-vacancy.component';
+import { VacancyComponent } from './vacancy/vacancy.component';
+import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';
 
-import {CompanyComponent} from './company/company.component';
-import {AddCompanyComponent} from './company/add-company/add-company.component';
+import { CompanyComponent } from './company/company.component';
+import { AddCompanyComponent } from './company/add-company/add-company.component';
 
-import {CvComponent} from './resume/resume.component';
-import {AddCvComponent} from './resume/add-resume/add-resume.component';
-import {PdfDesignerComponent} from './pdf-designer/pdf-designer.component';
+import { ResumeComponent } from './resume/resume.component';
+import { AddResumeComponent } from './resume/add-resume/add-resume.component';
+import { PdfDesignerComponent } from './pdf-designer/pdf-designer.component';
 
+import { AddUserComponent } from './user/add-user/add-user.component';
+import { UserComponent } from './user/user.component';
 
-import {AddUserComponent} from './user/add-user/add-user.component';
-import {UserComponent} from './user/user.component';
+import { AccessDeniedPageComponent } from './access-denied-page/access-denied-page.component';
 
-
-import {AccessDeniedPageComponent} from './access-denied-page/access-denied-page.component';
-
-import {ApproveCompanyComponent} from './company/approve-company/approve-company.component';
-import {SearchResumeComponent} from './search-resume/search-resume.component';
-import {ViewCompanyComponent} from './company/view-company/view-company.component';
-import {MyCompanyComponent} from './company/my-company/my-company.component';
-import {SearchVacancyComponent} from './search-vacancy/search-vacancy.component';
-import {RegistrationconfirmComponent} from './confirm/registrationconfirm/registrationconfirm.component';
-import {ViewVacancyComponent} from './vacancy/view-vacancy/view-vacancy.component';
-import {PasswordForgotComponent} from './password-forgot/password-forgot.component';
-import {PasswordRestoreComponent} from './password-restore/password-restore.component';
-import {AccessNonauthorizedPageComponent} from './access-nonauthorized-page/access-nonauthorized-page.component';
-import {HotVacancyComponent} from './vacancy/hot-vacancy/hot-vacancy.component';
-import {ViewCvComponent} from './resume/view-resume/view-resume.component';
-import {AuthGuard} from './_guards/auth.guard';
-import {Role} from './models/roles.model';
+import { ApproveCompanyComponent } from './company/approve-company/approve-company.component';
+import { SearchResumeComponent } from './search-resume/search-resume.component';
+import { ViewCompanyComponent } from './company/view-company/view-company.component';
+import { MyCompanyComponent } from './company/my-company/my-company.component';
+import { SearchVacancyComponent } from './search-vacancy/search-vacancy.component';
+import { RegistrationconfirmComponent } from './confirm/registrationconfirm/registrationconfirm.component';
+import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
+import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
+import { PasswordRestoreComponent } from './password-restore/password-restore.component';
+import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
+import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
+import { ViewResumeComponent } from './resume/view-resume/view-resume.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { Role } from './models/roles.model';
+import { PdfPreviewComponent } from './pdf-preview/pdf-preview.component';
+import { ShowResumeComponent } from './resume/show-resume/show-resume.component';
+import { ClosedVacancyComponent } from "./vacancy/closed-vacancy/closed-vacancy.component";
 
 
 const routes: Routes = [
-
   {
     path: 'companies/all/**, companies/sendMail',
     component: CompanyComponent,
@@ -70,45 +70,59 @@ const routes: Routes = [
   },
   {
     path: 'resume/create',
-    component: AddCvComponent,
+    component: AddResumeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
   {
     path: 'resume/user',
-    component: ViewCvComponent,
+    component: ViewResumeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
-  { path: 'vacancies', component: VacancyComponent },
-  { path: 'hotVacancies', component: HotVacancyComponent },
+  { path: 'showResume/:vacancyId', 
+  component: ShowResumeComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.ROLE_COWNER]}
+  },
+  { path: 'createVacancy/:companyId', 
+  component: EditVacancyComponent,
+  canActivate: [AuthGuard],
+  data: { roles: [Role.ROLE_COWNER]} 
+  },
+
   { path: 'profile', component: ProfileComponent },
 
-
-  { path: 'createVacancy/:companyId', component: EditVacancyComponent },
-  { path: 'updateVacancy/:vacancyId', component : EditVacancyComponent},
-  { path: 'viewVacancy/:vacancyId', component : ViewVacancyComponent},
+  { path: 'vacancies', component: VacancyComponent },
+  { path: 'hotVacancies', component: HotVacancyComponent },
+  { path: 'closedVacancies', component: ClosedVacancyComponent },
+  
+  { path: 'viewVacancy/:vacancyId', component: ViewVacancyComponent },
+  { path: 'updateVacancy/:vacancyId', component: EditVacancyComponent },
 
   { path: 'companies', component: CompanyComponent },
   { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
+  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
   { path: 'updateCompany/:companyName', component: AddCompanyComponent },
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
-  { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
 
-  { path: 'resume/user', component: ViewCvComponent },
-  { path: 'resume/all', component: CvComponent },
-  { path: 'resume/create', component: AddCvComponent },
+  { path: 'resume/user', component: ViewResumeComponent },
+  { path: 'resume/all', component: ResumeComponent },
+  { path: 'resume/create', component: AddResumeComponent },
+
+  { path: 'createResumePdf', component: PdfDesignerComponent },
+  { path: 'previewResumePdf/:resumeId', component: PdfPreviewComponent },
+  
+  { path: 'update/:resumeId', component: AddResumeComponent },
 
   { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
-
-  { path: 'update/:cvId', component: AddCvComponent },
 
   { path: 'users/auth', component: AddUserComponent },
   { path: 'forgotPassword', component: PasswordForgotComponent },
   { path: 'confirmPassword', component: PasswordRestoreComponent },
   { path: 'accessDenied', component: AccessDeniedPageComponent },
-  { path: 'nonauthorized', component: AccessNonauthorizedPageComponent},
+  { path: 'nonauthorized', component: AccessNonauthorizedPageComponent },
   { path: 'users/auth/confirm', component: RegistrationconfirmComponent },
   { path: 'users', component: UserComponent },
 

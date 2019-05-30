@@ -4,7 +4,7 @@ export class Job {
 
     begin: Date;
 
-    companyName: string;
+    companyName: string
 
     description: string;
 

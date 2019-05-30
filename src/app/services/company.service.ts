@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Company } from "../models/CompanyModel/company.model";
 import { Claim } from '../models/claim.model';
 import { CompanyPaginationDTO } from '../models/CompanyModel/companyPaginationDTO.model';
+import {APP_CONFIG, IAppConfig} from '../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,10 +19,10 @@ const httpOptions = {
 })
 export class CompanyService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
-  private companyURL = 'http://localhost:8080/companies';
-  private claimURL = 'http://localhost:8080/claims';
+  private companyURL = this.rabotyNETEndpoint.apiEndpoint + '/companies';
+  private claimURL = this.rabotyNETEndpoint.apiEndpoint + '/claims';
 
   public findAll() {
     return this.http.get<Company[]>(this.companyURL + "/all");

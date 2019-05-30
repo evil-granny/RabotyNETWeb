@@ -1,6 +1,7 @@
+import { AppConfig, APP_CONFIG } from './app.config';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
@@ -10,12 +11,13 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { VacancyComponent } from './vacancy/vacancy.component';
 import { EditVacancyComponent } from './vacancy/edit-vacancy/edit-vacancy.component';
+import { ClosedVacancyComponent } from './vacancy/closed-vacancy/closed-vacancy.component'
 
 import { CompanyComponent } from './company/company.component';
 import { AddCompanyComponent } from './company/add-company/add-company.component';
 
-import { CvComponent } from './resume/resume.component';
-import { AddCvComponent } from './resume/add-resume/add-resume.component';
+import { ResumeComponent } from './resume/resume.component';
+import { AddResumeComponent } from './resume/add-resume/add-resume.component';
 import { PdfDesignerComponent } from './pdf-designer/pdf-designer.component';
 
 import { UserComponent } from './user/user.component';
@@ -48,7 +50,9 @@ import { PasswordRestoreComponent } from './password-restore/password-restore.co
 import { ViewVacancyComponent } from './vacancy/view-vacancy/view-vacancy.component';
 import { AccessNonauthorizedPageComponent } from './access-nonauthorized-page/access-nonauthorized-page.component';
 import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component';
-import { ViewCvComponent } from './resume/view-resume/view-resume.component';
+import { ViewResumeComponent } from './resume/view-resume/view-resume.component';
+import { PdfPreviewComponent } from './pdf-preview/pdf-preview.component';
+import { ShowResumeComponent } from './resume/show-resume/show-resume.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -60,10 +64,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProfileComponent,
     VacancyComponent,
     EditVacancyComponent,
+    ClosedVacancyComponent,
     CompanyComponent,
     AddCompanyComponent,
-    CvComponent,
-    AddCvComponent,
+    ResumeComponent,
+    AddResumeComponent,
     UserComponent,
     AddUserComponent,
     SearchResumeComponent,
@@ -82,7 +87,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AccessNonauthorizedPageComponent,
     HotVacancyComponent,
     AccessNonauthorizedPageComponent,
-    ViewCvComponent,
+
+    PdfPreviewComponent,
+    ViewResumeComponent,
+    ShowResumeComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +98,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserAnimationsModule,
     MatDatepickerModule, MatInputModule, MatNativeDateModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions({cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN'}),
+    HttpClientXsrfModule.withOptions({ cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN' }),
     ReactiveFormsModule,
     AppRoutingModule,
     PerfectScrollbarModule,
@@ -103,7 +111,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { provide: MAT_DATE_LOCALE, useValue: 'uk-UK' },
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
-   ]
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: APP_CONFIG, useValue: AppConfig }
+  ]
 })
 export class AppModule { }

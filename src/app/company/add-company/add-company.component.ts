@@ -96,8 +96,7 @@ export class AddCompanyComponent implements OnInit {
   loadPhoto(photoId: BigInteger) {
     this.photoService.load(photoId)
       .subscribe(data => {
-        this.photo = data;
-        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + this.photo.image);
+        this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
       });
   }
 

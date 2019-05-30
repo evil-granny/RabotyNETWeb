@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Vacancy } from 'src/app/models/vacancy/vacancy.model';
-import { Observable } from 'rxjs';
 import { VacancyService } from 'src/app/services/vacancy.service';
 
 @Component({
-  selector: 'app-hot-vacancy',
-  templateUrl: './hot-vacancy.component.html',
-  styleUrls: ['./hot-vacancy.component.scss']
+  selector: 'app-closed-vacancy',
+  templateUrl: './closed-vacancy.component.html',
+  styleUrls: ['./closed-vacancy.component.scss']
 })
-export class HotVacancyComponent implements OnInit {
+export class ClosedVacancyComponent implements OnInit {
 
   vacancies: Observable<Vacancy[]>;
 
@@ -17,15 +17,14 @@ export class HotVacancyComponent implements OnInit {
   count: number = 9;
   size: number = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService) {
-  }
+  constructor(private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService) { }
 
   ngOnInit() {
     this.findAll();
   };
 
   findAll() {
-    this.vacancyService.findAllHotVacanciesWithPagination(this.page * this.count).subscribe(data => {
+    this.vacancyService.findAllClosedVacanciesWithPagination(this.page * this.count).subscribe(data => {
       this.vacancies = data.vacancies;
       this.size = data.count;
     });

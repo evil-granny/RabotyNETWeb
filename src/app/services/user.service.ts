@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { User } from "../models/user.model";
 import { Observable } from "rxjs";
 import { MatDialog } from '@angular/material';
 import { ComfirmComponent } from '../confirm/comfirm.component';
+import {APP_CONFIG, IAppConfig} from '../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,9 +20,9 @@ const httpOptions = {
 })
 export class UserService {
 
-  constructor(private http: HttpClient, public dialog: MatDialog) { }
+  constructor(private http: HttpClient, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
-  private userUrl = 'http://localhost:8080/users/';
+  private userUrl = this.rabotyNETEndpoint.apiEndpoint + '/users/';
 
   foundUser: User[];
   error: any;

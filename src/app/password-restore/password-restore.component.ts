@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ComfirmComponent} from '../confirm/comfirm.component';
+import {MatDialog} from '@angular/material';
+import {APP_CONFIG, IAppConfig} from '../app.config';
 
 @Component({
   selector: 'app-password-restore',
@@ -15,26 +18,15 @@ export class PasswordRestoreComponent implements OnInit {
 
   changePassword = {newPassword: '', confirmPassword: ''};
 
-  private changePasswordUrl = 'http://localhost:8080/changePassword';
+  private changePasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/changePassword';
   private errors: any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService, private router: Router) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService, private router: Router, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.token = params.token;
-    })
-
-    this.validToken();
-  }
-
-  validToken() {
-    this.userService.validToken(this.token)
-      .subscribe(data => {
-        this.valid = data;
-        if (this.valid == 'confirmed') {
-        }
-      });
+    });
   }
 
   restorePassword() {
@@ -54,13 +46,22 @@ export class PasswordRestoreComponent implements OnInit {
     observable.subscribe(result =>  {
       },
       error => {
+      console.log('Error from back')
+      console.log(error)
         this.errors = error;
-        alert(this.errors);
+        this.openErrorModal(this.errors);
       },
       () => {
-        alert('Password restored successfully! Please go to the sign in page');
-        this.router.navigate(['/registration']);
+        this.openSuccessModal('Password restored successfully! Please sign in.');
+        this.router.navigate(['/users/auth']);
       }
     );
     }
+
+  public openErrorModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } });
+  }
+  public openSuccessModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } });
+  }
 }

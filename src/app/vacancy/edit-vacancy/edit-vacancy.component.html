@@ -59,12 +59,23 @@
                   <div class="form-group">
                     <label for="employment" class="col-md-2 col-sm-3 col-xs-12 control-label">Employment</label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
-                       <select [(ngModel)]="vacancy.employment" name="employment" class="form-control">
-                          <option value="FULL" [defaultSelected]="vacancy.employment">full</option>
-                          <option value="PART_TIME">part time</option>
-                          <option value="TRAINEE">trainee</option>
-                          <option value="HOURLY">hourly</option>
-                        </select>
+                      <select [(ngModel)]="vacancy.employment" name="employment" class="form-control">
+                        <option value="FULL" [defaultSelected]="vacancy.employment">full</option>
+                        <option value="PART_TIME">part time</option>
+                        <option value="TRAINEE">trainee</option>
+                        <option value="HOURLY">hourly</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="vacancyStatus" class="col-md-2 col-sm-3 col-xs-12 control-label">Vacancy status</label>
+                    <div class="col-md-10 col-sm-9 col-xs-12">
+                      <select [(ngModel)]="vacancy.vacancyStatus" name="vacancyStatus" class="form-control">
+                        <option value="OPEN" [defaultSelected]="vacancy.vacancyStatus">open</option>
+                        <option value="OUTDATED">outdated</option>
+                        <option value="OCCUPIED">occupied</option>
+                      </select>
                     </div>
                   </div>
 
@@ -149,8 +160,11 @@
                           </div>
                         </div>
                         <a class="btn" style="margin-top:-70px;margin-left:100%;font-size:48px;color:red"
-                          (click)="deleteRequirement(item)"><i class="fa fa-remove" rel="tooltip"
-                            title="Delete"></i></a>
+                          *ngIf="item.requirementId!=null" (click)="deleteRequirement(item)"><i class="fa fa-remove"
+                            rel="tooltip" title="Delete"></i></a>
+                        <a class="btn" style="margin-top:-70px;margin-left:100%;font-size:48px;color:red"
+                          *ngIf="item.requirementId==null" (click)="removeInputField(index)"><i class="fa fa-remove"
+                            rel="tooltip" title="Delete"></i></a>
                       </ng-template>
                     </div>
                     <td>

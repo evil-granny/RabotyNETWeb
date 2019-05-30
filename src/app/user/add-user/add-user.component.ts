@@ -7,7 +7,6 @@ import { ComfirmComponent } from '../../confirm/comfirm.component';
 import { MatDialog } from '@angular/material';
 import { RegistrationconfirmComponent } from 'src/app/confirm/registrationconfirm/registrationconfirm.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { NgForm } from '@angular/forms';
 import { Role } from '../../models/roles.model';
 import { UserPrincipal } from '../../models/userPrincipal.model';
 @Component({
@@ -104,9 +103,14 @@ export class AddUserComponent implements OnInit {
         this.router.navigateByUrl('/companies/my');
       }
       if (this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1) {
-        this.router.navigateByUrl('/userCV');
+        this.router.navigateByUrl('/resume/user');
       }
-    });
+    },
+      error => {
+        this.error = error;
+        this.openErrorModal(this.error);
+        this.router.navigateByUrl('/users/auth');
+      });
   }
 
   validToken() {
@@ -116,18 +120,22 @@ export class AddUserComponent implements OnInit {
         if (this.valid == "valid") {
           this.openModal("Confirm you email, please!");
           this.credentials.password = "";
-        } else {          
+        } else {
           this.resendToken();
         }
-      })
+      });
   }
 
   resendToken(){
     this.userService.resendToken(this.credentials.username)
     .subscribe(data => {
-      this.openModal("Your account is not confirmed. Confirmation message has been sent to you again"); 
+      this.openModal("Your account is not confirmed. Confirmation message has been sent to you again");
     });
     this.credentials.password = "";
+  }
+
+  public openErrorModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } });
   }
 
   get isAdmin() {

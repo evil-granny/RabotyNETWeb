@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserPrincipal } from '../models/userPrincipal.model';
 import { map } from 'rxjs/operators';
+import {APP_CONFIG, IAppConfig} from '../app.config';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -10,10 +11,10 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<UserPrincipal>;
   public currentUser: Observable<UserPrincipal>;
 
-  private userLoginUrl = 'http://localhost:8080/login';
-  private userLogoutUrl = 'http://localhost:8080/logout';
+  private userLoginUrl = this.rabotyNETEndpoint.apiEndpoint + '/login';
+  private userLogoutUrl = this.rabotyNETEndpoint.apiEndpoint + '/logout';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) {
     this.currentUserSubject = new BehaviorSubject<UserPrincipal>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
