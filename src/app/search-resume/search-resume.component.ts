@@ -159,7 +159,7 @@ export class SearchResumeComponent implements OnInit {
         this.startSearch();
         break;
       case 'vacancies':
-        this.router.navigate(['/search/vacancies', {
+        this.router.navigate(['/searchVacancy', {
           searchDoc: this.search.searchDocument,
           searchText: this.search.searchText,
           searchParameter: this.search.searchParameter

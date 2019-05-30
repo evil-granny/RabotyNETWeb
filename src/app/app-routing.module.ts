@@ -57,7 +57,7 @@ const routes: Routes = [
     data: { roles: [Role.ROLE_COWNER] }
   },
   {
-    path: 'search/resume',
+    path: 'searchResume',
     component: SearchResumeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER] }
@@ -127,7 +127,7 @@ const routes: Routes = [
   { path: 'users/auth/confirm', component: RegistrationconfirmComponent },
   { path: 'users', component: UserComponent },
 
-  { path: 'search/vacancies', component: SearchVacancyComponent },
+  { path: 'searchVacancy', component: SearchVacancyComponent },
 
   { path: '**', redirectTo: 'vacancies' }
 ];
