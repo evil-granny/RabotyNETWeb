@@ -10,8 +10,8 @@
 
   <div class="collapse navbar-collapse" style="margin-left: 100px;">
     <ul class="navbar-nav mr-auto">
-      <a class="navbar-brand" routerLink="/companies/my" *ngIf="isCowner && isUser">My companies</a>
-      <a class="navbar-brand" routerLink="/createCompany" *ngIf="isUser">Create company</a>
+      <a class="navbar-brand" routerLink="/companies/my" *ngIf="isCowner">My companies</a>
+      <a class="navbar-brand" routerLink="/createCompany" *ngIf="isUser||isCowner">Create company</a>
       <a class="navbar-brand" routerLink="/resume/user" *ngIf="isCowner || isUser">My resumes</a>
       <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin">Сompanies</a>
       <a class="navbar-brand" routerLink="/hotVacancies">Hot Vacancies</a>
