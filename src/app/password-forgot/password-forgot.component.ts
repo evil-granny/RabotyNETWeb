@@ -15,7 +15,7 @@ export class PasswordForgotComponent {
 
   userLogin = {username: ''};
 
-  private resetPasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/resetPassword';
+  private resetPasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/password/reset';
   private errors: any;
 
   constructor(private http: HttpClient, private router: Router, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) {
