@@ -82,11 +82,13 @@ export class AppComponent {
         this.resumeSelect = false;
         this.vacancySelect = true;
         this.search.searchSort = 'firstName';
+        this.search.searchParameter = 'position';
         break;
       case 'vacancies':
         this.resumeSelect = true;
         this.vacancySelect = false;
         this.search.searchSort = 'position';
+        this.search.searchParameter = 'position';
         break;
     }
   }
