@@ -76,8 +76,10 @@ export class SearchVacancyComponent implements OnInit {
       this.nextButton = false;
       this.previousButton = true;
       this.pageNumber = 1;
-      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchVacancyResponse.searchVacancyDTOS.length > 15) {
+      if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchVacancyResponse.searchVacancyDTOS.length > 4) {
         this.bottomButtons = false;
+      } else {
+        this.bottomButtons = true;
       }
     } else {
       this.topButtons = true;

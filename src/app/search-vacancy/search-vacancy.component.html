@@ -51,9 +51,9 @@
   <div class="resultOnPage" [hidden]="resultText">
     <label>Results on page:
       <select [(ngModel)]="search.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
-        <option [defaultSelected]="search.resultsOnPage" value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
+        <option [defaultSelected]="search.resultsOnPage" value="3">3</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
       </select>
     </label>
   </div>

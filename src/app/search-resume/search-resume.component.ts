@@ -83,8 +83,10 @@ export class SearchResumeComponent implements OnInit {
       this.nextButton = false;
       this.previousButton = true;
       this.pageNumber = 1;
-      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchResumeResponse.searchResumeDTOS.length > 15) {
+      if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchResumeResponse.searchResumeDTOS.length > 4) {
         this.bottomButtons = false;
+      } else {
+        this.bottomButtons = true;
       }
     } else {
       this.topButtons = true;
