@@ -76,11 +76,7 @@ export class SearchVacancyComponent implements OnInit {
       this.nextButton = false;
       this.previousButton = true;
       this.pageNumber = 1;
-      if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchVacancyResponse.searchVacancyDTOS.length > 4) {
-        this.bottomButtons = false;
-      } else {
-        this.bottomButtons = true;
-      }
+      this.bottomButtonsShow();
     } else {
       this.topButtons = true;
       this.nextButton = true;
@@ -90,12 +86,20 @@ export class SearchVacancyComponent implements OnInit {
     }
   }
 
+  bottomButtonsShow() {
+    if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchVacancyResponse.searchVacancyDTOS.length > 4) {
+      this.bottomButtons = false;
+    } else {
+      this.bottomButtons = true;
+    }
+  }
+
   nextPage() {
     this.search.firstResultNumber = this.search.firstResultNumber + parseInt(this.search.resultsOnPage, 10);
     this.searchService.getVacancyResult(this.search)
       .subscribe(data => {
         this.searchVacancyResponse = data;
-        this.buttonsEnabled();
+        this.bottomButtonsShow();
         this.pageNumber++;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;
@@ -111,7 +115,7 @@ export class SearchVacancyComponent implements OnInit {
     this.searchService.getVacancyResult(this.search)
       .subscribe(data => {
         this.searchVacancyResponse = data;
-        this.buttonsEnabled();
+        this.bottomButtonsShow();
         this.pageNumber--;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;
