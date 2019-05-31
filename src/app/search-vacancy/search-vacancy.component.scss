@@ -1,3 +1,13 @@
+body, html {
+  background-image: url(../../assets/img/ddfdfdf.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
 #searchMenu {
   position: fixed;
   width: 250px;
@@ -5,54 +15,64 @@
   top: 90px;
   right: 10px;
   border-radius: 7px;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-.search-form{
+.search-form {
   margin-top: 30px;
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
 }
 
-.form-control{
+.form-control {
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.select-control{
+.select-control {
   font-size: 18px;
   color: white;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-#startButton{
+#startButton {
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-#hideButton{
+#hideButton {
   float: right;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.main{
-  margin-top: 100px;
-  padding-right: 270px;
-  padding-left: 270px;
-  padding-bottom: 70px;
+.main {
+  margin-top: 70px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: 13%;
+  margin-left: 13%;
+  background-position: center;
+  position: relative;
 }
 
 .page {
   float: left;
 }
 
-.resultOnPage{
+.resultOnPage {
   float: right;
 }
 
 .page .btn {
   margin: 10px;
 }
+
+#tableId {
+  background-color: rgba(255, 255 ,255 ,0.95) ;
+  border-radius: 5px;
+}
+

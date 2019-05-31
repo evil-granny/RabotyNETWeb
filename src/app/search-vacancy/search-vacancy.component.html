@@ -70,7 +70,7 @@
   </div>
 
   <div id="table">
-    <table class="table table-striped" [hidden]="resultText">
+    <table id="tableId" class="table table-striped" [hidden]="resultText">
       <thead>
       <tr>
         <th class="d-none">Id</th>
@@ -79,6 +79,7 @@
         <th (click)="sort('city')">City <i class="fa fa-arrows-v" [hidden]="cHidden"></i></th>
         <th (click)="sort('employment')">Employment <i class="fa fa-arrows-v" [hidden]="emHidden"></i></th>
         <th (click)="sort('salary')">Salary <i class="fa fa-arrows-v" [hidden]="sHidden"></i></th>
+        <th><p hidden="hidden">preview</p></th>
       </tr>
       </thead>
       <tbody>
