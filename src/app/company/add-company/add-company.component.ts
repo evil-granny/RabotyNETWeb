@@ -8,7 +8,7 @@ import { Photo } from 'src/app/models/photo.model';
 import { PhotoService } from 'src/app/services/profile/photo.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class AddCompanyComponent implements OnInit {
   avatar: any;
   fileToUpload: File;
 
-  constructor(private location: Location,private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
+  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
     private userService: UserService, private photoService: PhotoService, private sanitizer: DomSanitizer,
     private app: AuthenticationService) { }
 
@@ -36,7 +36,7 @@ export class AddCompanyComponent implements OnInit {
         .subscribe(data => {
           this.company = data;
 
-          if(this.app.currentUserValue.userId != this.company.user.userId) {
+          if (this.app.currentUserValue.userId != this.company.user.userId) {
             this.router.navigate(['accessDenied']);
           }
 
@@ -55,7 +55,7 @@ export class AddCompanyComponent implements OnInit {
     this.companyService.update(this.company)
       .subscribe(data => {
         if (data != null)
-        this.router.navigate(['companies/my']);
+          this.router.navigate(['companies/my']);
         else
           alert("Validation problem has been occured");
       });
@@ -94,7 +94,7 @@ export class AddCompanyComponent implements OnInit {
   }
 
   loadPhoto(photoId: BigInteger) {
-    this.photoService.load(photoId)
+    this.photoService.loadLogo(photoId)
       .subscribe(data => {
         this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
       });

@@ -88,7 +88,7 @@ export class ViewCompanyComponent implements OnInit {
   }
 
   loadPhoto(photoId: BigInteger) {
-    this.photoService.load(photoId)
+    this.photoService.loadLogo(photoId)
       .subscribe(data => {
         this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
       });
@@ -152,8 +152,6 @@ export class ViewCompanyComponent implements OnInit {
 
     this.vacancyService.update(vacancy)
       .subscribe(() => {
-        this.vacancies = this.vacancies.filter(p => p !== vacancy);
-        this.size = this.size - 1;
         window.location.reload();
       })
   }
@@ -162,8 +160,6 @@ export class ViewCompanyComponent implements OnInit {
     vacancy.vacancyStatus = 'OPEN';
     this.vacancyService.update(vacancy)
       .subscribe(() => {
-        this.vacancies = this.vacancies.filter(p => p !== vacancy);
-        this.size = this.size - 1;
         window.location.reload();
       });
   }

@@ -42,7 +42,7 @@ export class AppComponent {
   }
 
   loadPhoto(photoId: BigInteger) {
-    this.photoService.load(photoId)
+    this.photoService.loadAvatar(photoId)
       .subscribe(data => {
         this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
       });

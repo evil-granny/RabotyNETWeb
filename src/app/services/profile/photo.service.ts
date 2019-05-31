@@ -1,9 +1,9 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { Photo } from 'src/app/models/photo.model';
-import {APP_CONFIG, IAppConfig} from '../../app.config';
+import { APP_CONFIG, IAppConfig } from '../../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -35,8 +35,12 @@ export class PhotoService {
     return this.http.post<Photo>(this.photoUrl + "logos/" + companyName, body, httpOptions);
   }
 
-  public load(photoId: BigInteger): Observable<BinaryType> {
-    return this.http.get<BinaryType>(this.photoUrl + photoId, httpOptions);
+  public loadAvatar(photoId: BigInteger): Observable<BinaryType> {
+    return this.http.get<BinaryType>(this.photoUrl + "avatars/" + photoId, httpOptions);
+  }
+
+  public loadLogo(photoId: BigInteger): Observable<BinaryType> {
+    return this.http.get<BinaryType>(this.photoUrl + "logos/" + photoId, httpOptions);
   }
 
 }

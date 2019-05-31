@@ -21,8 +21,7 @@ const httpOptions = {
 })
 export class VacancyService {
 
-  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) {
-  }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
   private vacancyUrl = this.rabotyNETEndpoint.apiEndpoint + `/vacancies`;
   private requirementUrl = this.rabotyNETEndpoint.apiEndpoint + '/requirements';
@@ -60,6 +59,7 @@ export class VacancyService {
   }
 
   public update(vacancy: any): Observable<Vacancy> {
+    console.log(vacancy);
     return this.http.put<Vacancy>(this.vacancyUrl, vacancy, httpOptions);
   }
 
