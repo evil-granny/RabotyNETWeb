@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { SearchService } from '../services/search.service';
-import { Search } from '../models/SearchModel/search.model';
-import { SearchResumeResponse } from '../models/SearchModel/SearchResumeResponse.model';
-import { PdfService } from '../services/pdf.service';
-import { UserPrincipal } from '../models/userPrincipal.model';
-import { AuthenticationService } from '../services/authentication.service';
-import { Role } from '../models/roles.model';
+import {SearchService} from '../services/search.service';
+import {Search} from '../models/SearchModel/search.model';
+import {SearchResumeResponse} from '../models/SearchModel/SearchResumeResponse.model';
+import {PdfService} from '../services/pdf.service';
+import {UserPrincipal} from '../models/userPrincipal.model';
+import {AuthenticationService} from '../services/authentication.service';
+import {Role} from '../models/roles.model';
 
 @Component({
   selector: 'app-search-resume',
@@ -39,10 +39,10 @@ export class SearchResumeComponent implements OnInit {
   phHidden = true;
 
   constructor(private app: AuthenticationService,
-    private router: Router,
-    private pdfService: PdfService,
-    private route: ActivatedRoute,
-    private searchService: SearchService) {
+              private router: Router,
+              private pdfService: PdfService,
+              private route: ActivatedRoute,
+              private searchService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -102,6 +102,7 @@ export class SearchResumeComponent implements OnInit {
     this.searchService.getResumeResult(this.search)
       .subscribe(data => {
         this.searchResumeResponse = data;
+        this.buttonsEnabled();
         this.pageNumber++;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;
@@ -117,6 +118,7 @@ export class SearchResumeComponent implements OnInit {
     this.searchService.getResumeResult(this.search)
       .subscribe(data => {
         this.searchResumeResponse = data;
+        this.buttonsEnabled();
         this.pageNumber--;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;
@@ -134,7 +136,7 @@ export class SearchResumeComponent implements OnInit {
   viewCv(id: Uint8Array) {
     this.pdfService.show(id, this.send)
       .subscribe(data => {
-        var file = new Blob([data], { type: 'application/pdf' });
+        var file = new Blob([data], {type: 'application/pdf'});
         var fileURL = URL.createObjectURL(file);
         this.urlPdf = fileURL;
         window.open(fileURL);
