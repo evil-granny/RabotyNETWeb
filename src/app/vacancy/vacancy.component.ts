@@ -41,6 +41,7 @@ export class VacancyComponent implements OnInit {
        data => {
          this.vacancies = data.vacancies;
          this.size = data.count;
+         console.log(this.size);
        }
      );
   }

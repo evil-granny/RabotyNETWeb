@@ -70,8 +70,8 @@ export class VacancyService {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement, httpOptions);
   }
 
-  public sendResume(resume: Resume, vacancyId: Uint8Array): Observable<Resume> {
-    return this.http.post<Resume>(this.vacancyUrl + '/sendResume/' + vacancyId, resume, httpOptions);
+  public sendResume(resume:Resume, vacancyId) : Observable<Resume>{
+    return this.http.post<Resume>(this.vacancyUrl + '/sendResume/'+vacancyId, resume, httpOptions);
   }
 
 }

@@ -13,7 +13,7 @@ import { PdfService } from 'src/app/services/pdf.service';
 export class ShowResumeComponent implements OnInit {
 
   resumes: Resume[];
-  send: boolean = true;
+  send: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private cvService: ResumeService, private pdfService: PdfService) { }
 

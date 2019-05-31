@@ -10,8 +10,8 @@
 
   <div class="collapse navbar-collapse" style="margin-left: 100px;">
     <ul class="navbar-nav mr-auto">
-      <a class="navbar-brand" routerLink="/companies/my" *ngIf="isCowner && isUser">My companies</a>
-      <a class="navbar-brand" routerLink="/createCompany" *ngIf="isUser">Create company</a>
+      <a class="navbar-brand" routerLink="/companies/my" *ngIf="isCowner">My companies</a>
+      <a class="navbar-brand" routerLink="/createCompany" *ngIf="isUser||isCowner">Create company</a>
       <a class="navbar-brand" routerLink="/resume/user" *ngIf="isCowner || isUser">My resumes</a>
       <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin">Сompanies</a>
       <a class="navbar-brand" routerLink="/hotVacancies">Hot Vacancies</a>
@@ -76,8 +76,7 @@
       </select>
     </div>
 
-    <input type="text" [(ngModel)]="search.searchText" placeholder="Search..." name="searchText" class="form-control"
-      pattern="^[A-Za-z]{1,20}$"><br>
+    <input type="text" [(ngModel)]="search.searchText" placeholder="Search..." name="searchText" class="form-control"><br>
     <button id="startButton" class="btn btn-info" (click)="startSearch()">Start search</button>
   </form>
 </div>
