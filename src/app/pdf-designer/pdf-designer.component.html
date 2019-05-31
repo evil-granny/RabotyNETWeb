@@ -20,7 +20,7 @@
       <section class="module">
         <div class="module-inner">
           <div class="content-panel">
-            <h2 class="title">Design CV PDF</h2>
+            <h2 class="title">Design Resume PDF</h2>
             <form class="form-horizontal" #cvForm="ngForm">
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">General Info {{fileURL}} </h3>
@@ -192,9 +192,10 @@
                     <div class="form-group">
                       <label for="description" class="col-md-5" style="float: left; ">Description</label>
                       <div class="col-md-10" style="float: left; ">
-                        <input type="text" class="form-control" pattern="^[\s\S]{3,200}$" [(ngModel)]="job.description"
+                        <textarea class="form-control" pattern="^[\s\S]{3,200}$" [(ngModel)]="job.description"
                           placeholder="description" id="description{{in}}" name="description{{in}}"
-                          #description{{in}}="ngModel"  autocomplete="off">
+                          #description{{in}}="ngModel" style="resize: none" autocomplete="off">
+                        </textarea>
                       </div>
                     </div>
                   </fieldset>
@@ -221,10 +222,11 @@
                       <label for="descriptionSkill{{in}}"
                         class="col-md-2 col-sm-3 col-xs-12 control-label">Description</label>
                       <div class="col-md-10 col-sm-9 col-xs-12">
-                        <input type="text" class="form-control" pattern="^[\s\S]{0,255}$"
+                        <textarea class="form-control" pattern="^[\s\S]{0,255}$"
                           [(ngModel)]="skill.description" placeholder="Description" id="descriptionSkill{{in}}"
-                          name="descriptionSkill{{in}}" #descriptionSkill{{in}}="ngModel"  autocomplete="off">
-                      </div>
+                          name="descriptionSkill{{in}}" style="resize: none" #descriptionSkill{{in}}="ngModel"  autocomplete="off">
+                        </textarea>
+                        </div>
                     </div>
                   </fieldset>
                 </div>

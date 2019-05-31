@@ -3,6 +3,10 @@ html, body {
 }
 
 body {
+  background-image: url(../../assets/img/ddfdfdf.jpg); background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
   padding-top: 30px;
 }
 

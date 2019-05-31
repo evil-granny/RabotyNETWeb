@@ -57,7 +57,7 @@ const routes: Routes = [
     data: { roles: [Role.ROLE_COWNER] }
   },
   {
-    path: 'search/resume',
+    path: 'searchResume',
     component: SearchResumeComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER] }
@@ -80,15 +80,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
   },
-  { path: 'showResume/:vacancyId', 
+  { path: 'showResume/:vacancyId',
   component: ShowResumeComponent,
   canActivate: [AuthGuard],
   data: { roles: [Role.ROLE_COWNER]}
   },
-  { path: 'createVacancy/:companyId', 
+  { path: 'createVacancy/:companyId',
   component: EditVacancyComponent,
   canActivate: [AuthGuard],
-  data: { roles: [Role.ROLE_COWNER]} 
+  data: { roles: [Role.ROLE_COWNER]}
   },
 
   { path: 'profile', component: ProfileComponent },
@@ -96,7 +96,7 @@ const routes: Routes = [
   { path: 'vacancies', component: VacancyComponent },
   { path: 'hotVacancies', component: HotVacancyComponent },
   { path: 'closedVacancies', component: ClosedVacancyComponent },
-  
+
   { path: 'viewVacancy/:vacancyId', component: ViewVacancyComponent },
   { path: 'updateVacancy/:vacancyId', component: EditVacancyComponent },
 
@@ -112,8 +112,9 @@ const routes: Routes = [
   { path: 'resume/create', component: AddResumeComponent },
 
   { path: 'createResumePdf', component: PdfDesignerComponent },
-  { path: 'previewResumePdf/:resumeId', component: PdfPreviewComponent },
-  
+  { path: 'previewResumePdf/:resumeId/:vacancyId', component: PdfPreviewComponent },
+  { path: 'showResume/:vacancyId', component : ShowResumeComponent},
+
   { path: 'update/:resumeId', component: AddResumeComponent },
 
   { path: 'createCvPdf/:cvId', component: PdfDesignerComponent },
@@ -126,7 +127,7 @@ const routes: Routes = [
   { path: 'users/auth/confirm', component: RegistrationconfirmComponent },
   { path: 'users', component: UserComponent },
 
-  { path: 'search/vacancies', component: SearchVacancyComponent },
+  { path: 'searchVacancy', component: SearchVacancyComponent },
 
   { path: '**', redirectTo: 'vacancies' }
 ];
