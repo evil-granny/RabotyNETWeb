@@ -15,7 +15,7 @@ export class Search {
   firstResultNumber: number;
 
   constructor() {
-    this.resultsOnPage = '10';
+    this.resultsOnPage = '3';
     this.firstResultNumber = 0;
     this.searchParameter = 'position';
     this.searchDocument = 'vacancies';

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Search } from '../models/SearchModel/search.model';
-import { SearchVacancyResponse } from '../models/SearchModel/SearchVacancyResponse.model';
-import { SearchService } from '../services/search.service';
-import { Role } from '../models/roles.model';
-import { AuthenticationService } from '../services/authentication.service';
-import { UserPrincipal } from '../models/userPrincipal.model';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Search} from '../models/SearchModel/search.model';
+import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
+import {SearchService} from '../services/search.service';
+import {Role} from '../models/roles.model';
+import {AuthenticationService} from '../services/authentication.service';
+import {UserPrincipal} from '../models/userPrincipal.model';
 
 @Component({
   selector: 'app-search-vacancy',
@@ -33,9 +33,9 @@ export class SearchVacancyComponent implements OnInit {
   sHidden = true;
 
   constructor(private app: AuthenticationService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private searchService: SearchService) {
+              private router: Router,
+              private route: ActivatedRoute,
+              private searchService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -76,9 +76,7 @@ export class SearchVacancyComponent implements OnInit {
       this.nextButton = false;
       this.previousButton = true;
       this.pageNumber = 1;
-      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchVacancyResponse.searchVacancyDTOS.length > 15) {
-        this.bottomButtons = false;
-      }
+      this.bottomButtonsShow();
     } else {
       this.topButtons = true;
       this.nextButton = true;
@@ -88,11 +86,20 @@ export class SearchVacancyComponent implements OnInit {
     }
   }
 
+  bottomButtonsShow() {
+    if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchVacancyResponse.searchVacancyDTOS.length > 4) {
+      this.bottomButtons = false;
+    } else {
+      this.bottomButtons = true;
+    }
+  }
+
   nextPage() {
     this.search.firstResultNumber = this.search.firstResultNumber + parseInt(this.search.resultsOnPage, 10);
     this.searchService.getVacancyResult(this.search)
       .subscribe(data => {
         this.searchVacancyResponse = data;
+        this.bottomButtonsShow();
         this.pageNumber++;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;
@@ -108,6 +115,7 @@ export class SearchVacancyComponent implements OnInit {
     this.searchService.getVacancyResult(this.search)
       .subscribe(data => {
         this.searchVacancyResponse = data;
+        this.bottomButtonsShow();
         this.pageNumber--;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;

@@ -51,9 +51,9 @@
   <div class="resultOnPage" [hidden]="resultText">
     <label>Results on page:
       <select [(ngModel)]="search.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
-        <option [defaultSelected]="search.resultsOnPage" value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
+        <option [defaultSelected]="search.resultsOnPage" value="3">3</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
       </select>
     </label>
   </div>
@@ -88,7 +88,7 @@
         <td>{{searchVacancyResult.companyName}}</td>
         <td>{{searchVacancyResult.city}}</td>
         <td>{{searchVacancyResult.employment}}</td>
-        <td>{{searchVacancyResult.salary}} usd</td>
+        <td>{{searchVacancyResult.salary}} {{searchVacancyResult.currency}}</td>
         <td><a class="btn btn-info" style="left: 0; vertical-align: bottom"
                role="button" routerLink="/viewVacancy/{{searchVacancyResult.vacancyId}}">View details &raquo;</a></td>
       </tr>

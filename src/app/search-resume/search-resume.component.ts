@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { SearchService } from '../services/search.service';
-import { Search } from '../models/SearchModel/search.model';
-import { SearchResumeResponse } from '../models/SearchModel/SearchResumeResponse.model';
-import { PdfService } from '../services/pdf.service';
-import { UserPrincipal } from '../models/userPrincipal.model';
-import { AuthenticationService } from '../services/authentication.service';
-import { Role } from '../models/roles.model';
+import {SearchService} from '../services/search.service';
+import {Search} from '../models/SearchModel/search.model';
+import {SearchResumeResponse} from '../models/SearchModel/SearchResumeResponse.model';
+import {PdfService} from '../services/pdf.service';
+import {UserPrincipal} from '../models/userPrincipal.model';
+import {AuthenticationService} from '../services/authentication.service';
+import {Role} from '../models/roles.model';
 
 @Component({
   selector: 'app-search-resume',
@@ -39,10 +39,10 @@ export class SearchResumeComponent implements OnInit {
   phHidden = true;
 
   constructor(private app: AuthenticationService,
-    private router: Router,
-    private pdfService: PdfService,
-    private route: ActivatedRoute,
-    private searchService: SearchService) {
+              private router: Router,
+              private pdfService: PdfService,
+              private route: ActivatedRoute,
+              private searchService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -83,9 +83,7 @@ export class SearchResumeComponent implements OnInit {
       this.nextButton = false;
       this.previousButton = true;
       this.pageNumber = 1;
-      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchResumeResponse.searchResumeDTOS.length > 15) {
-        this.bottomButtons = false;
-      }
+      this.bottomButtonsShow();
     } else {
       this.topButtons = true;
       this.nextButton = true;
@@ -95,11 +93,20 @@ export class SearchResumeComponent implements OnInit {
     }
   }
 
+  bottomButtonsShow() {
+    if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchResumeResponse.searchResumeDTOS.length > 4) {
+      this.bottomButtons = false;
+    } else {
+      this.bottomButtons = true;
+    }
+  }
+
   nextPage() {
     this.search.firstResultNumber = this.search.firstResultNumber + parseInt(this.search.resultsOnPage, 10);
     this.searchService.getResumeResult(this.search)
       .subscribe(data => {
         this.searchResumeResponse = data;
+        this.bottomButtonsShow();
         this.pageNumber++;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;
@@ -115,6 +122,7 @@ export class SearchResumeComponent implements OnInit {
     this.searchService.getResumeResult(this.search)
       .subscribe(data => {
         this.searchResumeResponse = data;
+        this.bottomButtonsShow();
         this.pageNumber--;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;
@@ -132,7 +140,7 @@ export class SearchResumeComponent implements OnInit {
   viewCv(id: Uint8Array) {
     this.pdfService.show(id, this.send)
       .subscribe(data => {
-        var file = new Blob([data], { type: 'application/pdf' });
+        var file = new Blob([data], {type: 'application/pdf'});
         var fileURL = URL.createObjectURL(file);
         this.urlPdf = fileURL;
         window.open(fileURL);

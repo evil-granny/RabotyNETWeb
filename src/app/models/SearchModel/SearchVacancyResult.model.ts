@@ -14,4 +14,6 @@ export class SearchVacancyResult {
 
   salary: string;
 
+  currency: string;
+
 }
