@@ -48,7 +48,7 @@ export class UserService {
     return this.http.delete(this.userUrl + "delete/" + user.userId, httpOptions);
   }
 
-  public insert(user: any, users: any) {
+  public insert(user: any) {
       return this.http.post<User>(this.userUrl + "auth", user, httpOptions);
   }
 

@@ -22,10 +22,10 @@
             <div class="form-right">
                 <div class="tab">
                     <div class="tab-inner">
-                        <button class="tablinks" onclick="openCity(event, 'sign-in')" id="defaultOpen">Sign In</button>
+                        <button class="tablinks" onclick="openForm(event, 'sign-in')" id="defaultOpen">Sign In</button>
                     </div>
                     <div class="tab-inner">
-                        <button class="tablinks" onclick="openCity(event, 'sign-up')">Sign Up</button>
+                        <button class="tablinks" onclick="openForm(event, 'sign-up')">Sign Up</button>
                     </div>
                 </div>
                 <form class="form-detail" (ngSubmit)="findByEmail()" #userForm="ngForm">
@@ -112,10 +112,19 @@
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Sign In">
                         </div>
-                        <div  pagination-template><a routerLink="/users/auth/google"><h5>Google</h5></a></div>
-                        <div  pagination-template><a routerLink="/users/auth/facebook"><h5>Facebook</h5></a></div>
-                        <div  pagination-template><a routerLink="/users/auth/linkedin"><h5>linkedIn</h5></a></div>
-                        <div align="center" pagination-template><a routerLink="/forgotPassword"><h5>Forgot password?</h5></a></div>
+                        <div pagination-template><a routerLink="/users/auth/google">
+                                <h5>Google</h5>
+                            </a></div>
+                        <div pagination-template><a routerLink="/users/auth/facebook">
+                                <h5>Facebook</h5>
+                            </a></div>
+                        <div pagination-template><a routerLink="/users/auth/linkedin">
+                                <h5>linkedIn</h5>
+                            </a></div>
+                        <div pagination-template><a routerLink="/forgotPassword">
+                                <h5>Forgot password?</h5>
+                            </a></div>
+                            <a class="btn btn-block social-btn google" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect"><img src="/src/assets/img/google-logo.png" alt="Google"> Log in with Google</a>
                     </div>
                 </form>
             </div>

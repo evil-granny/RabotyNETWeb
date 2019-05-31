@@ -34,22 +34,6 @@ export class AddUserComponent implements OnInit {
     document.getElementById("defaultOpen").click();
   }
 
-
-  openCity(evt, cityName) {
-    var i: number, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-  }
-
-
   findByEmail() {
     this.userService.findByEmail(this.user)
       .subscribe(data => {
@@ -64,7 +48,7 @@ export class AddUserComponent implements OnInit {
   }
 
   create(): void {
-    this.userService.insert(this.user, this.users)
+    this.userService.insert(this.user)
       .subscribe(data => {
         this.openModal("User has been created successfully. Confirm your email and login into site!");
         this.router.navigateByUrl('http://localhost:4200/');
@@ -133,7 +117,7 @@ export class AddUserComponent implements OnInit {
     });
     this.credentials.password = "";
   }
-
+  
   public openErrorModal(name: String) {
     this.dialog.open(ComfirmComponent, { data: { name } });
   }
