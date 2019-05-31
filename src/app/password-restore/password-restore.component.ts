@@ -18,7 +18,7 @@ export class PasswordRestoreComponent implements OnInit {
 
   changePassword = {newPassword: '', confirmPassword: ''};
 
-  private changePasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/changePassword';
+  private changePasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/password/change';
   private errors: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService, private router: Router, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }

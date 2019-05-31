@@ -41,8 +41,7 @@
         <option value="position">position</option>
       </select>
     </div>
-    <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control"
-           pattern="^[A-Za-z]{1,20}$"><br>
+    <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control"><br>
     <button id="startButton" class="btn btn-info" (click)="start()">Start search</button>
   </form>
 </div>
@@ -70,7 +69,7 @@
   </div>
 
   <div id="table">
-    <table class="table table-striped" [hidden]="resultText">
+    <table id="tableId" class="table table-striped" [hidden]="resultText">
       <thead>
       <tr>
         <th class="d-none">Id</th>
@@ -79,6 +78,7 @@
         <th (click)="sort('city')">City <i class="fa fa-arrows-v" [hidden]="cHidden"></i></th>
         <th (click)="sort('employment')">Employment <i class="fa fa-arrows-v" [hidden]="emHidden"></i></th>
         <th (click)="sort('salary')">Salary <i class="fa fa-arrows-v" [hidden]="sHidden"></i></th>
+        <th><p hidden="hidden">preview</p></th>
       </tr>
       </thead>
       <tbody>

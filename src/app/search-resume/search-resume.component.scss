@@ -1,3 +1,14 @@
+body, html {
+  background-image: url(../../assets/img/ddfdfdf.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
+
 #searchMenu {
   position: fixed;
   width: 250px;
@@ -39,10 +50,14 @@
 }
 
 .main{
-  margin-top: 100px;
-  padding-right: 270px;
-  padding-left: 270px;
-  padding-bottom: 70px;
+  margin-top: 70px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: 13%;
+  margin-left: 13%;
+  background-position: center;
+  position: relative;
 }
 
 .page {
@@ -55,4 +70,9 @@
 
 .page .btn {
   margin: 10px;
+}
+
+#tableId {
+  background-color: rgba(255, 255 ,255 ,0.95) ;
+  border-radius: 5px;
 }
