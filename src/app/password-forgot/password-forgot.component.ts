@@ -36,8 +36,8 @@ export class PasswordForgotComponent {
     observable.subscribe(result =>  {
       },
         error => {
-          this.errors = error;
-          this.openErrorModal(this.errors);
+          // this.errors = error;
+          this.openErrorModal('Please check the correctness of the email ');
         },
     () => {
       this.openSuccessModal('Please check mail for further instructions!');
