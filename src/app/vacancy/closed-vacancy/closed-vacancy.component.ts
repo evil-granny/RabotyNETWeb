@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Vacancy } from 'src/app/models/vacancy/vacancy.model';
-import { VacancyService } from 'src/app/services/vacancy.service';
+
+import { Vacancy } from '../../models/vacancy/vacancy.model';
+
+import { VacancyService } from '../../services/vacancy.service';
+
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-closed-vacancy',

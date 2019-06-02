@@ -22,7 +22,6 @@ export class PasswordRestoreComponent implements OnInit {
   changePassword = { newPassword: '', confirmPassword: '' };
 
   private changePasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/password/change';
-  private errors: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService, private router: Router, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
@@ -45,9 +44,9 @@ export class PasswordRestoreComponent implements OnInit {
 
     const sendTokenPaasword = { 'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword };
     const observable = this.http.post<any>(this.changePasswordUrl, sendTokenPaasword, httpOptions);
-    observable.subscribe(result => {
+    observable.subscribe(() => {
     },
-      error => {
+      () => {
         this.openErrorModal('Your token invalid or expired. Please try again');
       },
       () => {

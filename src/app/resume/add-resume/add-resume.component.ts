@@ -6,6 +6,7 @@ import { Skill } from '../../models/skill.model';
 import { Job } from '../../models/job.model';
 
 import { ResumeService } from '../../services/resume.service';
+
 @Component({
   templateUrl: './add-resume.component.html',
   styleUrls: ['./add-resume.component.css']

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { Company } from '../../models/company/company.model';
-import { CompanyService } from '../../services/company.service';
-import { UserService } from 'src/app/services/user.service';
-import { Photo } from 'src/app/models/photo.model';
-import { PhotoService } from 'src/app/services/profile/photo.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Location } from '@angular/common';
 
+import { Company } from '../../models/company/company.model';
+import { Photo } from '../../models/photo.model';
+
+import { CompanyService } from '../../services/company.service';
+import { PhotoService } from '../../services/profile/photo.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'rabotyNet',
@@ -25,11 +24,10 @@ export class AddCompanyComponent implements OnInit {
   fileToUpload: File;
 
   constructor(private location: Location, private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
-    private userService: UserService, private photoService: PhotoService, private sanitizer: DomSanitizer,
+    private photoService: PhotoService, private sanitizer: DomSanitizer,
     private app: AuthenticationService) { }
 
   ngOnInit(): void {
-
     var companyName = this.route.snapshot.paramMap.get("companyName");
     if (companyName !== null) {
       this.companyService.findByName(companyName)
@@ -79,8 +77,6 @@ export class AddCompanyComponent implements OnInit {
           alert("Company with that name already exists!");
         }
       });
-
-
   };
 
   handlePhoto(file: FileList) {

@@ -1,14 +1,17 @@
-import { Component, OnInit, Optional } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 import { User } from '../../models/user.model';
-import { UserService } from '../../services/user.service';
-import { ComfirmComponent } from '../../confirm/comfirm.component';
-import { MatDialog } from '@angular/material';
-import { RegistrationconfirmComponent } from 'src/app/confirm/registrationconfirm/registrationconfirm.component';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Role } from '../../models/roles.model';
+
+import { UserService } from '../../services/user.service';
 import { UserPrincipal } from '../../models/userPrincipal.model';
+import { AuthenticationService } from '../../services/authentication.service';
+
+import { ComfirmComponent } from '../../confirm/comfirm.component';
+import { RegistrationconfirmComponent } from '../../confirm/registrationconfirm/registrationconfirm.component';
+
 @Component({
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
@@ -34,9 +37,8 @@ export class AddUserComponent implements OnInit {
     document.getElementById("defaultOpen").click();
   }
 
-
-  openCity(evt, cityName) {
-    var i: number, tabcontent, tablinks;
+  openCity(evt: any, cityName: any) {
+    var i: number, tabcontent: any, tablinks: any;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
@@ -48,7 +50,6 @@ export class AddUserComponent implements OnInit {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
   }
-
 
   findByEmail() {
     this.userService.findByEmail(this.user)
@@ -106,7 +107,7 @@ export class AddUserComponent implements OnInit {
         this.router.navigateByUrl('/resume/user');
       }
     },
-      error => {
+      () => {
         this.openErrorModal('Wrong credentials! Please try again.');
         this.router.navigateByUrl('/users/auth');
       });
@@ -125,11 +126,11 @@ export class AddUserComponent implements OnInit {
       });
   }
 
-  resendToken(){
+  resendToken() {
     this.userService.resendToken(this.credentials.username)
-    .subscribe(data => {
-      this.openModal("Your account is not confirmed. Confirmation message has been sent to you again");
-    });
+      .subscribe(data => {
+        this.openModal("Your account is not confirmed. Confirmation message has been sent to you again");
+      });
     this.credentials.password = "";
   }
 
@@ -144,4 +145,5 @@ export class AddUserComponent implements OnInit {
   get isCowner() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
   }
+
 }

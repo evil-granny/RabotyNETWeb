@@ -9,9 +9,9 @@ import { Company } from '../../models/company/company.model';
 import { UserPrincipal } from '../../models/userPrincipal.model';
 
 import { VacancyService } from '../../services/vacancy.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CompanyService } from '../../services/company.service';
 import { ResumeService } from '../../services/resume.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-view-vacancy',
