@@ -1,11 +1,12 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
 
 import { User } from '../models/user.model';
+
 import { Observable } from 'rxjs';
-import { MatDialog } from '@angular/material';
-import { ComfirmComponent } from '../confirm/comfirm.component';
-import {APP_CONFIG, IAppConfig} from '../app.config';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -39,7 +40,7 @@ export class UserService {
   }
 
   public insert(user: any) {
-      return this.http.post<User>(this.userUrl + 'auth', user, httpOptions);
+    return this.http.post<User>(this.userUrl + 'auth', user, httpOptions);
   }
 
   public validToken(token: String): Observable<any> {
@@ -47,11 +48,12 @@ export class UserService {
   }
 
 
-  public findToken (username: any): Observable<any> {
+  public findToken(username: any): Observable<any> {
     return this.http.get<String>(this.userUrl + 'findToken?email=' + username, httpOptions);
   }
 
   public resendToken(email: String): Observable<any> {
     return this.http.post<String>(this.userUrl + 'resendAuthToken?email=' + email, httpOptions);
   }
+
 }

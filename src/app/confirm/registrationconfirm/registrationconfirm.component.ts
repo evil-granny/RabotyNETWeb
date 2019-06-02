@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
+
 import { UserService } from 'src/app/services/user.service';
-import {ComfirmComponent} from '../comfirm.component';
-import {MatDialog} from '@angular/material';
+
+import { ComfirmComponent } from '../comfirm.component';
 
 @Component({
   selector: 'app-registrationconfirm',
@@ -10,7 +12,6 @@ import {MatDialog} from '@angular/material';
   styleUrls: ['./registrationconfirm.component.scss']
 })
 export class RegistrationconfirmComponent implements OnInit {
-
 
   token: string;
   valid: string;
@@ -37,7 +38,4 @@ export class RegistrationconfirmComponent implements OnInit {
     this.dialog.open(ComfirmComponent, { data: { name } });
   }
 
-  resendToken() {
-
-  }
 }

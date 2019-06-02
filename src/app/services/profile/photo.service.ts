@@ -1,8 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { Photo } from '../../models/photo.model';
+
 import { Observable } from 'rxjs';
-import { Photo } from 'src/app/models/photo.model';
+
 import { APP_CONFIG, IAppConfig } from '../../app.config';
 
 const httpOptions = {

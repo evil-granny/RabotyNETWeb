@@ -26,11 +26,12 @@ body {
     -webkit-align-items: center;
 }
 
-.btn-google{
-  background-image:    url(../../../assets/img/google-logo.png);
-  width: 100%;
-  height: 100%;
+.btn-google {
+    background-image: url(../../../assets/img/google-logo.png);
+    width: 100%;
+    height: 100%;
 }
+
 .form-v8-content {
     border: 1px solid #bbb;
     background: #fff;
