@@ -34,8 +34,10 @@ export class ProfileComponent implements OnInit {
       .subscribe(data => {
         this.person = data;
 
-        if (this.person.contact == null && this.person.address == null) {
+        if (this.person.contact == null) {
           this.person.contact = new Contact();
+        }
+        if (this.person.address == null) {
           this.person.address = new Address();
         }
         if (this.person.photo != null) {

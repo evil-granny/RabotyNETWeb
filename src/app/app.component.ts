@@ -53,7 +53,6 @@ export class AppComponent {
     this.app.logout();
     this.vacancySelect = false;
     window.location.reload();
-    this.router.navigateByUrl('/vacancies');
   }
 
   get isAdmin() {
