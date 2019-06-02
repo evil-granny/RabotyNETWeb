@@ -1,10 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../services/user.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ComfirmComponent} from '../confirm/comfirm.component';
-import {MatDialog} from '@angular/material';
-import {APP_CONFIG, IAppConfig} from '../app.config';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { UserService } from '../services/user.service';
+
+import { ComfirmComponent } from '../confirm/comfirm.component';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 @Component({
   selector: 'app-password-restore',
@@ -16,7 +19,7 @@ export class PasswordRestoreComponent implements OnInit {
   token: string;
   valid: string;
 
-  changePassword = {newPassword: '', confirmPassword: ''};
+  changePassword = { newPassword: '', confirmPassword: '' };
 
   private changePasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/changePassword';
   private errors: any;
@@ -30,7 +33,6 @@ export class PasswordRestoreComponent implements OnInit {
   }
 
   restorePassword() {
-
     const authHeader = {
       'Access-Control-Allow-Origin': 'http://localhost:4200',
       'Content-Type': 'application/json',
@@ -41,13 +43,13 @@ export class PasswordRestoreComponent implements OnInit {
       headers: new HttpHeaders(authHeader), withCredentials: true
     };
 
-    const sendTokenPaasword = {'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword};
+    const sendTokenPaasword = { 'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword };
     const observable = this.http.post<any>(this.changePasswordUrl, sendTokenPaasword, httpOptions);
-    observable.subscribe(result =>  {
-      },
+    observable.subscribe(result => {
+    },
       error => {
-      console.log('Error from back')
-      console.log(error)
+        console.log('Error from back')
+        console.log(error)
         this.errors = error;
         this.openErrorModal(this.errors);
       },
@@ -56,12 +58,14 @@ export class PasswordRestoreComponent implements OnInit {
         this.router.navigate(['/users/auth']);
       }
     );
-    }
+  }
 
   public openErrorModal(name: String) {
     this.dialog.open(ComfirmComponent, { data: { name } });
   }
+
   public openSuccessModal(name: String) {
     this.dialog.open(ComfirmComponent, { data: { name } });
   }
+
 }

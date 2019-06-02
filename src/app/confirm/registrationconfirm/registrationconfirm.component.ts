@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,7 +9,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./registrationconfirm.component.scss']
 })
 export class RegistrationconfirmComponent implements OnInit {
-
 
   token: string;
   valid: string;
@@ -32,8 +32,4 @@ export class RegistrationconfirmComponent implements OnInit {
       });
   }
 
-
-  resendToken() {
-
-  }
 }

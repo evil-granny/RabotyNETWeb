@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vacancy</title>
+
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div class="container" style="margin-top:70px">
+  <div class="container" style="margin-top: 40px; opacity: 0.95;">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
@@ -41,6 +41,7 @@
                       </div>
                     </div>
                   </div>
+
                   <div class="form-group">
                     <label for="position" class="col-md-2 col-sm-3 col-xs-12 control-label">Posistion</label>
                     <div class="col-md-10 col-sm-9 col-xs-12">
@@ -93,23 +94,21 @@
                         </select>
                       </div>
                     </div>
-
-
                   </div>
 
                   <div class="form-group">
                     <label for="hotVacancy" class="col-md-2 col-sm-3 col-xs-12 control-label">Hot vacancy</label>
                     <div class="checkboxC">
                       <div class="col-md-10 col-sm-9 col-xs-12">
-                        <input type="checkbox" style="width: 34px;height: 34px;" [(ngModel)]="vacancy.hotVacancy"
+                        <input type="checkbox" style="width: 34px; height: 34px;" [(ngModel)]="vacancy.hotVacancy"
                           placeholder="Check if vacancy is hot" id="hotVacancy" name="hotVacancy" #hotVacancy="ngModel"
                           checked autocomplete="off">
                       </div>
                     </div>
                   </div>
                 </fieldset>
-
-              </fieldset> <br>
+              </fieldset>
+              <br>
               <fieldset class="fieldset">
                 <fieldset class="experience-border">
                   <legend class="experience-border">
@@ -132,7 +131,7 @@
                             Description can only contain numbers and letters (3 - 100 digits)!
                           </div>
                         </div>
-                        <a class="btn" style="margin-top:-70px;margin-left:100%;font-size:48px;color:red"
+                        <a class="btn" style="margin-top: -70px; margin-left: 100%; font-size: 48px; color:red"
                           (click)="removeInputField(index)"><i class="fa fa-remove" rel="tooltip"
                             title="Delete"></i></a>
                       </div>
@@ -148,10 +147,10 @@
                             Description can only contain numbers and letters (max 100 digits)!
                           </div>
                         </div>
-                        <a class="btn" style="margin-top:-70px;margin-left:100%;font-size:48px;color:red"
+                        <a class="btn" style="margin-top: -70px; margin-left: 100%; font-size: 48px; color:red;"
                           *ngIf="item.requirementId!=null" (click)="deleteRequirement(item)"><i class="fa fa-remove"
                             rel="tooltip" title="Delete"></i></a>
-                        <a class="btn" style="margin-top:-70px;margin-left:100%;font-size:48px;color:red"
+                        <a class="btn" style="margin-top: -70px; margin-left: 100%; font-size: 48px; color:red;"
                           *ngIf="item.requirementId==null" (click)="removeInputField(index)"><i class="fa fa-remove"
                             rel="tooltip" title="Delete"></i></a>
                       </ng-template>
@@ -159,26 +158,27 @@
                     <td>
                       <div class="addRequirement">
                         <div>
-                          <button class="btn btn-success" type="button" style="margin-left: 14px"
+                          <button class="btn btn-success" type="button" style="margin-left: 14px;"
                             [disabled]="!personForm.form.valid" (click)="addFieldValue()">Add new requirement</button>
                         </div>
                       </div>
                     </td>
                   </div>
                 </fieldset>
-              </fieldset> <br>
+              </fieldset>
+              <br>
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Action</h3>
                 <div class="form-group">
                   <div *ngIf="vacancy.vacancyId == null">
-                    <button class="btn btn-primary" style="margin-top: 20px" type="submit"
+                    <button class="btn btn-primary" style="margin-top: 20px;" type="submit"
                       [disabled]="!personForm.form.valid" (click)="create()">Create</button>
                   </div>
                   <div *ngIf="vacancy.vacancyId != null && (isCowner==true)">
                     <button class="btn btn-success" style="font-size: 18px;" (click)="update()"
                       [disabled]="!personForm.form.valid">Update</button>
                   </div>
-                  <a class="btn btn-danger" (click)="goBack()" style="font-size: 16px;margin-top:15px">Go back</a>
+                  <a class="btn btn-danger" (click)="goBack()" style="font-size: 16px; margin-top: 15px;">Go back</a>
                 </div>
               </fieldset>
             </form>
@@ -188,3 +188,5 @@
     </div>
   </div>
 </body>
+
+</html>

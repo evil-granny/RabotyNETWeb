@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-
 import { Router } from '@angular/router';
-import { AuthenticationService } from './services/authentication.service';
-import { Search } from './models/SearchModel/search.model';
-import { UserPrincipal } from './models/userPrincipal.model';
-import { Role } from './models/roles.model';
-import { PersonService } from './services/profile/person.service';
 import { DomSanitizer } from '@angular/platform-browser';
+
+import { Search } from './models/search/search.model';
+import { Role } from './models/roles.model';
+import { UserPrincipal } from './models/userPrincipal.model';
+
+import { PersonService } from './services/profile/person.service';
 import { PhotoService } from './services/profile/photo.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',

@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { SearchService } from '../services/search.service';
-import { Search } from '../models/SearchModel/search.model';
-import { SearchResumeResponse } from '../models/SearchModel/SearchResumeResponse.model';
-import { PdfService } from '../services/pdf.service';
-import { UserPrincipal } from '../models/userPrincipal.model';
-import { AuthenticationService } from '../services/authentication.service';
+import { Search } from '../models/search/search.model';
 import { Role } from '../models/roles.model';
+import { SearchResumeResponse } from '../models/search/SearchResumeResponse.model';
+import { UserPrincipal } from '../models/userPrincipal.model';
+
+import { SearchService } from '../services/search.service';
+import { PdfService } from '../services/pdf.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-search-resume',
   templateUrl: './search-resume.component.html',
   styleUrls: ['./search-resume.component.scss'],
 })
-
 export class SearchResumeComponent implements OnInit {
 
   currentUser: UserPrincipal;
@@ -252,4 +252,5 @@ export class SearchResumeComponent implements OnInit {
     this.cHidden = true;
     this.phHidden = true;
   }
+
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Resume } from 'src/app/models/resume.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ResumeService } from 'src/app/services/resume.service';
-import { Person } from 'src/app/models/person.model';
-import { PdfService } from 'src/app/services/pdf.service';
+
+import { Resume } from '../../models/resume.model';
+
+import { ResumeService } from '../../services/resume.service';
+import { PdfService } from '../../services/pdf.service';
 
 @Component({
   selector: 'app-show-resume',
@@ -13,6 +14,7 @@ import { PdfService } from 'src/app/services/pdf.service';
 export class ShowResumeComponent implements OnInit {
 
   resumes: Resume[];
+
   send: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private cvService: ResumeService, private pdfService: PdfService) { }
@@ -25,29 +27,30 @@ export class ShowResumeComponent implements OnInit {
       });
   }
 
-  showPdf(resume : Resume): void {
-          this.pdfService.show(resume.resumeId, this.send)
-            .subscribe(data => {
-              var file = new Blob([data], { type: 'application/pdf' });
-              var fileURL = URL.createObjectURL(file);
-              window.open(fileURL);
-              window.focus();
-            });
-            setTimeout(() => {this.changeStatus(resume)}, 5000);
+  showPdf(resume: Resume): void {
+    this.pdfService.show(resume.resumeId, this.send)
+      .subscribe(data => {
+        var file = new Blob([data], { type: 'application/pdf' });
+        var fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+        window.focus();
+      });
+
+    setTimeout(() => { this.changeStatus(resume) }, 5000);
   };
 
-  changeStatus(resume){
+  changeStatus(resume: any) {
     resume.reviewed = true;
     this.cvService.update(resume)
-    .subscribe(data => {
-    });
+      .subscribe(() => {
+      });
   }
 
-  changeStatusOnNew(resume){
+  changeStatusOnNew(resume: any) {
     resume.reviewed = false;
     this.cvService.update(resume)
-    .subscribe(data => {
-    });
+      .subscribe(() => {
+      });
   }
 
 }

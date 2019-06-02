@@ -1,165 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vacancy</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+    integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 <body>
-<div class="container" style="margin-top:70px">
-  <div class="view-account">
-    <section class="module">
-      <div class="module-inner">
-        <div class="content-panel">
-          <h2 class="title">Resume</h2>
-          <form class="form-horizontal" #cvForm="ngForm">
-            <fieldset class="fieldset">
-              <h3 class="fieldset-title">Resume Info</h3>
-              <div class="form-group">
-                <label for="position" class="col-md-2 col-sm-3 col-xs-12 control-label">Position</label>
-                <div class="col-md-10 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,50}$" [(ngModel)]="resume.position"
-                    placeholder="Position" id="position" name="position" #position="ngModel" required
-                    autocomplete="off">
-                  <div *ngIf="position.errors && (position.dirty || position.touched)" class="alert alert-danger">
-                    <div [hidden]="!position.errors.required">Position is required!</div>
-                    <div [hidden]="!position.errors.pattern">Position can only contain letters of the alphabet
-                      (from 3 to 50 characters).</div>
+  <div class="container" style="margin-top: 40px; opacity: 0.95;">
+    <div class="view-account">
+      <section class="module">
+        <div class="module-inner">
+          <div class="content-panel">
+            <h2 class="title">Resume</h2>
+            <form class="form-horizontal" #cvForm="ngForm">
+              <fieldset class="fieldset">
+                <h3 class="fieldset-title">Resume Info</h3>
+                <div class="form-group">
+                  <label for="position" class="col-md-2 col-sm-3 col-xs-12 control-label">Position</label>
+                  <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,50}$"
+                      [(ngModel)]="resume.position" placeholder="Position" id="position" name="position"
+                      #position="ngModel" required autocomplete="off">
+                    <div *ngIf="position.errors && (position.dirty || position.touched)" class="alert alert-danger">
+                      <div [hidden]="!position.errors.required">Position is required!</div>
+                      <div [hidden]="!position.errors.pattern">Position can only contain letters of the alphabet
+                        (from 3 to 50 characters).</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </fieldset>
+              </fieldset>
               <fieldset class="fieldset">
                 <fieldset class="experience-border">
                   <legend class="experience-border">Skill Info</legend>
-                <div *ngFor = "let skill of resume.skills; let index = index;">
+                  <div *ngFor="let skill of resume.skills; let index = index;">
                     <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Skill:{{index+1}}</label>
-                  <div class="form-group">
-                    <label for="title" class="col-md-2 col-sm-3 col-xs-12 control-label">Title</label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[A-Za-z]{3,30}$" [(ngModel)]="skill.title" [ngModelOptions]="{standalone: true}"
-                        placeholder="Title" id="title" name="title" #title="ngModel" required
-                        autocomplete="off">
-                      <div *ngIf="title.errors && (title.dirty || title.touched)" class="alert alert-danger">
-                        <div [hidden]="!title.errors.required">Title is required!</div>
-                        <div [hidden]="!title.errors.pattern">Title can only contain letters of the alphabet (from
-                          3 to 30 characters).</div>
+                    <div class="form-group">
+                      <label for="title" class="col-md-2 col-sm-3 col-xs-12 control-label">Title</label>
+                      <div class="col-md-10 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" pattern="^[A-Za-z]{3,30}$" [(ngModel)]="skill.title"
+                          [ngModelOptions]="{standalone: true}" placeholder="Title" id="title" name="title"
+                          #title="ngModel" required autocomplete="off">
+                        <div *ngIf="title.errors && (title.dirty || title.touched)" class="alert alert-danger">
+                          <div [hidden]="!title.errors.required">Title is required!</div>
+                          <div [hidden]="!title.errors.pattern">Title can only contain letters of the alphabet (from
+                            3 to 30 characters).</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Description</label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" maxlength="255" [(ngModel)]="skill.description" placeholder="Description" [ngModelOptions]="{standalone: true}"
-                        id="description" name="description" #description="ngModel" autocomplete="off">
-                      <div *ngIf="description.errors && (description.dirty || description.touched)" class="alert alert-danger">
-                        <div [hidden]="!description.errors.pattern">Maximum lenght description is 255 characters.</div>
+
+                    <div class="form-group">
+                      <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Description</label>
+                      <div class="col-md-10 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" maxlength="255" [(ngModel)]="skill.description"
+                          placeholder="Description" [ngModelOptions]="{standalone: true}" id="description"
+                          name="description" #description="ngModel" autocomplete="off">
+                        <div *ngIf="description.errors && (description.dirty || description.touched)"
+                          class="alert alert-danger">
+                          <div [hidden]="!description.errors.pattern">Maximum lenght description is 255 characters.
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div *ngIf="resume.resumeId == null">
-                    <p style="margin-top:10px"><a class="btn btn-danger"
-                      style="left: 0;" role="button"
-                      (click)="removeInputFieldSkill(index)">Delete Skill</a></p>
-                  </div>
-                  <div *ngIf="resume.resumeId != null">
-                      <p style="margin-top:10px"><a class="btn btn-danger"
-                        style="left: 0;" role="button"
-                        (click)="deleteSkill(skill)">Delete Skill</a></p>
+                    <div *ngIf="resume.resumeId == null">
+                      <p style="margin-top: 10px;"><a class="btn btn-danger" style="left: 0;" role="button"
+                          (click)="removeInputFieldSkill(index)">Delete Skill</a></p>
                     </div>
-                </div>
+                    <div *ngIf="resume.resumeId != null">
+                      <p style="margin-top: 10px;"><a class="btn btn-danger" style="left: 0;" role="button"
+                          (click)="deleteSkill(skill)">Delete Skill</a></p>
+                    </div>
+                  </div>
+                </fieldset>
               </fieldset>
-            </fieldset>
-            <button class="btn btn-success" (click)="newSkill()">New Skill</button>
-            <fieldset class="fieldset">
-              <fieldset class="experience-border">
-                <legend class="experience-border">Job Info</legend>
-                <div *ngFor = "let job of resume.jobs; let index = index;">
+              <button class="btn btn-success" (click)="newSkill()">New Skill</button>
+              <fieldset class="fieldset">
+                <fieldset class="experience-border">
+                  <legend class="experience-border">Job Info</legend>
+                  <div *ngFor="let job of resume.jobs; let index = index;">
                     <label for="description" class="col-md-2 col-sm-3 col-xs-12 control-label">Job:{{index+1}}</label>
-                  <div class="form-group">
-                    <label for="position" class="col-md-2  col-sm-3 col-xs-12 control-label">Position</label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,40}" [(ngModel)]="job.position" placeholder="Position" [ngModelOptions]="{standalone: true}"
-                        id="positionJob" name="positionjob" #positionJob="ngModel" required autocomplete="off">
-                      <div *ngIf="positionJob.errors && (positionJob.dirty || positionJob.touched)" class="alert alert-danger">
-                          <div [hidden]="!positionJob.errors.pattern">Position can only contain letters of the alphabet (from
-                              3 to 40 characters).</div>
-                        <div [hidden]="!positionJob.errors.required">Position is required!</div>
+                    <div class="form-group">
+                      <label for="position" class="col-md-2  col-sm-3 col-xs-12 control-label">Position</label>
+                      <div class="col-md-10 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,40}"
+                          [(ngModel)]="job.position" placeholder="Position" [ngModelOptions]="{standalone: true}"
+                          id="positionJob" name="positionjob" #positionJob="ngModel" required autocomplete="off">
+                        <div *ngIf="positionJob.errors && (positionJob.dirty || positionJob.touched)"
+                          class="alert alert-danger">
+                          <div [hidden]="!positionJob.errors.pattern">Position can only contain letters of the alphabet
+                            (from
+                            3 to 40 characters).</div>
+                          <div [hidden]="!positionJob.errors.required">Position is required!</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="begin" class="col-md-2  col-sm-3 col-xs-12 control-label">Begin Work</label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="date" class="form-control" [ngModelOptions]="{standalone: true}"
-                        [(ngModel)]="job.begin" placeholder="Begin Work" id="begin"
-                        name="begin" #begin="ngModel"  autocomplete="off" required>
-                      <div *ngIf="begin.errors && (begin.dirty || begin.touched)"
-                        class="alert alert-danger">
+
+                    <div class="form-group">
+                      <label for="begin" class="col-md-2  col-sm-3 col-xs-12 control-label">Begin Work</label>
+                      <div class="col-md-10 col-sm-9 col-xs-12">
+                        <input type="date" class="form-control" [ngModelOptions]="{standalone: true}"
+                          [(ngModel)]="job.begin" placeholder="Begin Work" id="begin" name="begin" #begin="ngModel"
+                          autocomplete="off" required>
+                        <div *ngIf="begin.errors && (begin.dirty || begin.touched)" class="alert alert-danger">
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="end" class="col-md-2  col-sm-3 col-xs-12 control-label">End Work</label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="date" class="form-control" [ngModelOptions]="{standalone: true}"
-                        [(ngModel)]="job.end" placeholder="End Work" id="end" name="end"
-                        #end="ngModel" autocomplete="off" required>
-                      <div *ngIf="end.errors && (end.dirty || end.touched)" class="alert alert-danger">
+
+                    <div class="form-group">
+                      <label for="end" class="col-md-2  col-sm-3 col-xs-12 control-label">End Work</label>
+                      <div class="col-md-10 col-sm-9 col-xs-12">
+                        <input type="date" class="form-control" [ngModelOptions]="{standalone: true}"
+                          [(ngModel)]="job.end" placeholder="End Work" id="end" name="end" #end="ngModel"
+                          autocomplete="off" required>
+                        <div *ngIf="end.errors && (end.dirty || end.touched)" class="alert alert-danger">
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="companyName" class="col-md-10 col-form-label form-control-label"></label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{5,50}$" [ngModelOptions]="{standalone: true}"
-                        [(ngModel)]="job.companyName" placeholder="Company Name" id="companyName" name="companyName" #companyName="ngModel"
-                        autocomplete="off">
-                      <div *ngIf="companyName.errors && (companyName.dirty || companyName.touched)" class="alert alert-danger">
-                        <div [hidden]="!companyName.errors.pattern">Company name can only contain letters of the alphabet (from 5 to 50
-                          characters).</div>
+
+                    <div class="form-group">
+                      <label for="companyName" class="col-md-10 col-form-label form-control-label"></label>
+                      <div class="col-md-10 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{5,50}$"
+                          [ngModelOptions]="{standalone: true}" [(ngModel)]="job.companyName" placeholder="Company Name"
+                          id="companyName" name="companyName" #companyName="ngModel" autocomplete="off">
+                        <div *ngIf="companyName.errors && (companyName.dirty || companyName.touched)"
+                          class="alert alert-danger">
+                          <div [hidden]="!companyName.errors.pattern">Company name can only contain letters of the
+                            alphabet (from 5 to 50
+                            characters).</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group">
+
+                    <div class="form-group">
                       <label for="descriptionJob" class="col-md-10 col-form-label form-control-label"></label>
                       <div class="col-md-10 col-sm-9 col-xs-12">
                         <input type="text" class="form-control" maxlength="200" [ngModelOptions]="{standalone: true}"
-                          [(ngModel)]="job.description" placeholder="Description" id="descriptionJob" name="descriptionJob"
-                          #descriptionJob="ngModel" autocomplete="off">
-                        <div *ngIf="descriptionJob.errors && (descriptionJob.dirty || descriptionJob.touched)" class="alert alert-danger">
-                          <div [hidden]="!descriptionJob.errors.pattern">Maximum lenght description is 200 characters.</div>
+                          [(ngModel)]="job.description" placeholder="Description" id="descriptionJob"
+                          name="descriptionJob" #descriptionJob="ngModel" autocomplete="off">
+                        <div *ngIf="descriptionJob.errors && (descriptionJob.dirty || descriptionJob.touched)"
+                          class="alert alert-danger">
+                          <div [hidden]="!descriptionJob.errors.pattern">Maximum lenght description is 200 characters.
+                          </div>
                         </div>
                       </div>
+                    </div>
+                    <div *ngIf="resume.resumeId == null">
+                      <p style="margin-top: 10px;"><a class="btn btn-danger" style="left: 0;" role="button"
+                          (click)="removeInputFieldJob(index)">Delete Job</a></p>
+                    </div>
+                    <div *ngIf="resume.resumeId != null">
+                      <p style="margin-top: 10px;"><a class="btn btn-danger" style="left: 0;" role="button"
+                          (click)="deleteJob(job)">Delete Job</a></p>
+                    </div>
                   </div>
-                  <div *ngIf="resume.resumeId == null">
-                    <p style="margin-top:10px"><a class="btn btn-danger"
-                      style="left: 0;" role="button"
-                      (click)="removeInputFieldJob(index)">Delete Job</a></p>
-                  </div>
-                  <div *ngIf="resume.resumeId != null">
-                    <p style="margin-top:10px"><a class="btn btn-danger"
-                      style="left: 0;" role="button"
-                      (click)="deleteJob(job)">Delete Job</a></p>
-                  </div>
-                </div>
+                </fieldset>
               </fieldset>
-            </fieldset>
-            <button class="btn btn-success" (click)="newJob()">New Job</button>
-            <hr>
-            <fieldset class="fieldset">
+              <button class="btn btn-success" (click)="newJob()">New Job</button>
+              <hr>
+              <fieldset class="fieldset">
                 <h3 class="fieldset-title">Education Info</h3>
                 <div class="form-group">
                   <label for="degree" class="col-md-2 col-sm-3 col-xs-12 control-label">Degree</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,30}$" [(ngModel)]="resume.education.degree"
-                      placeholder="Degree" id="degree" name="degree" #degree="ngModel" required
-                      autocomplete="off">
+                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{3,30}$"
+                      [(ngModel)]="resume.education.degree" placeholder="Degree" id="degree" name="degree"
+                      #degree="ngModel" required autocomplete="off">
                     <div *ngIf="degree.errors && (degree.dirty || degree.touched)" class="alert alert-danger">
                       <div [hidden]="!degree.errors.required">Degree is required!</div>
                       <div [hidden]="!degree.errors.pattern">Degree can only contain letters of the alphabet
@@ -167,44 +180,50 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="form-group">
                   <label for="school" class="col-md-2 col-sm-3 col-xs-12 control-label">Educational institution</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z0-9? ?A-Za-z0-9]{3,30}$" [(ngModel)]="resume.education.school"
-                      placeholder="Educational institution" id="school" name="school" #school="ngModel" required
-                      autocomplete="off">
+                    <input type="text" class="form-control" pattern="^[A-Za-z0-9? ?A-Za-z0-9]{3,30}$"
+                      [(ngModel)]="resume.education.school" placeholder="Educational institution" id="school"
+                      name="school" #school="ngModel" required autocomplete="off">
                     <div *ngIf="school.errors && (school.dirty || school.touched)" class="alert alert-danger">
                       <div [hidden]="!school.errors.required">Educational institution is required!</div>
-                      <div [hidden]="!school.errors.pattern">Educational institution can only contain letters of the alphabet (till 30 characters).</div>
+                      <div [hidden]="!school.errors.pattern">Educational institution can only contain letters of the
+                        alphabet (till 30 characters).</div>
                     </div>
                   </div>
                 </div>
+
                 <div class="form-group">
                   <label for="specialty" class="col-md-2 col-sm-3 col-xs-12 control-label">Speciality</label>
                   <div class="col-md-10 col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{0,100}$" [(ngModel)]="resume.education.specialty" placeholder="Speciality"
-                      id="specialty" name="specialty" #specialty="ngModel"  autocomplete="off">
+                    <input type="text" class="form-control" pattern="^[A-Za-z? ?A-Za-z]{0,100}$"
+                      [(ngModel)]="resume.education.specialty" placeholder="Speciality" id="specialty" name="specialty"
+                      #specialty="ngModel" autocomplete="off">
                     <div *ngIf="specialty.errors && (specialty.dirty || specialty.touched)" class="alert alert-danger">
-                      <div [hidden]="!specialty.errors.pattern">Speciality can only contain letters of the alphabet (till 100 characters).</div>
+                      <div [hidden]="!specialty.errors.pattern">Speciality can only contain letters of the alphabet
+                        (till 100 characters).</div>
                     </div>
                   </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="graduation" class="col-md-2 col-sm-3 col-xs-12 control-label">Graduation</label>
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" pattern="^[1-9][0-9]{3}$" [(ngModel)]="resume.education.graduation" placeholder="Graduation"
-                        id="graduation" name="graduation" #graduation="ngModel" autocomplete="off">
-                      <div *ngIf="graduation.errors && (graduation.dirty || graduation.touched)" class="alert alert-danger">
-                        <div [hidden]="!graduation.errors.pattern">Graduation can only contain numbers.</div>
-                      </div>
+                  <label for="graduation" class="col-md-2 col-sm-3 col-xs-12 control-label">Graduation</label>
+                  <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" pattern="^[1-9][0-9]{3}$"
+                      [(ngModel)]="resume.education.graduation" placeholder="Graduation" id="graduation"
+                      name="graduation" #graduation="ngModel" autocomplete="off">
+                    <div *ngIf="graduation.errors && (graduation.dirty || graduation.touched)"
+                      class="alert alert-danger">
+                      <div [hidden]="!graduation.errors.pattern">Graduation can only contain numbers.</div>
                     </div>
                   </div>
+                </div>
               </fieldset>
-            <hr>
-            <fieldset class="fieldset">
+              <hr>
+              <fieldset class="fieldset">
                 <h3 class="fieldset-title">Action</h3>
-
                 <div class="form-group">
                   <div *ngIf="resume.resumeId == null">
                     <button [disabled]="!cvForm.form.valid" class="btn btn-primary" (click)="insert()">Create</button>
@@ -213,13 +232,16 @@
                     <button [disabled]="!cvForm.form.valid" class="btn btn-success" (click)="update()">Update</button>
                   </div>
                   <hr>
-                  <a class="cancel" routerLink="/resume/user" style="font-size: 17px;margin-left: 10px;margin-top:30px">Cancel</a>
+                  <a class="cancel" routerLink="/resume/user"
+                    style="font-size: 17px;margin-left: 10px;margin-top:30px">Cancel</a>
                 </div>
               </fieldset>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
-</div>
 </body>
+
+</html>

@@ -1,18 +1,27 @@
+body {
+    background-image: url(/../../assets/img/background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    padding-top: 30px;
+}
+
 fieldset.experience-border {
     border: 1px groove rgb(240, 233, 233) !important;
     padding: 0 1.4em 1.4em 1.4em !important;
     margin: 0 0 1.5em 0 !important;
-    -webkit-box-shadow:  0px 0px 0px 0px #616670;
-            box-shadow:  0px 0px 0px 0px #616670;
+    -webkit-box-shadow: 0px 0px 0px 0px #616670;
+    box-shadow: 0px 0px 0px 0px #616670;
 }
 
 legend.experience-border {
     font-size: 12px;
-    width:inherit; 
-    padding:0 10px; 
-    border-bottom:none;
+    width: inherit;
+    padding: 0 10px;
+    border-bottom: none;
     color: #616670;
-    
 }
 
 .ng-valid[required], .ng-valid.required {
@@ -598,22 +607,27 @@ legend.experience-border {
         display: inline-block
     }
 }
+
 .cancel {
     margin-left: 20px;
     text-align: center;
     font-size: 20px;
 }
-.addRequirement{
+
+.addRequirement {
     margin-top: 20px;
 }
-.checkboxC{
-margin-left: 100px; 
-margin-top:-35px; 
+
+.checkboxC {
+    margin-left: 100px;
+    margin-top: -35px;
 }
-.forSalary{
+
+.forSalary {
     position: relative;
 }
-.forCurrency{
+
+.forCurrency {
     position: relative;
     margin-left: 50%;
     margin-top: -9%;

@@ -1,11 +1,16 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { UserPrincipal } from '../models/userPrincipal.model';
-import { map } from 'rxjs/operators';
-import {APP_CONFIG, IAppConfig} from '../app.config';
 
-@Injectable({ providedIn: 'root' })
+import { UserPrincipal } from '../models/userPrincipal.model';
+
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
+
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<UserPrincipal>;
@@ -24,7 +29,6 @@ export class AuthenticationService {
   }
 
   public authenticate(credentials: { username: any; password: any; }) {
-
     const authHeader = credentials ? {
       'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password),
       'Access-Control-Allow-Origin': 'http://localhost:4200',

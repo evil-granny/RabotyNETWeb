@@ -1,4 +1,14 @@
-.btn-success{
+body {
+  background-image: url(/../../assets/img/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+  padding-top: 30px;
+}
+
+.btn-success {
   margin-left: 30px !important;
 }
 .ng-valid[required],

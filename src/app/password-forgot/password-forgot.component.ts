@@ -1,19 +1,20 @@
-import {Component, Inject} from '@angular/core';
-import {Router} from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ComfirmComponent} from '../confirm/comfirm.component';
-import {MatDialog} from '@angular/material';
-import {APP_CONFIG, IAppConfig} from '../app.config';
+import { Component, Inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { ComfirmComponent } from '../confirm/comfirm.component';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 @Component({
   selector: 'app-password-forgot',
   templateUrl: './password-forgot.component.html',
   styleUrls: ['./password-forgot.component.scss']
 })
-
 export class PasswordForgotComponent {
 
-  userLogin = {username: ''};
+  userLogin = { username: '' };
 
   private resetPasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/resetPassword';
   private errors: any;
@@ -33,23 +34,25 @@ export class PasswordForgotComponent {
     };
 
     const observable = this.http.post<any>(this.resetPasswordUrl, this.userLogin, httpOptions);
-    observable.subscribe(result =>  {
+    observable.subscribe(result => {
+    },
+      error => {
+        this.errors = error;
+        this.openErrorModal(this.errors);
       },
-        error => {
-          this.errors = error;
-          this.openErrorModal(this.errors);
-        },
-    () => {
-      this.openSuccessModal('Please check mail for further instructions!');
-      this.router.navigate(['/vacancies']);
-    }
+      () => {
+        this.openSuccessModal('Please check mail for further instructions!');
+        this.router.navigate(['/vacancies']);
+      }
     );
   }
 
   public openErrorModal(name: String) {
     this.dialog.open(ComfirmComponent, { data: { name } });
   }
+
   public openSuccessModal(name: String) {
     this.dialog.open(ComfirmComponent, { data: { name } });
   }
+
 }

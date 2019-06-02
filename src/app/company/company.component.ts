@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Company } from '../models/CompanyModel/company.model';
-import { CompanyService } from '../services/company.service';
+import { Company } from '../models/company/company.model';
 import { Claim } from '../models/claim.model';
+
+import { CompanyService } from '../services/company.service';
 
 @Component({
   selector: 'app-person',
   templateUrl: './company.component.html',
-  styleUrls: [ './company.component.css' ]
+  styleUrls: ['./company.component.css']
 })
 export class CompanyComponent implements OnInit {
 
   companies: Company[];
-  
+
   filter: string = "all";
   currentClaim: BigInteger = null;
 
@@ -21,7 +22,7 @@ export class CompanyComponent implements OnInit {
   count: number = 3;
   size: number = 0;
 
-  constructor(private router: Router, private companyService: CompanyService) {}
+  constructor(private router: Router, private companyService: CompanyService) { }
 
   ngOnInit() {
     this.findAll();
@@ -29,15 +30,15 @@ export class CompanyComponent implements OnInit {
 
   findAll() {
     this.companyService.findAllWothPagination(this.page * this.count, this.count)
-      .subscribe( data => {
+      .subscribe(data => {
         this.companies = data.companies;
         this.size = data.count;
 
         this.companies.forEach(company => {
           this.companyService.findClaims(company)
-            .subscribe( data => {
+            .subscribe(data => {
               company.claims = new Array();
-              data.forEach(function(claim) {
+              data.forEach(function (claim) {
                 company.claims.push(claim);
               })
             })
@@ -45,23 +46,23 @@ export class CompanyComponent implements OnInit {
       });
   }
 
-  canPrev() : boolean {
+  canPrev(): boolean {
     return this.page > 0;
   }
 
   prev() {
-    if(this.canPrev()) {
+    if (this.canPrev()) {
       this.page = this.page - 1;
       this.findAll();
     }
   }
 
-  canNext() : boolean {
+  canNext(): boolean {
     return (this.page + 1) * this.count < this.size;
   }
 
   next() {
-    if(this.canNext()) {
+    if (this.canNext()) {
       this.page = this.page + 1;
       this.findAll();
     }
@@ -69,52 +70,52 @@ export class CompanyComponent implements OnInit {
 
   deleteById(company: Company): void {
     this.companyService.deleteById(company)
-      .subscribe( data => {
+      .subscribe(() => {
         this.companies = this.companies.filter(p => p !== company);
         this.size = this.size - 1;
-      })
+      });
   };
 
-  approve(company: Company) : void {
+  approve(company: Company): void {
     this.companyService.sendMail(company)
-      .subscribe( data => {
+      .subscribe(() => {
         this.companies.find((c) => c.companyId === company.companyId).status = 'MAIL_SENT';
       });
   }
 
-  rejectClaim(claim: Claim) : void {
+  rejectClaim(claim: Claim): void {
     this.companyService.deleteClaimById(claim)
-      .subscribe( data => {
+      .subscribe(() => {
         this.companies.forEach(company => {
           this.companyService.findClaims(company)
-            .subscribe( data => {
+            .subscribe(() => {
               company.claims = company.claims.filter(c => c !== claim);
-            })
-        });     
+            });
+        });
       });
   }
 
-  isApproved(company: Company) : boolean {
+  isApproved(company: Company): boolean {
     return company.status == 'APPROVED';
   }
 
-  isMailSent(company: Company) : boolean {
+  isMailSent(company: Company): boolean {
     return company.status == 'MAIL_SENT';
   }
 
-  isBlocked(company: Company) : boolean {
+  isBlocked(company: Company): boolean {
     return company.status == 'BLOCKED';
   }
 
-  hasClaims(company: Company) : boolean {
+  hasClaims(company: Company): boolean {
     return company.claims != null && company.claims.length > 0;
   }
 
   block(company: Company) {
-    if(company.status == 'BLOCKED')
+    if (company.status == 'BLOCKED')
       company.status = 'APPROVED';
     else
-      company.status = 'BLOCKED';  
+      company.status = 'BLOCKED';
     this.companyService.update(company)
       .subscribe(data => {
         this.companies.find((c) => c.companyId === company.companyId).status = data.status;

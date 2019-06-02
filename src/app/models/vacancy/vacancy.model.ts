@@ -1,5 +1,5 @@
 import { Requirement } from '../requirement.model';
-import { Company } from '../CompanyModel/company.model';
+import { Company } from '../company/company.model';
 
 export class Vacancy {
 

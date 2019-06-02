@@ -1,17 +1,19 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Company } from 'src/app/models/CompanyModel/company.model';
-import { CompanyService } from 'src/app/services/company.service';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Claim } from 'src/app/models/claim.model';
-import { UserService } from 'src/app/services/user.service';
-import { Vacancy } from 'src/app/models/vacancy/vacancy.model';
-import { VacancyService } from 'src/app/services/vacancy.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Photo } from 'src/app/models/photo.model';
-import { PhotoService } from 'src/app/services/profile/photo.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { UserPrincipal } from 'src/app/models/userPrincipal.model';
-import { Role } from 'src/app/models/roles.model';
+
+import { Company } from '../../models/company/company.model';
+import { CompanyService } from '../../services/company.service';
+import { Claim } from '../../models/claim.model';
+import { Vacancy } from '../../models/vacancy/vacancy.model'
+import { Photo } from '../../models/photo.model';
+import { Role } from '../../models/roles.model';
+import { UserPrincipal } from '../../models/userPrincipal.model';
+
+import { VacancyService } from '../../services/vacancy.service';
+import { UserService } from '../../services/user.service';
+import { PhotoService } from '../../services/profile/photo.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'rabotyNet',
@@ -59,19 +61,19 @@ export class ViewCompanyComponent implements OnInit {
                 this.loadPhoto(this.company.photo.photoId);
               }
             });
-        })
+        });
     }
+
     this.findVacancies();
   }
 
   findVacancies() {
-    this.vacancyService.findVacanciesByCompanyId(this.route.snapshot.paramMap.get("companyId"), this.page * this.count).subscribe(
-      data => {
+    this.vacancyService.findVacanciesByCompanyId(this.route.snapshot.paramMap.get("companyId"), this.page * this.count)
+      .subscribe(data => {
         this.vacancies = data;
         this.vacancies = data.vacancies;
         this.size = data.count;
-      }
-    )
+      });
   }
 
   createClaim(): void {
@@ -141,8 +143,7 @@ export class ViewCompanyComponent implements OnInit {
 
     if (vacancy.vacancyStatus == 'OCCUPIED') {
       vacancy.vacancyStatus = 'OUTDATED';
-    }
-    else if (vacancy.vacancyStatus == 'OUTDATED') {
+    } else if (vacancy.vacancyStatus == 'OUTDATED') {
       vacancy.vacancyStatus = "OCCUPIED";
     }
 
@@ -153,7 +154,7 @@ export class ViewCompanyComponent implements OnInit {
     this.vacancyService.update(vacancy)
       .subscribe(() => {
         window.location.reload();
-      })
+      });
   }
 
   openVacancy(vacancy: Vacancy) {
@@ -165,6 +166,12 @@ export class ViewCompanyComponent implements OnInit {
   }
 
   ifClicked() {
+    document.getElementsByTagName("div")[0].setAttribute("style", "opacity: 1");
+    this.wasClicked = !this.wasClicked;
+  }
+
+  clickedCancel() {
+    document.getElementsByTagName("div")[0].setAttribute("style", "opacity: 0.95");
     this.wasClicked = !this.wasClicked;
   }
 

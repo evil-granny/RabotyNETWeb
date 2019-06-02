@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vacancy</title>
+
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
         integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -30,6 +30,7 @@
                 </div>
                 <form class="form-detail" (ngSubmit)="findByEmail()" #userForm="ngForm">
                     <div class="tabcontent" id="sign-up">
+
                         <div class="form-row">
                             <label class="form-row-inner">
                                 <input type="text" id="login1" class="input-text" required autofocus
@@ -43,6 +44,7 @@
                                 <div [hidden]="!login1.errors.required">Login is required!</div>
                             </div>
                         </div>
+
                         <div class="form-row">
                             <label class="form-row-inner">
                                 <input type="password" id="password1" class="input-text" name="password1"
@@ -58,6 +60,7 @@
                                     less than 9 symbols (uppercase, lowercase, number and one special symbol)!</div>
                             </div>
                         </div>
+
                         <div class="form-row">
                             <label class="form-row-inner">
                                 <input type="password" class="input-text" [(ngModel)]="user.matchingPassword"
@@ -73,14 +76,17 @@
                                 class="alert alert-danger">Passwords don`t match!
                             </div>
                         </div>
+
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" [disabled]="userForm.form.valid"
                                 value="Register">
                         </div>
+
                     </div>
                 </form>
                 <form class="form-detail" (submit)="validUser()" #userForm="ngForm">
                     <div class="tabcontent" id="sign-in">
+
                         <div class="form-row">
                             <label class="form-row-inner">
                                 <input type="text" name="username" id="username" class="input-text" #username="ngModel"
@@ -94,6 +100,7 @@
                                 <div [hidden]="!username.errors.required">Login is required!</div>
                             </div>
                         </div>
+
                         <div class="form-row">
                             <label class="form-row-inner">
                                 <input type="password" name="password" id="password" class="input-text"
@@ -109,10 +116,17 @@
                             <div [hidden]="!signinPassword.errors.pattern && signinPassword.untouched">Password is
                                 required!</div>
                         </div>
+
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Sign In">
                         </div>
-                      <div align="center" pagination-template><a routerLink="/forgotPassword"><h5>Forgot password?</h5></a></div>
+
+                        <div pagination-template>
+                            <a routerLink="/forgotPassword">
+                                <h5>Forgot password?</h5>
+                            </a>
+                        </div>
+
                     </div>
                 </form>
             </div>

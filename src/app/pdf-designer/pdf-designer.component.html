@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vacancy</title>
+
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -14,8 +14,7 @@
 </head>
 
 <body>
-  <div class="container" style="margin-top:70px">
-
+  <div class="container" style="margin-top: 40px; opacity: 0.95;">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
@@ -28,9 +27,9 @@
                   <label for="firstName" class="col-md-5" style="float: left; ">First Name</label>
                   <label for="firstName" class="col-md-5" style="float: left; ">Last Name</label>
                   <div class="col-md-5" style="float: left; ">
-                    <input type="text" class="form-control" pattern="^[A-Za-z]{2,20}$" [(ngModel)]="resume.person.firstName"
-                      placeholder="First Name" id="firstName" name="firstName" #firstName="ngModel" required
-                      autocomplete="off" disabled>
+                    <input type="text" class="form-control" pattern="^[A-Za-z]{2,20}$"
+                      [(ngModel)]="resume.person.firstName" placeholder="First Name" id="firstName" name="firstName"
+                      #firstName="ngModel" required autocomplete="off" disabled>
                     <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="alert alert-danger">
                       <div [hidden]="!firstName.errors.required">First Name is required!</div>
                       <div [hidden]="!firstName.errors.pattern">
@@ -39,9 +38,9 @@
                     </div>
                   </div>
                   <div class="col-md-5" style="float: left; ">
-                    <input type="text" class="form-control" pattern="^[A-Za-z]{2,20}$" [(ngModel)]="resume.person.lastName"
-                      placeholder="Last Name" id="lastName" name="lastName" #lastName="ngModel" required
-                      autocomplete="off" disabled>
+                    <input type="text" class="form-control" pattern="^[A-Za-z]{2,20}$"
+                      [(ngModel)]="resume.person.lastName" placeholder="Last Name" id="lastName" name="lastName"
+                      #lastName="ngModel" required autocomplete="off" disabled>
                     <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="alert alert-danger">
                       <div [hidden]="!lastName.errors.required">Last Name is required!</div>
                       <div [hidden]="!lastName.errors.pattern">
@@ -74,9 +73,9 @@
                   <label for="email" class="col-md-5" style="float: left; ">Email</label>
                   <div class="col-md-5" style="float: left; ">
                     <input type="text" class="form-control" maxlength="13"
-                           pattern="^[+]*[0-9][0-9][(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
-                           [(ngModel)]="resume.person.contact.phoneNumber" placeholder="Phone Number" id="phoneNumber"
-                           name="phoneNumber" #phoneNumber="ngModel" required autocomplete="off">
+                      pattern="^[+]*[0-9][0-9][(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
+                      [(ngModel)]="resume.person.contact.phoneNumber" placeholder="Phone Number" id="phoneNumber"
+                      name="phoneNumber" #phoneNumber="ngModel" required autocomplete="off">
                     <div *ngIf="phoneNumber.errors && (phoneNumber.dirty || phoneNumber.touched)"
                       class="alert alert-danger">
                       <div [hidden]="!phoneNumber.errors.required">Phone Number is required!</div>
@@ -85,11 +84,11 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-5" style="float: left; ">
+                  <div class="col-md-5" style="float: left;">
                     <input type="text" class="form-control" maxlength="50"
-                           pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-                           [(ngModel)]="resume.person.contact.email" placeholder="Email" id="email" name="email" #email="ngModel"
-                           required autocomplete="off">
+                      pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                      [(ngModel)]="resume.person.contact.email" placeholder="Email" id="email" name="email"
+                      #email="ngModel" required autocomplete="off">
                     <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
                       <div [hidden]="!email.errors.required">Email is required!</div>
                       <div [hidden]="!email.errors.pattern">
@@ -103,11 +102,12 @@
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Education</h3>
                 <div class="form-group">
-                  <label for="phoneNumber" class="col-md-5" style="float: left; ">Degree</label>
-                  <label for="school" class="col-md-5" style="float: left; ">Education institution</label>
-                  <div class="col-md-5" style="float: left; ">
-                    <input type="text" class="form-control" pattern="^[A-Za-z]{3,30}$" [(ngModel)]="resume.education.degree"
-                      placeholder="First Name" id="degree" name="degree" #degree="ngModel" required autocomplete="off">
+                  <label for="phoneNumber" class="col-md-5" style="float: left;">Degree</label>
+                  <label for="school" class="col-md-5" style="float: left;">Education institution</label>
+                  <div class="col-md-5" style="float: left;">
+                    <input type="text" class="form-control" pattern="^[A-Za-z]{3,30}$"
+                      [(ngModel)]="resume.education.degree" placeholder="First Name" id="degree" name="degree"
+                      #degree="ngModel" required autocomplete="off">
                     <div *ngIf="degree.errors && (degree.dirty || degree.touched)" class="alert alert-danger">
                       <div [hidden]="!degree.errors.required">Degree is required!</div>
                       <div [hidden]="!degree.errors.pattern">
@@ -115,9 +115,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-5" style="float: left; ">
-                    <input type="text" class="form-control" pattern="^[\s\S]{3,30}$" [(ngModel)]="resume.education.school"
-                      placeholder="School" id="school" name="school" #school="ngModel" required autocomplete="off">
+                  <div class="col-md-5" style="float: left;">
+                    <input type="text" class="form-control" pattern="^[\s\S]{3,30}$"
+                      [(ngModel)]="resume.education.school" placeholder="School" id="school" name="school"
+                      #school="ngModel" required autocomplete="off">
                     <div *ngIf="school.errors && (school.dirty || school.touched)" class="alert alert-danger">
                       <div [hidden]="!school.errors.required">School is required!</div>
                       <div [hidden]="!school.errors.pattern">
@@ -127,12 +128,12 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="phoneNumber" class="col-md-5" style="float: left; ">Specialty</label>
-                  <label for="graduation" class="col-md-5" style="float: left; ">Graduation</label>
-                  <div class="col-md-5" style="float: left; ">
+                  <label for="phoneNumber" class="col-md-5" style="float: left;">Specialty</label>
+                  <label for="graduation" class="col-md-5" style="float: left;">Graduation</label>
+                  <div class="col-md-5" style="float: left;">
                     <input type="text" class="form-control" pattern="^[\s\S]{3,100}$"
-                           [(ngModel)]="resume.education.specialty" placeholder="Specialty" id="specialty" name="specialty"
-                           #specialty="ngModel"  autocomplete="off">
+                      [(ngModel)]="resume.education.specialty" placeholder="Specialty" id="specialty" name="specialty"
+                      #specialty="ngModel" autocomplete="off">
                     <div *ngIf="specialty.errors && (specialty.dirty || specialty.touched)" class="alert alert-danger">
                       <!-- <div [hidden]="!specialty.errors.required">Specialty is required!</div> -->
                       <div [hidden]="!specialty.errors.pattern">
@@ -140,10 +141,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-5" style="float: left; ">
+                  <div class="col-md-5" style="float: left;">
                     <input type="text" class="form-control" pattern="^((19|20)[0-9]{2})$"
-                           [(ngModel)]="resume.education.graduation" placeholder="graduation" id="graduation" name="graduation"
-                           #graduation="ngModel"  autocomplete="off">
+                      [(ngModel)]="resume.education.graduation" placeholder="graduation" id="graduation"
+                      name="graduation" #graduation="ngModel" autocomplete="off">
                     <div *ngIf="graduation.errors && (graduation.dirty || graduation.touched)"
                       class="alert alert-danger">
                       <!-- <div [hidden]="!graduation.errors.required">Graduatioin is required!</div> -->
@@ -164,37 +165,37 @@
                       <input type="checkbox" [checked]="job.printPdf" (change)="job.printPdf = !job.printPdf" />
                     </legend>
                     <div class="form-group">
-                      <label for="position" class="col-md-5" style="float: left; ">Position</label>
-                      <label for="company" class="col-md-5" style="float: left; ">Company</label>
-                      <div class="col-md-5" style="float: left; ">
+                      <label for="position" class="col-md-5" style="float: left;">Position</label>
+                      <label for="company" class="col-md-5" style="float: left;">Company</label>
+                      <div class="col-md-5" style="float: left;">
                         <input type="text" class="form-control" pattern="^[\s\S]{3,40}$" [(ngModel)]="job.position"
                           placeholder="Position" id="position{{in}}" name="position{{in}}" #position{{in}}="ngModel"
                           required autocomplete="off">
                       </div>
-                      <div class="col-md-5" style="float: left; ">
+                      <div class="col-md-5" style="float: left;">
                         <input type="text" class="form-control" pattern="^[\s\S]{3,50}$" [(ngModel)]="job.companyName"
                           placeholder="company" id="company{{in}}" name="company{{in}}" #company{{in}}="ngModel"
                           autocomplete="off">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="from" class="col-md-5" style="float: left; ">From</label>
-                      <label for="to" class="col-md-5" style="float: left; ">To</label>
-                      <div class="col-md-5" style="float: left; ">
+                      <label for="from" class="col-md-5" style="float: left;">From</label>
+                      <label for="to" class="col-md-5" style="float: left;">To</label>
+                      <div class="col-md-5" style="float: left;">
                         <input type="date" class="form-control" [(ngModel)]="job.begin" placeholder="Last Name"
                           id="begin{{in}}" name="begin{{in}}" #begin{{in}}="ngModel" required autocomplete="off">
                       </div>
-                      <div class="col-md-5" style="float: left; ">
+                      <div class="col-md-5" style="float: left;">
                         <input type="date" class="form-control" [(ngModel)]="job.end" placeholder="Last Name"
                           id="end{{in}}" name="end{{in}}" #end{{in}}="ngModel" required autocomplete="off">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="description" class="col-md-5" style="float: left; ">Description</label>
-                      <div class="col-md-10" style="float: left; ">
+                      <label for="description" class="col-md-5" style="float: left;">Description</label>
+                      <div class="col-md-10" style="float: left;">
                         <textarea class="form-control" pattern="^[\s\S]{3,200}$" [(ngModel)]="job.description"
                           placeholder="description" id="description{{in}}" name="description{{in}}"
-                          #description{{in}}="ngModel" style="resize: none" autocomplete="off">
+                          #description{{in}}="ngModel" style="resize: none;" autocomplete="off">
                         </textarea>
                       </div>
                     </div>
@@ -222,11 +223,11 @@
                       <label for="descriptionSkill{{in}}"
                         class="col-md-2 col-sm-3 col-xs-12 control-label">Description</label>
                       <div class="col-md-10 col-sm-9 col-xs-12">
-                        <textarea class="form-control" pattern="^[\s\S]{0,255}$"
-                          [(ngModel)]="skill.description" placeholder="Description" id="descriptionSkill{{in}}"
-                          name="descriptionSkill{{in}}" style="resize: none" #descriptionSkill{{in}}="ngModel"  autocomplete="off">
+                        <textarea class="form-control" pattern="^[\s\S]{0,255}$" [(ngModel)]="skill.description"
+                          placeholder="Description" id="descriptionSkill{{in}}" name="descriptionSkill{{in}}"
+                          style="resize: none" #descriptionSkill{{in}}="ngModel" autocomplete="off">
                         </textarea>
-                        </div>
+                      </div>
                     </div>
                   </fieldset>
                 </div>
@@ -248,12 +249,12 @@
                   </div>
                 </div> -->
                 <div class="form-group">
-                    <div *ngIf="resume.resumeId != null">
-                      <button [disabled]="!cvForm.form.valid" class="btn btn-success" (click)="showPreviewPdf() ">Preview PDF
-                      </button>
-                    </div>
+                  <div *ngIf="resume.resumeId != null">
+                    <button [disabled]="!cvForm.form.valid" class="btn btn-success" (click)="showPreviewPdf() ">Preview
+                      PDF
+                    </button>
                   </div>
-                
+                </div>
               </fieldset>
             </form>
           </div>

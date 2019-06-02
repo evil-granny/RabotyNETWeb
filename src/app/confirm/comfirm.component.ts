@@ -13,8 +13,8 @@ export class ComfirmComponent implements OnInit {
   ngOnInit() {
   }
 
-  public close(){
-    this.MatDialogRef.close();  
+  public close() {
+    this.MatDialogRef.close();
   }
 
 }

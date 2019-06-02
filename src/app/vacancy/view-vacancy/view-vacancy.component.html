@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vacancy</title>
+
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div class="container" style="margin-top:70px">
+  <div class="container" style="margin-top: 40px; opacity: 0.95;">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
@@ -23,22 +23,26 @@
             <form class="form-horizontal" #personForm="ngForm">
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Main Info</h3>
-                <div class="simpleVacancy" >
-                    <p><span class="mySpan" >Position: </span>{{vacancy.position}}</p>
-                    <p><span class="mySpan">Employment: </span>{{vacancy.employment}}</p>
-                    <p><span class="mySpan">Salary: </span>{{vacancy.salary}} {{vacancy.currency}}</p>
-                    <p class="mySpan">Requirements:</p>
-                    <td>
-                      <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements ">
-                        {{requirement.description}}</li>
-                    </td>
+                <div class="simpleVacancy">
+                  <p><span class="mySpan">Position: </span>{{vacancy.position}}</p>
+                  <p><span class="mySpan">Employment: </span>{{vacancy.employment}}</p>
+                  <p><span class="mySpan">Salary: </span>{{vacancy.salary}} {{vacancy.currency}}</p>
+                  <p class="mySpan">Requirements:</p>
+                  <td>
+                    <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements ">
+                      {{requirement.description}}</li>
+                  </td>
                 </div>
-                </fieldset>
-             <hr>
-             <a class="btn btn-primary"  (click)="goBack()" style="font-size: 17px;margin-left: 10px;margin-top:20px;color:white">Show all vacancies</a>
-             <a class="btn btn-primary"  routerLink="/viewCompany/{{company.companyId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px;">Show company</a> 
-             <a class="btn btn-success" (click)=showPreviewPdf() style="font-size: 17px;margin-left: 10px;margin-top:20px;color:white">Send resume</a>
-             <a class="btn btn-success" *ngIf="isCowner" routerLink="/showResume/{{vacancy.vacancyId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px;">Show candidates</a>
+              </fieldset>
+              <hr>
+              <a class="btn btn-primary" (click)="goBack()"
+                style="font-size: 17px; margin-left: 10px; margin-top: 20px; color:white;">Show all vacancies</a>
+              <a class="btn btn-primary" routerLink="/viewCompany/{{company.companyId}}"
+                style="font-size: 17px; margin-left: 10px; margin-top: 20px;">Show company</a>
+              <a class="btn btn-success" (click)=showPreviewPdf()
+                style="font-size: 17px; margin-left: 10px; margin-top: 20px; color:white;">Send resume</a>
+              <a class="btn btn-success" *ngIf="isCowner" routerLink="/showResume/{{vacancy.vacancyId}}"
+                style="font-size: 17px; margin-left: 10px; margin-top: 20px;">Show candidates</a>
             </form>
           </div>
         </div>
@@ -46,3 +50,5 @@
     </div>
   </div>
 </body>
+
+</html>

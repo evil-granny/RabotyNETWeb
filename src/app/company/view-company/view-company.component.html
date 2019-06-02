@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vacancy</title>
+
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div class="container" style="margin-top:70px">
+  <div class="container" style="margin-top: 38px; opacity: 0.95;">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
@@ -28,7 +28,8 @@
                 rel="tooltip" title="This company is not approved"></i>
               <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" style="color: black; font-size: 150%;"
                 rel="tooltip" title="This company is blocked"></i>
-              {{company.name}}</h2>
+              {{company.name}}
+            </h2>
             <img *ngIf="avatar" style="height: 150px; float: left; margin-right: 5%;" [src]="avatar" alt="">
             <img *ngIf="!avatar" style="height: 150px; float: left; margin-right: 5%;" src="/assets/img/company.png"
               alt="">
@@ -72,7 +73,6 @@
                 </div>
               </div>
             </div>
-
             <br>
             <button *ngIf="claiming == false && !checkUser()" class="btn btn-warning"
               (click)="claiming = true;">Claim</button>
@@ -110,7 +110,6 @@
                     </div>
                   </div>
                 </fieldset>
-
                 <input type="reset" class="btn btn-default" value="Cancel" (click)="claiming = false;">
                 <input type="submit" class="btn btn-danger" value="Claim" [disabled]="!claimForm.form.valid"
                   style="margin-left: 30px;">
@@ -118,8 +117,7 @@
             </div>
 
             <a *ngIf="checkUser() && isCowner && company.status == 'APPROVED'" class="btn btn-primary"
-              style="margin: 20px" routerLink="/createVacancy/{{company.companyId}}">Create Vacancy</a>
-
+              style="margin: 20px;" routerLink="/createVacancy/{{company.companyId}}">Create Vacancy</a>
 
             <h4 class="fieldset-title"></h4>
             <h4>Vacancies</h4>
@@ -136,7 +134,8 @@
                         <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
                           {{requirement.description}}</li>
                       </td>
-                      <div class="row align-items-end" *ngIf="company.status == 'APPROVED'" style="height: 100%; margin: 0px;">
+                      <div class="row align-items-end" *ngIf="company.status == 'APPROVED'"
+                        style="height: 100%; margin: 0px;">
                         <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
@@ -165,7 +164,7 @@
                                 </div>
                                 <div class="modal-footer">
                                   <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"
-                                    (click)="ifClicked()">
+                                    (click)="clickedCancel()">
                                   <input type="submit" class="btn btn-success" value="Close"
                                     (click)="closeVacancy(vacancy)">
                                 </div>
@@ -188,7 +187,8 @@
                         <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
                           {{requirement.description}}</li>
                       </td>
-                      <div class="row align-items-end" *ngIf="company.status == 'APPROVED'" style="height: 100%; margin: 0px;">
+                      <div class="row align-items-end" *ngIf="company.status == 'APPROVED'"
+                        style="height: 100%; margin: 0px;">
                         <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
@@ -211,8 +211,9 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                  <input type="submit" class="btn btn-success" value="Open"
+                                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"
+                                    (click)="clickedCancel()">
+                                  <input type=" submit" class="btn btn-success" value="Open"
                                     (click)="openVacancy(vacancy)">
                                 </div>
                               </form>
@@ -234,7 +235,8 @@
                         <li style="margin-left: 20px;" *ngFor="let requirement of vacancy.requirements | slice:0:1;">
                           {{requirement.description}}</li>
                       </td>
-                      <div class="row align-items-end"  *ngIf="company.status == 'APPROVED'" style="height: 100%; margin: 0px;">
+                      <div class="row align-items-end" *ngIf="company.status == 'APPROVED'"
+                        style="height: 100%; margin: 0px;">
                         <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
@@ -242,7 +244,7 @@
                             style="left: 0; vertical-align: bottom" role="button" href="#openVacancyModal{{index}}"
                             data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Open vacancy</a></p>
 
-                        <div id="openVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true">
+                        <div id="openVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true" a>
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <form>
@@ -257,7 +259,8 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"
+                                    (click)="clickedCancel()">
                                   <input type="submit" class="btn btn-success" value="Open"
                                     (click)="openVacancy(vacancy)">
                                 </div>
@@ -309,7 +312,7 @@
                                 </div>
                                 <div class="modal-footer">
                                   <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"
-                                    (click)="ifClicked()">
+                                    (click)="clickedCancel()">
                                   <input type="submit" class="btn btn-success" value="Close"
                                     (click)="closeVacancy(vacancy)">
                                 </div>
@@ -321,6 +324,7 @@
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
 

@@ -1,11 +1,12 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
 
 import { User } from "../models/user.model";
+
 import { Observable } from "rxjs";
-import { MatDialog } from '@angular/material';
-import { ComfirmComponent } from '../confirm/comfirm.component';
-import {APP_CONFIG, IAppConfig} from '../app.config';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,8 +26,8 @@ export class UserService {
   private userUrl = this.rabotyNETEndpoint.apiEndpoint + '/users/';
 
   foundUser: User[];
-  error: any;
 
+  error: any;
 
   public findAll(): Observable<any> {
     return this.http.get<User[]>(this.userUrl, httpOptions);
@@ -37,10 +38,10 @@ export class UserService {
   }
 
   public findByEmail(user: User): Observable<any> {
-    return this.http.get<User[]>(this.userUrl +"username/"+ user.login + "/", httpOptions);
+    return this.http.get<User[]>(this.userUrl + "username/" + user.login + "/", httpOptions);
   }
 
-  public findById(userId:number): Observable<any> {
+  public findById(userId: number): Observable<any> {
     return this.http.get<User>(this.userUrl + userId, httpOptions);
   }
 
@@ -49,19 +50,19 @@ export class UserService {
   }
 
   public insert(user: any, users: any) {
-      return this.http.post<User>(this.userUrl + "auth", user, httpOptions);
+    return this.http.post<User>(this.userUrl + "auth", user, httpOptions);
   }
 
-  public validToken(token: String): Observable<any>{
+  public validToken(token: String): Observable<any> {
     return this.http.get<String>(this.userUrl + "auth/confirm?token=" + token, httpOptions);
   }
 
-
-  public findToken (username: any): Observable<any>{
+  public findToken(username: any): Observable<any> {
     return this.http.get<String>(this.userUrl + "findToken?email=" + username, httpOptions);
   }
 
-  public resendToken(email: String): Observable<any>{
-    return this.http.post<String>(this.userUrl + "resendAuthToken?email="+ email, httpOptions);
+  public resendToken(email: String): Observable<any> {
+    return this.http.post<String>(this.userUrl + "resendAuthToken?email=" + email, httpOptions);
   }
+
 }

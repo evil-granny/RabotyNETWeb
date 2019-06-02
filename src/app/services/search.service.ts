@@ -1,8 +1,10 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {SearchResumeResponse} from '../models/SearchModel/SearchResumeResponse.model';
-import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
-import {APP_CONFIG, IAppConfig} from '../app.config';
+
+import { SearchResumeResponse } from '../models/search/SearchResumeResponse.model';
+import { SearchVacancyResponse } from '../models/search/SearchVacancyResponse.model';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,11 +23,11 @@ export class SearchService {
 
   private searchUrl = this.rabotyNETEndpoint.apiEndpoint;
 
-  public getResumeResult(searchResume) {
+  public getResumeResult(searchResume: any) {
     return this.http.post<SearchResumeResponse>(this.searchUrl + '/searchResume', searchResume, httpOptions);
   }
 
-  public getVacancyResult(searchVacancy) {
+  public getVacancyResult(searchVacancy: any) {
     return this.http.post<SearchVacancyResponse>(this.searchUrl + '/searchVacancy', searchVacancy, httpOptions);
   }
 
