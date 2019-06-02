@@ -4,6 +4,6 @@ export class SearchVacancyResponse {
 
   count: number;
 
-  searchVacancyDTOS: SearchVacancyResult[];
+  searchVacancyDtos: SearchVacancyResult[];
 
 }
