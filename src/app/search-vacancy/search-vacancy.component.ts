@@ -87,7 +87,7 @@ export class SearchVacancyComponent implements OnInit {
   }
 
   bottomButtonsShow() {
-    if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchVacancyResponse.searchVacancyDTOS.length > 4) {
+    if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchVacancyResponse.searchVacancyDtos.length > 4) {
       this.bottomButtons = false;
     } else {
       this.bottomButtons = true;

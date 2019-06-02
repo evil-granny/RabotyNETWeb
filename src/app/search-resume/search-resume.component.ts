@@ -94,7 +94,7 @@ export class SearchResumeComponent implements OnInit {
   }
 
   bottomButtonsShow() {
-    if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchResumeResponse.searchResumeDTOS.length > 4) {
+    if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchResumeResponse.searchResumeDtos.length > 4) {
       this.bottomButtons = false;
     } else {
       this.bottomButtons = true;
