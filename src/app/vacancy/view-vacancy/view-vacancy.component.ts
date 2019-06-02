@@ -77,4 +77,8 @@ export class ViewVacancyComponent implements OnInit {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
   }
 
+  get isUser() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
+  }
+
 }

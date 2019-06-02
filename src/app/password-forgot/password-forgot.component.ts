@@ -16,7 +16,7 @@ export class PasswordForgotComponent {
 
   userLogin = { username: '' };
 
-  private resetPasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/resetPassword';
+  private resetPasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/password/reset';
   private errors: any;
 
   constructor(private http: HttpClient, private router: Router, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) {
@@ -34,16 +34,16 @@ export class PasswordForgotComponent {
     };
 
     const observable = this.http.post<any>(this.resetPasswordUrl, this.userLogin, httpOptions);
-    observable.subscribe(result => {
-    },
-      error => {
-        this.errors = error;
-        this.openErrorModal(this.errors);
+    observable.subscribe(result =>  {
       },
-      () => {
-        this.openSuccessModal('Please check mail for further instructions!');
-        this.router.navigate(['/vacancies']);
-      }
+        error => {
+          // this.errors = error;
+          this.openErrorModal('Please check the correctness of the email ');
+        },
+    () => {
+      this.openSuccessModal('Please check mail for further instructions!');
+      this.router.navigate(['/vacancies']);
+    }
     );
   }
 

@@ -9,103 +9,99 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-    integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-  <div id="searchMenu" hidden="hidden">
-    <form class="search-form">
-      <div class="select-control" *ngIf="isCowner">Search</div>
-      <select [(ngModel)]="search.searchDocument" (ngModelChange)="selectDocument()" name="searchDocument"
-        class="form-control" *ngIf="isCowner">
-        <option [defaultSelected]="search.searchDocument" value="vacancies">vacancies</option>
-        <option value="resume">resume</option>
+
+<div id="searchMenu" hidden="hidden">
+  <form class="search-form">
+    <div class="select-control" *ngIf="isCowner">Search</div>
+    <select [(ngModel)]="search.searchDocument" (ngModelChange)="selectDocument()" name="searchDocument"
+            class="form-control" *ngIf="isCowner">
+      <option [defaultSelected]="search.searchDocument" value="vacancies">vacancies</option>
+      <option value="resume">resume</option>
+    </select>
+    <div class="vacancy-select" [hidden]="vacancySelect">
+      <div class="select-control" *ngIf="!isCowner">Search vacancies by:</div>
+      <div class="select-control" *ngIf="isCowner">by:</div>
+      <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
+        <option [defaultSelected]="search.searchParameter" value="position">position</option>
+        <option value="city">city</option>
+        <option value="company">company</option>
       </select>
+    </div>
+    <div class="resume-select" [hidden]="resumeSelect" *ngIf="isCowner">
+      <div class="select-control" *ngIf="isCowner">by:</div>
+      <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
+        <option [defaultSelected]="search.searchParameter" value="name">name</option>
+        <option value="skill">skill</option>
+        <option value="phoneNumber">phone</option>
+        <option value="city">city</option>
+        <option value="position">position</option>
+      </select>
+    </div>
+    <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control"><br>
+    <button id="startButton" class="btn btn-info" (click)="start()">Start search</button>
+  </form>
+</div>
 
-      <div class="vacancy-select" [hidden]="vacancySelect">
-        <div class="select-control" *ngIf="!isCowner">Search vacancies by:</div>
-        <div class="select-control" *ngIf="isCowner">by:</div>
-        <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
-          <option [defaultSelected]="search.searchParameter" value="position">position</option>
-          <option value="city">city</option>
-          <option value="company">company</option>
-        </select>
-      </div>
-
-      <div class="resume-select" [hidden]="resumeSelect" *ngIf="isCowner">
-        <div class="select-control" *ngIf="isCowner">by:</div>
-        <select [(ngModel)]="search.searchParameter" name="searchParameter" class="form-control">
-          <option [defaultSelected]="search.searchParameter" value="name">name</option>
-          <option value="skill">skill</option>
-          <option value="phoneNumber">phone</option>
-          <option value="city">city</option>
-          <option value="position">position</option>
-        </select>
-      </div>
-      <input type="text" [(ngModel)]="search.searchText" placeholder="Search.." name="searchText" class="form-control"
-        pattern="^[A-Za-z]{1,20}$"><br>
-      <button id="startButton" class="btn btn-info" (click)="start()">Start search</button>
-    </form>
+<div class="main">
+  <div class="resultOnPage" [hidden]="resultText">
+    <label>Results on page:
+      <select [(ngModel)]="search.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
+        <option [defaultSelected]="search.resultsOnPage" value="3">3</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+      </select>
+    </label>
   </div>
 
-  <div class="main">
-    <div class="resultOnPage" [hidden]="resultText">
-      <label>Results on page:
-        <select [(ngModel)]="search.resultsOnPage" (change)="startSearch()" name="searchParameter" class="form-control">
-          <option [defaultSelected]="search.resultsOnPage" value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-        </select>
-      </label>
-    </div>
-
-    <div class="search-result" [hidden]="resultText">
-      <h2>Search result</h2>
-      <h5>{{searchVacancyResponse.count}} Vacancies founded</h5>
-    </div>
-
-    <div class="page" [hidden]="topButtons">
-      <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
-      <button class="btn btn-info" [disabled]="previousButton" (click)="previousPage()">&laquo; Previous</button>
-      <button class="btn btn-info" [disabled]="nextButton" (click)="nextPage()">Next &raquo;</button>
-    </div>
-
-    <div id="table">
-      <table class="table table-striped" [hidden]="resultText">
-        <thead>
-          <tr>
-            <th class="d-none">Id</th>
-            <th (click)="sort('position')">Position <i class="fa fa-arrows-v" [hidden]="posHidden"></i></th>
-            <th (click)="sort('company')">Company <i class="fa fa-arrows-v" [hidden]="coHidden"></i></th>
-            <th (click)="sort('city')">City <i class="fa fa-arrows-v" [hidden]="cHidden"></i></th>
-            <th (click)="sort('employment')">Employment <i class="fa fa-arrows-v" [hidden]="emHidden"></i></th>
-            <th (click)="sort('salary')">Salary <i class="fa fa-arrows-v" [hidden]="sHidden"></i></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let searchVacancyResult of searchVacancyResponse.searchVacancyDTOS">
-            <td class="d-none">{{searchVacancyResult.vacancyId}}</td>
-            <td>{{searchVacancyResult.position}}</td>
-            <td>{{searchVacancyResult.companyName}}</td>
-            <td>{{searchVacancyResult.city}}</td>
-            <td>{{searchVacancyResult.employment}}</td>
-            <td>{{searchVacancyResult.salary}} usd</td>
-            <td>
-              <a class="btn btn-info" style="left: 0; vertical-align: bottom" role="button"
-                routerLink="/viewVacancy/{{searchVacancyResult.vacancyId}}">View details &raquo;</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="page" [hidden]="bottomButtons">
-      <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
-      <button class="btn btn-info" [disabled]="previousButton" (click)="previousPage()">&laquo; Previous</button>
-      <button class="btn btn-info" [disabled]="nextButton" (click)="nextPage()">Next &raquo;</button>
-    </div>
+  <div class="search-result" [hidden]="resultText">
+    <h2>Search result</h2>
+    <h5>{{searchVacancyResponse.count}} Vacancies founded</h5>
   </div>
+
+  <div class="page" [hidden]="topButtons">
+    <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
+    <button class="btn btn-info" [disabled]="previousButton" (click)="previousPage()">&laquo; Previous</button>
+    <button class="btn btn-info" [disabled]="nextButton" (click)="nextPage()">Next &raquo;</button>
+  </div>
+
+  <div id="table">
+    <table id="tableId" class="table table-striped" [hidden]="resultText">
+      <thead>
+      <tr>
+        <th class="d-none">Id</th>
+        <th (click)="sort('position')">Position <i class="fa fa-arrows-v" [hidden]="posHidden"></i></th>
+        <th (click)="sort('company')">Company <i class="fa fa-arrows-v" [hidden]="coHidden"></i></th>
+        <th (click)="sort('city')">City <i class="fa fa-arrows-v" [hidden]="cHidden"></i></th>
+        <th (click)="sort('employment')">Employment <i class="fa fa-arrows-v" [hidden]="emHidden"></i></th>
+        <th (click)="sort('salary')">Salary <i class="fa fa-arrows-v" [hidden]="sHidden"></i></th>
+        <th><p hidden="hidden">preview</p></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let searchVacancyResult of searchVacancyResponse.searchVacancyDTOS">
+        <td class="d-none">{{searchVacancyResult.vacancyId}}</td>
+        <td>{{searchVacancyResult.position}}</td>
+        <td>{{searchVacancyResult.companyName}}</td>
+        <td>{{searchVacancyResult.city}}</td>
+        <td>{{searchVacancyResult.employment}}</td>
+        <td>{{searchVacancyResult.salary}} {{searchVacancyResult.currency}}</td>
+        <td><a class="btn btn-info" style="left: 0; vertical-align: bottom"
+               role="button" routerLink="/viewVacancy/{{searchVacancyResult.vacancyId}}">View details &raquo;</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page" [hidden]="bottomButtons">
+    <h5>Page {{pageNumber}} of {{pagesCount}}</h5>
+    <button class="btn btn-info" [disabled]="previousButton" (click)="previousPage()">&laquo; Previous</button>
+    <button class="btn btn-info" [disabled]="nextButton" (click)="nextPage()">Next &raquo;</button>
+  </div>
+</div>
 </body>
 
 </html>

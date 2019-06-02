@@ -83,9 +83,7 @@ export class SearchResumeComponent implements OnInit {
       this.nextButton = false;
       this.previousButton = true;
       this.pageNumber = 1;
-      if (parseInt(this.search.resultsOnPage, 10) > 10 && this.searchResumeResponse.searchResumeDTOS.length > 15) {
-        this.bottomButtons = false;
-      }
+      this.bottomButtonsShow();
     } else {
       this.topButtons = true;
       this.nextButton = true;
@@ -95,11 +93,20 @@ export class SearchResumeComponent implements OnInit {
     }
   }
 
+  bottomButtonsShow() {
+    if (parseInt(this.search.resultsOnPage, 10) > 4 && this.searchResumeResponse.searchResumeDTOS.length > 4) {
+      this.bottomButtons = false;
+    } else {
+      this.bottomButtons = true;
+    }
+  }
+
   nextPage() {
     this.search.firstResultNumber = this.search.firstResultNumber + parseInt(this.search.resultsOnPage, 10);
     this.searchService.getResumeResult(this.search)
       .subscribe(data => {
         this.searchResumeResponse = data;
+        this.bottomButtonsShow();
         this.pageNumber++;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;
@@ -115,6 +122,7 @@ export class SearchResumeComponent implements OnInit {
     this.searchService.getResumeResult(this.search)
       .subscribe(data => {
         this.searchResumeResponse = data;
+        this.bottomButtonsShow();
         this.pageNumber--;
         if (this.pageNumber === this.pagesCount) {
           this.nextButton = true;
