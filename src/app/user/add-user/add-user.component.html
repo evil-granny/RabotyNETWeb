@@ -54,7 +54,7 @@
             </label>
             <div *ngIf="password1.errors && password1.dirty" class="alert alert-danger">
               <div [hidden]="!password1.errors.required">Password is required!</div>
-              <div [hidden]="!password1.errors.length<9 && login1.errors.pattern">Password must be no
+              <div [hidden]="!password1.errors.pattern && login1.errors.pattern">Password must be no
                 less than 9 symbols (uppercase, lowercase, number and one special symbol)!
               </div>
             </div>
