@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import {Component, OnInit} from '@angular/core';
 
-import { User } from '../models/user.model';
-
-import { UserService } from '../services/user.service';
+import {User} from '../models/user.model';
 
 @Component({
   selector: 'app-user',
@@ -15,20 +11,8 @@ export class UserComponent implements OnInit {
 
   users: User[];
 
-  constructor(private router: Router, private userService: UserService, public dialog: MatDialog) { }
+  constructor() { }
 
   ngOnInit() {
-    this.userService.findAll()
-      .subscribe(data => {
-        this.users = data;
-      });
-  };
-
-  deleteById(user: User): void {
-    this.userService.deleteById(user)
-      .subscribe(() => {
-        this.users = this.users.filter(u => u !== user);
-      });
   }
-
 }
