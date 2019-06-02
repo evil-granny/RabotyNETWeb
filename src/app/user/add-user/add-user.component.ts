@@ -91,8 +91,7 @@ export class AddUserComponent implements OnInit {
       }
     },
       error => {
-        this.error = error;
-        this.openErrorModal(this.error);
+        this.openErrorModal('Wrong credentials! Please try again.');
         this.router.navigateByUrl('/users/auth');
       });
   }
