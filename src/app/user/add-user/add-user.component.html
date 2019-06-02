@@ -2,134 +2,139 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vacancy</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vacancy</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
         integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="form-v8">
-    <div class="page-content">
-        <div class="form-v8-content">
-            <div class="form-left">
-                <img src="../../../assets/img/logo.png" alt="form">
-            </div>
-            <div class="form-right">
-                <div class="tab">
-                    <div class="tab-inner">
-                        <button class="tablinks" onclick="openForm(event, 'sign-in')" id="defaultOpen">Sign In</button>
-                    </div>
-                    <div class="tab-inner">
-                        <button class="tablinks" onclick="openForm(event, 'sign-up')">Sign Up</button>
-                    </div>
-                </div>
-                <form class="form-detail" (ngSubmit)="findByEmail()" #userForm="ngForm">
-                    <div class="tabcontent" id="sign-up">
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="text" id="login1" class="input-text" required autofocus
-                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login1" #login1="ngModel"
-                                    [(ngModel)]="user.login" autocomplete="off">
-                                <span class="label">E-Mail</span>
-                                <span class="border"></span>
-                            </label>
-                            <div *ngIf="login1.errors && login1.dirty" class="alert alert-danger">
-                                <div [hidden]="!login1.errors.pattern">Login is incorrect!</div>
-                                <div [hidden]="!login1.errors.required">Login is required!</div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="password" id="password1" class="input-text" name="password1"
-                                    #password1="ngModel" required
-                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
-                                    [(ngModel)]="user.password">
-                                <span class="label">Password</span>
-                                <span class="border"></span>
-                            </label>
-                            <div *ngIf="password1.errors && password1.dirty" class="alert alert-danger">
-                                <div [hidden]="!password1.errors.required">Password is required!</div>
-                                <div [hidden]="!password1.errors.pattern && login1.errors.pattern">Password must be no
-                                    less than 9 symbols (uppercase, lowercase, number and one special symbol)!</div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="password" class="input-text" [(ngModel)]="user.matchingPassword"
-                                    id="matchingPassword" name="matchingPassword" #matchingPassword="ngModel" required>
-                                <span class="label">Confirm Password</span>
-                                <span class="border"></span>
-                            </label>
-                            <div *ngIf="matchingPassword.errors && matchingPassword.touched && matchingPassword.dirty"
-                                class="alert alert-danger">
-                                <div [hidden]="!matchingPassword.errors.required">Confirm password!</div>
-                            </div>
-                            <div *ngIf="user.matchingPassword != user.password && matchingPassword.dirty"
-                                class="alert alert-danger">Passwords don`t match!
-                            </div>
-                        </div>
-                        <div class="form-row-last">
-                            <input type="submit" name="register" class="register" [disabled]="userForm.form.valid"
-                                value="Register">
-                        </div>
-                    </div>
-                </form>
-                <form class="form-detail" (submit)="validUser()" #userForm="ngForm">
-                    <div class="tabcontent" id="sign-in">
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="text" name="username" id="username" class="input-text" #username="ngModel"
-                                    [(ngModel)]="credentials.username" required autofocus
-                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-                                <span class="label">E-Mail</span>
-                                <span class="border"></span>
-                            </label>
-                            <div *ngIf="username.errors && username.dirty" class="alert alert-danger">
-                                <div [hidden]="!username.errors.pattern">Please check your login!</div>
-                                <div [hidden]="!username.errors.required">Login is required!</div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="form-row-inner">
-                                <input type="password" name="password" id="password" class="input-text"
-                                    #signinPassword="ngModel" [(ngModel)]="credentials.password" required
-                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}">
-                                <span class="label">Password</span>
-                                <span class="border"></span>
-                            </label>
-                        </div>
-                        <div *ngIf="signinPassword.errors && signinPassword.dirty && (isAdmin || isCowner)"
-                            class="alert alert-danger">
-                            <div [hidden]="!signinPassword.errors.required">Password is required!</div>
-                            <div [hidden]="!signinPassword.errors.pattern && signinPassword.untouched">Password is
-                                required!</div>
-                        </div>
-                        <div class="form-row-last">
-                            <input type="submit" name="register" class="register" value="Sign In">
-                        </div>
-                        <div pagination-template><a routerLink="/users/auth/google">
-                                <h5>Google</h5>
-                            </a></div>
-                        <div pagination-template><a routerLink="/users/auth/facebook">
-                                <h5>Facebook</h5>
-                            </a></div>
-                        <div pagination-template><a routerLink="/users/auth/linkedin">
-                                <h5>linkedIn</h5>
-                            </a></div>
-                        <div pagination-template><a routerLink="/forgotPassword">
-                                <h5>Forgot password?</h5>
-                            </a></div>
-                            <a class="btn btn-block social-btn google" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect"><img src="/src/assets/img/google-logo.png" alt="Google"> Log in with Google</a>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="page-content">
+  <div class="form-v8-content">
+    <div class="form-left">
+      <img src="../../../assets/img/logo.png" alt="form">
     </div>
+    <div class="form-right">
+      <div class="tab">
+        <div class="tab-inner">
+          <button class="tablinks" onclick="openForm(event, 'sign-in')" id="defaultOpen">Sign In</button>
+        </div>
+        <div class="tab-inner">
+          <button class="tablinks" onclick="openForm(event, 'sign-up')">Sign Up</button>
+        </div>
+      </div>
+      <form class="form-detail" (ngSubmit)="findByEmail()" #userForm="ngForm">
+        <div class="tabcontent" id="sign-up">
+          <div class="form-row">
+            <label class="form-row-inner">
+              <input type="text" id="login1" class="input-text" required autofocus
+                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="login1" #login1="ngModel"
+                     [(ngModel)]="user.login" autocomplete="off">
+              <span class="label">E-Mail</span>
+              <span class="border"></span>
+            </label>
+            <div *ngIf="login1.errors && login1.dirty" class="alert alert-danger">
+              <div [hidden]="!login1.errors.pattern">Login is incorrect!</div>
+              <div [hidden]="!login1.errors.required">Login is required!</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-row-inner">
+              <input type="password" id="password1" class="input-text" name="password1"
+                     #password1="ngModel" required autocomplete="off"
+                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
+                     [(ngModel)]="user.password">
+              <span class="label">Password</span>
+              <span class="border"></span>
+            </label>
+            <div *ngIf="password1.errors && password1.dirty" class="alert alert-danger">
+              <div [hidden]="!password1.errors.required">Password is required!</div>
+              <div [hidden]="!password1.errors.length<9 && login1.errors.pattern">Password must be no
+                less than 9 symbols (uppercase, lowercase, number and one special symbol)!
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-row-inner">
+              <input type="password" class="input-text" [(ngModel)]="user.matchingPassword"
+                     id="matchingPassword" name="matchingPassword" #matchingPassword="ngModel" required
+                     autocomplete="off">
+              <span class="label">Confirm Password</span>
+              <span class="border"></span>
+            </label>
+            <div *ngIf="matchingPassword.errors && matchingPassword.touched && matchingPassword.dirty"
+                 class="alert alert-danger">
+              <div [hidden]="!matchingPassword.errors.required">Confirm password!</div>
+            </div>
+            <div *ngIf="user.matchingPassword != user.password && matchingPassword.dirty"
+                 class="alert alert-danger">Passwords don`t match!
+            </div>
+          </div>
+          <div class="form-row-last">
+            <input type="submit" name="register" class="register" [disabled]="userForm.form.valid"
+                   value="Register">
+          </div>
+        </div>
+      </form>
+      <form class="form-detail" (submit)="validUser()" #userForm="ngForm">
+        <div class="tabcontent" id="sign-in">
+          <div class="form-row">
+            <label class="form-row-inner">
+              <input type="text" name="username" id="username" class="input-text" #username="ngModel"
+                     [(ngModel)]="credentials.username" required autofocus
+                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+              <span class="label">E-Mail</span>
+              <span class="border"></span>
+            </label>
+            <div *ngIf="username.errors && username.dirty" class="alert alert-danger">
+              <div [hidden]="!username.errors.pattern">Please check your login!</div>
+              <div [hidden]="!username.errors.required">Login is required!</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-row-inner">
+              <input type="password" name="password" id="password" class="input-text"
+                     #signinPassword="ngModel" [(ngModel)]="credentials.password" required autocomplete="off"
+                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}">
+              <span class="label">Password</span>
+              <span class="border"></span>
+            </label>
+          </div>
+          <div *ngIf="signinPassword.errors && signinPassword.dirty && (isAdmin || isCowner)"
+               class="alert alert-danger">
+            <div [hidden]="!signinPassword.errors.required">Password is required!</div>
+            <div [hidden]="!signinPassword.errors.pattern && signinPassword.untouched">Password is
+              required!
+            </div>
+          </div>
+          <div class="form-row-last">
+            <input type="submit" name="register" class="register" value="Sign In">
+          </div>
+          <div pagination-template><a routerLink="/users/auth/google">
+            <h5>Google</h5>
+          </a></div>
+          <div pagination-template><a routerLink="/users/auth/facebook">
+            <h5>Facebook</h5>
+          </a></div>
+          <div pagination-template><a routerLink="/users/auth/linkedin">
+            <h5>linkedIn</h5>
+          </a></div>
+          <div pagination-template><a routerLink="/forgotPassword">
+            <h5>Forgot password?</h5>
+          </a></div>
+          <a class="btn-google"
+             href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect">
+            Log in with Google</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 
 </html>

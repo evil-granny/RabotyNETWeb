@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import {ComfirmComponent} from '../comfirm.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-registrationconfirm',
@@ -13,7 +15,7 @@ export class RegistrationconfirmComponent implements OnInit {
   token: string;
   valid: string;
 
-  constructor(private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -27,11 +29,13 @@ export class RegistrationconfirmComponent implements OnInit {
     this.userService.validToken(this.token)
       .subscribe(data => {
         this.valid = data;
-        location.replace("http://localhost:4200/users/auth")
-
+        location.replace('http://localhost:4200/users/auth');
       });
   }
 
+  public openModal(name: String) {
+    this.dialog.open(ComfirmComponent, { data: { name } });
+  }
 
   resendToken() {
 
