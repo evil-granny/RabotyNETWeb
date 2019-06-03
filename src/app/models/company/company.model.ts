@@ -29,4 +29,5 @@ export class Company {
     status: string;
 
     photo: Photo = new Photo();
+
 }

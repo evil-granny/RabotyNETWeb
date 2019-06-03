@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Resume } from '../models/resume.model';
-import { ResumeService } from '../services/resume.service';
 
+import { ResumeService } from '../services/resume.service';
 
 @Component({
   selector: 'app-resume',
@@ -25,9 +25,9 @@ export class ResumeComponent implements OnInit {
 
   deleteById(cv: Resume): void {
     this.resumeService.deleteById(cv)
-      .subscribe(data => {
+      .subscribe(() => {
         this.resumes = this.resumes.filter(p => p !== cv);
-      })
-  };
+      });
+  }
 
 }

@@ -11,8 +11,8 @@
   <div class="collapse navbar-collapse" style="margin-left: 100px;">
     <ul class="navbar-nav mr-auto">
       <a class="navbar-brand" routerLink="/companies/my" *ngIf="isCowner">My companies</a>
-      <a class="navbar-brand" routerLink="/createCompany" *ngIf="isUser||isCowner">Create company</a>
-      <a class="navbar-brand" routerLink="/resume/user" *ngIf="isCowner || isUser">My resumes</a>
+      <a class="navbar-brand" routerLink="/createCompany" *ngIf="isUser || isCowner">Create company</a>
+      <a class="navbar-brand" routerLink="/resume/user" *ngIf="isCowner || isUser">My resume </a>
       <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin">Сompanies</a>
       <a class="navbar-brand" routerLink="/hotVacancies">Hot Vacancies</a>
       <a class="navbar-brand" routerLink="/closedVacancies" *ngIf="isCowner">Closed Vacancies</a>
@@ -76,7 +76,8 @@
       </select>
     </div>
 
-    <input type="text" [(ngModel)]="search.searchText" placeholder="Search..." name="searchText" class="form-control"><br>
+    <input type="text" [(ngModel)]="search.searchText" placeholder="Search..." name="searchText"
+      class="form-control"><br>
     <button id="startButton" class="btn btn-info" (click)="startSearch()">Start search</button>
   </form>
 </div>

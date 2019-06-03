@@ -1,4 +1,4 @@
-import {SearchResumeResult} from './searchResumeResult.model';
+import { SearchResumeResult } from './searchResumeResult.model';
 
 export class SearchResumeResponse {
 

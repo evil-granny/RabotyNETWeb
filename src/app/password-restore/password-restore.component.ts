@@ -1,10 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../services/user.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ComfirmComponent} from '../confirm/comfirm.component';
-import {MatDialog} from '@angular/material';
-import {APP_CONFIG, IAppConfig} from '../app.config';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { UserService } from '../services/user.service';
+
+import { ComfirmComponent } from '../confirm/comfirm.component';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 @Component({
   selector: 'app-password-restore',
@@ -16,10 +19,9 @@ export class PasswordRestoreComponent implements OnInit {
   token: string;
   valid: string;
 
-  changePassword = {newPassword: '', confirmPassword: ''};
+  changePassword = { newPassword: '', confirmPassword: '' };
 
   private changePasswordUrl = this.rabotyNETEndpoint.apiEndpoint + '/password/change';
-  private errors: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService, private router: Router, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
@@ -30,7 +32,6 @@ export class PasswordRestoreComponent implements OnInit {
   }
 
   restorePassword() {
-
     const authHeader = {
       'Access-Control-Allow-Origin': 'http://localhost:4200',
       'Content-Type': 'application/json',
@@ -41,11 +42,11 @@ export class PasswordRestoreComponent implements OnInit {
       headers: new HttpHeaders(authHeader), withCredentials: true
     };
 
-    const sendTokenPaasword = {'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword};
+    const sendTokenPaasword = { 'userResetPasswordToken': this.token, 'resetPassword': this.changePassword.newPassword };
     const observable = this.http.post<any>(this.changePasswordUrl, sendTokenPaasword, httpOptions);
-    observable.subscribe(result =>  {
-      },
-      error => {
+    observable.subscribe(() => {
+    },
+      () => {
         this.openErrorModal('Your token invalid or expired. Please try again');
       },
       () => {
@@ -53,12 +54,14 @@ export class PasswordRestoreComponent implements OnInit {
         this.router.navigate(['/users/auth']);
       }
     );
-    }
+  }
 
   public openErrorModal(name: String) {
     this.dialog.open(ComfirmComponent, { data: { name } });
   }
+
   public openSuccessModal(name: String) {
     this.dialog.open(ComfirmComponent, { data: { name } });
   }
+
 }

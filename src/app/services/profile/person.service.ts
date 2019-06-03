@@ -1,9 +1,11 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Person } from './../../models/person.model';
+
 import { Observable } from 'rxjs';
-import {APP_CONFIG, IAppConfig} from '../../app.config';
+
+import { APP_CONFIG, IAppConfig } from '../../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({

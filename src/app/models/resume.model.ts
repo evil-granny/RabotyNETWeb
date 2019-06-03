@@ -2,7 +2,6 @@ import { Skill } from './skill.model';
 import { Education } from './education.model';
 import { Job } from './job.model';
 import { Person } from './person.model';
-import { Contact } from './contact.model';
 
 export class Resume {
 
@@ -19,5 +18,5 @@ export class Resume {
     person: Person = new Person();
 
     reviewed: boolean;
-   
+
 }

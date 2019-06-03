@@ -1,14 +1,16 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 import { User } from '../../models/user.model';
-import { UserService } from '../../services/user.service';
-import { ComfirmComponent } from '../../confirm/comfirm.component';
-import { MatDialog } from '@angular/material';
-import { RegistrationconfirmComponent } from 'src/app/confirm/registrationconfirm/registrationconfirm.component';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Role } from '../../models/roles.model';
 import { UserPrincipal } from '../../models/userPrincipal.model';
+
+import { UserService } from '../../services/user.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+
+import { ComfirmComponent } from '../../confirm/comfirm.component';
+
 @Component({
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
@@ -26,7 +28,7 @@ export class AddUserComponent implements OnInit {
   credentials = { username: '', password: '' };
 
   constructor(private router: Router, private userService: UserService, public dialog: MatDialog,
-              private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
@@ -107,9 +109,9 @@ export class AddUserComponent implements OnInit {
 
   resendToken() {
     this.userService.resendToken(this.credentials.username)
-    .subscribe(data => {
-      this.openModal('Your account is not confirmed. Confirmation message has been sent to you again');
-    });
+      .subscribe(data => {
+        this.openModal('Your account is not confirmed. Confirmation message has been sent to you again');
+      });
     this.credentials.password = '';
   }
 
@@ -124,4 +126,5 @@ export class AddUserComponent implements OnInit {
   get isCowner() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_COWNER) > -1;
   }
+
 }

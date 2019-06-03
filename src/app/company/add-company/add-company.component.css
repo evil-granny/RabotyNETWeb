@@ -1,3 +1,13 @@
+body {
+    background-image: url(/../../assets/img/background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    padding-top: 30px;
+}
+
 .ng-valid[required], .ng-valid.required {
     border-left: 5px solid #42A948;
 }

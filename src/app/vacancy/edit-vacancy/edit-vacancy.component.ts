@@ -1,19 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
-import {Vacancy} from '../../models/vacancy/vacancy.model';
-import {VacancyService} from '../../services/vacancy.service';
-import {Requirement} from 'src/app/models/requirement.model';
-import {UserPrincipal} from 'src/app/models/userPrincipal.model';
-import {AuthenticationService} from 'src/app/services/authentication.service';
-import {Role} from 'src/app/models/roles.model';
-import {Location} from '@angular/common';
-import { FormArray } from '@angular/forms';
-import { Company } from 'src/app/models/CompanyModel/company.model';
+import { Vacancy } from '../../models/vacancy/vacancy.model';
+import { Company } from '../../models/company/company.model';
+import { Requirement } from '../../models/requirement.model';
+import { Role } from '../../models/roles.model';
+import { UserPrincipal } from 'src/app/models/userPrincipal.model';
 
+import { VacancyService } from '../../services/vacancy.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'rabotyNet',
   templateUrl: './edit-vacancy.component.html',
   styleUrls: ['./edit-vacancy.component.css']
@@ -21,23 +19,25 @@ import { Company } from 'src/app/models/CompanyModel/company.model';
 export class EditVacancyComponent implements OnInit {
 
   vacancy: Vacancy = new Vacancy();
+  company: Company = new Company();
   requirements: Requirement[] = Array<Requirement>();
   currentUser: UserPrincipal;
-  company: Company = new Company();
+
   employment = 'FULL PART_TIME HOURLY TRAINEE'.split(' ');
   selectedEmployment = 'FULL';
   selectedCurrency = 'USD';
-  size : number = 0;
+
+  size: number = 0;
 
   constructor(private location: Location, private app: AuthenticationService, private route: ActivatedRoute, private router: Router, private vacancyService: VacancyService) {
-    this.app.currentUser.subscribe(x => this.currentUser = x);
+    this.app.currentUser.subscribe(data => this.currentUser = data);
   }
 
   goBack() {
     this.location.back();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     let vacancyId = this.route.snapshot.paramMap.get('vacancyId');
     if (vacancyId !== null) {
       this.vacancyService.get(vacancyId)
@@ -45,18 +45,18 @@ export class EditVacancyComponent implements OnInit {
           this.vacancy = data;
         });
     }
-  }
+  };
 
   create(): void {
     this.vacancyService.createVacancy(this.vacancy, this.route.snapshot.paramMap.get('companyId'))
-      .subscribe(data => {
+      .subscribe(() => {
         this.router.navigate(['/viewCompany/' + this.route.snapshot.paramMap.get('companyId')]);
       }, error => console.error(error));
   };
 
   update(): void {
     this.vacancyService.update(this.vacancy)
-      .subscribe(data => {
+      .subscribe(() => {
         this.goBack();
       }, error => console.error(error));
 
@@ -66,7 +66,7 @@ export class EditVacancyComponent implements OnInit {
     this.router.navigate(['/vacancies']);
   }
 
-  changingValue(newValue) {
+  changingValue(newValue: string) {
     this.selectedEmployment = newValue;
   }
 
@@ -84,20 +84,19 @@ export class EditVacancyComponent implements OnInit {
 
   deleteRequirement(requirement: Requirement): void {
     let flag = confirm("Do you really want to delete?");
-    if(flag==false){
+    if (flag == false) {
       return;
-    }
-    else{
-    this.vacancyService.deleteRequiremnetById(requirement.requirementId)
-      .subscribe( data => {
-        this.requirements = this.requirements.filter(p => p !== requirement);
-        window.location.reload();
-      })
+    } else {
+      this.vacancyService.deleteRequiremnetById(requirement.requirementId)
+        .subscribe(() => {
+          this.requirements = this.requirements.filter(r => r !== requirement);
+          window.location.reload();
+        });
     }
   };
 
-  removeInputField(index : number) : void{
-  this.vacancy.requirements.splice(index,1); 
-}
+  removeInputField(index: number): void {
+    this.vacancy.requirements.splice(index, 1);
+  }
 
 }

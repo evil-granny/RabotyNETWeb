@@ -5,4 +5,5 @@ export class CompanyPaginationDTO {
     count: number;
 
     companies: Company[] = [];
+
 }

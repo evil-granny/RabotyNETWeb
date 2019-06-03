@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse, HttpXsrfTokenExtractor} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpXsrfTokenExtractor } from '@angular/common/http';
 
-import {AuthenticationService} from '../services/authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
+
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private tokenExtractor: HttpXsrfTokenExtractor, private authenticationService: AuthenticationService) {}
+  constructor(private tokenExtractor: HttpXsrfTokenExtractor, private authenticationService: AuthenticationService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authenticationService.currentUserValue;

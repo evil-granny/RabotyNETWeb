@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { Company } from '../../models/CompanyModel/company.model';
-import { CompanyService } from '../../services/company.service';
-import { UserService } from 'src/app/services/user.service';
-import { Photo } from 'src/app/models/photo.model';
-import { PhotoService } from 'src/app/services/profile/photo.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
+import { Company } from '../../models/company/company.model';
+import { Photo } from '../../models/photo.model';
+
+import { CompanyService } from '../../services/company.service';
+import { PhotoService } from '../../services/profile/photo.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'rabotyNet',
@@ -24,19 +23,18 @@ export class AddCompanyComponent implements OnInit {
   avatar: any;
   fileToUpload: File;
 
-  constructor(private location: Location,private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
-    private userService: UserService, private photoService: PhotoService, private sanitizer: DomSanitizer,
+  constructor(private location: Location, private router: Router, private route: ActivatedRoute, private companyService: CompanyService,
+    private photoService: PhotoService, private sanitizer: DomSanitizer,
     private app: AuthenticationService) { }
 
   ngOnInit(): void {
-
     var companyName = this.route.snapshot.paramMap.get("companyName");
     if (companyName !== null) {
       this.companyService.findByName(companyName)
         .subscribe(data => {
           this.company = data;
 
-          if(this.app.currentUserValue.userId != this.company.user.userId) {
+          if (this.app.currentUserValue.userId != this.company.user.userId) {
             this.router.navigate(['accessDenied']);
           }
 
@@ -55,7 +53,7 @@ export class AddCompanyComponent implements OnInit {
     this.companyService.update(this.company)
       .subscribe(data => {
         if (data != null)
-        this.router.navigate(['companies/my']);
+          this.router.navigate(['companies/my']);
         else
           alert("Validation problem has been occured");
       });
@@ -79,8 +77,6 @@ export class AddCompanyComponent implements OnInit {
           alert("Company with that name already exists!");
         }
       });
-
-
   };
 
   handlePhoto(file: FileList) {
@@ -94,7 +90,7 @@ export class AddCompanyComponent implements OnInit {
   }
 
   loadPhoto(photoId: BigInteger) {
-    this.photoService.load(photoId)
+    this.photoService.loadLogo(photoId)
       .subscribe(data => {
         this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
       });

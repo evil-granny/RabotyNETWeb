@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Resume } from 'src/app/models/resume.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ResumeService } from 'src/app/services/resume.service';
+
+import { Resume } from '../../models/resume.model';
+
+import { ResumeService } from '../../services/resume.service';
 
 @Component({
   selector: 'app-view-resume',
@@ -12,7 +14,7 @@ export class ViewResumeComponent implements OnInit {
 
   resume: Resume = new Resume();
 
-  constructor(private router: Router,private route: ActivatedRoute, private resumeService: ResumeService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private resumeService: ResumeService) { }
 
   ngOnInit() {
     this.resumeService.findByUserId()

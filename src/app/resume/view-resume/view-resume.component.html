@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vacancy</title>
+
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div class="container" style="margin-top:70px">
+  <div class="container" style="margin-top: 40px; opacity: 0.95;">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
@@ -23,21 +23,23 @@
             <form class="form-horizontal" #personForm="ngForm">
               <fieldset class="fieldset">
                 <h3 class="fieldset-title">Main Info</h3>
-                <div class="simpleVacancy" >
-                    <p><span class="mySpan" >Position: </span>{{resume.position}}</p>
-                    <p class="mySpan">Your Skill:</p>
-                    <td>
-                      <li style="margin-left: 10px;" *ngFor="let skill of resume.skills ">
-                        {{skill.title}}</li>
-                    </td>
+                <div class="simpleVacancy">
+                  <p><span class="mySpan">Position: </span>{{resume.position}}</p>
+                  <p class="mySpan">Your Skill:</p>
+                  <td>
+                    <li style="margin-left: 10px;" *ngFor="let skill of resume.skills ">
+                      {{skill.title}}</li>
+                  </td>
                 </div>
-                </fieldset>
-             <hr>
-             <a *ngIf = "resume.resumeId == null" routerLink="/resume/create">Create Resume</a>
-             <div *ngIf="resume.resumeId != null">
-             <a class="btn btn-primary" routerLink="/createResumePdf" style="font-size: 17px;margin-left: 10px;margin-top:20px">Create Pdf</a>
-             <a class="btn btn-primary" routerLink="/update/{{resume.resumeId}}" style="font-size: 17px;margin-left: 10px;margin-top:20px">Show all info</a>
-             </div>
+              </fieldset>
+              <hr>
+              <a *ngIf="resume.resumeId == null" routerLink="/resume/create">Create Resume</a>
+              <div *ngIf="resume.resumeId != null">
+                <a class="btn btn-primary" routerLink="/createResumePdf"
+                  style="font-size: 17px; margin-left: 10px; margin-top:20px;">Create Pdf</a>
+                <a class="btn btn-primary" routerLink="/update/{{resume.resumeId}}"
+                  style="font-size: 17px; margin-left: 10px; margin-top:20px;">Show all info</a>
+              </div>
             </form>
           </div>
         </div>
@@ -45,3 +47,5 @@
     </div>
   </div>
 </body>
+
+</html>

@@ -1,5 +1,6 @@
-body, html {
-  background-image: url(../../assets/img/ddfdfdf.jpg);
+body,
+html {
+  background-image: url(../../assets/img/background.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -8,7 +9,6 @@ body, html {
   background-attachment: fixed;
 }
 
-
 #searchMenu {
   position: fixed;
   width: 250px;
@@ -16,40 +16,40 @@ body, html {
   top: 90px;
   right: 10px;
   border-radius: 7px;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-.search-form{
+.search-form {
   margin-top: 30px;
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
 }
 
-.form-control{
+.form-control {
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.select-control{
+.select-control {
   font-size: 18px;
   color: white;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-#startButton{
+#startButton {
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-#hideButton{
+#hideButton {
   float: right;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.main{
+.main {
   margin-top: 70px;
   padding-top: 20px;
   padding-right: 20px;
@@ -64,7 +64,7 @@ body, html {
   float: left;
 }
 
-.resultOnPage{
+.resultOnPage {
   float: right;
 }
 
@@ -73,6 +73,6 @@ body, html {
 }
 
 #tableId {
-  background-color: rgba(255, 255 ,255 ,0.95) ;
+  background-color: rgba(255, 255, 255, 0.95);
   border-radius: 5px;
 }

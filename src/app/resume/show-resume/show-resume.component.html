@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vacancy</title>
+
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -14,12 +14,12 @@
 </head>
 
 <body>
-  <div class="container" style="margin-top:70px">
+  <div class="container" style="margin-top: 40px; opacity: 0.95;">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
           <div class="content-panel">
-            <h2>List resumes</h2>
+            <h2>List of resumes</h2>
             <br>
             <table class="table table-striped">
               <thead class="thead-dark">
@@ -33,7 +33,7 @@
                 </tr>
               </thead>
               <tbody *ngFor="let resume of resumes">
-                <tr *ngIf="resume.reviewed==null||resume.reviewed==false; else reviewBlock" style="background: white">
+                <tr *ngIf="resume.reviewed==null||resume.reviewed==false; else reviewBlock" style="background: white;">
                   <td class="d-none">{{resume.resumeId}}</td>
                   <td>{{resume.person.firstName}}</td>
                   <td>{{resume.person.lastName}}</td>
@@ -42,8 +42,7 @@
                   <td>
                     <a (click)="showPdf(resume)" class="btn" rel="tooltip" title="View resume"><i
                         class="fa fa-eye"></i></a>
-                    <a class="btn" (click)="changeStatus(resume)" rel="tooltip"
-                      title="Show">&#10008;</a>
+                    <a class="btn" (click)="changeStatus(resume)" rel="tooltip" title="Show">&#10008;</a>
                   </td>
                 </tr>
                 <ng-template #reviewBlock>
@@ -69,3 +68,5 @@
     </div>
   </div>
 </body>
+
+</html>

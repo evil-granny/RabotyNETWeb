@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Vacancy } from 'src/app/models/vacancy/vacancy.model';
+
+import { Vacancy } from '../../models/vacancy/vacancy.model';
+
+import { VacancyService } from '../../services/vacancy.service';
+
 import { Observable } from 'rxjs';
-import { VacancyService } from 'src/app/services/vacancy.service';
 
 @Component({
   selector: 'app-hot-vacancy',
@@ -17,18 +20,18 @@ export class HotVacancyComponent implements OnInit {
   count: number = 9;
   size: number = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService) {
-  }
+  constructor(private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService) { }
 
   ngOnInit() {
     this.findAll();
   };
 
   findAll() {
-    this.vacancyService.findAllHotVacanciesWithPagination(this.page * this.count).subscribe(data => {
-      this.vacancies = data.vacancies;
-      this.size = data.count;
-    });
+    this.vacancyService.findAllHotVacanciesWithPagination(this.page * this.count)
+      .subscribe(data => {
+        this.vacancies = data.vacancies;
+        this.size = data.count;
+      });
   }
 
   gotoList() {

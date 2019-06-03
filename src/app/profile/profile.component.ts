@@ -5,11 +5,10 @@ import { DomSanitizer } from '@angular/platform-browser'
 import { Person } from '../models/person.model';
 import { Contact } from '../models/contact.model';
 import { Address } from '../models/address.model';
+import { UserPrincipal } from '../models/userPrincipal.model';
 
 import { PersonService } from '../services/profile/person.service';
 import { PhotoService } from '../services/profile/photo.service';
-
-import { UserPrincipal } from '../models/userPrincipal.model';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -26,8 +25,6 @@ export class ProfileComponent implements OnInit {
   fileToUpload: File;
   maxDate: Date = new Date();
 
-  location: Object;
-
   constructor(private app: AuthenticationService, private router: Router, private personService: PersonService, private photoService: PhotoService, private sanitizer: DomSanitizer) {
     this.app.currentUser.subscribe(data => this.currentUser = data);
   }
@@ -37,8 +34,10 @@ export class ProfileComponent implements OnInit {
       .subscribe(data => {
         this.person = data;
 
-        if (this.person.contact == null && this.person.address == null) {
+        if (this.person.contact == null) {
           this.person.contact = new Contact();
+        }
+        if (this.person.address == null) {
           this.person.address = new Address();
         }
         if (this.person.photo != null) {
@@ -63,7 +62,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadPhoto(photoId: BigInteger) {
-    this.photoService.load(photoId)
+    this.photoService.loadAvatar(photoId)
       .subscribe(data => {
         this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
       });

@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Search} from '../models/SearchModel/search.model';
-import {SearchVacancyResponse} from '../models/SearchModel/SearchVacancyResponse.model';
-import {SearchService} from '../services/search.service';
-import {Role} from '../models/roles.model';
-import {AuthenticationService} from '../services/authentication.service';
-import {UserPrincipal} from '../models/userPrincipal.model';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Search } from '../models/search/search.model';
+import { SearchVacancyResponse } from '../models/search/SearchVacancyResponse.model';
+import { Role } from '../models/roles.model';
+import { UserPrincipal } from '../models/userPrincipal.model';
+
+import { SearchService } from '../services/search.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-search-vacancy',
@@ -33,9 +35,9 @@ export class SearchVacancyComponent implements OnInit {
   sHidden = true;
 
   constructor(private app: AuthenticationService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private searchService: SearchService) {
+    private router: Router,
+    private route: ActivatedRoute,
+    private searchService: SearchService) {
     this.app.currentUser.subscribe(x => this.currentUser = x);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -230,4 +232,5 @@ export class SearchVacancyComponent implements OnInit {
     this.emHidden = true;
     this.sHidden = true;
   }
+
 }

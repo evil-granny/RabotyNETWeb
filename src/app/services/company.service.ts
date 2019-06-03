@@ -1,10 +1,11 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Company } from "../models/CompanyModel/company.model";
+import { Company } from "../models/company/company.model";
 import { Claim } from '../models/claim.model';
-import { CompanyPaginationDTO } from '../models/CompanyModel/companyPaginationDTO.model';
-import {APP_CONFIG, IAppConfig} from '../app.config';
+import { CompanyPaginationDTO } from '../models/company/companyPaginationDTO.model';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -36,52 +37,52 @@ export class CompanyService {
     return this.http.get<Company[]>(this.companyURL + "/my");
   }
 
-  public deleteById(company) {
+  public deleteById(company: any) {
     return this.http.delete(this.companyURL + "/delete/" + company.companyId, httpOptions);
   }
 
-  public create(company) {
+  public create(company: any) {
     return this.http.post<Company>(this.companyURL + "/create", company, httpOptions);
   }
 
-  public update(company) {
+  public update(company: any) {
     return this.http.put<Company>(this.companyURL + "/update", company, httpOptions);
   }
 
-  public sendMail(company) {
+  public sendMail(company: any) {
     return this.http.put<Company>(this.companyURL + "/sendMail", company, httpOptions);
   }
 
-  public approve(company, token) {
+  public approve(company: any, token: any) {
     return this.http.put<Company>(this.companyURL + "/approve/" + token, company, httpOptions);
   }
 
-  public findByName(companyName) {
+  public findByName(companyName: any) {
     return this.http.get<Company>(this.companyURL + "/byName/" + companyName, httpOptions);
   }
 
-  public exists(companyName) {
+  public exists(companyName: any) {
     return this.http.get<boolean>(this.companyURL + "/exists/" + companyName, httpOptions);
   }
 
-  public createClaim(claim) {
+  public createClaim(claim: any) {
     return this.http.post<Company>(this.claimURL + "/create", claim, httpOptions);
   }
 
-  public findClaims(company) {
+  public findClaims(company: any) {
     return this.http.get<Claim[]>(this.claimURL + "/byCompany/" + company.companyId, httpOptions);
   }
 
-  public deleteClaimById(claim) {
+  public deleteClaimById(claim: any) {
     return this.http.delete(this.claimURL + "/delete/" + claim.claimId, httpOptions);
   }
 
-  public getCompanyByVacanycId(id) {
-    return this.http.get<Company>(this.companyURL+"/byVacancyId/" + id , httpOptions);
-}
+  public getCompanyByVacanycId(id: any) {
+    return this.http.get<Company>(this.companyURL + "/byVacancyId/" + id, httpOptions);
+  }
 
-public findById(companyId) {
-  return this.http.get<Company>(this.companyURL + "/byId/" + companyId, httpOptions);
-}
+  public findById(companyId: any) {
+    return this.http.get<Company>(this.companyURL + "/byId/" + companyId, httpOptions);
+  }
 
 }

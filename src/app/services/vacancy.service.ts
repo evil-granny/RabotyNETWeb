@@ -1,12 +1,14 @@
-import { APP_CONFIG, IAppConfig } from '../app.config';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Vacancy } from '../models/vacancy/vacancy.model';
-import { Observable } from 'rxjs';
 import { Requirement } from '../models/requirement.model';
 import { VacancyDTO } from '../models/vacancy/vacancyDTO.model';
 import { Resume } from '../models/resume.model';
+import { Vacancy } from '../models/vacancy/vacancy.model';
+
+import { Observable } from 'rxjs';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,10 +23,9 @@ const httpOptions = {
 })
 export class VacancyService {
 
-  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) {
-  }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
-  private vacancyUrl = this.rabotyNETEndpoint.apiEndpoint + `/vacancies`;
+  private vacancyUrl = this.rabotyNETEndpoint.apiEndpoint + '/vacancies';
   private requirementUrl = this.rabotyNETEndpoint.apiEndpoint + '/requirements';
 
   public findAll(): Observable<any> {
@@ -55,7 +56,7 @@ export class VacancyService {
     return this.http.delete(this.vacancyUrl + '/' + id, httpOptions);
   }
 
-  public deleteRequiremnetById(id: any) {
+  public deleteRequiremnetById(id: BigInteger) {
     return this.http.delete(this.requirementUrl + '/' + id, httpOptions);
   }
 
@@ -70,8 +71,8 @@ export class VacancyService {
     return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement, httpOptions);
   }
 
-  public sendResume(resume:Resume, vacancyId) : Observable<Resume>{
-    return this.http.post<Resume>(this.vacancyUrl + '/sendResume/'+vacancyId, resume, httpOptions);
+  public sendResume(resume: Resume, vacancyId: any): Observable<Resume> {
+    return this.http.post<Resume>(this.vacancyUrl + '/sendResume/' + vacancyId, resume, httpOptions);
   }
 
 }

@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-
 import { Router } from '@angular/router';
-import { AuthenticationService } from './services/authentication.service';
-import { Search } from './models/SearchModel/search.model';
-import { UserPrincipal } from './models/userPrincipal.model';
-import { Role } from './models/roles.model';
-import { PersonService } from './services/profile/person.service';
 import { DomSanitizer } from '@angular/platform-browser';
+
+import { Search } from './models/search/search.model';
+import { Role } from './models/roles.model';
+import { UserPrincipal } from './models/userPrincipal.model';
+
+import { PersonService } from './services/profile/person.service';
 import { PhotoService } from './services/profile/photo.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,7 @@ export class AppComponent {
   }
 
   loadPhoto(photoId: BigInteger) {
-    this.photoService.load(photoId)
+    this.photoService.loadAvatar(photoId)
       .subscribe(data => {
         this.avatar = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpg;base64," + data);
       });
@@ -51,7 +52,7 @@ export class AppComponent {
   logout() {
     this.app.logout();
     this.vacancySelect = false;
-    this.router.navigateByUrl('/vacancies');
+    window.location.reload();
   }
 
   get isAdmin() {

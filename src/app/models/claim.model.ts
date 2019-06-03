@@ -1,8 +1,8 @@
 import { User } from './user.model';
-import { Company } from './CompanyModel/company.model';
+import { Company } from './company/company.model';
 
 export class Claim {
-    
+
     claimId: BigInteger;
 
     title: string;
@@ -12,4 +12,5 @@ export class Claim {
     user: User = new User();
 
     company: Company = new Company();
+
 }

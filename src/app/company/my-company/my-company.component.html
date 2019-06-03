@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vacancy</title>
+
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div class="container" style="margin-top:70px">
+  <div class="container" style="margin-top: 40px; opacity: 0.95;">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
@@ -37,16 +37,17 @@
               <tbody *ngFor="let company of companies">
                 <tr>
                   <td>
-                    <i *ngIf="company.status == 'APPROVED' && !hasClaims(company)" class="fa fa-thumbs-up"
-                      rel="tooltip" title="This company is approved" style="color: green; font-size: 150%;"></i>
-                    <i *ngIf="company.status == 'APPROVED' && hasClaims(company)" class="fa fa-warning"
-                      rel="tooltip" title="This company is has claims" style="color: orange; font-size: 150%;"></i>
+                    <i *ngIf="company.status == 'APPROVED' && !hasClaims(company)" class="fa fa-thumbs-up" rel="tooltip"
+                      title="This company is approved" style="color: green; font-size: 150%;"></i>
+                    <i *ngIf="company.status == 'APPROVED' && hasClaims(company)" class="fa fa-warning" rel="tooltip"
+                      title="This company is has claims" style="color: orange; font-size: 150%;"></i>
                     <i *ngIf="company.status == 'CREATED'" class="fa fa-times" style="color: red; font-size: 150%;"
                       rel="tooltip" title="This company is not approved"></i>
-                    <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock"
-                      rel="tooltip" title="This company is blocked"style="color: black; font-size: 150%;"></i>
-                    <i *ngIf="company.status == 'MAIL_SENT'" class="fa fa-envelope" style="color: greenyellow; font-size: 150%;"
-                      rel="tooltip" title="This company is approved, but not confirmed"></i>
+                    <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" rel="tooltip"
+                      title="This company is blocked" style="color: black; font-size: 150%;"></i>
+                    <i *ngIf="company.status == 'MAIL_SENT'" class="fa fa-envelope"
+                      style="color: greenyellow; font-size: 150%;" rel="tooltip"
+                      title="This company is approved, but not confirmed"></i>
                   </td>
                   <td class="d-none"
                     *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
@@ -112,3 +113,5 @@
     </div>
   </div>
 </body>
+
+</html>

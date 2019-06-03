@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Resume } from '../../models/resume.model';
-import { ResumeService } from '../../services/resume.service';
 import { Skill } from '../../models/skill.model';
 import { Job } from '../../models/job.model';
+
+import { ResumeService } from '../../services/resume.service';
 
 @Component({
   templateUrl: './add-resume.component.html',
@@ -26,16 +27,16 @@ export class AddResumeComponent {
           this.resume = data;
         });
     }
-  }
+  };
 
   update(): void {
     this.resumeService.update(this.resume)
       .subscribe(data => {
         if (data != null) {
           this.router.navigate(['/resume/user']);
-        }
-        else
+        } else {
           alert("Validation problem has been occured");
+        }
       });
   };
 
@@ -44,15 +45,15 @@ export class AddResumeComponent {
       .subscribe(data => {
         if (data != null) {
           this.router.navigate(['/resume/user']);
-        }
-        else
+        } else {
           alert("Validation problem has been occured");
+        }
       });
   };
 
   deleteSkill(skill: Skill): void {
     this.resumeService.deleteSkillById(skill.skillId)
-      .subscribe(data => {
+      .subscribe(() => {
         this.skills = this.skills.filter(p => p !== skill);
         window.location.reload();
       })
@@ -60,7 +61,7 @@ export class AddResumeComponent {
 
   deleteJob(job: Job): void {
     this.resumeService.deleteJobById(job.jobId)
-      .subscribe(data => {
+      .subscribe(() => {
         this.jobs = this.jobs.filter(p => p !== job);
         window.location.reload();
       })

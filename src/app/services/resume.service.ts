@@ -1,9 +1,9 @@
-import { APP_CONFIG, IAppConfig } from '../app.config';
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Resume } from '../models/resume.model';
-import { Person } from '../models/person.model';
+
+import { APP_CONFIG, IAppConfig } from '../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
