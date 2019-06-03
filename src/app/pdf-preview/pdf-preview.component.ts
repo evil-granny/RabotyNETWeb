@@ -54,7 +54,8 @@ export class PdfPreviewComponent implements OnInit {
 
   sendResumeForUser() {
     this.pdfService.send().subscribe();
-    this.openModal("Mail send");
+    this.openModal("Mail has been sent!");
+
   }
 
   openModal(name: String) {
@@ -66,7 +67,7 @@ export class PdfPreviewComponent implements OnInit {
     this.pdfService.findByUserId().subscribe(data => {
       this.resume = data;
       this.vacancyService.sendResume(this.resume, vacancyId).subscribe(data => {
-        this.openModal("Mail send");
+        this.openModal("Mail has been sent!");
       }, error => console.error(error));
     });
   }
