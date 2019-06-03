@@ -55,7 +55,6 @@ export class PdfPreviewComponent implements OnInit {
   sendResumeForUser() {
     this.pdfService.send().subscribe();
     this.openModal("Mail send");
-
   }
 
   openModal(name: String) {
