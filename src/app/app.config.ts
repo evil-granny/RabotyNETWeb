@@ -10,6 +10,6 @@ export interface IAppConfig {
 
 export const AppConfig: IAppConfig = {
 
-  apiEndpoint: 'http://localhost:8080/RabotyNET'
+  apiEndpoint: 'http://localhost:8080'
 
 };

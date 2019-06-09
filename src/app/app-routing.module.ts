@@ -54,7 +54,7 @@ const routes: Routes = [
     path: 'companies/my, companies/update, companies/delete/**',
     component: CompanyComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.ROLE_COWNER] }
+    data: { roles: [Role.ROLE_USER && Role.ROLE_COWNER] }
   },
   {
     path: 'searchResume',

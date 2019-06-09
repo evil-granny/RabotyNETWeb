@@ -21,17 +21,22 @@
           <div class="content-panel">
             <h2>Your Resume</h2>
             <form class="form-horizontal" #personForm="ngForm">
-              <fieldset class="fieldset">
-                <h3 class="fieldset-title">Main Info</h3>
-                <div class="simpleVacancy">
-                  <p><span class="mySpan">Position: </span>{{resume.position}}</p>
-                  <p class="mySpan">Your Skill:</p>
-                  <td>
-                    <li style="margin-left: 10px;" *ngFor="let skill of resume.skills ">
-                      {{skill.title}}</li>
-                  </td>
-                </div>
-              </fieldset>
+              <div class="temp" *ngIf="resume.resumeId != null; else resumeNotFound">
+                <fieldset class="fieldset">
+                  <h3 class="fieldset-title">Main Info</h3>
+                  <div class="simpleVacancy">
+                    <p><span class="mySpan">Position: </span>{{resume.position}}</p>
+                    <p class="mySpan">Your Skill:</p>
+                    <td>
+                      <li style="margin-left: 10px;" *ngFor="let skill of resume.skills ">
+                        {{skill.title}}</li>
+                    </td>
+                  </div>
+                </fieldset>
+              </div>
+              <ng-template #resumeNotFound>
+                <p>You don't have a resume. Create your resume</p>
+              </ng-template>
               <hr>
               <a *ngIf="resume.resumeId == null" routerLink="/resume/create">Create Resume</a>
               <div *ngIf="resume.resumeId != null">

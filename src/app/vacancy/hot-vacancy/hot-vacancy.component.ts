@@ -15,7 +15,6 @@ import { Observable } from 'rxjs';
 export class HotVacancyComponent implements OnInit {
 
   vacancies: Observable<Vacancy[]>;
-
   page: number = 0;
   count: number = 9;
   size: number = 0;

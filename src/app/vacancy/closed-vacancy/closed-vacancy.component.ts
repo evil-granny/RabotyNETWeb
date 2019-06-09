@@ -8,55 +8,52 @@ import { VacancyService } from '../../services/vacancy.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-closed-vacancy',
-  templateUrl: './closed-vacancy.component.html',
-  styleUrls: ['./closed-vacancy.component.scss']
+	selector: 'app-closed-vacancy',
+	templateUrl: './closed-vacancy.component.html',
+	styleUrls: [ './closed-vacancy.component.scss' ]
 })
 export class ClosedVacancyComponent implements OnInit {
+	vacancies: Observable<Vacancy[]>;
+	page: number = 0;
+	count: number = 9;
+	size: number = 0;
 
-  vacancies: Observable<Vacancy[]>;
+	constructor(private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService) {}
 
-  page: number = 0;
-  count: number = 9;
-  size: number = 0;
+	ngOnInit() {
+		this.findAll();
+	}
 
-  constructor(private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService) { }
+	findAll() {
+		this.vacancyService.findAllClosedVacanciesWithPagination(this.page * this.count).subscribe((data) => {
+			this.vacancies = data.vacancies;
+			this.size = data.count;
+		});
+	}
 
-  ngOnInit() {
-    this.findAll();
-  };
+	gotoList() {
+		this.router.navigate([ '/vacancies' ]);
+	}
 
-  findAll() {
-    this.vacancyService.findAllClosedVacanciesWithPagination(this.page * this.count).subscribe(data => {
-      this.vacancies = data.vacancies;
-      this.size = data.count;
-    });
-  }
+	canPreviousPage(): boolean {
+		return this.page > 0;
+	}
 
-  gotoList() {
-    this.router.navigate(['/vacancies']);
-  }
+	previousPage() {
+		if (this.canPreviousPage()) {
+			this.page = this.page - 1;
+			this.findAll();
+		}
+	}
 
-  canPreviousPage(): boolean {
-    return this.page > 0;
-  }
+	canNextPage(): boolean {
+		return (this.page + 1) * this.count < this.size;
+	}
 
-  previousPage() {
-    if (this.canPreviousPage()) {
-      this.page = this.page - 1;
-      this.findAll();
-    }
-  }
-
-  canNextPage(): boolean {
-    return (this.page + 1) * this.count < this.size;
-  }
-
-  nextPage() {
-    if (this.canNextPage()) {
-      this.page = this.page + 1;
-      this.findAll();
-    }
-  }
-
+	nextPage() {
+		if (this.canNextPage()) {
+			this.page = this.page + 1;
+			this.findAll();
+		}
+	}
 }

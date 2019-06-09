@@ -42,8 +42,8 @@ export class ResumeService {
     return this.http.get<Resume>(this.cvUrl + '/' + cvId, httpOptions);
   }
 
-  public findByUserId() {
-    return this.http.get<Resume>(this.cvUrl + '/user', httpOptions);
+  public findByUserId(userId: any) {
+    return this.http.get<Resume>(this.cvUrl + '/user/'+ userId, httpOptions);
   }
 
   public deleteSkillById(id: any) {
@@ -56,6 +56,10 @@ export class ResumeService {
 
   public getResumeByVacancyId(id: any) {
     return this.http.get<Resume[]>(this.cvUrl + '/byVacancyId/' + id, httpOptions);
+  }
+
+  public exists(userId: any) {
+    return this.http.get<boolean>(this.cvUrl + "/exists/" + userId, httpOptions);
   }
 
 }

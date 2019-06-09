@@ -20,7 +20,6 @@
     </div>
     <div class="row">
       <div class="col-lg-4" *ngFor="let vacancy of vacancies">
-
         <div class="closedVacancies" *ngIf="vacancy.vacancyStatus == 'OCCUPIED'">
           <div class="card">
             <span class="ribbon"><span class="badge badge-danger" style="background-color: grey;">OCCUPIED</span></span>

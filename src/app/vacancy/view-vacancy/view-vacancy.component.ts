@@ -49,20 +49,11 @@ export class ViewVacancyComponent implements OnInit {
     }
   };
 
-  // sendResume() {
-  //   this.resumeService.findByUserId()
-  //     .subscribe(data => {
-  //       this.resume = data;
-  //     });
-
-  //   this.vacancyService.sendResume(this.resume, this.vacancyId)
-  //     .subscribe(data => {
-  //       alert("Resume was sent on this resume")
-  //     }, error => console.error(error));
-  // }
-
   showPreviewPdf() {
-    this.resumeService.findByUserId()
+    this.resumeService.exists(this.currentUser.userId)
+    .subscribe(flag => {
+      if (flag == true) {
+        this.resumeService.findByUserId(this.currentUser.userId)
       .subscribe(data => {
         if (data != null) {
           this.resume = data;
@@ -71,6 +62,10 @@ export class ViewVacancyComponent implements OnInit {
           alert("Validation problem has been occured");
         }
       });
+      } else {
+        alert("Resume doesn't found! Please create your resume and try again");
+      }
+    });
   }
 
   get isCowner() {

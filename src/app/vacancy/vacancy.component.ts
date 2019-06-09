@@ -18,16 +18,12 @@ import { Observable } from 'rxjs';
 export class VacancyComponent implements OnInit {
 
   vacancies: Observable<Vacancy[]>;
-  vacancy: Vacancy = new Vacancy();
-  currentUser: UserPrincipal;
-
   page: number = 0;
   count: number = 9;
   size: number = 0;
 
   constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, private companyService: CompanyService) {
-    this.app.currentUser.subscribe(data => this.currentUser = data);
-  };
+  }
 
   ngOnInit() {
     this.findAll();

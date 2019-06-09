@@ -33,6 +33,9 @@ export class PdfPreviewComponent implements OnInit {
 
   ngOnInit(): void {
     var resumeId = this.route.snapshot.paramMap.get('resumeId');
+    let resumeIdNumber = +resumeId;
+    if(resumeIdNumber < 1)
+      return;
     this.sendVacancy = this.route.snapshot.paramMap.get('vacancyId');
     this.pdfService.show(resumeId, this.send)
       .subscribe(data => {
@@ -68,7 +71,7 @@ export class PdfPreviewComponent implements OnInit {
       this.resume = data;
       this.vacancyService.sendResume(this.resume, vacancyId).subscribe(data => {
         this.openModal("Mail has been sent!");
-      }, error => console.error(error));
+      }, () => this.openModal("You have already sent your resume on this vacancy!"));
     });
   }
 
