@@ -41,8 +41,12 @@ export class PdfPreviewComponent implements OnInit {
       .subscribe(data => {
         var file = new Blob([data], { type: 'application/pdf' });
         this.urlTemp = URL.createObjectURL(file);
-        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.urlTemp);
+         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.urlTemp);
       });
+      this.pdfURL();
+  }
+  pdfURL() {
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.urlTemp);
   }
 
   newWindowPdf(): void {
