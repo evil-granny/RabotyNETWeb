@@ -112,10 +112,14 @@ export class CompanyComponent implements OnInit {
   }
 
   block(company: Company) {
-    if (company.status == 'BLOCKED')
+    console.log(company.status);
+    if (company.status == 'BLOCKED') {
       company.status = 'APPROVED';
-    else
+    }
+    else {
       company.status = 'BLOCKED';
+    }
+
     this.companyService.update(company)
       .subscribe(data => {
         this.companies.find((c) => c.companyId === company.companyId).status = data.status;

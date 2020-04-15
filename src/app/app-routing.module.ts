@@ -39,13 +39,13 @@ import { ClosedVacancyComponent } from "./vacancy/closed-vacancy/closed-vacancy.
 
 const routes: Routes = [
   {
-    path: 'companies/all/**, companies/sendMail',
+    path: 'companies/all/**, companies/sendMail, companies/update',
     component: CompanyComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_ADMIN] }
   },
   {
-    path: 'companies/all/**, companies/sendMail',
+    path: 'companies/all/**, companies/sendMail, companies/update',
     component: MyCompanyComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_ADMIN] }

@@ -20,46 +20,46 @@ export class ResumeService {
 
   constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
-  private cvUrl = this.rabotyNETEndpoint.apiEndpoint + '/resume';
+  private resume = this.rabotyNETEndpoint.apiEndpoint + '/resume';
 
   public findAll() {
-    return this.http.get<Resume[]>(this.cvUrl + '/all', httpOptions);
+    return this.http.get<Resume[]>(this.resume + '/all', httpOptions);
   }
 
   public deleteById(cv: Resume) {
-    return this.http.delete(this.cvUrl + '/delete/' + cv.resumeId, httpOptions);
+    return this.http.delete(this.resume + '/delete/' + cv.resumeId, httpOptions);
   }
 
   public insert(cv: Resume) {
-    return this.http.post<Resume>(this.cvUrl + '/create', cv, httpOptions);
+    return this.http.post<Resume>(this.resume + '/create', cv, httpOptions);
   }
 
   public update(cv: Resume) {
-    return this.http.put<Resume>(this.cvUrl + '/update', cv, httpOptions);
+    return this.http.put<Resume>(this.resume + '/update', cv, httpOptions);
   }
 
   public findById(cvId: any) {
-    return this.http.get<Resume>(this.cvUrl + '/' + cvId, httpOptions);
+    return this.http.get<Resume>(this.resume + '/' + cvId, httpOptions);
   }
 
-  public findByUserId(userId: any) {
-    return this.http.get<Resume>(this.cvUrl + '/user/'+ userId, httpOptions);
+  public findByUserId() {
+    return this.http.get<Resume>(this.resume + '/user', httpOptions);
   }
 
   public deleteSkillById(id: any) {
-    return this.http.delete(this.cvUrl + '/skill/' + id, httpOptions);
+    return this.http.delete(this.resume + '/skill/' + id, httpOptions);
   }
 
   public deleteJobById(id: any) {
-    return this.http.delete(this.cvUrl + '/job/' + id, httpOptions);
+    return this.http.delete(this.resume + '/job/' + id, httpOptions);
   }
 
   public getResumeByVacancyId(id: any) {
-    return this.http.get<Resume[]>(this.cvUrl + '/byVacancyId/' + id, httpOptions);
+    return this.http.get<Resume[]>(this.resume + '/byVacancyId/' + id, httpOptions);
   }
 
   public exists(userId: any) {
-    return this.http.get<boolean>(this.cvUrl + "/exists/" + userId, httpOptions);
+    return this.http.get<boolean>(this.resume + "/exists/" + userId, httpOptions);
   }
 
 }
