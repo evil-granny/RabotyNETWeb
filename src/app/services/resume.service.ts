@@ -42,8 +42,8 @@ export class ResumeService {
     return this.http.get<Resume>(this.resume + '/' + cvId, httpOptions);
   }
 
-  public findByUserId() {
-    return this.http.get<Resume>(this.resume + '/user', httpOptions);
+  public findByUserId(userId: any) {
+    return this.http.get<Resume>(this.resume + '/user/' + userId, httpOptions);
   }
 
   public deleteSkillById(id: any) {
@@ -59,7 +59,7 @@ export class ResumeService {
   }
 
   public exists(userId: any) {
-    return this.http.get<boolean>(this.resume + "/exists/" + userId, httpOptions);
+    return this.http.get<boolean>(this.resume + "/existsResume/" + userId, httpOptions);
   }
 
 }
