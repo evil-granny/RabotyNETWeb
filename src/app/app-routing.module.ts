@@ -106,7 +106,11 @@ const routes: Routes = [
   { path: 'companies/my', component: MyCompanyComponent },
   { path: 'createCompany', component: AddCompanyComponent },
   { path: 'viewCompany/:companyId', component: ViewCompanyComponent },
-  { path: 'updateCompany/:companyName', component: AddCompanyComponent },
+  {
+    path: 'updateCompany/:companyName', component: AddCompanyComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_COWNER, Role.ROLE_USER] }
+  },
   { path: 'approveCompany/:companyName/:companyToken', component: ApproveCompanyComponent },
 
   { path: 'resume/user', component: ViewResumeComponent },

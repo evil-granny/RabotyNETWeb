@@ -37,15 +37,15 @@
               <tbody *ngFor="let company of companies">
                 <tr>
                   <td>
-                    <i *ngIf="company.status == 'APPROVED' && !hasClaims(company)" class="fa fa-thumbs-up" rel="tooltip"
+                    <i *ngIf="isApproved(company) && !hasClaims(company)" class="fa fa-thumbs-up" rel="tooltip"
                       title="This company is approved" style="color: green; font-size: 150%;"></i>
-                    <i *ngIf="company.status == 'APPROVED' && hasClaims(company)" class="fa fa-warning" rel="tooltip"
+                    <i *ngIf="isApproved(company) && hasClaims(company)" class="fa fa-warning" rel="tooltip"
                       title="This company is has claims" style="color: orange; font-size: 150%;"></i>
                     <i *ngIf="company.status == 'CREATED'" class="fa fa-times" style="color: red; font-size: 150%;"
                       rel="tooltip" title="This company is not approved"></i>
-                    <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" rel="tooltip"
+                    <i *ngIf="isBlocked(company)" class="fa fa-lock" rel="tooltip"
                       title="This company is blocked" style="color: black; font-size: 150%;"></i>
-                    <i *ngIf="company.status == 'MAIL_SENT'" class="fa fa-envelope"
+                    <i *ngIf="isMailSent(company)" class="fa fa-envelope"
                       style="color: greenyellow; font-size: 150%;" rel="tooltip"
                       title="This company is approved, but not confirmed"></i>
                   </td>

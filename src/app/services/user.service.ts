@@ -56,4 +56,8 @@ export class UserService {
     return this.http.post<String>(this.userUrl + 'resendAuthToken?email=' + email, httpOptions);
   }
 
+  public getUserRoles(userName: String): Observable<any> {
+    return this.http.get<String[]>(this.userUrl + 'getRoles/' + userName + '/', httpOptions);
+  }
+
 }

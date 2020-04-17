@@ -53,7 +53,7 @@ export class ViewVacancyComponent implements OnInit {
     this.resumeService.exists(this.currentUser.userId)
     .subscribe(flag => {
       if (flag == true) {
-        this.resumeService.findByUserId()
+        this.resumeService.findByUserId(this.currentUser.userId)
       .subscribe(data => {
         if (data != null) {
           this.resume = data;

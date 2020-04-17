@@ -28,7 +28,7 @@ export class ViewResumeComponent implements OnInit {
 	ngOnInit() {
 		this.resumeService.exists(this.currentUser.userId).subscribe((flag) => {
 			if (flag == true) {
-				this.resumeService.findByUserId().subscribe((data) => {
+				this.resumeService.findByUserId(this.currentUser.userId).subscribe((data) => {
 						this.resume = data;
 				});
 			} else {

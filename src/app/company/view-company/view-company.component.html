@@ -20,13 +20,13 @@
         <div class="module-inner">
           <div class="content-panel">
             <h2>
-              <i *ngIf="company.status == 'APPROVED' && !hasClaims()" class="fa fa-thumbs-up" rel="tooltip"
+              <i *ngIf="isApproved() && !hasClaims()" class="fa fa-thumbs-up" rel="tooltip"
                 title="This company is approved" style="color: green; font-size: 150%;"></i>
-              <i *ngIf="company.status == 'APPROVED' && hasClaims()" class="fa fa-warning" rel="tooltip"
+              <i *ngIf="isApproved() && hasClaims()" class="fa fa-warning" rel="tooltip"
                 title="This company has claims" style="color: orange; font-size: 150%;"></i>
               <i *ngIf="company.status == 'CREATED'" class="fa fa-times" style="color: red; font-size: 150%;"
                 rel="tooltip" title="This company is not approved"></i>
-              <i *ngIf="company.status == 'BLOCKED'" class="fa fa-lock" style="color: black; font-size: 150%;"
+              <i *ngIf="isBlocked()" class="fa fa-lock" style="color: black; font-size: 150%;"
                 rel="tooltip" title="This company is blocked"></i>
               {{company.name}}
             </h2>
@@ -85,7 +85,10 @@
                     <div class="col-md-10 col-sm-9 col-xs-12">
                       <select id="title" name="title" class="form-control" required [(ngModel)]="claim.title"
                         #title="ngModel">
-                        <option value="None" selected>None</option>
+                        <option value="Invalid data" selected>Invalid data</option>
+                        <option value="Contains few information">Contains few information</option>
+                        <option value="Breaking the rules">Breaking the rules</option>
+                        <option value="Other">Other</option>
                       </select>
                       <div *ngIf="title.errors && (title.dirty || title.touched)" class="alert alert-danger">
                         <div [hidden]="!title.errors.required">Title is required!</div>
@@ -192,7 +195,7 @@
                         <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
-                        <p style="margin-bottom: 0; margin-left: 30px"><a class="btn btn-success"
+                        <p style="margin-bottom: 0; margin-left: 40px"><a class="btn btn-success"
                             style="left: 0; vertical-align: bottom" role="button" href="#openVacancyModal{{index}}"
                             data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Open vacancy</a></p>
 
@@ -287,7 +290,7 @@
                         <p style="margin-bottom: 0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
                             role="button" routerLink="/updateVacancy/{{vacancy.vacancyId}}" *ngIf="isCowner">View
                             details &raquo;</a></p>
-                        <p style="margin-bottom: 0; margin-left: 30px"><a class="btn btn-warning"
+                        <p style="margin-bottom: 0; margin-left: 40px"><a class="btn btn-warning"
                             style="left: 0; vertical-align: bottom" role="button" href="#closeVacancyModal{{index}}"
                             data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Close vacancy</a></p>
 

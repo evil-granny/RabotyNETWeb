@@ -29,7 +29,7 @@ export class CompanyComponent implements OnInit {
   };
 
   findAll() {
-    this.companyService.findAllWothPagination(this.page * this.count, this.count)
+    this.companyService.findAllWithPagination(this.page * this.count, this.count)
       .subscribe(data => {
         this.companies = data.companies;
         this.size = data.count;

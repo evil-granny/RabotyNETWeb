@@ -29,7 +29,7 @@ export class CompanyService {
     return this.http.get<Company[]>(this.companyURL + "/all");
   }
 
-  public findAllWothPagination(first: number, count: number) {
+  public findAllWithPagination(first: number, count: number) {
     return this.http.get<CompanyPaginationDTO>(this.companyURL + "/all/" + first + "/" + count);
   }
 
