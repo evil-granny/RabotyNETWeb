@@ -59,9 +59,10 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "angular-pro-sidebar:build"
+                        "browserTarget": "angular-pro-sidebar:build",
+                        "proxyConfig": "proxy.conf.json"
                     },
-                    "configurations": {
+                  "configurations": {
                         "production": {
                             "browserTarget": "angular-pro-sidebar:build:production"
                         }
