@@ -32,7 +32,7 @@ export class VacancyService {
   private requirementUrl = this.rabotyNETEndpoint.apiEndpoint + '/requirements';
 
   public findAll(): Observable<any> {
-    return this.http.get(this.vacancyUrl, httpOptions);
+    return this.http.get(this.vacancyUrl);
   }
 
   public findVacanciesByCompanyId(companyId: string, first: number): Observable<any> {
@@ -40,11 +40,11 @@ export class VacancyService {
   }
 
   public findAllWithPagination(first: number): Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + "/findAll/" + first, httpOptions);
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/findAll/" + first);
   }
 
   public findAllHotVacanciesWithPagination(first: number): Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + "/hotVacancies/" + first, httpOptions);
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/hotVacancies/" + first);
   }
 
   public findAllClosedVacanciesWithPagination(first: number): Observable<any> {
