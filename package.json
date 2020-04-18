@@ -7,13 +7,19 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "publishConfig": {
+      "registry": "https://npm.pkg.github.com/"
+    },
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
     "@agm/core": "^1.0.0-beta.5",
+    "@angular-devkit/build-angular": "^0.13.9",
     "@angular/animations": "^7.2.15",
     "@angular/cdk": "^7.3.7",
+    "@angular/cli": "^7.3.9",
     "@angular/common": "^7.2.15",
     "@angular/compiler": "^7.2.15",
     "@angular/core": "^7.2.15",
@@ -27,12 +33,14 @@
     "angular2-google-maps": "^0.17.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
+    "express": "^4.17.1",
     "jquery": "^3.4.1",
     "ng-sidebar": "^8.0.0",
     "ngx-bootstrap": "^3.3.0",
     "ngx-cookie-service": "^2.1.0",
     "ngx-pagination": "^3.2.1",
     "ngx-perfect-scrollbar": "^7.2.1",
+    "path": "^0.12.7",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "^0.8.29"
@@ -46,6 +54,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
+    "enhanced-resolve": "^3.3.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^4.1.0",
@@ -57,5 +66,9 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
+  },
+  "engines": {
+    "node": "12.16.1",
+    "npm": "6.13.4"
   }
 }
