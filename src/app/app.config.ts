@@ -11,6 +11,6 @@ export interface IAppConfig {
 export const AppConfig: IAppConfig = {
 
   apiEndpoint: 'https://rabotynet.herokuapp.com'
-  // apiEndpoint: 'http://localhost:8080'
+  // apiEndpoint: 'http://localhost:8081'
 
 };

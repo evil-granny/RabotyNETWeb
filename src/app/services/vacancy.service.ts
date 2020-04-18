@@ -15,6 +15,9 @@ const httpOptions = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:4200',
     'Access-Control-Allow-Credentials': 'true',
+    // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+    // 'Access-Control-Allow-Headers': 'Authorization, Accept, X-XSRF-TOKEN',
+    // 'Access-Control-Allow-Headers': '*',
   }), withCredentials: true
 };
 
