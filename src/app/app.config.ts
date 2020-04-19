@@ -10,6 +10,6 @@ export class IAppConfig {
 
 export const AppConfig: IAppConfig = {
   apiEndpoint: 'https://rabotynet.herokuapp.com',
-  allowOrigin: 'https://rabotynetweb.herokuapp.com'
+  allowOrigin: 'http://localhost:4200'
   // apiEndpoint: 'http://localhost:8081'
 };
