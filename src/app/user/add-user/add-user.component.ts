@@ -54,7 +54,7 @@ export class AddUserComponent implements OnInit {
     this.userService.insert(this.user)
       .subscribe(data => {
         this.openModal('User has been created successfully. Confirm your email and login into site!');
-        this.router.navigateByUrl(new IAppConfig().allowOrigin.toString() + '/');
+        this.router.navigateByUrl(new IAppConfig().allowOrigin + '/');
       });
   }
 

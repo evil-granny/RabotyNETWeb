@@ -31,7 +31,7 @@ export class RegistrationconfirmComponent implements OnInit {
     this.userService.validToken(this.token)
       .subscribe(data => {
         this.valid = data;
-        location.replace( new IAppConfig().allowOrigin.toString() + '/users/auth');
+        location.replace( new IAppConfig().allowOrigin + '/users/auth');
       });
   }
 

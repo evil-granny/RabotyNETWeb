@@ -23,7 +23,7 @@ export class PasswordForgotComponent {
 
   forgotPassword() {
     const authHeader = {
-      'Access-Control-Allow-Origin': new IAppConfig().allowOrigin.toString() ,
+      'Access-Control-Allow-Origin': new IAppConfig().allowOrigin ,
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
     };
