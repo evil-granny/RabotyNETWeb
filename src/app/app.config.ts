@@ -5,7 +5,6 @@ export let APP_CONFIG = new InjectionToken('app.config');
 export class IAppConfig {
   apiEndpoint: string;
   allowOrigin: string;
-
 }
 
 export const AppConfig: IAppConfig = {

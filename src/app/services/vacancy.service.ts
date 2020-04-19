@@ -13,7 +13,6 @@ import { APP_CONFIG, IAppConfig } from '../app.config';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': new IAppConfig().allowOrigin,
     'Access-Control-Allow-Credentials': 'true',
     // 'Access-Control-Allow-Methods' : 'GET,POST,PUT,DELETE',
     // 'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin,Access-Control-Allow-Credentials,Authorization,' +
@@ -21,7 +20,6 @@ const httpOptions = {
     // 'Access-Control-Allow-Headers': '*',
   }), withCredentials: true
 };
-
 @Injectable({
   providedIn: 'root'
 })
@@ -31,8 +29,8 @@ export class VacancyService {
 
   private vacancyUrl = this.rabotyNETEndpoint.apiEndpoint + '/vacancies';
   private requirementUrl = this.rabotyNETEndpoint.apiEndpoint + '/requirements';
+  private allowOrigin = httpOptions.headers.append('Access-Control-Allow-Origin', this.rabotyNETEndpoint.allowOrigin);
 
-  private requirementUrls = this.rabotyNETEndpoint.allowOrigin;
   public findAll(): Observable<any> {
     return this.http.get(this.vacancyUrl, httpOptions);
   }

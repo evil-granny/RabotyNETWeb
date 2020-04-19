@@ -11,7 +11,6 @@ import { APP_CONFIG, IAppConfig } from '../app.config';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': new IAppConfig().allowOrigin,
     'Access-Control-Allow-Credentials': 'true',
   }), withCredentials: true
 };
@@ -24,6 +23,7 @@ export class UserService {
   constructor(private http: HttpClient, public dialog: MatDialog, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
   private userUrl = this.rabotyNETEndpoint.apiEndpoint + '/users/';
+  private allowOrigin = httpOptions.headers.append('Access-Control-Allow-Origin', this.rabotyNETEndpoint.allowOrigin);
 
   error: any;
 
