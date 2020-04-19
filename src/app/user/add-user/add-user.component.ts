@@ -10,6 +10,7 @@ import { UserService } from '../../services/user.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 import { ComfirmComponent } from '../../confirm/comfirm.component';
+import {IAppConfig} from '../../app.config';
 
 @Component({
   templateUrl: './add-user.component.html',
@@ -53,7 +54,7 @@ export class AddUserComponent implements OnInit {
     this.userService.insert(this.user)
       .subscribe(data => {
         this.openModal('User has been created successfully. Confirm your email and login into site!');
-        this.router.navigateByUrl('http://localhost:4200/');
+        this.router.navigateByUrl(new IAppConfig().allowOrigin.toString() + '/');
       });
   }
 

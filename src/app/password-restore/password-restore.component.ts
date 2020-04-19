@@ -33,7 +33,7 @@ export class PasswordRestoreComponent implements OnInit {
 
   restorePassword() {
     const authHeader = {
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Origin': new IAppConfig().allowOrigin.toString(),
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
     };

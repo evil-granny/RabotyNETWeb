@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 
 import { ComfirmComponent } from '../comfirm.component';
+import {IAppConfig} from '../../app.config';
 
 @Component({
   selector: 'app-registrationconfirm',
@@ -30,7 +31,7 @@ export class RegistrationconfirmComponent implements OnInit {
     this.userService.validToken(this.token)
       .subscribe(data => {
         this.valid = data;
-        location.replace('http://localhost:4200/users/auth');
+        location.replace( new IAppConfig().allowOrigin.toString() + '/users/auth');
       });
   }
 

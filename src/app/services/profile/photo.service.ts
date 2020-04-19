@@ -9,7 +9,7 @@ import { APP_CONFIG, IAppConfig } from '../../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Origin': new IAppConfig().allowOrigin.toString(),
     'Access-Control-Allow-Credentials': 'true',
   }), withCredentials: true
 };
