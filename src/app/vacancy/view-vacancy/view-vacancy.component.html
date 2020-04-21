@@ -43,7 +43,7 @@
               <a class="btn btn-success" (click)=showPreviewPdf()
                 style="font-size: 17px; margin-left: 10px; margin-top: 20px; color:white;"
                 *ngIf="isCowner || isUser">Send resume</a>
-              <a class="btn btn-success" *ngIf="isCowner" routerLink="/showResume/{{vacancy.vacancyId}}"
+              <a class="btn btn-success" *ngIf="isCowner && checkUser()" routerLink="/showResume/{{vacancy.vacancyId}}"
                 style="font-size: 17px; margin-left: 10px; margin-top: 20px;">Show candidates</a>
             </form>
           </div>
