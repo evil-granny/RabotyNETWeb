@@ -56,7 +56,7 @@ export class AddResumeComponent {
       .subscribe(() => {
         this.skills = this.skills.filter(p => p !== skill);
         window.location.reload();
-      })
+      });
   }
 
   deleteJob(job: Job): void {
@@ -64,7 +64,7 @@ export class AddResumeComponent {
       .subscribe(() => {
         this.jobs = this.jobs.filter(p => p !== job);
         window.location.reload();
-      })
+      });
   }
 
   newSkill() {
