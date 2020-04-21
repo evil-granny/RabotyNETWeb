@@ -9,7 +9,6 @@ import { APP_CONFIG, IAppConfig } from '../../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
     'Access-Control-Allow-Credentials': 'true',
   }), withCredentials: true
 };
@@ -22,6 +21,7 @@ export class PhotoService {
   constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
   private photoUrl = this.rabotyNETEndpoint.apiEndpoint + '/photo/';
+  private allowOrigin = httpOptions.headers.append('Access-Control-Allow-Origin', this.rabotyNETEndpoint.allowOrigin);
 
   public uploadAvatar(file: File, userId: BigInteger): Observable<Photo> {
     let body = new FormData();

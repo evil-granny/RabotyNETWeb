@@ -53,6 +53,7 @@ export class AppComponent implements OnInit {
     this.userService.getUserRoles(this.currentUser.username)
       .subscribe(data => {
         this.roles = data;
+        console.log(this.roles);
       });
     this.isCownerAndUser();
   }

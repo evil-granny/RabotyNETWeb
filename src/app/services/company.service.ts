@@ -10,7 +10,6 @@ import { APP_CONFIG, IAppConfig } from '../app.config';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
     'Access-Control-Allow-Credentials': 'true',
   }), withCredentials: true
 };
@@ -24,6 +23,7 @@ export class CompanyService {
 
   private companyURL = this.rabotyNETEndpoint.apiEndpoint + '/companies';
   private claimURL = this.rabotyNETEndpoint.apiEndpoint + '/claims';
+  private allowOrigin = httpOptions.headers.append('Access-Control-Allow-Origin', this.rabotyNETEndpoint.allowOrigin);
 
   public findAll() {
     return this.http.get<Company[]>(this.companyURL + "/all");

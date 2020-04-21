@@ -1,18 +1,17 @@
-# Angular Pro Sidebar
+# RabotyNETWeb
 
-A responsive sidebar template with dropdown menu built with angular 7 and bootstrap 4
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.10.
 
 ## Quick start
 
 ```
 npm install 
 
-ng serve
+ng serve -o
 ```
 
-Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Navigate to `https://rabotynetweb.herokuapp.com`. The app will automatically reload if you change any of the source files.
 
 ## Resources
 *   [Bootstrap](https://getbootstrap.com/)

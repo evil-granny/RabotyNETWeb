@@ -8,7 +8,6 @@ import { APP_CONFIG, IAppConfig } from '../app.config';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
     'Access-Control-Allow-Credentials': 'true',
   }), withCredentials: true
 };
@@ -21,6 +20,7 @@ export class PdfService {
   constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
   private resumeURL = this.rabotyNETEndpoint.apiEndpoint;
+  private allowOrigin = httpOptions.headers.append('Access-Control-Allow-Origin', this.rabotyNETEndpoint.allowOrigin);
 
   public findById(resumeId: any) {
     return this.http.get<Resume>(this.resumeURL + "/pdf/" + resumeId, httpOptions);

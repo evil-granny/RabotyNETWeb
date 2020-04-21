@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional } from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
@@ -10,6 +10,7 @@ import { UserService } from '../../services/user.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 import { ComfirmComponent } from '../../confirm/comfirm.component';
+import {APP_CONFIG, IAppConfig} from '../../app.config';
 
 @Component({
   templateUrl: './add-user.component.html',
@@ -28,7 +29,7 @@ export class AddUserComponent implements OnInit {
   credentials = { username: '', password: '' };
 
   constructor(private router: Router, private userService: UserService, public dialog: MatDialog,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
@@ -53,7 +54,7 @@ export class AddUserComponent implements OnInit {
     this.userService.insert(this.user)
       .subscribe(data => {
         this.openModal('User has been created successfully. Confirm your email and login into site!');
-        this.router.navigateByUrl('http://localhost:4200/');
+        this.router.navigateByUrl( this.rabotyNETEndpoint.allowOrigin + '/');
       });
   }
 
