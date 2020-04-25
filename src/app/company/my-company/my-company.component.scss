@@ -27,6 +27,12 @@ button {
   border-left: 5px solid #a94442;
 }
 
+.main-container {
+  margin-top: 40px;
+  opacity: 0.95;
+  //height: 100%;
+  padding: 0 470px;
+}
 .view-account {
   background: #ffffff;
 }
@@ -537,9 +543,9 @@ button {
 
 @media (min-width: 992px) {
   .view-account .content-panel {
-    min-height: 800px;
+    min-height: 880px;
     border-left: 1px solid #f3f3f7;
-    margin-left: 200px;
+    //margin-left: 100px;
   }
   .view-account .mail-subject .subject {
     max-width: 280px;
