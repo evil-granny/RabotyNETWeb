@@ -17,6 +17,12 @@ footer {
   padding: 30px 0;
 }
 
+.main-container {
+  margin-top: 40px;
+  opacity: 0.95;
+  padding: 0 470px;
+}
+
 .pagin {
   text-align: center;
 }
@@ -41,7 +47,7 @@ footer {
 }
 .ribbon {
   width: 150px;
-  height: 150px;
+  height: 100px;
   overflow: hidden;
   right: 0;
   top: 0;
@@ -595,9 +601,9 @@ footer {
 
 @media (min-width: 992px) {
   .view-account .content-panel {
-    min-height: 800px;
+    min-height: 880px;
     border-left: 1px solid #f3f3f7;
-    margin-left: 200px;
+    //margin-left: 200px;
   }
   .view-account .mail-subject .subject {
     max-width: 280px;
