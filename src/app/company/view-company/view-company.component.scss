@@ -19,7 +19,6 @@ footer {
 
 .main-container {
   margin-top: 40px;
-  opacity: 0.95;
   padding: 0 360px;
 }
 
@@ -68,10 +67,6 @@ footer {
   position: relative;
   text-align: center;
   margin-top: 20px;
-}
-
-.container {
-  padding: 2px 16px;
 }
 
 .simpleVacancy {
@@ -602,6 +597,7 @@ footer {
 @media (min-width: 992px) {
   .view-account .content-panel {
     min-height: 880px;
+    //min-height: 880px;
     border-left: 1px solid #f3f3f7;
     //margin-left: 200px;
   }
