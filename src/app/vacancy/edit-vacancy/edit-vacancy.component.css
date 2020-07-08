@@ -33,6 +33,10 @@ legend.experience-border {
 }
 
 .view-account {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    width: 70%;
     background: #FFFFFF;
 }
 
@@ -635,6 +639,6 @@ legend.experience-border {
 .forCurrency {
     position: relative;
     width: 57%;
-    margin-left: 55%;
-    margin-top: -12%;
+    margin-left: 40%;
+    margin-top: -11%;
 }

@@ -5,77 +5,70 @@ import { Requirement } from '../models/requirement.model';
 import { VacancyDTO } from '../models/vacancy/vacancyDTO.model';
 import { Resume } from '../models/resume.model';
 import { Vacancy } from '../models/vacancy/vacancy.model';
-
 import { Observable } from 'rxjs';
-
 import { APP_CONFIG, IAppConfig } from '../app.config';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Credentials': 'true',
-    // 'Access-Control-Allow-Methods' : 'GET,POST,PUT,DELETE',
-    // 'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin,Access-Control-Allow-Credentials,Authorization,' +
-    //   'Content-Type,Accept,application/pdf,X-XSRF-TOKEN',
-    // 'Access-Control-Allow-Headers': '*',
-  }), withCredentials: true
-};
 @Injectable({
   providedIn: 'root'
 })
 export class VacancyService {
-
   constructor(private http: HttpClient, @Inject(APP_CONFIG) private rabotyNETEndpoint: IAppConfig) { }
 
   private vacancyUrl = this.rabotyNETEndpoint.apiEndpoint + '/vacancies';
   private requirementUrl = this.rabotyNETEndpoint.apiEndpoint + '/requirements';
-  private allowOrigin = httpOptions.headers.append('Access-Control-Allow-Origin', this.rabotyNETEndpoint.allowOrigin);
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': this.rabotyNETEndpoint.allowOrigin,
+      'Access-Control-Allow-Credentials': 'true',
+    }), withCredentials: true
+  };
 
   public findAll(): Observable<any> {
-    return this.http.get(this.vacancyUrl, httpOptions);
+    return this.http.get(this.vacancyUrl, this.httpOptions);
   }
 
   public findVacanciesByCompanyId(companyId: string, first: number): Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + '/' + companyId + "/" + first, httpOptions);
+    return this.http.get<VacancyDTO>(this.vacancyUrl + '/' + companyId + "/" + first, this.httpOptions);
   }
 
   public findAllWithPagination(first: number): Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + "/findAll/" + first, httpOptions);
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/findAll/" + first, this.httpOptions);
   }
 
   public findAllHotVacanciesWithPagination(first: number): Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + "/hotVacancies/" + first, httpOptions);
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/hotVacancies/" + first, this.httpOptions);
   }
 
   public findAllClosedVacanciesWithPagination(first: number): Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + "/closedVacancies/" + first, httpOptions);
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/closedVacancies/" + first, this.httpOptions);
   }
 
   get(vacancyId: string) {
-    return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, httpOptions);
+    return this.http.get<Vacancy>(this.vacancyUrl + '/' + vacancyId, this.httpOptions);
   }
 
   public deleteById(id: any) {
-    return this.http.delete(this.vacancyUrl + '/' + id, httpOptions);
+    return this.http.delete(this.vacancyUrl + '/' + id, this.httpOptions);
   }
 
   public deleteRequiremnetById(id: BigInteger) {
-    return this.http.delete(this.requirementUrl + '/' + id, httpOptions);
+    return this.http.delete(this.requirementUrl + '/' + id, this.httpOptions);
   }
 
   public update(vacancy: any): Observable<Vacancy> {
-    return this.http.put<Vacancy>(this.vacancyUrl, vacancy, httpOptions);
+    return this.http.put<Vacancy>(this.vacancyUrl, vacancy, this.httpOptions);
   }
 
   public createVacancy(vacancy: Vacancy, companyId: any): Observable<Object> {
-    return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + companyId, vacancy, httpOptions);
+    return this.http.post<Vacancy>(this.vacancyUrl + '/createVacancy/' + companyId, vacancy, this.httpOptions);
   }
   public updateRequirement(requirement: any): Observable<Requirement> {
-    return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement, httpOptions);
+    return this.http.put<Requirement>(this.vacancyUrl + '/updateRequirement', requirement, this.httpOptions);
   }
 
   public sendResume(resume: Resume, vacancyId: any): Observable<Resume> {
-    return this.http.post<Resume>(this.vacancyUrl + '/sendResume/' + vacancyId, resume, httpOptions);
+    return this.http.post<Resume>(this.vacancyUrl + '/sendResume/' + vacancyId, resume, this.httpOptions);
   }
 
 }

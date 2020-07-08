@@ -23,7 +23,11 @@ body {
 }
 
 .view-account {
-    background: #FFFFFF;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  width: 68%;
+  background: #FFFFFF;
 }
 
 .view-account .pro-label {
@@ -135,7 +139,8 @@ body {
 }
 
 .view-account .content-panel {
-    padding: 30px
+    /*padding-left: 100px;*/
+    padding: 30px;
 }
 
 .view-account .content-panel .title {
@@ -453,7 +458,7 @@ body {
     color: #a2a6af
 }
 
-@media (max-width:767px) {
+@media screen and (max-width:767px) {
     .view-account .content-panel .title {
         text-align: center
     }
@@ -513,7 +518,7 @@ body {
     }
 }
 
-@media (min-width:768px) {
+@media screen and (min-width:768px) {
     .view-account .side-bar .user-info {
         padding: 0;
         padding-bottom: 15px
@@ -526,11 +531,11 @@ body {
     }
 }
 
-@media (min-width:992px) {
+@media screen and (min-width:992px) {
     .view-account .content-panel {
-        min-height: 880px;
+        /*min-height: 880px;*/
+        min-height: 800px;
         border-left: 1px solid #f3f3f7;
-        /*margin-left: 200px*/
     }
     .view-account .mail-subject .subject {
         max-width: 280px;

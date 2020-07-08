@@ -23,6 +23,10 @@ body {
 }
 
 .view-account {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    width: 70%;
     background: #FFFFFF;
 }
 
@@ -458,7 +462,7 @@ body {
     color: #a2a6af
 }
 
-@media (max-width:767px) {
+@media screen and (max-width:767px) {
     .view-account .content-panel .title {
         text-align: center
     }
@@ -518,7 +522,7 @@ body {
     }
 }
 
-@media (min-width:768px) {
+@media screen and (min-width:768px) {
     .view-account .side-bar .user-info {
         padding: 0;
         padding-bottom: 15px
@@ -531,7 +535,7 @@ body {
     }
 }
 
-@media (min-width:992px) {
+@media screen and (min-width:992px) {
     .view-account .content-panel {
         min-height: 880px;
         border-left: 1px solid #f3f3f7;

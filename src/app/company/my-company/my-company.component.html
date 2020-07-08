@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <section class="main-container">
+ <div class="container" style="margin-top: 40px; opacity: 0.95;">
     <div class="view-account">
       <section class="module">
         <div class="module-inner">
@@ -68,11 +68,13 @@
                   </td>
                   <td
                     *ngIf="filter == 'all' || filter == 'approved' && isApproved(company) || filter == 'unapproved' && !isApproved(company)">
-                    <a routerLink="/viewCompany/{{company.companyId}}" class="btn" rel="tooltip" title="View details"><i
-                        class="fa fa-eye"></i></a>
-                    <a routerLink="/updateCompany/{{company.name}}" class="btn"><i class="fa fa-edit" rel="tooltip"
+                    <a routerLink="/viewCompany/{{company.companyId}}" class="btn" rel="tooltip" title="View details">
+                      <i class="fa fa-eye"></i></a>
+                    <a routerLink="/updateCompany/{{company.name}}" class="btn">
+                      <i class="fa fa-edit" rel="tooltip"
                         title="Update"></i></a>
-                    <a class="btn" (click)="deleteById(company)"><i class="fa fa-trash" rel="tooltip"
+                    <a class="btn" (click)="deleteById(company)">
+                      <i class="fa fa-trash" rel="tooltip"
                         title="Delete"></i></a>
                   </td>
                 </tr>
@@ -111,7 +113,7 @@
         </div>
       </section>
     </div>
-  </section>
+ </div>
 </body>
 
 </html>

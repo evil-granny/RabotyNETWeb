@@ -34,7 +34,11 @@ button {
 }
 
 .view-account {
-  background: #ffffff;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  width: 70%;
+  background: #FFFFFF;
 }
 
 .view-account .pro-label {
@@ -146,7 +150,8 @@ button {
 }
 
 .view-account .content-panel {
-  padding: 30px;
+  padding: 30px 0;
+  min-height: 90vh;
 }
 
 .view-account .content-panel .title {
@@ -468,7 +473,7 @@ button {
   color: #a2a6af;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .view-account .content-panel .title {
     text-align: center;
   }
@@ -528,7 +533,7 @@ button {
   }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .view-account .side-bar .user-info {
     padding: 0;
     padding-bottom: 15px;
@@ -541,9 +546,9 @@ button {
   }
 }
 
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) {
   .view-account .content-panel {
-    min-height: 880px;
+    min-height: 90vh;
     border-left: 1px solid #f3f3f7;
   }
   .view-account .mail-subject .subject {
@@ -612,14 +617,12 @@ button {
   }
 }
 
-/* Tooltip container */
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  border-bottom: 1px dotted black;
 }
 
-/* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -628,13 +631,10 @@ button {
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
-
-  /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }

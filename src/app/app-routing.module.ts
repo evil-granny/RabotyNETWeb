@@ -34,7 +34,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { Role } from './models/roles.model';
 import { PdfPreviewComponent } from './pdf-preview/pdf-preview.component';
 import { ShowResumeComponent } from './resume/show-resume/show-resume.component';
-import { ClosedVacancyComponent } from "./vacancy/closed-vacancy/closed-vacancy.component";
+import { ClosedVacancyComponent } from './vacancy/closed-vacancy/closed-vacancy.component';
 
 
 const routes: Routes = [

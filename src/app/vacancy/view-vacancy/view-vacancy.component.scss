@@ -36,7 +36,11 @@ body {
 }
 
 .view-account {
-  background: #ffffff;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  width: 70%;
+  background: #FFFFFF;
 }
 
 .view-account .pro-label {
