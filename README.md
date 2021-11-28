@@ -15,7 +15,7 @@ Navigate to `https://rabotynetweb.herokuapp.com`. The app will automatically rel
 ## :eight_spoked_asterisk: Resources
 *   [Bootstrap](https://getbootstrap.com/)
 *   [ngx bootstrap](https://valor-software.com/ngx-bootstrap/)
-*   [Font awsome](http://fontawesome.io/)
+*   [Font awesome](http://fontawesome.io/)
 *   [Angular Perfect Scrollbar](https://github.com/zefoy/ngx-perfect-scrollbar)
 
 ## :eight_spoked_asterisk: Author

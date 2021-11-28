@@ -19,9 +19,9 @@
       <h3 class="text-muted">Vacancies</h3>
     </div>
     <div class="row">
-      <div class="col-lg-4" *ngFor="let vacancy of vacancies ">
+      <div class="col-lg-4" *ngFor="let vacancy of vacancies">
 
-        <div class="hotVacancies" *ngIf="vacancy.hotVacancy==true">
+        <div class="hotVacancies" *ngIf="vacancy.hotVacancy">
           <div style="background: rgb(247, 248, 196)" class="card">
             <span class=" ribbon"><span class="badge badge-danger">HOT</span></span>
             <h2 style="margin-left: 10px;">{{vacancy.position}}</h2>
@@ -32,12 +32,21 @@
             </td>
             <div class="row align-items-end" style="height: 100%;margin: 0px;">
               <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
-                  role="button" routerLink="/viewVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
+                  role="button" routerLink="/viewVacancy/{{vacancy.vacancyId}}">View details &raquo;</a>
+              </p>
+              <p style="margin-bottom:0;margin-left: 150px;">
+                 <a class="btn fa fa-star" role="button" *ngIf="checkWhetherUserHasUserOnlyUserRole() && vacancy.markedAsBookmark"
+                    (click)="removeVacancyFromBookmark(vacancy.vacancyId)">
+                 </a>
+                <a class="btn fas fa-star" role="button" *ngIf="checkWhetherUserHasUserOnlyUserRole() && !vacancy.markedAsBookmark"
+                   (click)="addToBookmark(vacancy.vacancyId)">
+                </a>
+              </p>
             </div>
           </div>
         </div>
 
-        <div class="simpleVacancy" *ngIf="vacancy.hotVacancy!=true">
+        <div class="simpleVacancy" *ngIf="!vacancy.hotVacancy">
           <div class="card">
             <span class="ribbon"><span class="badge badge-danger"
                 style="background-color: rgb(77, 189, 12)">OPEN</span></span>
@@ -48,8 +57,16 @@
                 {{requirement.description}}</li>
             </td>
             <div class="row align-items-end" style="height: 100%;margin: 0px;">
-              <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom"
+              <p style="margin-bottom:0;"><a class="btn btn-primary" style="left: 0; vertical-align: bottom; padding-top: 5px;"
                   role="button" routerLink="/viewVacancy/{{vacancy.vacancyId}}">View details &raquo;</a></p>
+              <p style="margin-bottom:0;margin-left: 150px;">
+                <a class="btn fa fa-star" role="button" *ngIf="checkWhetherUserHasUserOnlyUserRole() && vacancy.markedAsBookmark"
+                   (click)="removeVacancyFromBookmark(vacancy.vacancyId)">
+                </a>
+                <a class="btn fas fa-star" role="button" *ngIf="checkWhetherUserHasUserOnlyUserRole() && !vacancy.markedAsBookmark"
+                   (click)="addToBookmark(vacancy.vacancyId)">
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -59,8 +76,8 @@
 
   <footer style="position: absolute; bottom: 100px;  width: 100%;  height: 4.5rem;">
     <div class="paginations">
-      <button *ngIf="canPreviousPage()" class="btn btn-info" style="margin-right:40px;margin-top: 60px"
-        (click)="previousPage();">&laquo;
+      <button *ngIf="hasPreviousPage()" class="btn btn-info" style="margin-right:40px;margin-top: 60px"
+              (click)="previousPage();">&laquo;
         Previous</button>
       <button *ngIf="canNextPage()" class="btn btn-info" style="margin-right:40px;margin-top: 60px"
         (click)="nextPage();">Next

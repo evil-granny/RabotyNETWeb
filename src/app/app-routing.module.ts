@@ -34,7 +34,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { Role } from './models/roles.model';
 import { PdfPreviewComponent } from './pdf-preview/pdf-preview.component';
 import { ShowResumeComponent } from './resume/show-resume/show-resume.component';
-import { ClosedVacancyComponent } from './vacancy/closed-vacancy/closed-vacancy.component';
+import { ClosedVacancyComponent } from "./vacancy/closed-vacancy/closed-vacancy.component";
+import {BookmarkComponent} from './bookmark/bookmark.component';
 
 
 const routes: Routes = [
@@ -91,6 +92,13 @@ const routes: Routes = [
     component: EditVacancyComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.ROLE_COWNER] }
+  },
+
+  {
+    path: 'bookmarks',
+    component: BookmarkComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.ROLE_USER] }
   },
 
   { path: 'profile', component: ProfileComponent },

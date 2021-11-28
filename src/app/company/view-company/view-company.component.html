@@ -125,7 +125,7 @@
             <h4 class="fieldset-title"></h4>
             <h4>Vacancies</h4>
             <div class="container">
-              <div class="row">
+              <div class="row" style="margin-left: -25px;">
                 <div class="col-lg-6" *ngFor="let vacancy of vacancies; let index = index">
 
                   <div class="hotVacancies" *ngIf="vacancy.hotVacancy == true">
@@ -146,7 +146,7 @@
                             style="left: 0; vertical-align: bottom;" role="button" href="#closeVacancyModal{{index}}"
                             data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Close vacancy</a></p>
 
-                        <div id="closeVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true">
+                        <div id="closeVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true" style="top: 50%;" data-backdrop="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <form>
@@ -199,7 +199,7 @@
                             style="left: 0; vertical-align: bottom" role="button" href="#openVacancyModal{{index}}"
                             data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Open vacancy</a></p>
 
-                        <div id="openVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true">
+                        <div id="openVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true" style="top: 50%" data-backdrop="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <form>
@@ -247,7 +247,7 @@
                             style="left: 0; vertical-align: bottom" role="button" href="#openVacancyModal{{index}}"
                             data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Open vacancy</a></p>
 
-                        <div id="openVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true" a>
+                        <div id="openVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true" style="top: 50%" data-backdrop="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <form>
@@ -294,7 +294,7 @@
                             style="left: 0; vertical-align: bottom" role="button" href="#closeVacancyModal{{index}}"
                             data-toggle="modal" *ngIf="isCowner" (click)="ifClicked()">Close vacancy</a></p>
 
-                        <div id="closeVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true">
+                        <div id="closeVacancyModal{{index}}" class="modal fade" *ngIf="wasClicked == true" style="top: 50%" data-backdrop="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <form>

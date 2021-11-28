@@ -628,6 +628,7 @@ legend.experience-border {
 }
 
 .checkboxC {
+    padding-top: 5px;
     margin-left: 100px;
     margin-top: -35px;
 }
@@ -638,7 +639,6 @@ legend.experience-border {
 
 .forCurrency {
     position: relative;
-    width: 57%;
-    margin-left: 40%;
-    margin-top: -11%;
+    margin-left: 50%;
+    margin-top: -15%;
 }

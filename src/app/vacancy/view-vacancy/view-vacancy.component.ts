@@ -12,6 +12,7 @@ import { VacancyService } from '../../services/vacancy.service';
 import { CompanyService } from '../../services/company.service';
 import { ResumeService } from '../../services/resume.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import {BookmarkService} from '../../services/bookmark.service';
 
 @Component({
   selector: 'app-view-vacancy',
@@ -26,7 +27,7 @@ export class ViewVacancyComponent implements OnInit {
   currentUser: UserPrincipal;
 
   constructor(private location: Location, private app: AuthenticationService, private resumeService: ResumeService, private route: ActivatedRoute,
-    private router: Router, private vacancyService: VacancyService, private companyService: CompanyService) {
+    private router: Router, private vacancyService: VacancyService, private companyService: CompanyService, private bookmarkService: BookmarkService) {
     this.app.currentUser.subscribe(data => this.currentUser = data);
   }
 
@@ -43,11 +44,11 @@ export class ViewVacancyComponent implements OnInit {
         });
 
       this.companyService.getCompanyByVacanycId(vacancyId)
-        .subscribe(com => {
-          this.company = com;
+        .subscribe(company => {
+          this.company = company;
         });
     }
-  };
+  }
 
   showPreviewPdf() {
     this.resumeService.exists(this.currentUser.userId)
@@ -78,6 +79,27 @@ export class ViewVacancyComponent implements OnInit {
 
   checkUser(): boolean {
     return this.app.currentUserValue.userId == this.company.user.userId;
+  }
+
+  checkWhetherUserHasUserOnlyUserRole() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1 &&
+      this.currentUser.roles.indexOf(Role.ROLE_COWNER) === 0 && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) === 0;
+  }
+
+  addToBookmark(vacancyId: any): void {
+    this.bookmarkService.addVacancyToBookmark(vacancyId, this.currentUser.userId)
+      .subscribe(() => {
+        if (this.vacancy.vacancyId === vacancyId) {
+            this.vacancy.markedAsBookmark = true;
+        }
+      });
+  }
+
+  removeVacancyFromBookmark(vacancyId: any): void {
+    this.bookmarkService.deleteVacancyFromBookmark(vacancyId, this.currentUser.userId)
+      .subscribe(() => {
+        this.vacancy.markedAsBookmark = false;
+      });
   }
 
 }

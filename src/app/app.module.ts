@@ -53,6 +53,7 @@ import { HotVacancyComponent } from './vacancy/hot-vacancy/hot-vacancy.component
 import { ViewResumeComponent } from './resume/view-resume/view-resume.component';
 import { PdfPreviewComponent } from './pdf-preview/pdf-preview.component';
 import { ShowResumeComponent } from './resume/show-resume/show-resume.component';
+import { BookmarkComponent } from './bookmark/bookmark.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -91,6 +92,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PdfPreviewComponent,
     ViewResumeComponent,
     ShowResumeComponent,
+    BookmarkComponent,
   ],
   imports: [
     BrowserModule,

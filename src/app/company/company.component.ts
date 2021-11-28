@@ -74,7 +74,7 @@ export class CompanyComponent implements OnInit {
         this.companies = this.companies.filter(p => p !== company);
         this.size = this.size - 1;
       });
-  };
+  }
 
   approve(company: Company): void {
     this.companyService.sendMail(company)

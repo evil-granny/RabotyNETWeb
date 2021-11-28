@@ -30,7 +30,8 @@
                   <p class="mySpan">Requirements:</p>
                   <td>
                     <li style="margin-left: 10px;" *ngFor="let requirement of vacancy.requirements ">
-                      {{requirement.description}}</li>
+                      {{requirement.description}}
+                    </li>
                   </td>
                 </div>
               </fieldset>
@@ -38,13 +39,19 @@
               <a class="btn btn-primary" (click)="goBack()"
                 style="font-size: 17px; margin-left: 10px; margin-top: 20px; color:white;">Show all vacancies</a>
               <a class="btn btn-primary" routerLink="/viewCompany/{{company.companyId}}"
-                style="font-size: 17px; margin-left: 10px; margin-top: 20px;" *ngIf="isCowner || isUser">Show
-                company</a>
+                style="font-size: 17px; margin-left: 10px; margin-top: 20px;" *ngIf="isCowner || isUser">Show company</a>
               <a class="btn btn-success" (click)=showPreviewPdf()
                 style="font-size: 17px; margin-left: 10px; margin-top: 20px; color:white;"
                 *ngIf="isCowner || isUser">Send resume</a>
               <a class="btn btn-success" *ngIf="isCowner && checkUser()" routerLink="/showResume/{{vacancy.vacancyId}}"
                 style="font-size: 17px; margin-left: 10px; margin-top: 20px;">Show candidates</a>
+              <a class="btn btn-success" (click)=addToBookmark(vacancy.vacancyId)
+                 style="font-size: 17px; margin-left: 10px; margin-top: 20px; color:white;"
+                 *ngIf="checkWhetherUserHasUserOnlyUserRole() && !vacancy.markedAsBookmark">Add to bookmark</a>
+
+              <a class="btn btn-danger" (click)=removeVacancyFromBookmark(vacancy.vacancyId)
+                 style="font-size: 17px; margin-left: 10px; margin-top: 20px; color:white;"
+                 *ngIf="checkWhetherUserHasUserOnlyUserRole() && vacancy.markedAsBookmark">Remove from bookmark</a>
             </form>
           </div>
         </div>

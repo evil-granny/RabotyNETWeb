@@ -50,12 +50,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUserRoles(this.currentUser.username)
-      .subscribe(data => {
-        this.roles = data;
-        console.log(this.roles);
-      });
-    this.isCownerAndUser();
+    if (this.currentUser) {
+      this.userService.getUserRoles(this.currentUser.username)
+        .subscribe(data => {
+          this.roles = data;
+        });
+      this.checkWhetherUserHasUserAndCownerRoles();
+    }
   }
 
   loadPhoto(photoId: BigInteger) {
@@ -68,7 +69,7 @@ export class AppComponent implements OnInit {
   logout() {
     this.app.logout();
     this.vacancySelect = false;
-    window.location.reload();
+    window.location.href = '/vacancies';
   }
 
   get isAdmin() {
@@ -83,11 +84,12 @@ export class AppComponent implements OnInit {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1;
   }
 
-  isCownerAndUser() {
-    if (this.roles.includes('user') && this.roles.includes('cowner')) {
-      return true;
-    }
-    return false;
+  checkWhetherUserHasUserAndCownerRoles() {
+    return this.roles.includes('user') && this.roles.includes('cowner');
+  }
+
+  checkWhetherUserHasUserOnlyUserRole() {
+    return this.roles.includes('user') && !this.roles.includes('cowner') && !this.roles.includes('admin');
   }
 
   hide() {

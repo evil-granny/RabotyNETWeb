@@ -87,7 +87,7 @@ export class EditVacancyComponent implements OnInit {
     if (flag == false) {
       return;
     } else {
-      this.vacancyService.deleteRequiremnetById(requirement.requirementId)
+      this.vacancyService.deleteRequirementById(requirement.requirementId)
         .subscribe(() => {
           this.requirements = this.requirements.filter(r => r !== requirement);
           window.location.reload();

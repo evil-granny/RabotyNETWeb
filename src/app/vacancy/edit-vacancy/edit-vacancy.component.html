@@ -87,7 +87,7 @@
                     <div class="forCurrency">
                       <label for="currency" class="col-md-2 col-sm-3 col-xs-12 control-label">Currency</label>
                       <div class="col-md-4 col-sm-3 col-xs-12">
-                        <select [(ngModel)]="vacancy.currency" name="currency" class="form-control">
+                        <select [(ngModel)]="vacancy.currency" name="currency" class="form-control" style="width: auto;">
                           <option value="USD" [defaultSelected]="vacancy.currency">USD</option>
                           <option value="UAH">UAH</option>
                           <option value="EUR">EUR</option>
@@ -97,10 +97,10 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="hotVacancy" class="col-md-2 col-sm-3 col-xs-12 control-label">Hot vacancy</label>
+                    <label for="hotVacancy" class="col-md-3 col-sm-3 col-xs-12 control-label">Hot vacancy</label>
                     <div class="checkboxC">
                       <div class="col-md-10 col-sm-9 col-xs-12">
-                        <input type="checkbox" style="width: 34px; height: 34px;" [(ngModel)]="vacancy.hotVacancy"
+                        <input type="checkbox" style="width: 20px; height: 20px;" [(ngModel)]="vacancy.hotVacancy"
                           placeholder="Check if vacancy is hot" id="hotVacancy" name="hotVacancy" #hotVacancy="ngModel"
                           checked autocomplete="off">
                       </div>

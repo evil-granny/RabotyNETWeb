@@ -19,6 +19,8 @@ export class Vacancy {
 
   hotVacancy: boolean;
 
+  markedAsBookmark: boolean;
+
   company: Company = new Company();
 
   requirements: Requirement[] = Array<Requirement>();

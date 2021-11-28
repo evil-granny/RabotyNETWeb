@@ -10,12 +10,13 @@
 
   <div class="collapse navbar-collapse" style="margin-left: 100px;">
     <ul class="navbar-nav mr-auto">
-      <a class="navbar-brand" routerLink="/companies/my" *ngIf="isCownerAndUser()">My companies</a>
+      <a class="navbar-brand" routerLink="/companies/my" *ngIf="checkWhetherUserHasUserAndCownerRoles()">My companies</a>
       <a class="navbar-brand" routerLink="/createCompany" *ngIf="isUser || isCowner">Create company</a>
       <a class="navbar-brand" routerLink="/resume/user" *ngIf="isCowner || isUser">My resume </a>
       <a class="navbar-brand" routerLink="/companies" *ngIf="isAdmin">Сompanies</a>
       <a class="navbar-brand" routerLink="/hotVacancies">Hot Vacancies</a>
       <a class="navbar-brand" routerLink="/closedVacancies" *ngIf="isCowner">Closed Vacancies</a>
+      <a class="navbar-brand" routerLink="/bookmarks" *ngIf="checkWhetherUserHasUserOnlyUserRole()">Bookmarks</a>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item" style="margin-top: 5px; margin-right: 60px;">
@@ -35,6 +36,9 @@
               style="width: 50px; height: 50px" src="/assets/img/user.jpg" alt="">
           </a>
           <div class="list dropdown-menu">
+            <a class="dropdown-item" *ngIf="isUser && !isCowner">User</a>
+            <a class="dropdown-item" *ngIf="isCowner && checkWhetherUserHasUserAndCownerRoles">Company owner</a>
+            <a class="dropdown-item" *ngIf="isAdmin">Administrator</a>
             <a class="dropdown-item" routerLink="/profile" *ngIf="isUser || isCowner">Profile</a>
             <a class="dropdown-item" routerLink="/users/auth" *ngIf="!currentUser">Log in</a>
             <a class="dropdown-item" (click)="logout()" *ngIf="currentUser">Log out</a>

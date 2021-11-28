@@ -32,8 +32,8 @@ export class VacancyService {
     return this.http.get<VacancyDTO>(this.vacancyUrl + '/' + companyId + "/" + first, this.httpOptions);
   }
 
-  public findAllWithPagination(first: number): Observable<any> {
-    return this.http.get<VacancyDTO>(this.vacancyUrl + "/findAll/" + first, this.httpOptions);
+  public findAllWithPagination(first: number, userId: any): Observable<any> {
+    return this.http.get<VacancyDTO>(this.vacancyUrl + "/findAll/" + first + "/" + userId, this.httpOptions);
   }
 
   public findAllHotVacanciesWithPagination(first: number): Observable<any> {
@@ -52,7 +52,7 @@ export class VacancyService {
     return this.http.delete(this.vacancyUrl + '/' + id, this.httpOptions);
   }
 
-  public deleteRequiremnetById(id: BigInteger) {
+  public deleteRequirementById(id: BigInteger) {
     return this.http.delete(this.requirementUrl + '/' + id, this.httpOptions);
   }
 

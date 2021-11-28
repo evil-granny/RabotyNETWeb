@@ -9,6 +9,9 @@ import { CompanyService } from '../services/company.service';
 import { AuthenticationService } from '../services/authentication.service';
 
 import { Observable } from 'rxjs';
+import {Role} from '../models/roles.model';
+import {Company} from '../models/company/company.model';
+import {BookmarkService} from '../services/bookmark.service';
 
 @Component({
   selector: 'rabotyNet',
@@ -17,12 +20,15 @@ import { Observable } from 'rxjs';
 })
 export class VacancyComponent implements OnInit {
 
-  vacancies: Observable<Vacancy[]>;
+  vacancies: Vacancy[];
   page: number = 0;
   count: number = 9;
   size: number = 0;
+  currentUser: UserPrincipal;
 
-  constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, private companyService: CompanyService) {
+  constructor(private app: AuthenticationService, private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService,
+              private companyService: CompanyService, private bookmarkService: BookmarkService) {
+    this.app.currentUser.subscribe(data => this.currentUser = data);
   }
 
   ngOnInit() {
@@ -30,7 +36,7 @@ export class VacancyComponent implements OnInit {
   };
 
   findAll() {
-    this.vacancyService.findAllWithPagination(this.page * this.count)
+    this.vacancyService.findAllWithPagination(this.page * this.count, this.currentUser == null ? 0 : this.currentUser.userId)
       .subscribe(data => {
         this.vacancies = data.vacancies;
         this.size = data.count;
@@ -39,14 +45,28 @@ export class VacancyComponent implements OnInit {
 
   gotoList() {
     this.router.navigate(['/vacancies']);
-  };
+  }
 
-  canPreviousPage(): boolean {
+  addToBookmark(vacancyId: any): void {
+    this.bookmarkService.addVacancyToBookmark(vacancyId, this.currentUser.userId)
+      .subscribe(() => {
+        this.vacancies.find((vacancy) => vacancy.vacancyId === vacancyId).markedAsBookmark = true;
+      });
+  }
+
+  removeVacancyFromBookmark(vacancyId: any): void {
+    this.bookmarkService.deleteVacancyFromBookmark(vacancyId, this.currentUser.userId)
+      .subscribe(() => {
+        this.vacancies.find((vacancy) => vacancy.vacancyId === vacancyId).markedAsBookmark = false;
+      });
+  }
+
+  hasPreviousPage(): boolean {
     return this.page > 0;
   }
 
   previousPage() {
-    if (this.canPreviousPage()) {
+    if (this.hasPreviousPage()) {
       this.page = this.page - 1;
       this.findAll();
     }
@@ -61,6 +81,11 @@ export class VacancyComponent implements OnInit {
       this.page = this.page + 1;
       this.findAll();
     }
+  }
+
+  checkWhetherUserHasUserOnlyUserRole() {
+    return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1 &&
+      this.currentUser.roles.indexOf(Role.ROLE_COWNER) === 0 && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) === 0;
   }
 
 }
