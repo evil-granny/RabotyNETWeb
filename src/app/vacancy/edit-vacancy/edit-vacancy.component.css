@@ -639,6 +639,7 @@ legend.experience-border {
 
 .forCurrency {
     position: relative;
-    margin-left: 50%;
-    margin-top: -15%;
+    width: 57%;
+    margin-left: 40%;
+    margin-top: -10.5%;
 }
