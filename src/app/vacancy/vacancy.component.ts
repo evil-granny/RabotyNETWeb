@@ -85,7 +85,7 @@ export class VacancyComponent implements OnInit {
 
   checkWhetherUserHasUserOnlyUserRole() {
     return this.currentUser && this.currentUser.roles && this.currentUser.roles.indexOf(Role.ROLE_USER) > -1 &&
-      this.currentUser.roles.indexOf(Role.ROLE_COWNER) === 0 && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) === 0;
+      this.currentUser.roles.indexOf(Role.ROLE_COWNER) === -1 && this.currentUser.roles.indexOf(Role.ROLE_ADMIN) === -1;
   }
 
 }

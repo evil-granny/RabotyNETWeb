@@ -30,7 +30,7 @@ export class AuthenticationService {
 
   public authenticate(credentials: { username: any; password: any; }) {
     const authHeader = credentials ? {
-      'Authorization': 'Basic ' + btoa(credentials.username + ':' + credentials.password),
+      'Authorization': 'Basic ' + window.btoa(unescape(encodeURIComponent(credentials.username + ':' + credentials.password))),
       'Access-Control-Allow-Origin': this.rabotyNETEndpoint.allowOrigin,
       'Content-Type': 'application/json',
       'Access-Control-Allow-Credentials': 'true',
